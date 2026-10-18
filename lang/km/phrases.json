@@ -1,0 +1,52 @@
+{
+  "hello": {"text": "សួស្តី", "say": "soo-sdei", "note": "Works any time of day. The formal version is ជំរាបសួរ (chum-reap-suor), said with palms together"},
+  "good-morning": {"text": "អរុណសួស្តី", "say": "a-run soo-sdei", "note": "Rather formal; soo-sdei alone is fine all day"},
+  "goodbye": {"text": "លាសិនហើយ", "say": "lia sen haeuy", "note": "Literally \"goodbye for now\""},
+  "please": {"text": "សូម", "say": "soum", "note": "Goes before a request: soum + what you want"},
+  "thank-you": {"text": "អរគុណ", "say": "aw-kohn", "note": "អរគុណច្រើន (aw-kohn chraeun) means thank you very much"},
+  "yes": {"text": "បាទ", "say": "baat", "note": "What men say. Women say ចាស (chaas)"},
+  "no": {"text": "ទេ", "say": "teh", "note": "Also ends most negative sentences"},
+  "excuse-me": {"text": "សុំទោស", "say": "som-toh", "note": "Excuse me and sorry"},
+  "my-name": {"text": "ខ្ញុំឈ្មោះ…", "say": "k'nyom ch'moo-ah …", "note": "ខ្ញុំ (k'nyom) means I"},
+  "dont-understand": {"text": "ខ្ញុំមិនយល់ទេ", "say": "k'nyom min yool teh"},
+  "speak-slowly": {"text": "សូមនិយាយយឺតៗ", "say": "soum nee-yeay yeut yeut", "note": "Saying a word twice, as in yeut yeut, softens it"},
+  "repeat": {"text": "សូមនិយាយម្តងទៀត", "say": "soum nee-yeay m'dong tiet"},
+  "speak-english": {"text": "តើអ្នកចេះនិយាយអង់គ្លេសទេ", "say": "tae neak chess nee-yeay ong-kleh teh", "note": "តើ at the start and ទេ at the end mark a yes/no question. អ្នក (neak) means you"},
+
+  "one": {"text": "មួយ", "say": "moo-ey"},
+  "two": {"text": "ពីរ", "say": "pee"},
+  "three": {"text": "បី", "say": "bay"},
+  "four": {"text": "បួន", "say": "boo-un"},
+  "five": {"text": "ប្រាំ", "say": "pram", "note": "Counting from six goes five-one, five-two, and so on"},
+  "six": {"text": "ប្រាំមួយ", "say": "pram moo-ey", "note": "Five plus one"},
+  "seven": {"text": "ប្រាំពីរ", "say": "pram pee", "note": "Five plus two"},
+  "eight": {"text": "ប្រាំបី", "say": "pram bay", "note": "Five plus three"},
+  "nine": {"text": "ប្រាំបួន", "say": "pram boo-un", "note": "Five plus four"},
+  "ten": {"text": "ដប់", "say": "dop"},
+  "hundred": {"text": "មួយរយ", "say": "moo-ey roy"},
+  "thousand": {"text": "មួយពាន់", "say": "moo-ey poan", "note": "Prices are in riel or US dollars. 4,000 riel is about one dollar"},
+
+  "how-much": {"text": "ថ្លៃប៉ុន្មាន", "say": "t'lay pon-man", "note": "Point at the item and say នេះថ្លៃប៉ុន្មាន (nih t'lay pon-man), how much is this?"},
+  "would-like": {"text": "ខ្ញុំសុំ…", "say": "k'nyom som …", "note": "Literally \"I ask for …\"; the polite way to order"},
+  "i-want": {"text": "ខ្ញុំចង់បាន…", "say": "k'nyom chong ban …", "note": "More direct"},
+  "do-you-have": {"text": "តើអ្នកមាន…ទេ", "say": "tae neak mee-an … teh", "note": "Put the item in the gap"},
+  "just-looking": {"text": "ខ្ញុំគ្រាន់តែមើល", "say": "k'nyom kron tae muhl"},
+  "ill-take-it": {"text": "ខ្ញុំយកនេះ", "say": "k'nyom yok nih"},
+  "too-expensive": {"text": "ថ្លៃពេក", "say": "t'lay pek"},
+  "discount": {"text": "បញ្ចុះតម្លៃបានទេ", "say": "ban-choh tom-lay ban teh", "note": "Bargaining is normal in markets, not in fixed-price shops"},
+  "card": {"text": "តើអ្នកទទួលកាតទេ", "say": "tae neak toh-too-ol kat teh", "note": "Cash is still common, and US dollars are accepted in most places"},
+  "bill": {"text": "សូមគិតលុយ", "say": "soum kit luy", "note": "គិតលុយ (kit luy) alone also works"},
+
+  "reservation": {"text": "ខ្ញុំបានកក់បន្ទប់", "say": "k'nyom ban kok bon-toop"},
+  "checkout-time": {"text": "ត្រូវចេញម៉ោងប៉ុន្មាន", "say": "trow chenh mowng pon-man"},
+  "breakfast": {"text": "តើរួមបញ្ចូលអាហារពេលព្រឹកទេ", "say": "tae roo-um ban-jol a-har pel pruk teh"},
+  "wifi": {"text": "លេខសម្ងាត់វ៉ាយហ្វាយជាអ្វី", "say": "lek som-ngat wai-fai chea ay"},
+
+  "toilet": {"text": "បន្ទប់ទឹកនៅឯណា", "say": "bon-toop tuk nov ae nah", "note": "\"… នៅឯណា (nov ae nah)\" means \"where is …?\" for anything"},
+  "taxi": {"text": "សូមហៅតាក់ស៊ីឲ្យខ្ញុំបានទេ", "say": "soum how tak-see ow k'nyom ban teh", "note": "Tuk-tuks are more common than taxis, and you can hail one on the street"},
+
+  "delicious": {"text": "ឆ្ងាញ់ណាស់", "say": "ch'ngan nah", "note": "Said to the cook, it is a lovely compliment"},
+  "allergic": {"text": "ខ្ញុំអាឡែរហ្ស៊ីនឹង…", "say": "k'nyom a-ler-jee nung …", "note": "Add the food, or show a note written in Khmer to be safe"},
+
+  "help": {"text": "ជួយខ្ញុំផង", "say": "joo-ey k'nyom pong"}
+}

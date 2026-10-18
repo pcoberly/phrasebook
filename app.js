@@ -97,6 +97,12 @@ function detail(p) {
     ${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}
     ${p.note ? `<div class="note">${esc(p.note)}</div>` : ""}`;
 }
+// languages marked "draft" in languages.json have not been checked by a native speaker
+function draftBanner() {
+  return state.lang.draft
+    ? `<p class="draft">Draft ${esc(state.lang.name)}: not yet checked by a native speaker. Trust the audio over the spelling, and check anything important with a local.</p>`
+    : "";
+}
 function updateStatus() {
   if (state.note) { $("#status").textContent = state.note; return; }
   const all = state.phrases.length * 2;
@@ -207,7 +213,7 @@ function renderList() {
   const fromFirst = $("#dir").value === "from"; // English first unless studying the language → English
   const groups = {};
   for (const p of state.phrases) if (cat === "all" || p.cat === cat) (groups[p.cat] ||= []).push(p);
-  main.innerHTML = Object.entries(groups).map(([c, ps]) => `
+  main.innerHTML = draftBanner() + Object.entries(groups).map(([c, ps]) => `
     <h2 class="group">${esc(c.replace("-", " "))}</h2>
     ${ps.map((p) => `
       <div class="entry">
@@ -360,7 +366,7 @@ function languageRows() {
     return `
       <div class="lang${active ? " current" : ""}" data-lang="${l.code}">
         <div><div class="lname">${esc(l.name)} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
-          <div class="note"><span class="lstate">${esc(status)}</span> · ${mb}</div></div>
+          <div class="note"><span class="lstate">${esc(status)}</span> · ${mb}${l.draft ? " · Draft translations" : ""}</div></div>
         <div class="lbtn">${buttons}</div>
       </div>`;
   }).join("");

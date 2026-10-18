@@ -20,5 +20,29 @@
       "m": "ja-JP-KeitaNeural"
     },
     "bytes": 1282737
+  },
+  {
+    "code": "km",
+    "name": "Khmer",
+    "native": "ខ្មែរ",
+    "ttsLang": "km-KH",
+    "draft": true,
+    "voices": {
+      "f": "km-KH-SreymomNeural",
+      "m": "km-KH-PisethNeural"
+    },
+    "bytes": 1238970
+  },
+  {
+    "code": "lo",
+    "name": "Lao",
+    "native": "ລາວ",
+    "ttsLang": "lo-LA",
+    "draft": true,
+    "voices": {
+      "f": "lo-LA-KeomanyNeural",
+      "m": "lo-LA-ChanthavongNeural"
+    },
+    "bytes": 1216030
   }
 ]

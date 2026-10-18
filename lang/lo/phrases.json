@@ -1,0 +1,52 @@
+{
+  "hello": {"text": "ສະບາຍດີ", "say": "sa-bai-dee", "note": "Works any time of day, and is also a casual goodbye"},
+  "good-morning": {"text": "ສະບາຍດີຕອນເຊົ້າ", "say": "sa-bai-dee tawn sao", "note": "Most people just say sabaidee all day"},
+  "goodbye": {"text": "ລາກ່ອນ", "say": "la kawn", "note": "Literally \"farewell for now\""},
+  "please": {"text": "ກະລຸນາ", "say": "ka-lu-na", "note": "Formal. In a shop people usually say ຂໍ (kaw) before the item"},
+  "thank-you": {"text": "ຂອບໃຈ", "say": "kawp jai", "note": "ຂອບໃຈຫຼາຍໆ (kawp jai lai lai) means thank you very much"},
+  "yes": {"text": "ແມ່ນ", "say": "men", "note": "Literally \"it is\". ເຈົ້າ (jao) is also used as a polite yes"},
+  "no": {"text": "ບໍ່", "say": "baw", "note": "ບໍ່ແມ່ນ (baw men) means \"no, it isn't\""},
+  "excuse-me": {"text": "ຂໍໂທດ", "say": "kaw tote", "note": "Excuse me and sorry"},
+  "my-name": {"text": "ຂ້ອຍຊື່…", "say": "koy sue …", "note": "ຂ້ອຍ (koy) means I"},
+  "dont-understand": {"text": "ຂ້ອຍບໍ່ເຂົ້າໃຈ", "say": "koy baw kow jai"},
+  "speak-slowly": {"text": "ກະລຸນາເວົ້າຊ້າໆ", "say": "ka-lu-na wow sah sah", "note": "Saying a word twice, as in sah sah, softens it"},
+  "repeat": {"text": "ກະລຸນາເວົ້າອີກເທື່ອໜຶ່ງ", "say": "ka-lu-na wow eek too-a nuhng"},
+  "speak-english": {"text": "ເຈົ້າເວົ້າພາສາອັງກິດໄດ້ບໍ", "say": "jao wow pa-sa ang-git dai baw", "note": "Ending with ບໍ (baw) makes it a yes/no question. ເຈົ້າ (jao) means you"},
+
+  "one": {"text": "ໜຶ່ງ", "say": "nuhng"},
+  "two": {"text": "ສອງ", "say": "song"},
+  "three": {"text": "ສາມ", "say": "sahm"},
+  "four": {"text": "ສີ່", "say": "see"},
+  "five": {"text": "ຫ້າ", "say": "hah"},
+  "six": {"text": "ຫົກ", "say": "hok"},
+  "seven": {"text": "ເຈັດ", "say": "chet"},
+  "eight": {"text": "ແປດ", "say": "paet"},
+  "nine": {"text": "ເກົ້າ", "say": "gow"},
+  "ten": {"text": "ສິບ", "say": "sip"},
+  "hundred": {"text": "ໜຶ່ງຮ້ອຍ", "say": "nuhng hoy"},
+  "thousand": {"text": "ໜຶ່ງພັນ", "say": "nuhng pan", "note": "Prices are in kip and run into the thousands: ພັນ (pan) is a thousand, ແສນ (saen) a hundred thousand, ລ້ານ (lan) a million"},
+
+  "how-much": {"text": "ເທົ່າໃດ", "say": "tow dai", "note": "Point at the item and say ອັນນີ້ເທົ່າໃດ (an nee tow dai), how much is this?"},
+  "would-like": {"text": "ຂໍ…", "say": "kaw …", "note": "Literally \"I request …\"; the normal polite way to ask for something"},
+  "i-want": {"text": "ຂ້ອຍຢາກໄດ້…", "say": "koy yak dai …", "note": "More direct"},
+  "do-you-have": {"text": "ມີ…ບໍ", "say": "mee … baw", "note": "Put the item in the gap"},
+  "just-looking": {"text": "ຂ້ອຍພຽງແຕ່ເບິ່ງ", "say": "koy pee-ang tae beung"},
+  "ill-take-it": {"text": "ເອົາອັນນີ້", "say": "ow an nee"},
+  "too-expensive": {"text": "ແພງຫຼາຍ", "say": "paeng lai"},
+  "discount": {"text": "ຫຼຸດລາຄາໄດ້ບໍ", "say": "lut la-ka dai baw", "note": "Bargaining is normal in markets, not in fixed-price shops"},
+  "card": {"text": "ຮັບບັດເຄຣດິດບໍ", "say": "hap bat ke-dit baw", "note": "Cash is still common: kip, and often Thai baht or US dollars"},
+  "bill": {"text": "ຂໍຄິດເງິນ", "say": "kaw kit ngern"},
+
+  "reservation": {"text": "ຂ້ອຍຈອງຫ້ອງໄວ້ແລ້ວ", "say": "koy jong hong wai leo"},
+  "checkout-time": {"text": "ເຊັກເອົາຈັກໂມງ", "say": "chek-out chak mong"},
+  "breakfast": {"text": "ລວມອາຫານເຊົ້າບໍ", "say": "loo-am a-han sao baw"},
+  "wifi": {"text": "ລະຫັດວາຍຟາຍແມ່ນຫຍັງ", "say": "la-hat wai-fai men nyang"},
+
+  "toilet": {"text": "ຫ້ອງນ້ຳຢູ່ໃສ", "say": "hong nahm yoo sai", "note": "\"… ຢູ່ໃສ (yoo sai)\" means \"where is …?\" for anything"},
+  "taxi": {"text": "ຊ່ວຍເອີ້ນແທັກຊີໃຫ້ໄດ້ບໍ", "say": "soo-ay urn tak-see hai dai baw", "note": "Tuk-tuks (ຕຸກຕຸກ) are more common than taxis"},
+
+  "delicious": {"text": "ແຊບຫຼາຍ", "say": "saep lai", "note": "ແຊບ (saep) alone means tasty"},
+  "allergic": {"text": "ຂ້ອຍແພ້…", "say": "koy pae …", "note": "Add the food, or show a note written in Lao to be safe"},
+
+  "help": {"text": "ຊ່ວຍແດ່", "say": "soo-ay dae"}
+}

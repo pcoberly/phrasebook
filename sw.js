@@ -1,4 +1,4 @@
-const CACHE = "phrasebook-v2";
+const CACHE = "phrasebook-v3";
 // The app itself. Languages are not here: each one is a "pack" (lang/<code>/ and audio/<code>/)
 // that the page downloads into its own cache, "lang-<code>", only when you choose that language.
 const SHELL = ["./", "index.html", "style.css", "app.js", "phrases.json", "languages.json", "manifest.webmanifest", "icon-v3-180.png"];
