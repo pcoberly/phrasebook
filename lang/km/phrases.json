@@ -47,6 +47,18 @@
 
   "delicious": {"text": "ឆ្ងាញ់ណាស់", "say": "ch'ngan nah", "note": "Said to the cook, it is a lovely compliment"},
   "allergic": {"text": "ខ្ញុំអាឡែរហ្ស៊ីនឹង…", "say": "k'nyom a-ler-jee nung …", "note": "Add the food, or show a note written in Khmer to be safe"},
+  "love-dish": {"text": "ខ្ញុំចូលចិត្តម្ហូបនេះណាស់", "say": "k'nyom chol-chet m'hop nih nah", "note": "ចូលចិត្ត (chol-chet) means like, and is the natural word for food. ស្រលាញ់ (sro-lanh) is for people"},
+  "what-called": {"text": "នេះហៅថាអ្វី", "say": "nih how tah ay", "note": "Point at the dish or item"},
+  "table-for-two": {"text": "ខ្ញុំសុំតុមួយសម្រាប់ពីរនាក់", "say": "k'nyom som tok moo-ey som-rap pee neak", "note": "For more people replace ពីរ (pee, two) with បី (bay, three) or បួន (boo-un, four)"},
+  "menu": {"text": "សុំមើលម៉ឺនុយបានទេ", "say": "som muhl may-nui ban teh"},
+  "recommend": {"text": "តើអ្នកណែនាំម្ហូបអ្វី", "say": "tae neak nae-nom m'hop ay"},
+  "beer": {"text": "ខ្ញុំសុំបៀរមួយដប", "say": "k'nyom som bee-ah moo-ey dop", "note": "Angkor is the local beer. Ask for it by name"},
+  "coffee": {"text": "កាហ្វេ", "say": "ka-feh", "note": "កាហ្វេទឹកកក (ka-feh tuk kok) is iced coffee"},
+  "tea": {"text": "តែ", "say": "tay"},
+  "water": {"text": "ទឹក", "say": "tuk", "note": "Ask for ទឹកសុទ្ធ (tuk sot), bottled drinking water"},
+  "milk": {"text": "ទឹកដោះគោ", "say": "tuk doh ko"},
+  "sugar": {"text": "ស្ករ", "say": "skaw", "note": "មិនដាក់ស្ករ (min dak skaw) means without sugar"},
+  "cheers": {"text": "ជល់មួយ", "say": "chol moo-ey", "note": "Literally \"clink one\". The usual toast as the glasses touch"},
 
   "help": {"text": "ជួយខ្ញុំផង", "say": "joo-ey k'nyom pong"}
 }

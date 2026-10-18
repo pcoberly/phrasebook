@@ -42,5 +42,17 @@
   "taxi": {"text": "Bạn gọi giúp tôi một chiếc taxi được không?", "say": "bahn goy zoop toy moht chee-uhk tak-see doo-uhk khohm", "tones": "heavy, heavy, rising, flat, heavy, rising, (taxi), heavy, flat"},
   "delicious": {"text": "Ngon quá!", "say": "ngawn gwah", "tones": "flat, rising", "note": "ng as in \"sing\", even at the start of a word"},
   "allergic": {"text": "Tôi bị dị ứng với...", "say": "toy bee zee uhng vuh-ee", "tones": "flat, heavy, heavy, rising, rising", "note": "Add the food: ... hải sản = seafood"},
+  "love-dish": {"text": "Tôi rất thích món này!", "say": "toy zuht tick mon nigh", "tones": "flat, rising, rising, rising, falling", "note": "Thích means like, and rất thích is the natural way to say you love a dish. Yêu is kept for people. Món means dish"},
+  "what-called": {"text": "Cái này gọi là gì?", "say": "guy nigh goy lah zee", "tones": "rising, falling, heavy, falling, falling", "note": "Point at the dish or item. Cái này means this thing"},
+  "table-for-two": {"text": "Cho tôi một bàn cho hai người", "say": "chaw toy moht bahn chaw hi nguh-ee", "tones": "flat, flat, heavy, falling, flat, flat, falling", "note": "Hai is two. For more people use ba (3) or bốn (4) in its place"},
+  "menu": {"text": "Cho tôi xem thực đơn được không?", "say": "chaw toy sem tuhk duhn doo-uhk khohm", "tones": "flat, flat, flat, heavy, flat, heavy, flat"},
+  "recommend": {"text": "Bạn gợi ý món nào?", "say": "bahn guh-ee ee mon now", "tones": "heavy, heavy, rising, rising, falling", "note": "Or ask Món nào ngon? (mon now ngawn), which dish is good?"},
+  "beer": {"text": "Cho tôi một chai bia", "say": "chaw toy moht chai bee-uh", "tones": "flat, flat, heavy, flat, flat", "note": "In Hanoi try bia hơi, the fresh draught beer sold at street corners"},
+  "coffee": {"text": "Cà phê", "say": "gah feh", "tones": "falling, flat", "note": "Cà phê sữa đá is the famous iced coffee with condensed milk; cà phê đen is black"},
+  "tea": {"text": "Trà", "say": "chah", "tones": "falling", "note": "Trà đá (chah dah) is iced tea, often free at street stalls"},
+  "water": {"text": "Nước", "say": "noo-uhk", "tones": "rising", "note": "Say nước lọc (noo-uhk lawk) for plain drinking water"},
+  "milk": {"text": "Sữa", "say": "suh-ah", "tones": "broken", "note": "Sữa tươi is fresh milk"},
+  "sugar": {"text": "Đường", "say": "doo-uhng", "tones": "falling", "note": "Ít đường (eet doo-uhng) is a little sugar; không đường (khohm doo-uhng) is none"},
+  "cheers": {"text": "Một, hai, ba, dô!", "say": "moht, hi, bah, zoh", "tones": "heavy, flat, flat, flat", "note": "The usual toast: count one, two, three, then dô, often shouted. Chúc sức khỏe means good health"},
   "help": {"text": "Giúp tôi với!", "say": "zoop toy vuh-ee", "tones": "rising, flat, rising"}
 }

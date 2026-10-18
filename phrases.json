@@ -42,5 +42,17 @@
   {"id": "taxi", "en": "Can you call a taxi for me?", "cat": "getting-around"},
   {"id": "delicious", "en": "Delicious!", "cat": "food"},
   {"id": "allergic", "en": "I'm allergic to...", "cat": "food"},
+  {"id": "love-dish", "en": "I love this dish!", "cat": "food"},
+  {"id": "what-called", "en": "What is it called?", "cat": "food"},
+  {"id": "table-for-two", "en": "I'd like a table for 2 please", "cat": "food"},
+  {"id": "menu", "en": "Can I have a menu?", "cat": "food"},
+  {"id": "recommend", "en": "What do you recommend?", "cat": "food"},
+  {"id": "beer", "en": "I'd like a bottle of beer please", "cat": "food"},
+  {"id": "coffee", "en": "Coffee", "cat": "food"},
+  {"id": "tea", "en": "Tea", "cat": "food"},
+  {"id": "water", "en": "Water", "cat": "food"},
+  {"id": "milk", "en": "Milk", "cat": "food"},
+  {"id": "sugar", "en": "Sugar", "cat": "food"},
+  {"id": "cheers", "en": "Cheers!", "cat": "food"},
   {"id": "help", "en": "Help me!", "cat": "emergency"}
 ]

@@ -47,6 +47,18 @@
 
   "delicious": {"text": "ແຊບຫຼາຍ", "say": "saep lai", "note": "ແຊບ (saep) alone means tasty"},
   "allergic": {"text": "ຂ້ອຍແພ້…", "say": "koy pae …", "note": "Add the food, or show a note written in Lao to be safe"},
+  "love-dish": {"text": "ຂ້ອຍມັກອາຫານນີ້ຫຼາຍ", "say": "koy mak a-han nee lai", "note": "ມັກ (mak) means like, and is the natural word for food"},
+  "what-called": {"text": "ອັນນີ້ເອີ້ນວ່າຫຍັງ", "say": "an nee urn wah nyang", "note": "Point at the dish or item"},
+  "table-for-two": {"text": "ຂໍໂຕະສຳລັບສອງຄົນ", "say": "kaw toh sam-lap song kon", "note": "For more people replace ສອງ (song, two) with ສາມ (sahm, three) or ສີ່ (see, four)"},
+  "menu": {"text": "ຂໍເບິ່ງເມນູໄດ້ບໍ", "say": "kaw beung may-noo dai baw"},
+  "recommend": {"text": "ເຈົ້າແນະນຳຫຍັງ", "say": "jao nae-nam nyang"},
+  "beer": {"text": "ຂໍເບຍໜຶ່ງຂວດ", "say": "kaw bee-a nuhng kuat", "note": "Beerlao is the national beer. Ask for it by name: ເບຍລາວ (bia lao)"},
+  "coffee": {"text": "ກາເຟ", "say": "ga-feh", "note": "ກາເຟເຢັນ (ga-feh yen) is iced coffee"},
+  "tea": {"text": "ຊາ", "say": "sah", "note": "ຊາເຢັນ (sah yen) is iced tea"},
+  "water": {"text": "ນ້ຳດື່ມ", "say": "nahm deum", "note": "Drinking water, the bottled kind"},
+  "milk": {"text": "ນົມ", "say": "nom"},
+  "sugar": {"text": "ນ້ຳຕານ", "say": "nahm tan"},
+  "cheers": {"text": "ຊົນແກ້ວ", "say": "son keo", "note": "Literally \"clink glasses\". ໄຊໂຍ (sai yo) is also used"},
 
   "help": {"text": "ຊ່ວຍແດ່", "say": "soo-ay dae"}
 }

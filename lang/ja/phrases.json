@@ -47,6 +47,18 @@
 
   "delicious": {"text": "おいしい！", "say": "oishii", "note": "Said to the cook, it is the best compliment"},
   "allergic": {"text": "…のアレルギーがあります", "say": "… no arerugī ga arimasu", "note": "Add the food: ebi (shrimp), tamago (egg), piinattsu (peanuts)"},
+  "love-dish": {"text": "この料理が大好きです！", "say": "kono ryōri ga daisuki desu", "note": "Daisuki is \"love\" for things you really like, such as food, and is not romantic"},
+  "what-called": {"text": "これは何と言いますか", "say": "kore wa nan to iimasu ka", "note": "Or simply kore wa nan desu ka, what is this?"},
+  "table-for-two": {"text": "二人です、お願いします", "say": "futari desu, onegai shimasu", "note": "Hold up two fingers too. For more: san-nin (3), yo-nin (4)"},
+  "menu": {"text": "メニューをいただけますか", "say": "menyū o itadakemasu ka"},
+  "recommend": {"text": "おすすめは何ですか", "say": "osusume wa nan desu ka"},
+  "beer": {"text": "瓶ビールを一本お願いします", "say": "bin biiru o ippon onegai shimasu", "note": "Ippon is the counter for bottles. Draught beer is nama (生)"},
+  "coffee": {"text": "コーヒー", "say": "kōhī", "note": "Hot is hotto, iced is aisu"},
+  "tea": {"text": "お茶", "say": "ocha", "note": "Ocha is green tea. Black tea is kōcha (紅茶)"},
+  "water": {"text": "お水", "say": "omizu", "note": "Most restaurants bring free water without being asked"},
+  "milk": {"text": "牛乳", "say": "gyūnyū", "note": "For coffee or tea, ask for ミルク (miruku)"},
+  "sugar": {"text": "砂糖", "say": "satō", "note": "In a café, シュガー (shugā) also works"},
+  "cheers": {"text": "乾杯！", "say": "kanpai", "note": "Wait until everyone has a glass, then say it together"},
 
   "help": {"text": "助けて！", "say": "tasukete", "note": "Shout it. Police are keisatsu"}
 }
