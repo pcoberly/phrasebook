@@ -1,0 +1,52 @@
+{
+  "hello": {"text": "こんにちは", "say": "konnichiwa", "note": "Daytime greeting. Ohayō gozaimasu in the morning, konbanwa in the evening"},
+  "good-morning": {"text": "おはようございます", "say": "ohayō gozaimasu", "note": "The polite form; with friends it is just ohayō"},
+  "goodbye": {"text": "さようなら", "say": "sayōnara", "note": "Sounds final, so it is used less than you'd think. Shopkeepers say arigatō gozaimashita as you leave"},
+  "please": {"text": "お願いします", "say": "onegai shimasu", "note": "When asking for something, or handing something over. After an item, kudasai also works"},
+  "thank-you": {"text": "ありがとうございます", "say": "arigatō gozaimasu", "note": "Use arigatō gozaimashita for something that has just finished, such as a meal"},
+  "yes": {"text": "はい", "say": "hai", "note": "Often just means \"I'm listening\", not always agreement"},
+  "no": {"text": "いいえ", "say": "iie", "note": "Often softened: chotto… (\"that's a bit…\") is a polite refusal"},
+  "excuse-me": {"text": "すみません", "say": "sumimasen", "note": "Gets attention, says sorry, and says thanks for the trouble"},
+  "my-name": {"text": "私の名前は…です", "say": "watashi no namae wa … desu", "note": "Add -san to other people's names, never to your own"},
+  "dont-understand": {"text": "わかりません", "say": "wakarimasen"},
+  "speak-slowly": {"text": "ゆっくり話してください", "say": "yukkuri hanashite kudasai"},
+  "repeat": {"text": "もう一度お願いします", "say": "mō ichido onegai shimasu"},
+  "speak-english": {"text": "英語を話せますか", "say": "eigo o hanasemasu ka", "note": "Ending a sentence with ka makes it a question"},
+
+  "one": {"text": "一", "say": "ichi"},
+  "two": {"text": "二", "say": "ni"},
+  "three": {"text": "三", "say": "san"},
+  "four": {"text": "四", "say": "yon", "note": "Also shi, but that sounds like \"death\", so yon is preferred"},
+  "five": {"text": "五", "say": "go"},
+  "six": {"text": "六", "say": "roku"},
+  "seven": {"text": "七", "say": "nana", "note": "Also shichi"},
+  "eight": {"text": "八", "say": "hachi"},
+  "nine": {"text": "九", "say": "kyū", "note": "Also ku"},
+  "ten": {"text": "十", "say": "jū"},
+  "hundred": {"text": "百", "say": "hyaku"},
+  "thousand": {"text": "千", "say": "sen", "note": "Prices are in yen. 10,000 is man (万)"},
+
+  "how-much": {"text": "いくらですか", "say": "ikura desu ka", "note": "Point at the item and say kore wa ikura desu ka (how much is this?)"},
+  "would-like": {"text": "…をください", "say": "… o kudasai", "note": "Literally \"give me …\". Kore o kudasai = this one, please"},
+  "i-want": {"text": "…が欲しいです", "say": "… ga hoshii desu", "note": "Direct; fine with friends, a little blunt to a shopkeeper"},
+  "do-you-have": {"text": "…はありますか", "say": "… wa arimasu ka", "note": "Put the item in the gap"},
+  "just-looking": {"text": "見ているだけです", "say": "mite iru dake desu", "note": "A polite way to decline help"},
+  "ill-take-it": {"text": "これにします", "say": "kore ni shimasu", "note": "Literally \"I'll go with this\""},
+  "too-expensive": {"text": "高すぎます", "say": "takasugimasu", "note": "Say it gently; bargaining is not normal in most Japanese shops"},
+  "discount": {"text": "もう少し安くなりますか", "say": "mō sukoshi yasuku narimasu ka", "note": "Only really works at markets and flea shops"},
+  "card": {"text": "クレジットカードは使えますか", "say": "kurejitto kādo wa tsukaemasu ka"},
+  "bill": {"text": "お会計をお願いします", "say": "okaikei o onegai shimasu", "note": "Usually you pay at the till, not at the table"},
+
+  "reservation": {"text": "予約しています", "say": "yoyaku shite imasu"},
+  "checkout-time": {"text": "チェックアウトは何時ですか", "say": "chekkuauto wa nanji desu ka", "note": "Nanji means \"what time\""},
+  "breakfast": {"text": "朝食は含まれていますか", "say": "chōshoku wa fukumarete imasu ka"},
+  "wifi": {"text": "ワイファイのパスワードは何ですか", "say": "waifai no pasuwādo wa nan desu ka"},
+
+  "toilet": {"text": "トイレはどこですか", "say": "toire wa doko desu ka", "note": "\"… wa doko desu ka?\" means \"where is …?\" for anything"},
+  "taxi": {"text": "タクシーを呼んでもらえますか", "say": "takushī o yonde moraemasu ka"},
+
+  "delicious": {"text": "おいしい！", "say": "oishii", "note": "Said to the cook, it is the best compliment"},
+  "allergic": {"text": "…のアレルギーがあります", "say": "… no arerugī ga arimasu", "note": "Add the food: ebi (shrimp), tamago (egg), piinattsu (peanuts)"},
+
+  "help": {"text": "助けて！", "say": "tasukete", "note": "Shout it. Police are keisatsu"}
+}

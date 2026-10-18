@@ -5,44 +5,42 @@ const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode etc. */ } },
+  remove(k) { try { localStorage.removeItem(k); } catch { /* private mode etc. */ } },
 };
-
-// One-time move of settings and progress saved under the app's old name ("viet-").
-try {
-  for (const k of ["progress", "cat", "dir", "voice", "speed", "listen"]) {
-    const old = localStorage.getItem("viet-" + k);
-    if (old !== null && localStorage.getItem("translation-" + k) === null) localStorage.setItem("translation-" + k, old);
-  }
-} catch { /* storage unavailable */ }
 
 const $ = (s) => document.querySelector(s);
 const main = $("#main");
 const state = {
-  phrases: [],
+  languages: [],  // languages.json: every language the app offers
+  shared: [],     // phrases.json: the phrases every language shares (id, English, topic)
+  lang: null,     // the language being studied
+  phrases: [],    // shared phrases merged with the active language's text, say, tones, note
   mode: "list",
-  progress: store.get("translation-progress", {}),
-  settings: { voice: store.get("translation-voice", "f"), speed: store.get("translation-speed", "1") },
+  progress: {},
+  settings: { voice: store.get("phrasebook-voice", "f"), speed: store.get("phrasebook-speed", "1") },
   last: null,
+  busy: {},       // language code -> message while it downloads
+  note: "",       // temporary footer message
 };
 
 // ---------- speech ----------
-let viVoice = null;
+let browserVoice = null;
 function pickVoice() {
-  if (!("speechSynthesis" in window)) return;
-  const vs = speechSynthesis.getVoices().filter((v) => v.lang.toLowerCase().startsWith("vi"));
-  viVoice = vs.find((v) => /linh/i.test(v.name)) || vs[0] || null;
+  browserVoice = null;
+  if (!("speechSynthesis" in window) || !state.lang) return;
+  const prefix = state.lang.ttsLang.slice(0, 2).toLowerCase();
+  const vs = speechSynthesis.getVoices().filter((v) => v.lang.toLowerCase().startsWith(prefix));
+  browserVoice = vs.find((v) => /linh|kyoko|o-ren/i.test(v.name)) || vs[0] || null;
 }
-if ("speechSynthesis" in window) {
-  pickVoice();
-  speechSynthesis.addEventListener("voiceschanged", pickVoice);
-}
+if ("speechSynthesis" in window) speechSynthesis.addEventListener("voiceschanged", pickVoice);
+
 let currentAudio = null;
 function speak(p) {
   if (currentAudio) { currentAudio.pause(); currentAudio = null; }
   if ("speechSynthesis" in window) speechSynthesis.cancel();
   const pref = state.settings.voice;
   const voice = pref === "mixed" ? (Math.random() < 0.5 ? "f" : "m") : pref;
-  const a = new Audio(`audio/${voice}/${p.id}.mp3`);
+  const a = new Audio(`audio/${state.lang.code}/${voice}/${p.id}.mp3`);
   a.playbackRate = parseFloat(state.settings.speed) || 1;
   a.onerror = () => speakWithBrowserVoice(p); // audio file missing: fall back to the phone's voice
   currentAudio = a;
@@ -50,24 +48,26 @@ function speak(p) {
 }
 function speakWithBrowserVoice(p) {
   if (!("speechSynthesis" in window)) return;
-  const u = new SpeechSynthesisUtterance(p.vi.replace(/\.\.\./g, ""));
-  u.lang = "vi-VN";
-  if (viVoice) u.voice = viVoice;
+  const u = new SpeechSynthesisUtterance(p.text.replace(/\.\.\.|…/g, ""));
+  u.lang = state.lang.ttsLang;
+  if (browserVoice) u.voice = browserVoice;
   u.rate = 0.85;
   speechSynthesis.speak(u);
 }
 
 // ---------- scheduling ----------
+const progressKey = (code) => "phrasebook-progress-" + code;
 const keyOf = (p, dir) => p.id + ":" + dir;
 function grade(key, ok) {
   const cur = state.progress[key] || { box: 0 };
   const box = ok ? Math.min(cur.box + 1, INTERVALS.length - 1) : 0;
   state.progress[key] = { box, due: Date.now() + INTERVALS[box] * DAY };
-  store.set("translation-progress", state.progress);
+  store.set(progressKey(state.lang.code), state.progress);
 }
+// "to" = English prompt, answer in the language; "from" = the other way round
 function candidates() {
   const cat = $("#cat").value, dirSel = $("#dir").value;
-  const dirs = dirSel === "mixed" ? ["en2vi", "vi2en"] : [dirSel];
+  const dirs = dirSel === "mixed" ? ["to", "from"] : [dirSel];
   const out = [];
   for (const p of state.phrases) {
     if (cat !== "all" && p.cat !== cat) continue;
@@ -88,49 +88,57 @@ function next() {
 
 // ---------- ui helpers ----------
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+// text in the language being studied, tagged so the phone picks the right font
+const nat = (s) => `<span lang="${state.lang.code}">${esc(s)}</span>`;
 function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
-// pronunciation block: "sounds like" spelling, tone per syllable, and a usage note
+// pronunciation block: "sounds like" spelling, tones when the language has them, and a usage note
 function detail(p) {
   return `${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}
     ${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}
     ${p.note ? `<div class="note">${esc(p.note)}</div>` : ""}`;
 }
 function updateStatus() {
+  if (state.note) { $("#status").textContent = state.note; return; }
   const all = state.phrases.length * 2;
   const known = Object.values(state.progress).filter((v) => v.box >= 3).length;
   $("#status").textContent = `${known} of ${all} cards learned`;
+}
+function say(note, ms = 0) {
+  state.note = note;
+  updateStatus();
+  if (ms) setTimeout(() => { if (state.note === note) { state.note = ""; updateStatus(); } }, ms);
 }
 
 // ---------- cards ----------
 function renderCard() {
   const { p, dir, key } = next();
+  const name = state.lang.name;
   const listenOnly = $("#listen").checked;
-  const frontVi = dir === "vi2en";
-  const frontText = frontVi ? p.vi : p.en;
-  const showFront = !(frontVi && listenOnly);
+  const fromLang = dir === "from";
+  const showFront = !(fromLang && listenOnly);
+  const front = fromLang ? nat(p.text) : esc(p.en);
   main.innerHTML = `
     <div class="card" id="face">
-      <div class="label">${frontVi ? "Vietnamese" : "English"}</div>
-      <div class="big">${showFront ? esc(frontText) : "🎧"}</div>
-      ${frontVi ? `<button class="speak" id="say" aria-label="Play">🔊</button>` : ""}
+      <div class="label">${fromLang ? name : "English"}</div>
+      <div class="big">${showFront ? front : "🎧"}</div>
+      ${fromLang ? `<button class="speak" id="say" aria-label="Play">🔊</button>` : ""}
       <div class="hint">Tap the card to reveal</div>
     </div>
     <div class="row hidden" id="grades">
       <button class="act bad" id="again">✗ Didn't know it</button>
       <button class="act good" id="got">✓ Knew it</button>
     </div>`;
-  if (frontVi) { $("#say").onclick = (e) => { e.stopPropagation(); speak(p); }; speak(p); }
+  if (fromLang) { $("#say").onclick = (e) => { e.stopPropagation(); speak(p); }; speak(p); }
   $("#face").onclick = () => {
     if ($("#grades").classList.contains("hidden") === false) return;
-    const backVi = !frontVi;
     $("#face").innerHTML = `
-      <div class="label">${frontVi ? "English" : "Vietnamese"}</div>
-      <div class="big">${esc(backVi ? p.vi : p.en)}</div>
+      <div class="label">${fromLang ? "English" : name}</div>
+      <div class="big">${fromLang ? esc(p.en) : nat(p.text)}</div>
       <button class="speak" id="say2" aria-label="Play">🔊</button>
-      <div class="orig">${frontVi ? "Vietnamese" : "English"}: <b>${esc(frontText)}</b></div>
+      <div class="orig">${fromLang ? name : "English"}: <b>${front}</b></div>
       ${detail(p)}`;
     $("#say2").onclick = (e) => { e.stopPropagation(); speak(p); };
-    if (backVi) speak(p);
+    if (!fromLang) speak(p);
     $("#grades").classList.remove("hidden");
   };
   $("#again").onclick = () => { grade(key, false); render(); };
@@ -140,7 +148,7 @@ function renderCard() {
 
 // ---------- quiz ----------
 function distractors(p, dir) {
-  const field = dir === "en2vi" ? "vi" : "en";
+  const field = dir === "to" ? "text" : "en";
   const others = state.phrases.filter((o) => o.id !== p.id && o[field] !== p[field]);
   const same = shuffle(others.filter((o) => o.cat === p.cat));
   const rest = shuffle(others.filter((o) => o.cat !== p.cat));
@@ -149,28 +157,29 @@ function distractors(p, dir) {
 function renderQuiz() {
   if (state.phrases.length < 4) { main.innerHTML = `<div class="card">Need at least 4 phrases.</div>`; return; }
   const { p, dir, key } = next();
+  const name = state.lang.name;
   const listenOnly = $("#listen").checked;
-  const toVi = dir === "en2vi";
+  const toLang = dir === "to";
   const opts = shuffle([p, ...distractors(p, dir)]);
   main.innerHTML = `
     <div class="card">
-      <div class="label">${toVi ? "Pick the Vietnamese" : "Pick the English"}</div>
-      <div class="big">${toVi ? esc(p.en) : (listenOnly ? "🎧" : esc(p.vi))}</div>
-      ${toVi ? "" : `<button class="speak" id="say" aria-label="Play">🔊</button>`}
+      <div class="label">${toLang ? `Pick the ${name}` : "Pick the English"}</div>
+      <div class="big">${toLang ? esc(p.en) : (listenOnly ? "🎧" : nat(p.text))}</div>
+      ${toLang ? "" : `<button class="speak" id="say" aria-label="Play">🔊</button>`}
     </div>
     <div id="choices"></div>
     <div class="card reveal" id="reveal"></div>
     <div class="row hidden" id="nextrow"><button class="act" id="next">Next</button></div>`;
-  if (!toVi) { $("#say").onclick = () => speak(p); speak(p); }
+  if (!toLang) { $("#say").onclick = () => speak(p); speak(p); }
   const box = $("#choices");
   let answered = false;
   opts.forEach((o, i) => {
     const div = document.createElement("div");
     div.className = "choice";
-    const label = toVi ? (listenOnly ? `Option ${i + 1}` : esc(o.vi)) : esc(o.en);
-    div.innerHTML = `<button class="pick">${label}</button>${toVi ? `<button class="speak" aria-label="Play">🔊</button>` : ""}`;
+    const label = toLang ? (listenOnly ? `Option ${i + 1}` : nat(o.text)) : esc(o.en);
+    div.innerHTML = `<button class="pick">${label}</button>${toLang ? `<button class="speak" aria-label="Play">🔊</button>` : ""}`;
     const pick = div.querySelector(".pick");
-    if (toVi) div.querySelector(".speak").onclick = () => speak(o);
+    if (toLang) div.querySelector(".speak").onclick = () => speak(o);
     pick.onclick = () => {
       if (answered) return;
       answered = true;
@@ -179,10 +188,10 @@ function renderQuiz() {
       pick.classList.add(ok ? "right" : "wrong");
       [...box.children].forEach((c, j) => {
         if (opts[j].id === p.id) c.querySelector(".pick").classList.add("right");
-        if (toVi) c.querySelector(".pick").textContent = opts[j].vi;
+        if (toLang) c.querySelector(".pick").innerHTML = nat(opts[j].text);
       });
       speak(p);
-      $("#reveal").innerHTML = `<div class="big">${esc(p.vi)}</div><div class="orig">${esc(p.en)}</div>${detail(p)}`;
+      $("#reveal").innerHTML = `<div class="big">${nat(p.text)}</div><div class="orig">${esc(p.en)}</div>${detail(p)}`;
       $("#nextrow").classList.remove("hidden");
       updateStatus();
     };
@@ -195,7 +204,7 @@ function renderQuiz() {
 // ---------- study list ----------
 function renderList() {
   const cat = $("#cat").value;
-  const viFirst = $("#dir").value === "vi2en"; // English first unless studying Vietnamese → English
+  const fromFirst = $("#dir").value === "from"; // English first unless studying the language → English
   const groups = {};
   for (const p of state.phrases) if (cat === "all" || p.cat === cat) (groups[p.cat] ||= []).push(p);
   main.innerHTML = Object.entries(groups).map(([c, ps]) => `
@@ -203,10 +212,10 @@ function renderList() {
     ${ps.map((p) => `
       <div class="entry">
         <div>
-          ${viFirst ? "" : `<div class="en">${esc(p.en)}</div>`}
-          <div class="vi">${esc(p.vi)}</div>
+          ${fromFirst ? "" : `<div class="en">${esc(p.en)}</div>`}
+          <div class="vi">${nat(p.text)}</div>
           ${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}
-          ${viFirst ? `<div class="en">${esc(p.en)}</div>` : ""}
+          ${fromFirst ? `<div class="en">${esc(p.en)}</div>` : ""}
           ${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}
           ${p.note ? `<div class="note">${esc(p.note)}</div>` : ""}
         </div>
@@ -216,49 +225,19 @@ function renderList() {
   $("#status").textContent = "Tap 🔊 to hear a phrase";
 }
 
-// ---------- guide (from the cheat sheet) ----------
-const GUIDE = `
-  <h2 class="group">The six tones</h2>
-  <p class="note">Every syllable carries a tone, marked on the vowel. The tone is part of the word: say it wrong and you may say a different word. "Sounds like" spellings are rough English approximations of Hanoi pronunciation.</p>
-  <table>
-    <tr><th>Tone</th><th>Mark</th><th>How to say it</th><th>Example</th></tr>
-    <tr><td>Flat (ngang)</td><td>none: a</td><td>Level and mid-high, like holding a note</td><td>ma (ghost)</td></tr>
-    <tr><td>Falling (huyền)</td><td>à</td><td>Low and sliding down, like a sigh</td><td>mà (but)</td></tr>
-    <tr><td>Rising (sắc)</td><td>á</td><td>Sharp rise, like "what?"</td><td>má (cheek)</td></tr>
-    <tr><td>Dipping (hỏi)</td><td>ả</td><td>Drops, then comes back up</td><td>mả (tomb)</td></tr>
-    <tr><td>Broken (ngã)</td><td>ã</td><td>Rises with a catch in the throat midway</td><td>mã (code)</td></tr>
-    <tr><td>Heavy (nặng)</td><td>ạ</td><td>Low, short, cut off abruptly</td><td>mạ (rice seedling)</td></tr>
-  </table>
-  <h2 class="group">Letters that surprise</h2>
-  <table>
-    <tr><th>Letter</th><th>Sounds like</th></tr>
-    <tr><td>x</td><td>s</td></tr>
-    <tr><td>đ</td><td>d</td></tr>
-    <tr><td>d, gi</td><td>z</td></tr>
-    <tr><td>c, k</td><td>A soft k with no puff of air, close to g</td></tr>
-    <tr><td>kh</td><td>A breathy k, like the ch in "loch"</td></tr>
-    <tr><td>nh</td><td>ny, as in "canyon"</td></tr>
-    <tr><td>ng</td><td>As in "sing", including at the start of a word</td></tr>
-    <tr><td>ơ, â</td><td>uh</td></tr>
-    <tr><td>ô / o</td><td>oh / aw</td></tr>
-    <tr><td>ê / e</td><td>ay / eh</td></tr>
-  </table>
-  <h2 class="group">You and I</h2>
-  <p class="note">Tôi (I) and bạn (you) are neutral and safe for a visitor. Locals usually swap in age-based words such as anh (older man), chị (older woman) and em (younger person).</p>
-  <h2 class="group">North vs South</h2>
-  <p class="note">Every phrase here is understood nationwide; what shifts between Hanoi and Ho Chi Minh City is the accent and a few word choices.</p>
-  <table>
-    <tr><th>What changes</th><th>Hanoi</th><th>Ho Chi Minh City</th></tr>
-    <tr><td>Polite yes</td><td>Vâng (vuhng)</td><td>Dạ (yah)</td></tr>
-    <tr><td>Thank you</td><td>Cảm ơn, dipping tone</td><td>Often Cám ơn, rising tone</td></tr>
-    <tr><td>d and gi</td><td>z</td><td>y</td></tr>
-    <tr><td>v</td><td>v</td><td>Often y, so vệ sinh is close to "yay shin"</td></tr>
-    <tr><td>Final -nh (Anh, sinh)</td><td>aing, sing</td><td>an, shin</td></tr>
-    <tr><td>Broken tone (ã)</td><td>Rise with a catch in the throat</td><td>Said like the dipping tone</td></tr>
-  </table>`;
-function renderGuide() {
-  main.innerHTML = GUIDE;
-  $("#status").textContent = "Pronunciation guide";
+// ---------- guide: one page per language ----------
+async function renderGuide() {
+  const code = state.lang.code;
+  main.innerHTML = `<p class="note">Loading…</p>`;
+  $("#status").textContent = `${state.lang.name} pronunciation guide`;
+  try {
+    const res = await fetch(`lang/${code}/guide.html`);
+    if (!res.ok) throw new Error(res.status);
+    const html = await res.text();
+    if (state.mode === "guide" && state.lang.code === code) main.innerHTML = html;
+  } catch {
+    if (state.mode === "guide") main.innerHTML = `<p class="note">The guide isn't available offline until ${esc(state.lang.name)} has finished downloading.</p>`;
+  }
 }
 
 function render() {
@@ -269,10 +248,129 @@ function render() {
   else renderSettings();
 }
 
+// ---------- language packs: only the languages you choose are stored on the phone ----------
+// A pack is everything for one language: its text, guide and audio. lang/<code>/pack.json
+// lists every file with a hash, so a pack downloads once and later updates fetch only what changed.
+const canCache = "caches" in window;
+const packKey = (code) => "phrasebook-pack-" + code;
+const cacheName = (code) => "lang-" + code;
+function packState(code) {
+  const rec = store.get(packKey(code), null);
+  return rec ? (rec.complete ? "installed" : "partial") : "none";
+}
+async function syncPack(code, onProgress) {
+  if (!canCache) throw new Error("This browser cannot keep languages offline");
+  const res = await fetch(`lang/${code}/pack.json`, { cache: "no-store" });
+  if (!res.ok) throw new Error("pack.json " + res.status);
+  const manifest = await res.json();
+  const rec = store.get(packKey(code), { complete: false, files: {} });
+  const cache = await caches.open(cacheName(code));
+  for (const path of Object.keys(rec.files)) {
+    if (!(path in manifest.files)) { await cache.delete(path); delete rec.files[path]; }
+  }
+  const todo = [];
+  for (const [path, hash] of Object.entries(manifest.files)) {
+    if (rec.files[path] === hash && (await cache.match(path))) continue;
+    todo.push(path);
+  }
+  if (!todo.length) { rec.complete = true; store.set(packKey(code), rec); return 0; }
+  rec.complete = false;
+  store.set(packKey(code), rec);
+  const total = todo.length;
+  let done = 0;
+  onProgress?.(0, total);
+  const worker = async () => {
+    while (todo.length) {
+      const path = todo.shift();
+      const r = await fetch(`${path}?sync=${manifest.files[path]}`); // ?sync makes the service worker step aside
+      if (!r.ok) throw new Error(`${path}: ${r.status}`);
+      await cache.put(path, r);
+      rec.files[path] = manifest.files[path];
+      store.set(packKey(code), rec);
+      onProgress?.(++done, total);
+    }
+  };
+  await Promise.all([worker(), worker(), worker(), worker()]);
+  rec.complete = true;
+  store.set(packKey(code), rec);
+  return done;
+}
+async function removePack(code) {
+  if (canCache) await caches.delete(cacheName(code));
+  store.remove(packKey(code));
+}
+
+async function loadLanguageData() {
+  const code = state.lang.code;
+  const res = await fetch(`lang/${code}/phrases.json`);
+  if (!res.ok) throw new Error(`lang/${code}/phrases.json ${res.status}`);
+  const texts = await res.json();
+  state.phrases = state.shared.filter((p) => texts[p.id]).map((p) => ({ ...p, ...texts[p.id] }));
+}
+function rebuildDirOptions() {
+  const n = esc(state.lang.name);
+  const sel = $("#dir");
+  const saved = store.get("phrasebook-dir", "mixed");
+  sel.innerHTML = `<option value="mixed">Both ways</option><option value="to">English → ${n}</option><option value="from">${n} → English</option>`;
+  sel.value = ["mixed", "to", "from"].includes(saved) ? saved : "mixed";
+}
+async function useLanguage(code) {
+  const previous = state.lang;
+  state.lang = state.languages.find((l) => l.code === code);
+  try {
+    await loadLanguageData();
+  } catch (err) {
+    state.lang = previous; // keep studying what we had
+    throw err;
+  }
+  store.set("phrasebook-lang", code);
+  state.progress = store.get(progressKey(code), {});
+  state.last = null;
+  rebuildDirOptions();
+  pickVoice();
+}
+// Keep the language in use, and any other downloaded one, up to date. Runs quietly when online.
+async function syncInstalled() {
+  if (!canCache || !navigator.onLine) return;
+  const codes = state.languages.map((l) => l.code).filter((c) => c === state.lang.code || packState(c) !== "none");
+  for (const code of codes) {
+    const label = state.languages.find((l) => l.code === code).name;
+    try {
+      const changed = await syncPack(code, (done, total) => {
+        if (code === state.lang.code) say(`Downloading ${label}: ${done} of ${total}`);
+      });
+      if (changed && code === state.lang.code) say(`${label} is ready to use offline`, 4000);
+      else if (code === state.lang.code && state.note) say("");
+    } catch {
+      if (code === state.lang.code) say("");
+    }
+  }
+}
+
 // ---------- settings ----------
+function languageRows() {
+  return state.languages.map((l) => {
+    const ps = packState(l.code);
+    const active = l.code === state.lang.code;
+    const mb = `${(l.bytes / 1e6).toFixed(1)} MB`;
+    const status = state.busy[l.code] || (active ? "In use" : ps === "installed" ? "Downloaded" : ps === "partial" ? "Partly downloaded" : "Not downloaded");
+    const buttons = state.busy[l.code] || active ? ""
+      : ps === "installed" ? `<button class="mini" data-act="use">Use</button><button class="mini ghost" data-act="remove">Remove</button>`
+      : `<button class="mini" data-act="download">${canCache ? "Download &amp; use" : "Use"}</button>`;
+    return `
+      <div class="lang${active ? " current" : ""}" data-lang="${l.code}">
+        <div><div class="lname">${esc(l.name)} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
+          <div class="note"><span class="lstate">${esc(status)}</span> · ${mb}</div></div>
+        <div class="lbtn">${buttons}</div>
+      </div>`;
+  }).join("");
+}
 function renderSettings() {
   const opt = (v, label, cur) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
   main.innerHTML = `
+    <h2 class="group">Language</h2>
+    <div id="langs">${languageRows()}</div>
+    <p class="note">Each language is stored on this phone only once you download it. Removing one frees its space and keeps your progress.</p>
     <h2 class="group">Audio</h2>
     <div class="setting">
       <label for="voice">Voice</label>
@@ -291,36 +389,75 @@ function renderSettings() {
       </select>
     </div>
     <div class="row"><button class="act" id="sample">🔊 Hear a sample</button></div>`;
+  const sample = () => speak(state.phrases.find((p) => p.id === "hello") || state.phrases[0]);
   for (const id of ["voice", "speed"]) {
     $("#" + id).onchange = () => {
       state.settings[id] = $("#" + id).value;
-      store.set("translation-" + id, state.settings[id]);
-      speak(state.phrases.find((p) => p.id === "hello") || state.phrases[0]);
+      store.set("phrasebook-" + id, state.settings[id]);
+      sample();
     };
   }
-  $("#sample").onclick = () => speak(state.phrases.find((p) => p.id === "hello") || state.phrases[0]);
+  $("#sample").onclick = sample;
+  $("#langs").onclick = async (e) => {
+    const btn = e.target.closest("button[data-act]");
+    if (!btn) return;
+    const code = btn.closest("[data-lang]").dataset.lang;
+    const lang = state.languages.find((l) => l.code === code);
+    if (btn.dataset.act === "remove") {
+      if (confirm(`Remove ${lang.name} from this phone? Your progress is kept.`)) { await removePack(code); renderSettings(); }
+      return;
+    }
+    try {
+      if (btn.dataset.act === "download" && canCache) {
+        state.busy[code] = "Starting…";
+        renderSettings();
+        await syncPack(code, (done, total) => {
+          state.busy[code] = `Downloading ${done} of ${total}`;
+          const el = document.querySelector(`[data-lang="${code}"] .lstate`);
+          if (el) el.textContent = state.busy[code];
+        });
+      }
+      await useLanguage(code);
+      delete state.busy[code];
+    } catch {
+      state.busy[code] = "Couldn't download. Check you're online and try again.";
+      setTimeout(() => { delete state.busy[code]; if (state.mode === "settings") renderSettings(); }, 5000);
+    }
+    if (state.mode === "settings") renderSettings();
+  };
   $("#status").textContent = "Settings are saved on this device";
 }
 
 // ---------- boot ----------
+async function getJson(path) {
+  const res = await fetch(path, { cache: "no-cache" });
+  if (!res.ok) throw new Error(`${path} ${res.status}`);
+  return res.json();
+}
 async function boot() {
   try {
-    const r = await fetch("phrases.json", { cache: "no-cache" });
-    state.phrases = await r.json();
+    [state.languages, state.shared] = await Promise.all([getJson("languages.json"), getJson("phrases.json")]);
+    const saved = store.get("phrasebook-lang", "");
+    const code = state.languages.some((l) => l.code === saved) ? saved : state.languages[0].code;
+    state.lang = state.languages.find((l) => l.code === code);
+    await loadLanguageData();
   } catch {
-    try { state.phrases = await (await fetch("phrases.json")).json(); } catch { main.textContent = "Could not load phrases."; return; }
+    main.innerHTML = `<p class="note">Couldn't load the phrases. Open the app once while online.</p>`;
+    return;
   }
-  const cats = [...new Set(state.phrases.map((p) => p.cat))];
+  state.progress = store.get(progressKey(state.lang.code), {});
+  pickVoice();
+  const cats = [...new Set(state.shared.map((p) => p.cat))];
   $("#cat").innerHTML = `<option value="all">All</option>` + cats.map((c) => `<option>${c}</option>`).join("");
-  for (const [id, key] of [["cat", "translation-cat"], ["dir", "translation-dir"]]) {
-    const saved = store.get(key, null);
-    if (saved && [...$("#" + id).options].some((o) => o.value === saved)) $("#" + id).value = saved;
-    $("#" + id).onchange = () => { store.set(key, $("#" + id).value); state.last = null; render(); };
-  }
+  const savedCat = store.get("phrasebook-cat", null);
+  if (savedCat && [...$("#cat").options].some((o) => o.value === savedCat)) $("#cat").value = savedCat;
+  $("#cat").onchange = () => { store.set("phrasebook-cat", $("#cat").value); state.last = null; render(); };
+  rebuildDirOptions();
+  $("#dir").onchange = () => { store.set("phrasebook-dir", $("#dir").value); state.last = null; render(); };
   if (!["f", "m", "mixed"].includes(state.settings.voice)) state.settings.voice = "f";
   if (!["1", "0.85", "0.7"].includes(state.settings.speed)) state.settings.speed = "1";
-  $("#listen").checked = store.get("translation-listen", false);
-  $("#listen").onchange = () => { store.set("translation-listen", $("#listen").checked); render(); };
+  $("#listen").checked = store.get("phrasebook-listen", false);
+  $("#listen").onchange = () => { store.set("phrasebook-listen", $("#listen").checked); render(); };
   document.querySelectorAll(".tab").forEach((b) => b.onclick = () => {
     state.mode = b.dataset.mode;
     document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t === b));
@@ -329,6 +466,7 @@ async function boot() {
     render();
   });
   render();
+  syncInstalled();
 }
 boot();
 

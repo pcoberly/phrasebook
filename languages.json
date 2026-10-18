@@ -1,0 +1,24 @@
+[
+  {
+    "code": "vi",
+    "name": "Vietnamese",
+    "native": "Tiếng Việt",
+    "ttsLang": "vi-VN",
+    "voices": {
+      "f": "vi-VN-HoaiMyNeural",
+      "m": "vi-VN-NamMinhNeural"
+    },
+    "bytes": 1222117
+  },
+  {
+    "code": "ja",
+    "name": "Japanese",
+    "native": "日本語",
+    "ttsLang": "ja-JP",
+    "voices": {
+      "f": "ja-JP-NanamiNeural",
+      "m": "ja-JP-KeitaNeural"
+    },
+    "bytes": 1282737
+  }
+]

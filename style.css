@@ -52,4 +52,11 @@ th { color: var(--muted); font-weight: 600; font-size: 13px; }
 .entry .vi { font-size: 20px; font-weight: 600; }
 .entry .en { font-size: 18px; font-weight: 600; }
 .entry .vi { font-size: 20px; font-weight: 600; color: var(--accent); }
+.lang { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 12px; margin: 8px 0; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+.lang.current { border-color: var(--accent); }
+.lname { font-size: 18px; font-weight: 600; }
+.lbtn { display: flex; gap: 8px; flex: none; }
+button.mini { padding: 9px 14px; font-size: 15px; border-radius: 10px; border: 1px solid var(--accent); background: var(--accent); color: #fff; }
+@media (prefers-color-scheme: dark) { button.mini { color: #161413; } }
+button.mini.ghost { background: transparent; color: var(--muted); border-color: var(--line); }
 footer { text-align: center; color: var(--muted); font-size: 13px; padding: 18px 0 24px; }
