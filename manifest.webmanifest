@@ -1,6 +1,6 @@
 {
-  "name": "Translation",
-  "short_name": "Translation",
+  "name": "PhraseBook",
+  "short_name": "PhraseBook",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
