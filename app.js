@@ -90,6 +90,8 @@ function next() {
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 // text in the language being studied, tagged so the phone picks the right font
 const nat = (s) => `<span lang="${state.lang.code}">${esc(s)}</span>`;
+// topics are stored as slugs ("getting-around") and shown as names ("Getting Around")
+const topicName = (c) => c.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
 function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 // pronunciation block: "sounds like" spelling, tones when the language has them, and a usage note
 function detail(p) {
@@ -214,7 +216,7 @@ function renderList() {
   const groups = {};
   for (const p of state.phrases) if (cat === "all" || p.cat === cat) (groups[p.cat] ||= []).push(p);
   main.innerHTML = draftBanner() + Object.entries(groups).map(([c, ps]) => `
-    <h2 class="group">${esc(c.replace("-", " "))}</h2>
+    <h2 class="group">${esc(topicName(c))}</h2>
     ${ps.map((p) => `
       <div class="entry">
         <div>
@@ -454,7 +456,7 @@ async function boot() {
   state.progress = store.get(progressKey(state.lang.code), {});
   pickVoice();
   const cats = [...new Set(state.shared.map((p) => p.cat))];
-  $("#cat").innerHTML = `<option value="all">All</option>` + cats.map((c) => `<option>${c}</option>`).join("");
+  $("#cat").innerHTML = `<option value="all">All</option>` + cats.map((c) => `<option value="${c}">${esc(topicName(c))}</option>`).join("");
   const savedCat = store.get("phrasebook-cat", null);
   if (savedCat && [...$("#cat").options].some((o) => o.value === savedCat)) $("#cat").value = savedCat;
   $("#cat").onchange = () => { store.set("phrasebook-cat", $("#cat").value); state.last = null; render(); };

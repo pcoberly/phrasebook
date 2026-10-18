@@ -44,6 +44,17 @@
 
   "toilet": {"text": "ຫ້ອງນ້ຳຢູ່ໃສ", "say": "hong nahm yoo sai", "note": "\"… ຢູ່ໃສ (yoo sai)\" means \"where is …?\" for anything"},
   "taxi": {"text": "ຊ່ວຍເອີ້ນແທັກຊີໃຫ້ໄດ້ບໍ", "say": "soo-ay urn tak-see hai dai baw", "note": "Tuk-tuks (ຕຸກຕຸກ) are more common than taxis"},
+  "train": {"text": "ລົດໄຟ", "say": "lot fai"},
+  "bus": {"text": "ລົດເມ", "say": "lot may"},
+  "airport": {"text": "ສະໜາມບິນ", "say": "sa-nam bin"},
+  "bus-station": {"text": "ສະຖານີລົດເມ", "say": "sa-tha-nee lot may"},
+  "train-station": {"text": "ສະຖານີລົດໄຟ", "say": "sa-tha-nee lot fai"},
+  "where-train-station": {"text": "ສະຖານີລົດໄຟຢູ່ໃສ", "say": "sa-tha-nee lot fai yoo sai"},
+  "where-bus-station": {"text": "ສະຖານີລົດເມຢູ່ໃສ", "say": "sa-tha-nee lot may yoo sai"},
+  "which-train": {"text": "ລົດໄຟຄັນໃດໄປຮ່າໂນ້ຍ", "say": "lot fai kan dai pai ha-noy", "note": "ຄັນໃດ (kan dai) means which one. Swap ຮ່າໂນ້ຍ for any city"},
+  "buy-ticket": {"text": "ຊື້ປີ້ຢູ່ໃສ", "say": "sue pee yoo sai"},
+  "two-tickets": {"text": "ຂໍຊື້ປີ້ສອງໃບໄປຮ່າໂນ້ຍ", "say": "kaw sue pee song bai pai ha-noy", "note": "ໃບ (bai) counts tickets"},
+  "trip-length": {"text": "ໄປຮ່າໂນ້ຍໃຊ້ເວລາດົນປານໃດ", "say": "pai ha-noy sai way-la don pan dai"},
 
   "delicious": {"text": "ແຊບຫຼາຍ", "say": "saep lai", "note": "ແຊບ (saep) alone means tasty"},
   "allergic": {"text": "ຂ້ອຍແພ້…", "say": "koy pae …", "note": "Add the food, or show a note written in Lao to be safe"},

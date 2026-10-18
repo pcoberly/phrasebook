@@ -44,6 +44,17 @@
 
   "toilet": {"text": "トイレはどこですか", "say": "toire wa doko desu ka", "note": "\"… wa doko desu ka?\" means \"where is …?\" for anything"},
   "taxi": {"text": "タクシーを呼んでもらえますか", "say": "takushī o yonde moraemasu ka"},
+  "train": {"text": "電車", "say": "densha", "note": "Any local train. The bullet train is shinkansen (新幹線)"},
+  "bus": {"text": "バス", "say": "basu"},
+  "airport": {"text": "空港", "say": "kūkō"},
+  "bus-station": {"text": "バスターミナル", "say": "basu tāminaru", "note": "A bus stop is basutei (バス停)"},
+  "train-station": {"text": "駅", "say": "eki", "note": "Any station. Add the name: Tōkyō-eki"},
+  "where-train-station": {"text": "駅はどこですか", "say": "eki wa doko desu ka"},
+  "where-bus-station": {"text": "バスターミナルはどこですか", "say": "basu tāminaru wa doko desu ka"},
+  "which-train": {"text": "ハノイ行きはどの電車ですか", "say": "hanoi-iki wa dono densha desu ka", "note": "行き (iki) means bound for. Swap in any destination: Tōkyō-iki"},
+  "buy-ticket": {"text": "切符はどこで買えますか", "say": "kippu wa doko de kaemasu ka", "note": "Kippu is a ticket. Machines are common, and many have an English button"},
+  "two-tickets": {"text": "ハノイまで二枚お願いします", "say": "hanoi made nimai onegai shimasu", "note": "Mai counts tickets: ichi-mai (1), nimai (2), san-mai (3)"},
+  "trip-length": {"text": "ハノイまでどのくらいかかりますか", "say": "hanoi made dono kurai kakarimasu ka"},
 
   "delicious": {"text": "おいしい！", "say": "oishii", "note": "Said to the cook, it is the best compliment"},
   "allergic": {"text": "…のアレルギーがあります", "say": "… no arerugī ga arimasu", "note": "Add the food: ebi (shrimp), tamago (egg), piinattsu (peanuts)"},
