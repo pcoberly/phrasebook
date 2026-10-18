@@ -19,7 +19,7 @@ const $ = (s) => document.querySelector(s);
 const main = $("#main");
 const state = {
   phrases: [],
-  mode: "cards",
+  mode: "list",
   progress: store.get("translation-progress", {}),
   settings: { voice: store.get("translation-voice", "f"), speed: store.get("translation-speed", "1") },
   last: null,

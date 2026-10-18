@@ -21,6 +21,7 @@ HASHES = AUDIO / "hashes.json"
 # folder name -> voice. The app plays audio/<folder>/<phrase id>.mp3
 VOICES = {"f": "vi-VN-HoaiMyNeural", "m": "vi-VN-NamMinhNeural"}
 RATE = "-20%"
+VOLUME = "+50%"  # the default output is quiet on a phone
 
 
 def spoken(vi: str) -> str:
@@ -41,13 +42,13 @@ async def main():
         (AUDIO / folder).mkdir(exist_ok=True)
         for p in phrases:
             text = spoken(p["vi"])
-            digest = hashlib.sha1(f"{voice}|{RATE}|{text}".encode("utf-8")).hexdigest()
+            digest = hashlib.sha1(f"{voice}|{RATE}|{VOLUME}|{text}".encode("utf-8")).hexdigest()
             out = AUDIO / folder / f"{p['id']}.mp3"
             hkey = f"{folder}/{p['id']}"
             if args.force or not out.exists() or hashes.get(hkey) != digest:
                 for attempt in range(5):  # the service sometimes answers 503 under load
                     try:
-                        await edge_tts.Communicate(text, voice, rate=RATE).save(str(out))
+                        await edge_tts.Communicate(text, voice, rate=RATE, volume=VOLUME).save(str(out))
                         break
                     except Exception as err:
                         if attempt == 4:

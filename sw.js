@@ -1,4 +1,4 @@
-const CACHE = "translation-v5";
+const CACHE = "translation-v6";
 const SHELL = ["./", "index.html", "style.css", "app.js", "phrases.json", "manifest.webmanifest", "icon-180.png"];
 
 // Cache the app shell plus every phrase's audio up front so it all works offline.
