@@ -1,5 +1,5 @@
-const CACHE = "translation-v7";
-const SHELL = ["./", "index.html", "style.css", "app.js", "phrases.json", "manifest.webmanifest", "icon-v2-180.png"];
+const CACHE = "translation-v8";
+const SHELL = ["./", "index.html", "style.css", "app.js", "phrases.json", "manifest.webmanifest", "icon-v3-180.png"];
 
 // Cache the app shell plus every phrase's audio up front so it all works offline.
 async function precache() {
