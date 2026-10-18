@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Translation</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Translation">
+<meta name="theme-color" content="#b3261e">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <nav>
+    <button data-mode="cards" class="tab active">Cards</button>
+    <button data-mode="quiz" class="tab">Quiz</button>
+    <button data-mode="list" class="tab">List</button>
+    <button data-mode="guide" class="tab">Guide</button>
+    <button data-mode="settings" class="tab gear" aria-label="Settings">⚙</button>
+  </nav>
+  <div class="opts">
+    <label>Topic
+      <select id="cat"></select>
+    </label>
+    <label>Direction
+      <select id="dir">
+        <option value="mixed">Both ways</option>
+        <option value="en2vi">English → Vietnamese</option>
+        <option value="vi2en">Vietnamese → English</option>
+      </select>
+    </label>
+    <label class="check"><input type="checkbox" id="listen"> Listening only</label>
+  </div>
+</header>
+<main id="main"></main>
+<footer id="status"></footer>
+<script src="app.js"></script>
+</body>
+</html>

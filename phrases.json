@@ -1,0 +1,52 @@
+[
+  {"id": "hello", "en": "Hello", "vi": "Xin chào", "cat": "basics", "say": "sin chow", "tones": "flat, falling", "note": "Works any time of day"},
+  {"id": "good-morning", "en": "Good morning", "vi": "Chào buổi sáng", "cat": "basics", "say": "chow boo-ee sahng", "tones": "falling, dipping, rising"},
+  {"id": "goodbye", "en": "Goodbye", "vi": "Tạm biệt", "cat": "basics", "say": "tahm bee-et", "tones": "heavy, heavy", "note": "Slightly formal; \"bye bye\" is also common"},
+  {"id": "please", "en": "Please", "vi": "Làm ơn", "cat": "basics", "say": "lahm uhn", "tones": "falling, flat", "note": "Goes at the start of a request"},
+  {"id": "thank-you", "en": "Thank you", "vi": "Cảm ơn", "cat": "basics", "say": "gahm uhn", "tones": "dipping, flat", "note": "In the South it is often Cám ơn, with a rising tone"},
+  {"id": "yes", "en": "Yes", "vi": "Vâng", "cat": "basics", "say": "vuhng", "tones": "flat", "note": "Polite yes in the North; Dạ in the South"},
+  {"id": "no", "en": "No", "vi": "Không", "cat": "basics", "say": "khohm", "tones": "flat", "note": "Lips close at the end, so it sounds like an m"},
+  {"id": "excuse-me", "en": "Excuse me / Sorry", "vi": "Xin lỗi", "cat": "basics", "say": "sin loy", "tones": "flat, broken", "note": "To call a waiter, say Em ơi (em uh-ee) instead"},
+  {"id": "my-name", "en": "My name is...", "vi": "Tôi tên là...", "cat": "basics", "say": "toy tayn lah", "tones": "flat, flat, falling", "note": "Tôi (I) and bạn (you) are neutral and safe for a visitor"},
+  {"id": "dont-understand", "en": "I don't understand", "vi": "Tôi không hiểu", "cat": "basics", "say": "toy khohm hee-oo", "tones": "flat, flat, dipping"},
+  {"id": "speak-slowly", "en": "Please speak slowly", "vi": "Làm ơn nói chậm thôi", "cat": "basics", "say": "lahm uhn noy chuhm toy", "tones": "falling, flat, rising, heavy, flat"},
+  {"id": "repeat", "en": "Can you repeat that?", "vi": "Bạn nhắc lại được không?", "cat": "basics", "say": "bahn nyahk lie doo-uhk khohm", "tones": "heavy, rising, heavy, heavy, flat"},
+  {"id": "speak-english", "en": "Can you speak English?", "vi": "Bạn có nói được tiếng Anh không?", "cat": "basics", "say": "bahn gaw noy doo-uhk tee-eng aing khohm", "tones": "heavy, rising, rising, heavy, rising, flat, flat", "note": "Ending a sentence with không turns it into a yes/no question"},
+
+  {"id": "one", "en": "One", "vi": "Một", "cat": "numbers", "say": "moht", "tones": "heavy", "note": "Short and clipped"},
+  {"id": "two", "en": "Two", "vi": "Hai", "cat": "numbers", "say": "hi", "tones": "flat", "note": "Like \"high\""},
+  {"id": "three", "en": "Three", "vi": "Ba", "cat": "numbers", "say": "bah", "tones": "flat"},
+  {"id": "four", "en": "Four", "vi": "Bốn", "cat": "numbers", "say": "bohn", "tones": "rising"},
+  {"id": "five", "en": "Five", "vi": "Năm", "cat": "numbers", "say": "nahm", "tones": "flat", "note": "Short a"},
+  {"id": "six", "en": "Six", "vi": "Sáu", "cat": "numbers", "say": "sow", "tones": "rising", "note": "Rhymes with \"now\""},
+  {"id": "seven", "en": "Seven", "vi": "Bảy", "cat": "numbers", "say": "bye", "tones": "dipping"},
+  {"id": "eight", "en": "Eight", "vi": "Tám", "cat": "numbers", "say": "tahm", "tones": "rising"},
+  {"id": "nine", "en": "Nine", "vi": "Chín", "cat": "numbers", "say": "cheen", "tones": "rising"},
+  {"id": "ten", "en": "Ten", "vi": "Mười", "cat": "numbers", "say": "moo-ee", "tones": "falling"},
+  {"id": "hundred", "en": "One hundred", "vi": "Một trăm", "cat": "numbers", "say": "moht chahm", "tones": "heavy, flat"},
+  {"id": "thousand", "en": "One thousand", "vi": "Một nghìn", "cat": "numbers", "say": "moht ngin", "tones": "heavy, falling", "note": "Prices are often said in nghìn (thousands of đồng)"},
+
+  {"id": "how-much", "en": "How much?", "vi": "Bao nhiêu tiền?", "cat": "shopping", "say": "bow nyew tee-en", "tones": "flat, flat, falling", "note": "\"Bow\" as in taking a bow. Bao nhiêu? on its own also works"},
+  {"id": "would-like", "en": "I would like...", "vi": "Cho tôi...", "cat": "shopping", "say": "chaw toy", "tones": "flat, flat", "note": "Literally \"give me\"; the normal polite way to order. Cho tôi hai cà phê = two coffees, please"},
+  {"id": "i-want", "en": "I want...", "vi": "Tôi muốn...", "cat": "shopping", "say": "toy moo-uhn", "tones": "flat, rising", "note": "More direct; best with a verb. Tôi muốn đi ... = I want to go to ..."},
+  {"id": "do-you-have", "en": "Do you have...?", "vi": "Bạn có ... không?", "cat": "shopping", "say": "bahn gaw ... khohm", "tones": "heavy, rising, flat", "note": "Put the item in the gap. Bạn có nước không? = Do you have water?"},
+  {"id": "just-looking", "en": "I'm just looking", "vi": "Tôi chỉ xem thôi", "cat": "shopping", "say": "toy chee sem toy", "tones": "flat, dipping, flat, flat"},
+  {"id": "ill-take-it", "en": "I'll take it", "vi": "Tôi lấy cái này", "cat": "shopping", "say": "toy lay guy nigh", "tones": "flat, rising, rising, falling"},
+  {"id": "too-expensive", "en": "Too expensive", "vi": "Đắt quá", "cat": "shopping", "say": "daht gwah", "tones": "rising, rising"},
+  {"id": "discount", "en": "Can you lower the price?", "vi": "Giảm giá được không?", "cat": "shopping", "say": "zahm zah doo-uhk khohm", "tones": "dipping, rising, heavy, flat", "note": "For markets and small shops; fixed-price stores won't haggle"},
+  {"id": "card", "en": "Do you accept credit cards?", "vi": "Bạn có nhận thẻ tín dụng không?", "cat": "shopping", "say": "bahn gaw nyuhn tay teen zoong khohm", "tones": "heavy, rising, heavy, dipping, rising, heavy, flat"},
+  {"id": "bill", "en": "The bill, please", "vi": "Tính tiền giúp tôi", "cat": "shopping", "say": "ting tee-en zoop toy", "tones": "rising, falling, rising, flat", "note": "Tính tiền! on its own is also common"},
+
+  {"id": "reservation", "en": "I have a reservation", "vi": "Tôi đã đặt phòng", "cat": "hotel", "say": "toy dah daht fawm", "tones": "flat, broken, heavy, falling"},
+  {"id": "checkout-time", "en": "What time is check-out?", "vi": "Mấy giờ trả phòng?", "cat": "hotel", "say": "may zuh chah fawm", "tones": "rising, falling, dipping, falling"},
+  {"id": "breakfast", "en": "Is breakfast included?", "vi": "Có bao gồm bữa sáng không?", "cat": "hotel", "say": "gaw bow gohm buh-ah sahng khohm", "tones": "rising, flat, falling, broken, rising, flat"},
+  {"id": "wifi", "en": "What is the Wi-Fi password?", "vi": "Mật khẩu Wi-Fi là gì?", "cat": "hotel", "say": "muht khow wi-fi lah zee", "tones": "heavy, dipping, (Wi-Fi), falling, falling"},
+
+  {"id": "toilet", "en": "Where is the toilet?", "vi": "Nhà vệ sinh ở đâu?", "cat": "getting-around", "say": "nyah vay sing uh dow", "tones": "falling, heavy, flat, dipping, flat", "note": "\"... ở đâu?\" means \"where is ...?\" for anything. Signs usually say WC"},
+  {"id": "taxi", "en": "Can you call a taxi for me?", "vi": "Bạn gọi giúp tôi một chiếc taxi được không?", "cat": "getting-around", "say": "bahn goy zoop toy moht chee-uhk tak-see doo-uhk khohm", "tones": "heavy, heavy, rising, flat, heavy, rising, (taxi), heavy, flat"},
+
+  {"id": "delicious", "en": "Delicious!", "vi": "Ngon quá!", "cat": "food", "say": "ngawn gwah", "tones": "flat, rising", "note": "ng as in \"sing\", even at the start of a word"},
+  {"id": "allergic", "en": "I'm allergic to...", "vi": "Tôi bị dị ứng với...", "cat": "food", "say": "toy bee zee uhng vuh-ee", "tones": "flat, heavy, heavy, rising, rising", "note": "Add the food: ... hải sản = seafood"},
+
+  {"id": "help", "en": "Help me!", "vi": "Giúp tôi với!", "cat": "emergency", "say": "zoop toy vuh-ee", "tones": "rising, flat, rising"}
+]
