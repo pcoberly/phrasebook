@@ -36,9 +36,14 @@ button.speak { border: 1px solid var(--line); background: var(--card); color: va
 .note { color: var(--muted); font-size: 14px; }
 .orig { color: var(--muted); font-size: 15px; }
 .orig b { color: var(--fg); font-weight: 600; }
-.reveal { min-height: 0; padding: 18px 20px; gap: 6px; }
+.card.q { min-height: 0; padding: 14px 16px; gap: 6px; margin-top: 4px; }
+.card.q .big { font-size: 26px; }
+.choice { margin-top: 8px; }
+.choice .pick { padding: 13px 16px; }
+.reveal { text-align: center; padding-top: 8px; min-height: 1px; }
 .reveal:empty { display: none; }
-.reveal .big { font-size: 24px; }
+/* the Next and grade buttons stay in reach, so a drill never needs scrolling */
+.row.sticky { position: sticky; bottom: 0; padding: 10px 0 calc(8px + env(safe-area-inset-bottom)); margin-top: 0; background: linear-gradient(to top, var(--bg) 75%, transparent); }
 table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 8px 0; }
 th, td { text-align: left; padding: 7px 8px 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { color: var(--muted); font-weight: 600; font-size: 13px; }

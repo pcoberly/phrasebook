@@ -132,7 +132,7 @@ function renderCard() {
       ${fromLang ? `<button class="speak" id="say" aria-label="Play">🔊</button>` : ""}
       <div class="hint">Tap the card to reveal</div>
     </div>
-    <div class="row hidden" id="grades">
+    <div class="row sticky hidden" id="grades">
       <button class="act bad" id="again">✗ Didn't know it</button>
       <button class="act good" id="got">✓ Knew it</button>
     </div>`;
@@ -170,14 +170,14 @@ function renderQuiz() {
   const toLang = dir === "to";
   const opts = shuffle([p, ...distractors(p, dir)]);
   main.innerHTML = `
-    <div class="card">
+    <div class="card q">
       <div class="label">${toLang ? `Pick the ${name}` : "Pick the English"}</div>
       <div class="big">${toLang ? esc(p.en) : (listenOnly ? "🎧" : nat(p.text))}</div>
       ${toLang ? "" : `<button class="speak" id="say" aria-label="Play">🔊</button>`}
     </div>
     <div id="choices"></div>
-    <div class="card reveal" id="reveal"></div>
-    <div class="row hidden" id="nextrow"><button class="act" id="next">Next</button></div>`;
+    <div class="reveal" id="reveal"></div>
+    <div class="row sticky hidden" id="nextrow"><button class="act" id="next">Next</button></div>`;
   if (!toLang) { $("#say").onclick = () => speak(p); speak(p); }
   const box = $("#choices");
   let answered = false;
@@ -199,7 +199,8 @@ function renderQuiz() {
         if (toLang) c.querySelector(".pick").innerHTML = nat(opts[j].text);
       });
       speak(p);
-      $("#reveal").innerHTML = `<div class="big">${nat(p.text)}</div><div class="orig">${esc(p.en)}</div>${detail(p)}`;
+      // the answer is already on screen, so show only what is new: how to say it
+      $("#reveal").innerHTML = `${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}`;
       $("#nextrow").classList.remove("hidden");
       updateStatus();
     };
