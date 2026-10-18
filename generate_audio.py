@@ -44,7 +44,9 @@ async def make_audio(code: str, language: dict, texts: dict, shared_ids: list, h
         for phrase_id in shared_ids:
             if phrase_id not in texts:
                 continue
-            text = spoken(texts[phrase_id]["text"])
+            entry = texts[phrase_id]
+            # a phrase with a gap ("Which train for...?") can give the audio a "spoken" version with an example filled in
+            text = spoken(entry.get("spoken", entry["text"]))
             digest = hashlib.sha1(f"{voice}|{RATE}|{VOLUME}|{text}".encode("utf-8")).hexdigest()
             out = AUDIO / code / folder / f"{phrase_id}.mp3"
             hkey = f"{code}/{folder}/{phrase_id}"

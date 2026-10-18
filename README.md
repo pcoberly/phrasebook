@@ -10,7 +10,7 @@ GitHub Pages, so it needs no App Store account. Live at https://pcoberly.github.
 | --- | --- |
 | `phrases.json` | The phrases every language shares: `id`, English, topic (`cat`) |
 | `languages.json` | The languages on offer: name, code, voices, size (size is filled in by the script) |
-| `lang/<code>/phrases.json` | That language's text for each phrase `id`: `text`, `say` (pronunciation), optional `tones`, `note` |
+| `lang/<code>/phrases.json` | That language's text for each phrase `id`: `text`, `say` (pronunciation), optional `tones`, `note`, and `spoken` |
 | `lang/<code>/guide.html` | That language's pronunciation guide |
 | `lang/<code>/pack.json` | Generated: a hash for every file in the language (do not edit) |
 | `audio/<code>/f/`, `audio/<code>/m/` | Generated: female and male MP3 for each phrase |

@@ -48,7 +48,7 @@ function speak(p) {
 }
 function speakWithBrowserVoice(p) {
   if (!("speechSynthesis" in window)) return;
-  const u = new SpeechSynthesisUtterance(p.text.replace(/\.\.\.|…/g, ""));
+  const u = new SpeechSynthesisUtterance((p.spoken || p.text).replace(/\.\.\.|…/g, ""));
   u.lang = state.lang.ttsLang;
   if (browserVoice) u.voice = browserVoice;
   u.rate = 0.85;

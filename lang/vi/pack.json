@@ -1,7 +1,7 @@
 {
- "bytes": 1919198,
+ "bytes": 1922582,
  "files": {
-  "lang/vi/phrases.json": "4279dd45b9c8",
+  "lang/vi/phrases.json": "921c78227a0a",
   "lang/vi/guide.html": "48a09cacaafa",
   "audio/vi/f/hello.mp3": "ca6fa4e43495",
   "audio/vi/f/good-morning.mp3": "cadcd172041e",
@@ -31,7 +31,7 @@
   "audio/vi/f/how-much.mp3": "f3268fd8d80a",
   "audio/vi/f/would-like.mp3": "ddc4f613cf32",
   "audio/vi/f/i-want.mp3": "1adff432affd",
-  "audio/vi/f/do-you-have.mp3": "58de305e33ac",
+  "audio/vi/f/do-you-have.mp3": "ca9b83af3808",
   "audio/vi/f/just-looking.mp3": "6143955ba43b",
   "audio/vi/f/ill-take-it.mp3": "c796be687350",
   "audio/vi/f/too-expensive.mp3": "a43c0b4f4463",
@@ -98,7 +98,7 @@
   "audio/vi/m/how-much.mp3": "1dce72a29f3e",
   "audio/vi/m/would-like.mp3": "67e6e7c670d6",
   "audio/vi/m/i-want.mp3": "3081a91c2eb9",
-  "audio/vi/m/do-you-have.mp3": "2c17f9f687e6",
+  "audio/vi/m/do-you-have.mp3": "86d63ad63be6",
   "audio/vi/m/just-looking.mp3": "f2e47a988b04",
   "audio/vi/m/ill-take-it.mp3": "3d9ca160d85d",
   "audio/vi/m/too-expensive.mp3": "adfc6da39428",
