@@ -49,6 +49,11 @@ button.speak { border: 1px solid var(--line); background: var(--card); color: va
 .detail:empty { display: none; }
 .card.q { min-height: 0; padding: 14px 16px; gap: 6px; margin-top: 4px; }
 .card.q .big { font-size: 26px; }
+.roundbar { display: flex; justify-content: space-between; margin-top: 6px; font-size: 13px; color: var(--muted); }
+.bar { height: 4px; margin: 4px 0 6px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--accent); transition: width .3s; }
+.card.q.summary { padding: 22px 16px; gap: 8px; }
+.card.q.summary .big { font-size: 44px; }
 .choice { margin-top: 8px; }
 .choice .pick { padding: 13px 16px; }
 .reveal { text-align: center; padding-top: 8px; min-height: 1px; }

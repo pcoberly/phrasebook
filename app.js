@@ -2,6 +2,7 @@
 
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
+const ROUND_SIZE = 20; // questions in one quiz round
 const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode etc. */ } },
@@ -19,7 +20,8 @@ const state = {
   progress: {},
   settings: { voice: store.get("phrasebook-voice", "f"), speed: store.get("phrasebook-speed", "1") },
   last: null,
-  busy: {},       // language code -> message while it downloads
+  round: null,    // the quiz round in progress: its questions, where you are, your score and your misses
+  busy: {},      // language code -> message while it downloads
   note: "",       // temporary footer message
 };
 
@@ -178,14 +180,44 @@ function distractors(p, dir) {
   const rest = shuffle(others.filter((o) => o.cat !== p.cat));
   return [...same, ...rest].slice(0, 2);
 }
+// A quiz is a round of ROUND_SIZE questions, chosen up front from the cards that most need practice:
+// new or due ones first (in random order), then whatever comes due soonest. One question per phrase.
+function buildRound() {
+  const now = Date.now();
+  const items = candidates();
+  const isDue = (i) => !state.progress[i.key] || state.progress[i.key].due <= now;
+  const ordered = [
+    ...shuffle(items.filter(isDue)),
+    ...items.filter((i) => !isDue(i)).sort((a, b) => state.progress[a.key].due - state.progress[b.key].due),
+  ];
+  const seen = new Set();
+  const picked = [];
+  for (const i of ordered) {
+    if (picked.length === ROUND_SIZE) break;
+    if (!seen.has(i.p.id)) { seen.add(i.p.id); picked.push(i); }
+  }
+  // a small topic can run out of distinct phrases: top up with the other direction
+  for (const i of ordered) {
+    if (picked.length >= Math.min(ROUND_SIZE, ordered.length)) break;
+    if (!picked.includes(i)) picked.push(i);
+  }
+  return { items: shuffle(picked), index: 0, correct: 0, missed: [] };
+}
 function renderQuiz() {
   if (state.phrases.length < 4) { main.innerHTML = `<div class="card">Need at least 4 phrases.</div>`; return; }
-  const { p, dir, key } = next();
+  if (!state.round) state.round = buildRound();
+  const round = state.round;
+  if (round.index >= round.items.length) { renderSummary(); return; }
+  const { p, dir, key } = round.items[round.index];
+  const total = round.items.length;
+  const number = round.index + 1;
   const name = state.lang.name;
   const listenOnly = $("#listen").checked;
   const toLang = dir === "to";
   const opts = shuffle([p, ...distractors(p, dir)]);
   main.innerHTML = `
+    <div class="roundbar"><span>Question ${number} of ${total}</span><span id="score">${round.correct} correct</span></div>
+    <div class="bar"><i style="width:${Math.round(100 * round.index / total)}%"></i></div>
     <div class="card q">
       <div class="label">${toLang ? `Pick the ${name}` : "Pick the English"}</div>
       <div class="big">${toLang ? esc(p.en) : (listenOnly ? "🎧" : nat(p.text))}</div>
@@ -193,7 +225,7 @@ function renderQuiz() {
     </div>
     <div id="choices"></div>
     <div class="reveal" id="reveal"></div>
-    <div class="row sticky hidden" id="nextrow"><button class="act" id="next">Next</button></div>`;
+    <div class="row sticky hidden" id="nextrow"><button class="act" id="next">${number === total ? "See score" : "Next"}</button></div>`;
   if (!toLang) { $("#say").onclick = () => speak(p); speak(p); }
   const box = $("#choices");
   let answered = false;
@@ -209,6 +241,10 @@ function renderQuiz() {
       answered = true;
       const ok = o.id === p.id;
       grade(key, ok);
+      // record the answer and move on at once, so leaving this tab and coming back never asks (or scores) it twice
+      if (ok) round.correct++; else round.missed.push(round.items[round.index]);
+      round.index++;
+      $("#score").textContent = `${round.correct} correct`;
       pick.classList.add(ok ? "right" : "wrong");
       [...box.children].forEach((c, j) => {
         if (opts[j].id === p.id) c.querySelector(".pick").classList.add("right");
@@ -226,15 +262,32 @@ function renderQuiz() {
   updateStatus();
 }
 
+// The score screen at the end of a round: how you did, and the questions you missed.
+function renderSummary() {
+  const r = state.round;
+  const total = r.items.length;
+  const pct = total ? Math.round((100 * r.correct) / total) : 0;
+  const message = r.correct === total ? "A perfect round!" : pct >= 80 ? "Great work." : pct >= 50 ? "Good effort." : "Keep going. These will stick.";
+  main.innerHTML = `
+    <div class="card q summary">
+      <div class="label">Round complete</div>
+      <div class="big">${r.correct} of ${total}</div>
+      <div class="hint">${message}</div>
+    </div>
+    ${r.missed.length
+      ? `<h2 class="group">To review (${r.missed.length})</h2>${r.missed.map((i) => entryHtml(i.p, i.dir === "from", false)).join("")}`
+      : `<p class="note" style="text-align:center">No mistakes this round.</p>`}
+    <div class="row sticky"><button class="act good" id="newround">New round</button></div>`;
+  wireSpeakButtons();
+  $("#newround").onclick = () => { state.round = null; render(); };
+  window.scrollTo(0, 0);
+  updateStatus();
+}
+
 // ---------- study list ----------
-function renderList() {
-  const cat = $("#cat").value;
-  const fromFirst = $("#dir").value === "from"; // English first unless studying the language → English
-  const groups = {};
-  for (const p of state.phrases) if (cat === "all" || p.cat === cat) (groups[p.cat] ||= []).push(p);
-  main.innerHTML = draftBanner() + Object.entries(groups).map(([c, ps]) => `
-    <h2 class="group">${esc(topicName(c))}</h2>
-    ${ps.map((p) => `
+// one phrase as a row: the language text with how to say it, and the English, in the order you are studying
+function entryHtml(p, fromFirst, withNote = true) {
+  return `
       <div class="entry">
         <div>
           ${fromFirst ? "" : `<div class="en">${esc(p.en)}</div>`}
@@ -242,11 +295,23 @@ function renderList() {
           ${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}
           ${fromFirst ? `<div class="en">${esc(p.en)}</div>` : ""}
           ${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}
-          ${p.note ? `<div class="note">${esc(p.note)}</div>` : ""}
+          ${withNote && p.note ? `<div class="note">${esc(p.note)}</div>` : ""}
         </div>
         <button class="speak" data-id="${p.id}" aria-label="Play">🔊</button>
-      </div>`).join("")}`).join("");
-  main.querySelectorAll(".speak").forEach((b) => b.onclick = () => speak(state.phrases.find((p) => p.id === b.dataset.id)));
+      </div>`;
+}
+function wireSpeakButtons() {
+  main.querySelectorAll(".entry .speak").forEach((b) => b.onclick = () => speak(state.phrases.find((p) => p.id === b.dataset.id)));
+}
+function renderList() {
+  const cat = $("#cat").value;
+  const fromFirst = $("#dir").value === "from"; // English first unless studying the language → English
+  const groups = {};
+  for (const p of state.phrases) if (cat === "all" || p.cat === cat) (groups[p.cat] ||= []).push(p);
+  main.innerHTML = draftBanner() + Object.entries(groups).map(([c, ps]) => `
+    <h2 class="group">${esc(topicName(c))}</h2>
+    ${ps.map((p) => entryHtml(p, fromFirst)).join("")}`).join("");
+  wireSpeakButtons();
   $("#status").textContent = "Tap 🔊 to hear a phrase";
 }
 
@@ -351,6 +416,7 @@ async function useLanguage(code) {
   store.set("phrasebook-lang", code);
   state.progress = store.get(progressKey(code), {});
   state.last = null;
+  state.round = null;
   rebuildDirOptions();
   pickVoice();
 }
@@ -476,9 +542,9 @@ async function boot() {
   $("#cat").innerHTML = `<option value="all">All Topics</option>` + cats.map((c) => `<option value="${c}">${esc(topicName(c))}</option>`).join("");
   const savedCat = store.get("phrasebook-cat", null);
   if (savedCat && [...$("#cat").options].some((o) => o.value === savedCat)) $("#cat").value = savedCat;
-  $("#cat").onchange = () => { store.set("phrasebook-cat", $("#cat").value); state.last = null; render(); };
+  $("#cat").onchange = () => { store.set("phrasebook-cat", $("#cat").value); state.last = null; state.round = null; render(); };
   rebuildDirOptions();
-  $("#dir").onchange = () => { store.set("phrasebook-dir", $("#dir").value); state.last = null; render(); };
+  $("#dir").onchange = () => { store.set("phrasebook-dir", $("#dir").value); state.last = null; state.round = null; render(); };
   if (!["f", "m", "mixed"].includes(state.settings.voice)) state.settings.voice = "f";
   if (!["1", "0.85", "0.7"].includes(state.settings.speed)) state.settings.speed = "1";
   $("#listen").checked = store.get("phrasebook-listen", false);
