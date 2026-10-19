@@ -36,6 +36,16 @@ button.speak { border: 1px solid var(--line); background: var(--card); color: va
 .note { color: var(--muted); font-size: 14px; }
 .orig { color: var(--muted); font-size: 15px; }
 .orig b { color: var(--fg); font-weight: 600; }
+/* flashcard: two faces in one grid cell (so both share the taller face's height) that turn over together */
+.flip { perspective: 1200px; -webkit-perspective: 1200px; margin-top: 8px; cursor: pointer; user-select: none; -webkit-user-select: none; outline-offset: 4px; }
+.flip-inner { display: grid; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transition: transform .4s ease; -webkit-transition: -webkit-transform .4s ease; }
+.flip.flipped .flip-inner { transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
+.face { grid-area: 1 / 1; margin-top: 0; min-height: 0; padding: 16px 18px; gap: 8px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.face.back { transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
+.flip:not(.flipped) .back, .flip.flipped .front { pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .flip-inner { transition: none; -webkit-transition: none; } }
+.detail { text-align: center; padding-top: 10px; }
+.detail:empty { display: none; }
 .card.q { min-height: 0; padding: 14px 16px; gap: 6px; margin-top: 4px; }
 .card.q .big { font-size: 26px; }
 .choice { margin-top: 8px; }

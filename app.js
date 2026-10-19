@@ -125,30 +125,48 @@ function renderCard() {
   const fromLang = dir === "from";
   const showFront = !(fromLang && listenOnly);
   const front = fromLang ? nat(p.text) : esc(p.en);
+  // Two faces share one spot, so the card keeps one height and turns over like a real flashcard.
   main.innerHTML = `
-    <div class="card" id="face">
-      <div class="label">${fromLang ? name : "English"}</div>
-      <div class="big">${showFront ? front : "🎧"}</div>
-      ${fromLang ? `<button class="speak" id="say" aria-label="Play">🔊</button>` : ""}
-      <div class="hint">Tap the card to reveal</div>
+    <div class="flip" id="flip" role="button" tabindex="0" aria-label="Flip the card">
+      <div class="flip-inner">
+        <div class="card face front">
+          <div class="label">${fromLang ? name : "English"}</div>
+          <div class="big">${showFront ? front : "🎧"}</div>
+          ${fromLang ? `<button class="speak" id="say" aria-label="Play">🔊</button>` : ""}
+          <div class="hint">Tap the card to flip it</div>
+        </div>
+        <div class="card face back">
+          <div class="label">${fromLang ? "English" : name}</div>
+          <div class="big">${fromLang ? esc(p.en) : nat(p.text)}</div>
+          <button class="speak" id="say2" aria-label="Play">🔊</button>
+          <div class="orig">${fromLang ? name : "English"}: <b>${front}</b></div>
+          <div class="hint">Tap to flip back</div>
+        </div>
+      </div>
     </div>
+    <div class="detail" id="detail"></div>
     <div class="row sticky hidden" id="grades">
       <button class="act bad" id="again">✗ Didn't know it</button>
       <button class="act good" id="got">✓ Knew it</button>
     </div>`;
+  const flip = $("#flip");
+  let seenAnswer = false;
   if (fromLang) { $("#say").onclick = (e) => { e.stopPropagation(); speak(p); }; speak(p); }
-  $("#face").onclick = () => {
-    if ($("#grades").classList.contains("hidden") === false) return;
-    $("#face").innerHTML = `
-      <div class="label">${fromLang ? "English" : name}</div>
-      <div class="big">${fromLang ? esc(p.en) : nat(p.text)}</div>
-      <button class="speak" id="say2" aria-label="Play">🔊</button>
-      <div class="orig">${fromLang ? name : "English"}: <b>${front}</b></div>
-      ${detail(p)}`;
-    $("#say2").onclick = (e) => { e.stopPropagation(); speak(p); };
-    if (!fromLang) speak(p);
-    $("#grades").classList.remove("hidden");
+  $("#say2").onclick = (e) => { e.stopPropagation(); speak(p); };
+  const toggle = () => {
+    const flipped = flip.classList.toggle("flipped");
+    flip.setAttribute("aria-pressed", flipped);
+    if (!seenAnswer) {
+      // the first flip reveals the answer: play it (if it is the language side), show how to say it
+      // under the card (so the card itself stays small), and offer the grade buttons
+      seenAnswer = true;
+      if (!fromLang) speak(p);
+      $("#detail").innerHTML = detail(p);
+      $("#grades").classList.remove("hidden");
+    }
   };
+  flip.onclick = toggle;
+  flip.onkeydown = (e) => { if ((e.key === "Enter" || e.key === " ") && e.target === flip) { e.preventDefault(); toggle(); } };
   $("#again").onclick = () => { grade(key, false); render(); };
   $("#got").onclick = () => { grade(key, true); render(); };
   updateStatus();
