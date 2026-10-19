@@ -495,29 +495,70 @@ async function checkForUpdates(force = false) {
 }
 
 // ---------- settings ----------
-function languageRows() {
-  return state.languages.map((l) => {
-    const ps = packState(l.code);
-    const active = l.code === state.lang.code;
-    const mb = `${(l.bytes / 1e6).toFixed(1)} MB`;
-    const status = state.busy[l.code] || (active ? "In use" : ps === "installed" ? "Downloaded" : ps === "partial" ? "Partly downloaded" : "Not downloaded");
-    const buttons = state.busy[l.code] || active ? ""
-      : ps === "installed" ? `<button class="mini" data-act="use">Use</button><button class="mini ghost" data-act="remove">Remove</button>`
-      : `<button class="mini" data-act="download">${canCache ? "Download &amp; use" : "Use"}</button>`;
-    return `
-      <div class="lang${active ? " current" : ""}" data-lang="${l.code}">
-        <div><div class="lname">${esc(l.name)} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
+// The language list is split into the languages on this phone (in an order you set with the arrows)
+// and the ones still available to download, so the ones you use are always at the top.
+const langOrderKey = "phrasebook-lang-order";
+function languageGroups() {
+  const onPhone = (l) => l.code === state.lang.code || packState(l.code) !== "none";
+  const order = store.get(langOrderKey, []);
+  const rank = (code) => (order.includes(code) ? order.indexOf(code) : order.length); // new ones go to the end
+  const mine = state.languages.filter(onPhone).sort((a, b) => rank(a.code) - rank(b.code));
+  const available = state.languages.filter((l) => !onPhone(l));
+  return { mine, available };
+}
+function moveLanguage(code, delta) {
+  const codes = languageGroups().mine.map((l) => l.code);
+  const i = codes.indexOf(code), j = i + delta;
+  if (i < 0 || j < 0 || j >= codes.length) return;
+  [codes[i], codes[j]] = [codes[j], codes[i]];
+  store.set(langOrderKey, codes);
+}
+function languageRow(l, position, count) {
+  const ps = packState(l.code);
+  const active = l.code === state.lang.code;
+  const mb = `${(l.bytes / 1e6).toFixed(1)} MB`;
+  const status = state.busy[l.code] || (active ? "In use" : ps === "installed" ? "Downloaded" : ps === "partial" ? "Partly downloaded" : "Not downloaded");
+  const buttons = state.busy[l.code] || active ? ""
+    : ps === "installed" ? `<button class="mini" data-act="use">Use</button><button class="mini ghost" data-act="remove" aria-label="Remove ${esc(l.name)} from this phone" title="Remove from this phone">✕</button>`
+    : `<button class="mini" data-act="download">${canCache ? "Download &amp; use" : "Use"}</button>`;
+  // arrows only for languages on the phone, where the order matters
+  const arrows = position < 0 ? "" : `
+        <div class="mv">
+          <button class="mvb" data-act="up" aria-label="Move ${esc(l.name)} up"${position === 0 ? " disabled" : ""}>▲</button>
+          <button class="mvb" data-act="down" aria-label="Move ${esc(l.name)} down"${position === count - 1 ? " disabled" : ""}>▼</button>
+        </div>`;
+  return `
+      <div class="lang${active ? " current" : ""}" data-lang="${l.code}">${arrows}
+        <div class="linfo"><div class="lname">${esc(l.name)} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
           <div class="note"><span class="lstate">${esc(status)}</span> · ${mb}${l.draft ? " · Draft translations" : ""}</div></div>
         <div class="lbtn">${buttons}</div>
       </div>`;
-  }).join("");
+}
+// The whole Language section folds away, leaving one line that names the language in use.
+// Whether it (and the Available list) is open is remembered.
+function languagePanel() {
+  const { mine, available } = languageGroups();
+  const open = store.get("phrasebook-lang-open", false);
+  const availOpen = store.get("phrasebook-avail-open", available.length <= 5); // a long list starts folded
+  return `
+    <details class="panel" id="langpanel"${open ? " open" : ""}>
+      <summary><span class="ptitle">Language</span><span class="pval">${esc(state.lang.name)}</span></summary>
+      <div class="pbody" id="langs">
+        <h3 class="sub">On this phone (${mine.length})</h3>
+        ${mine.map((l, i) => languageRow(l, i, mine.length)).join("")}
+        ${available.length ? `
+        <details class="avail" id="availpanel"${availOpen ? " open" : ""}>
+          <summary>Available to download (${available.length})</summary>
+          ${available.map((l) => languageRow(l, -1, 0)).join("")}
+        </details>` : ""}
+        <p class="note">A language is stored on this phone only once you download it. Removing one frees its space and keeps your progress. Use the arrows to put your languages in the order you want.</p>
+      </div>
+    </details>`;
 }
 function renderSettings() {
   const opt = (v, label, cur) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
   main.innerHTML = `
-    <h2 class="group">Language</h2>
-    <div id="langs">${languageRows()}</div>
-    <p class="note">Each language is stored on this phone only once you download it. Removing one frees its space and keeps your progress.</p>
+    ${languagePanel()}
     <h2 class="group">Audio</h2>
     <div class="setting">
       <label for="voice">Voice</label>
@@ -557,11 +598,24 @@ function renderSettings() {
     };
   }
   $("#sample").onclick = sample;
+  // remember whether the panels are open, but only when the person opens or closes one
+  // (browsers also fire "toggle" when a panel that starts open is drawn)
+  for (const [id, key] of [["langpanel", "phrasebook-lang-open"], ["availpanel", "phrasebook-avail-open"]]) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    let last = el.open;
+    el.addEventListener("toggle", () => { if (el.open !== last) { last = el.open; store.set(key, last); } });
+  }
   $("#langs").onclick = async (e) => {
     const btn = e.target.closest("button[data-act]");
     if (!btn) return;
     const code = btn.closest("[data-lang]").dataset.lang;
     const lang = state.languages.find((l) => l.code === code);
+    if (btn.dataset.act === "up" || btn.dataset.act === "down") {
+      moveLanguage(code, btn.dataset.act === "up" ? -1 : 1);
+      renderSettings();
+      return;
+    }
     if (btn.dataset.act === "remove") {
       if (confirm(`Remove ${lang.name} from this phone? Your progress is kept.`)) { await removePack(code); renderSettings(); }
       return;
