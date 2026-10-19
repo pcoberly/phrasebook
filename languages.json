@@ -88,5 +88,27 @@
       "m": "de-DE-ConradNeural"
     },
     "bytes": 2038922
+  },
+  {
+    "code": "it",
+    "name": "Italian",
+    "native": "Italiano",
+    "ttsLang": "it-IT",
+    "voices": {
+      "f": "it-IT-ElsaNeural",
+      "m": "it-IT-DiegoNeural"
+    },
+    "bytes": 1877907
+  },
+  {
+    "code": "zh",
+    "name": "Mandarin Chinese",
+    "native": "中文",
+    "ttsLang": "zh-CN",
+    "voices": {
+      "f": "zh-CN-XiaoxiaoNeural",
+      "m": "zh-CN-YunyangNeural"
+    },
+    "bytes": 1647526
   }
 ]
