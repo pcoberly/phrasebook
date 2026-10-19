@@ -82,6 +82,7 @@ button.mini { padding: 9px 14px; font-size: 15px; border-radius: 10px; border: 1
 button.mini.ghost { background: transparent; color: var(--muted); border-color: var(--line); }
 .draft { margin: 12px 0 0; padding: 10px 12px; font-size: 14px; color: var(--muted); border-left: 4px solid var(--accent); background: var(--card); border-radius: 0 10px 10px 0; }
 footer { text-align: center; color: var(--muted); font-size: 13px; padding: 18px 0 24px; }
+footer.ready { color: var(--accent); font-weight: 600; text-decoration: underline; cursor: pointer; }
 
 /* On a phone the tabs move to a tray at the bottom, where the thumb is, and the top is left for the cards */
 @media (max-width: 600px) {

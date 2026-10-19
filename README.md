@@ -35,7 +35,13 @@ changed (`app.js`, `style.css`, `index.html`, `sw.js`, icons), bump `CACHE` in `
 
 ## Things to know
 
-- iOS keeps the Home Screen icon cached by URL, so a new icon needs a new filename.
+- Nobody should ever need to delete and re-save the bookmark. Whenever the app opens or returns to the foreground
+  with a connection it fetches the newest app files (the service worker asks the server every time, bypassing GitHub
+  Pages' 10-minute cache), the newest phrase list, and only the language files that changed. A page that has been
+  open since before a release reloads itself, or shows "A new version is ready. Tap here to reload." mid-quiz.
+  The app's version is the `CACHE` name in `sw.js`, so bump it on every app change. Offline it just shows what is stored.
+- The one thing iOS will not update remotely is the Home Screen icon (it is cached by URL), so a new icon needs a new
+  filename and a one-off re-add. Avoid changing the icon.
 - Service workers need HTTPS or `localhost`; opening `index.html` as a file will not work. Test locally with
   `python -m http.server 8765` and open http://localhost:8765.
 - Add to Home Screen from **Safari**, not Chrome on the iPhone.

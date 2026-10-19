@@ -1,4 +1,4 @@
-const CACHE = "phrasebook-v10";
+const CACHE = "phrasebook-v11";
 // The app itself. Languages are not here: each one is a "pack" (lang/<code>/ and audio/<code>/)
 // that the page downloads into its own cache, "lang-<code>", only when you choose that language.
 const SHELL = ["./", "index.html", "style.css", "app.js", "phrases.json", "languages.json", "manifest.webmanifest", "icon-v3-180.png"];
@@ -40,10 +40,12 @@ async function packResponse(req) {
 }
 
 // App files: take the network copy when online so updates show up at once, fall back to the cache offline.
+// "no-cache" makes the browser check with the server every time (a cheap not-modified answer when nothing
+// changed), instead of trusting the 10 minutes GitHub Pages allows it to keep a copy.
 async function appResponse(req) {
   const cache = await caches.open(CACHE);
   try {
-    const res = await fetch(req);
+    const res = await fetch(new Request(req.url, { cache: "no-cache" }));
     if (res.ok) cache.put(req, res.clone());
     return res;
   } catch {

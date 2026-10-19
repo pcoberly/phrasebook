@@ -107,12 +107,14 @@ function draftBanner() {
     : "";
 }
 function updateStatus() {
+  $("#status").classList.toggle("ready", !!state.updateReady); // a pending app update turns the footer into a reload button
   if (state.note) { $("#status").textContent = state.note; return; }
   const all = state.phrases.length * 2;
   const known = Object.values(state.progress).filter((v) => v.box >= 3).length;
   $("#status").textContent = `${known} of ${all} cards learned`;
 }
 function say(note, ms = 0) {
+  if (state.updateReady) return; // never hide the "new version" message
   state.note = note;
   updateStatus();
   if (ms) setTimeout(() => { if (state.note === note) { state.note = ""; updateStatus(); } }, ms);
@@ -423,20 +425,73 @@ async function useLanguage(code) {
 }
 // Keep the language in use, and any other downloaded one, up to date. Runs quietly when online.
 async function syncInstalled() {
-  if (!canCache || !navigator.onLine) return;
+  if (!canCache || !navigator.onLine) return false;
   const codes = state.languages.map((l) => l.code).filter((c) => c === state.lang.code || packState(c) !== "none");
+  let activeChanged = false;
   for (const code of codes) {
     const label = state.languages.find((l) => l.code === code).name;
     try {
       const changed = await syncPack(code, (done, total) => {
         if (code === state.lang.code) say(`Downloading ${label}: ${done} of ${total}`);
       });
-      if (changed && code === state.lang.code) say(`${label} is ready to use offline`, 4000);
+      if (changed && code === state.lang.code) { activeChanged = true; say(`${label} is ready to use offline`, 4000); }
       else if (code === state.lang.code && state.note) say("");
     } catch {
       if (code === state.lang.code) say("");
     }
   }
+  return activeChanged;
+}
+
+// ---------- staying up to date ----------
+// Whenever the app opens or comes back to the foreground with a connection, it checks for a newer version of
+// itself and for new phrases, audio and languages. With no connection it just keeps using what it has stored.
+async function swVersion() {
+  // the app's version is the cache name in sw.js, so there is one number to bump per release
+  try {
+    const text = await (await fetch("sw.js", { cache: "no-store" })).text();
+    return /CACHE = "([^"]+)"/.exec(text)?.[1] || null;
+  } catch { return null; }
+}
+function rebuildTopicOptions() {
+  const current = $("#cat").value || store.get("phrasebook-cat", "all");
+  const cats = [...new Set(state.shared.map((p) => p.cat))];
+  $("#cat").innerHTML = `<option value="all">All Topics</option>` + cats.map((c) => `<option value="${c}">${esc(topicName(c))}</option>`).join("");
+  $("#cat").value = [...$("#cat").options].some((o) => o.value === current) ? current : "all";
+}
+// A newer app version is reloaded at once unless a quiz round is under way, in which case the footer offers it.
+function installUpdate() {
+  const r = state.round;
+  const midRound = state.mode === "quiz" && r && r.index > 0 && r.index < r.items.length;
+  if (!midRound) { location.reload(); return; }
+  state.updateReady = true;
+  state.note = "A new version is ready. Tap here to reload.";
+  updateStatus();
+}
+let lastCheck = 0;
+async function checkForUpdates(force = false) {
+  if (!navigator.onLine || (!force && Date.now() - lastCheck < 30000)) return;
+  lastCheck = Date.now();
+  const version = await swVersion();
+  if (version && state.version && version !== state.version) {
+    navigator.serviceWorker?.getRegistration().then((reg) => reg && reg.update()).catch(() => {});
+    installUpdate();
+    return;
+  }
+  if (version && !state.version) state.version = version;
+  try {
+    const [languages, shared] = await Promise.all([getJson("languages.json"), getJson("phrases.json")]);
+    const listChanged = JSON.stringify(shared) !== JSON.stringify(state.shared);
+    state.languages = languages;
+    state.shared = shared;
+    state.lang = languages.find((l) => l.code === state.lang.code) || state.lang;
+    if (listChanged) rebuildTopicOptions();
+    const filesChanged = await syncInstalled();
+    if (listChanged || filesChanged) {
+      await loadLanguageData();
+      if (state.mode === "list" || state.mode === "guide" || state.mode === "settings") render();
+    }
+  } catch { /* offline or a hiccup: keep showing what is stored */ }
 }
 
 // ---------- settings ----------
@@ -551,10 +606,7 @@ async function boot() {
   }
   state.progress = store.get(progressKey(state.lang.code), {});
   pickVoice();
-  const cats = [...new Set(state.shared.map((p) => p.cat))];
-  $("#cat").innerHTML = `<option value="all">All Topics</option>` + cats.map((c) => `<option value="${c}">${esc(topicName(c))}</option>`).join("");
-  const savedCat = store.get("phrasebook-cat", null);
-  if (savedCat && [...$("#cat").options].some((o) => o.value === savedCat)) $("#cat").value = savedCat;
+  rebuildTopicOptions();
   $("#cat").onchange = () => { store.set("phrasebook-cat", $("#cat").value); state.last = null; state.round = null; render(); };
   rebuildDirOptions();
   $("#dir").onchange = () => { store.set("phrasebook-dir", $("#dir").value); state.last = null; state.round = null; render(); };
@@ -571,7 +623,10 @@ async function boot() {
     render();
   });
   render();
-  syncInstalled();
+  $("#status").onclick = () => { if (state.updateReady) location.reload(); };
+  checkForUpdates(true);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) checkForUpdates(); });
+  window.addEventListener("online", () => checkForUpdates(true));
 }
 boot();
 
