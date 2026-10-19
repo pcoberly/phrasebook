@@ -44,5 +44,16 @@
       "m": "lo-LA-ChanthavongNeural"
     },
     "bytes": 1949598
+  },
+  {
+    "code": "es",
+    "name": "Spanish",
+    "native": "Español",
+    "ttsLang": "es-MX",
+    "voices": {
+      "f": "es-MX-DaliaNeural",
+      "m": "es-MX-JorgeNeural"
+    },
+    "bytes": 1966492
   }
 ]
