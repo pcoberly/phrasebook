@@ -16,7 +16,7 @@ GitHub Pages, so it needs no App Store account. Live at https://pcoberly.github.
 | `audio/<code>/f/`, `audio/<code>/m/` | Generated: female and male MP3 for each phrase |
 | `app.js`, `index.html`, `style.css`, `sw.js`, `manifest.webmanifest`, `icon-v3-*.png` | The app itself |
 
-A phone downloads the app plus only the languages chosen in Settings. Each language is a "pack"
+A device downloads the app plus only the languages chosen in Settings. Each language is a "pack"
 stored in its own cache (`lang-<code>`) and removable from Settings. The app compares `pack.json`
 with what it holds, so an update downloads only the files that changed.
 

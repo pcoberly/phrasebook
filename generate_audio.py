@@ -25,7 +25,7 @@ AUDIO = ROOT / "audio"
 HASHES = AUDIO / "hashes.json"
 
 RATE = "-20%"
-VOLUME = "+50%"  # the default output is quiet on a phone
+VOLUME = "+50%"  # the default output is quiet on a handheld device
 
 
 def spoken(text: str) -> str:
@@ -68,7 +68,7 @@ async def make_audio(code: str, language: dict, texts: dict, shared_ids: list, h
 
 
 def build_pack(code: str, texts: dict, shared_ids: list) -> int:
-    """List every file a phone needs for this language, each with a short content hash."""
+    """List every file a device needs for this language, each with a short content hash."""
     paths = [ROOT / "lang" / code / "phrases.json", ROOT / "lang" / code / "guide.html"]
     for folder in ("f", "m"):
         paths += [AUDIO / code / folder / f"{i}.mp3" for i in shared_ids if i in texts]

@@ -1,7 +1,7 @@
 :root {
   --bg: #faf8f5; --fg: #1d1b1a; --card: #fff; --line: #ddd6cf; --accent: #b3261e;
   --good: #1b7a3d; --bad: #b3261e; --muted: #6b645e;
-  --tab-h: 0px; /* height of the bottom tab tray on phones */
+  --tab-h: 0px; /* height of the bottom tab tray on small screens */
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #161413; --fg: #f1ece7; --card: #221f1d; --line: #3a3532; --accent: #ff8a80; --good: #6fd08c; --bad: #ff8a80; --muted: #a39b94; }
@@ -101,7 +101,7 @@ button.mini.ghost { background: transparent; color: var(--muted); border-color: 
 footer { text-align: center; color: var(--muted); font-size: 13px; padding: 18px 0 24px; }
 footer.ready { color: var(--accent); font-weight: 600; text-decoration: underline; cursor: pointer; }
 
-/* On a phone the tabs move to a tray at the bottom, where the thumb is, and the top is left for the cards */
+/* On a small screen the tabs move to a tray at the bottom, where the thumb is, and the top is left for the cards */
 @media (max-width: 600px) {
   :root { --tab-h: calc(56px + env(safe-area-inset-bottom, 0px)); }
   body { padding-bottom: var(--tab-h); }

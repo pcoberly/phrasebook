@@ -55,5 +55,38 @@
       "m": "es-MX-JorgeNeural"
     },
     "bytes": 1966492
+  },
+  {
+    "code": "fr",
+    "name": "French",
+    "native": "Français",
+    "ttsLang": "fr-FR",
+    "voices": {
+      "f": "fr-FR-DeniseNeural",
+      "m": "fr-FR-HenriNeural"
+    },
+    "bytes": 1939044
+  },
+  {
+    "code": "nl",
+    "name": "Dutch",
+    "native": "Nederlands",
+    "ttsLang": "nl-NL",
+    "voices": {
+      "f": "nl-NL-ColetteNeural",
+      "m": "nl-NL-MaartenNeural"
+    },
+    "bytes": 2106528
+  },
+  {
+    "code": "de",
+    "name": "German",
+    "native": "Deutsch",
+    "ttsLang": "de-DE",
+    "voices": {
+      "f": "de-DE-KatjaNeural",
+      "m": "de-DE-ConradNeural"
+    },
+    "bytes": 2038922
   }
 ]
