@@ -2,7 +2,7 @@
 
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
-const ROUND_SIZE = 20; // questions in one quiz round
+const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
 const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode etc. */ } },
@@ -18,7 +18,7 @@ const state = {
   phrases: [],    // shared phrases merged with the active language's text, say, tones, note
   mode: "list",
   progress: {},
-  settings: { voice: store.get("phrasebook-voice", "f"), speed: store.get("phrasebook-speed", "1") },
+  settings: { voice: store.get("phrasebook-voice", "f"), speed: store.get("phrasebook-speed", "1"), round: store.get("phrasebook-round", "20") },
   last: null,
   round: null,    // the quiz round in progress: its questions, where you are, your score and your misses
   busy: {},      // language code -> message while it downloads
@@ -180,9 +180,10 @@ function distractors(p, dir) {
   const rest = shuffle(others.filter((o) => o.cat !== p.cat));
   return [...same, ...rest].slice(0, 2);
 }
-// A quiz is a round of ROUND_SIZE questions, chosen up front from the cards that most need practice:
+// A quiz is a round of questions (10, 20 or 50, from Settings), chosen up front from the cards that most need practice:
 // new or due ones first (in random order), then whatever comes due soonest. One question per phrase.
 function buildRound() {
+  const size = parseInt(state.settings.round, 10) || 20;
   const now = Date.now();
   const items = candidates();
   const isDue = (i) => !state.progress[i.key] || state.progress[i.key].due <= now;
@@ -193,12 +194,12 @@ function buildRound() {
   const seen = new Set();
   const picked = [];
   for (const i of ordered) {
-    if (picked.length === ROUND_SIZE) break;
+    if (picked.length === size) break;
     if (!seen.has(i.p.id)) { seen.add(i.p.id); picked.push(i); }
   }
   // a small topic can run out of distinct phrases: top up with the other direction
   for (const i of ordered) {
-    if (picked.length >= Math.min(ROUND_SIZE, ordered.length)) break;
+    if (picked.length >= Math.min(size, ordered.length)) break;
     if (!picked.includes(i)) picked.push(i);
   }
   return { items: shuffle(picked), index: 0, correct: 0, missed: [] };
@@ -479,7 +480,19 @@ function renderSettings() {
         ${opt("0.7", "Slowest", state.settings.speed)}
       </select>
     </div>
-    <div class="row"><button class="act" id="sample">🔊 Hear a sample</button></div>`;
+    <div class="row"><button class="act" id="sample">🔊 Hear a sample</button></div>
+    <h2 class="group">Quiz</h2>
+    <div class="setting">
+      <label for="round">Questions per round</label>
+      <select id="round">
+        ${ROUND_CHOICES.map((n) => opt(n, n, state.settings.round)).join("")}
+      </select>
+    </div>`;
+  $("#round").onchange = () => {
+    state.settings.round = $("#round").value;
+    store.set("phrasebook-round", state.settings.round);
+    state.round = null; // the next quiz starts a fresh round of the new length
+  };
   const sample = () => speak(state.phrases.find((p) => p.id === "hello") || state.phrases[0]);
   for (const id of ["voice", "speed"]) {
     $("#" + id).onchange = () => {
@@ -547,6 +560,7 @@ async function boot() {
   $("#dir").onchange = () => { store.set("phrasebook-dir", $("#dir").value); state.last = null; state.round = null; render(); };
   if (!["f", "m", "mixed"].includes(state.settings.voice)) state.settings.voice = "f";
   if (!["1", "0.85", "0.7"].includes(state.settings.speed)) state.settings.speed = "1";
+  if (!ROUND_CHOICES.includes(state.settings.round)) state.settings.round = "20";
   $("#listen").checked = store.get("phrasebook-listen", false);
   $("#listen").onchange = () => { store.set("phrasebook-listen", $("#listen").checked); render(); };
   document.querySelectorAll(".tab").forEach((b) => b.onclick = () => {
