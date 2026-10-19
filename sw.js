@@ -1,7 +1,7 @@
-const CACHE = "phrasebook-v11";
+const CACHE = "phrasebook-v12";
 // The app itself. Languages are not here: each one is a "pack" (lang/<code>/ and audio/<code>/)
 // that the page downloads into its own cache, "lang-<code>", only when you choose that language.
-const SHELL = ["./", "index.html", "style.css", "app.js", "phrases.json", "languages.json", "manifest.webmanifest", "icon-v3-180.png"];
+const SHELL = ["./", "index.html", "style.css", "app.js", "phrases.json", "languages.json", "manifest.webmanifest", "icon-v3-180.png", "favicon-32.png", "favicon-48.png"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
