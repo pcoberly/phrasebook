@@ -94,11 +94,10 @@ const nat = (s) => `<span lang="${state.lang.code}">${esc(s)}</span>`;
 const topicName = (c) => c.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
 function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 // pronunciation block: "sounds like" spelling, tones when the language has them, and a usage note
-function detail(p) {
-  return `${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}
-    ${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}
-    ${p.note ? `<div class="note">${esc(p.note)}</div>` : ""}`;
+function pron(p) {
+  return `${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}`;
 }
+const noteOf = (p) => (p.note ? `<div class="note">${esc(p.note)}</div>` : "");
 // languages marked "draft" in languages.json have not been checked by a native speaker
 function draftBanner() {
   return state.lang.draft
@@ -140,7 +139,7 @@ function renderCard() {
           <div class="big">${fromLang ? esc(p.en) : nat(p.text)}</div>
           <button class="speak" id="say2" aria-label="Play">🔊</button>
           <div class="orig">${fromLang ? name : "English"}: <b>${front}</b></div>
-          <div class="hint">Tap to flip back</div>
+          ${pron(p)}
         </div>
       </div>
     </div>
@@ -156,12 +155,11 @@ function renderCard() {
   const toggle = () => {
     const flipped = flip.classList.toggle("flipped");
     flip.setAttribute("aria-pressed", flipped);
+    speak(p); // every flip plays the phrase, so you can hear it from either side
     if (!seenAnswer) {
-      // the first flip reveals the answer: play it (if it is the language side), show how to say it
-      // under the card (so the card itself stays small), and offer the grade buttons
+      // the first flip reveals the answer: show the usage note under the card and offer the grade buttons
       seenAnswer = true;
-      if (!fromLang) speak(p);
-      $("#detail").innerHTML = detail(p);
+      $("#detail").innerHTML = noteOf(p);
       $("#grades").classList.remove("hidden");
     }
   };
@@ -338,7 +336,7 @@ function rebuildDirOptions() {
   const n = esc(state.lang.name);
   const sel = $("#dir");
   const saved = store.get("phrasebook-dir", "mixed");
-  sel.innerHTML = `<option value="mixed">Both ways</option><option value="to">English → ${n}</option><option value="from">${n} → English</option>`;
+  sel.innerHTML = `<option value="mixed">Both Directions</option><option value="to">English → ${n}</option><option value="from">${n} → English</option>`;
   sel.value = ["mixed", "to", "from"].includes(saved) ? saved : "mixed";
 }
 async function useLanguage(code) {
@@ -475,7 +473,7 @@ async function boot() {
   state.progress = store.get(progressKey(state.lang.code), {});
   pickVoice();
   const cats = [...new Set(state.shared.map((p) => p.cat))];
-  $("#cat").innerHTML = `<option value="all">All</option>` + cats.map((c) => `<option value="${c}">${esc(topicName(c))}</option>`).join("");
+  $("#cat").innerHTML = `<option value="all">All Topics</option>` + cats.map((c) => `<option value="${c}">${esc(topicName(c))}</option>`).join("");
   const savedCat = store.get("phrasebook-cat", null);
   if (savedCat && [...$("#cat").options].some((o) => o.value === savedCat)) $("#cat").value = savedCat;
   $("#cat").onchange = () => { store.set("phrasebook-cat", $("#cat").value); state.last = null; render(); };

@@ -1,6 +1,7 @@
 :root {
   --bg: #faf8f5; --fg: #1d1b1a; --card: #fff; --line: #ddd6cf; --accent: #b3261e;
   --good: #1b7a3d; --bad: #b3261e; --muted: #6b645e;
+  --tab-h: 0px; /* height of the bottom tab tray on phones */
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #161413; --fg: #f1ece7; --card: #221f1d; --line: #3a3532; --accent: #ff8a80; --good: #6fd08c; --bad: #ff8a80; --muted: #a39b94; }
@@ -12,9 +13,9 @@ header { padding-top: 12px; }
 nav { display: flex; gap: 8px; }
 .tab { flex: 1; padding: 12px; border: 1px solid var(--line); background: var(--card); color: var(--fg); border-radius: 12px; font-size: 17px; }
 .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-.opts { display: flex; flex-wrap: wrap; gap: 8px 12px; margin: 12px 0; font-size: 14px; color: var(--muted); }
-.opts label { display: flex; flex-direction: column; gap: 2px; }
-.opts .check { flex-direction: row; align-items: center; gap: 6px; align-self: end; }
+.opts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0; font-size: 14px; color: var(--muted); }
+.opts select { flex: 1 1 140px; min-width: 0; font-size: 15px; padding: 8px; }
+.opts .check { display: flex; align-items: center; gap: 6px; }
 select { font-size: 16px; padding: 6px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px 20px; min-height: 200px;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; margin-top: 8px; }
@@ -53,7 +54,7 @@ button.speak { border: 1px solid var(--line); background: var(--card); color: va
 .reveal { text-align: center; padding-top: 8px; min-height: 1px; }
 .reveal:empty { display: none; }
 /* the Next and grade buttons stay in reach, so a drill never needs scrolling */
-.row.sticky { position: sticky; bottom: 0; padding: 10px 0 calc(8px + env(safe-area-inset-bottom)); margin-top: 0; background: linear-gradient(to top, var(--bg) 75%, transparent); }
+.row.sticky { position: sticky; bottom: var(--tab-h); padding: 10px 0 8px; margin-top: 0; background: linear-gradient(to top, var(--bg) 75%, transparent); }
 table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 8px 0; }
 th, td { text-align: left; padding: 7px 8px 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { color: var(--muted); font-weight: 600; font-size: 13px; }
@@ -76,3 +77,14 @@ button.mini { padding: 9px 14px; font-size: 15px; border-radius: 10px; border: 1
 button.mini.ghost { background: transparent; color: var(--muted); border-color: var(--line); }
 .draft { margin: 12px 0 0; padding: 10px 12px; font-size: 14px; color: var(--muted); border-left: 4px solid var(--accent); background: var(--card); border-radius: 0 10px 10px 0; }
 footer { text-align: center; color: var(--muted); font-size: 13px; padding: 18px 0 24px; }
+
+/* On a phone the tabs move to a tray at the bottom, where the thumb is, and the top is left for the cards */
+@media (max-width: 600px) {
+  :root { --tab-h: calc(56px + env(safe-area-inset-bottom, 0px)); }
+  body { padding-bottom: var(--tab-h); }
+  header { padding-top: 8px; }
+  nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; gap: 0; padding: 0 8px env(safe-area-inset-bottom, 0px); background: var(--card); border-top: 1px solid var(--line); }
+  .tab { border: 0; border-top: 3px solid transparent; border-radius: 0; background: transparent; color: var(--muted); padding: 14px 0 12px; font-size: 15px; }
+  .tab.active { background: transparent; color: var(--accent); border-top-color: var(--accent); font-weight: 600; }
+  .tab.gear { flex: 1; width: auto; font-size: 20px; padding: 10px 0 8px; }
+}
