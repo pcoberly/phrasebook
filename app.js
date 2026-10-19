@@ -544,13 +544,13 @@ function languagePanel() {
   const availOpen = store.get("phrasebook-avail-open", available.length <= 5); // a long list starts folded
   return `
     <details class="panel" id="langpanel"${open ? " open" : ""}>
-      <summary><span class="ptitle">Language</span><span class="pval">${esc(state.lang.name)}</span></summary>
+      <summary><span class="ptitle">Language</span><span class="pval">${esc(state.lang.name)}</span><span class="chev" aria-hidden="true"></span></summary>
       <div class="pbody" id="langs">
         <h3 class="sub">On this device (${mine.length})</h3>
         ${mine.map((l, i) => languageRow(l, i, mine.length)).join("")}
         ${available.length ? `
         <details class="avail" id="availpanel"${availOpen ? " open" : ""}>
-          <summary>Available to download (${available.length})</summary>
+          <summary><span>Available to download (${available.length})</span><span class="chev" aria-hidden="true"></span></summary>
           ${available.map((l) => languageRow(l, -1, 0)).join("")}
         </details>` : ""}
         <p class="note">A language is stored on this device only once you download it. Removing one frees its space and keeps your progress. Use the arrows to put your languages in the order you want.</p>

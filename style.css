@@ -78,13 +78,16 @@ th { color: var(--muted); font-weight: 600; font-size: 13px; }
 .panel > summary, .avail > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .panel > summary::-webkit-details-marker, .avail > summary::-webkit-details-marker { display: none; }
 .panel > summary { padding: 14px 16px; font-size: 17px; font-weight: 600; }
-.panel > summary::after, .avail > summary::after { content: "▸"; color: var(--muted); font-size: 14px; transition: transform .2s; flex: none; }
-.panel[open] > summary::after, .avail[open] > summary::after { transform: rotate(90deg); }
+/* the expand control: a ringed chevron that points down when closed and up when open */
+.chev { flex: none; position: relative; width: 28px; height: 28px; border: 1.5px solid var(--accent); border-radius: 50%; }
+.chev::after { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; border-right: 2.5px solid var(--accent); border-bottom: 2.5px solid var(--accent); transform: translate(-50%, -70%) rotate(45deg); transition: transform .2s; }
+[open] > summary .chev::after { transform: translate(-50%, -30%) rotate(225deg); }
 .pval { margin-left: auto; font-weight: 400; color: var(--accent); }
 .pbody { padding: 0 12px 12px; }
-.sub { margin: 4px 0 0; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
-.avail { margin-top: 12px; }
-.avail > summary { padding: 8px 0; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+/* the two group headings, On this device and Available to download, share one look */
+.sub, .avail > summary { margin: 14px 0 4px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.avail { margin-top: 0; }
+.avail > summary { padding: 0; }
 .mv { display: flex; flex-direction: column; gap: 4px; flex: none; }
 .mvb { width: 30px; height: 26px; padding: 0; font-size: 11px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--fg); }
 .mvb:disabled { opacity: .3; }
