@@ -53,6 +53,8 @@ def main() -> int:
                 problems.append(f"lang/{code}/phrases.json: no entry for {i!r}")
             elif not entry.get("text"):
                 problems.append(f"lang/{code}/phrases.json: {i!r} has no text")
+            elif "female" in entry and not (isinstance(entry["female"], dict) and (entry["female"].get("text") or entry["female"].get("say"))):
+                problems.append(f"lang/{code}/phrases.json: {i!r} has a female form with no text or say")
             else:
                 for voice in ("f", "m"):
                     if not (ROOT / "audio" / code / voice / f"{i}.mp3").exists():

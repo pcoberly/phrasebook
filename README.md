@@ -9,8 +9,8 @@ GitHub Pages, so it needs no App Store account. Live at https://pcoberly.github.
 | Path | What it is |
 | --- | --- |
 | `phrases.json` | The phrases every language shares: `id`, English, topic (`cat`) |
-| `languages.json` | The languages on offer: name, code, voices, size (size is filled in by the script) |
-| `lang/<code>/phrases.json` | That language's text for each phrase `id`: `text`, `say` (pronunciation), optional `tones`, `note`, and `spoken` |
+| `languages.json` | The languages on offer: name, code, voices, size (size is filled in by the script), and `rtl` for a right-to-left language such as Hebrew |
+| `lang/<code>/phrases.json` | That language's text for each phrase `id`: `text`, `say` (pronunciation), optional `tones`, `note`, `spoken`, and `female` (the woman's form, with its own `text`, `say` and `spoken`, where a woman says the phrase differently) |
 | `lang/<code>/guide.html` | That language's pronunciation guide |
 | `lang/<code>/pack.json` | Generated: a hash for every file in the language (do not edit) |
 | `audio/<code>/f/`, `audio/<code>/m/` | Generated: female and male MP3 for each phrase |
@@ -35,7 +35,9 @@ It makes only the missing or changed audio and rewrites each `pack.json`.
 
 **Add a language.** Add it to `languages.json` (copy a neighbour; pick `edge-tts` voices with
 `python -m edge_tts --list-voices`), create `lang/<code>/phrases.json` and `guide.html`, and run
-`python generate_audio.py`.
+`python generate_audio.py`. For a right-to-left language add `"rtl": true`: the app then lines its phrases up on the
+right and keeps their punctuation on the correct side. Where a phrase changes with the speaker's gender, give it a
+`female` form; the female voice says that form and the app shows both.
 
 **Release.** If any app file changed (`app.js`, `style.css`, `index.html`, `sw.js`, icons), bump the
 version: `CACHE` in `sw.js` and `VERSION` in `app.js`, to the same new number. Phrase and audio changes need no bump.

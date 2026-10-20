@@ -1,4 +1,4 @@
-const CACHE = "phrasebook-v23"; // keep in step with VERSION in app.js (check_data.py checks)
+const CACHE = "phrasebook-v24"; // keep in step with VERSION in app.js (check_data.py checks)
 // The app itself. Languages are not here: each one is a "pack" (lang/<code>/ and audio/<code>/)
 // that the page downloads into its own cache, "lang-<code>", only when you choose that language.
 const SHELL = ["./", "index.html", "style.css", "app.js", "phrases.json", "languages.json", "manifest.webmanifest", "icon-v3-180.png", "favicon-32.png", "favicon-48.png"];

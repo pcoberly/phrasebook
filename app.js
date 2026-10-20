@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v23";
+const VERSION = "phrasebook-v24";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -135,16 +135,28 @@ function next() {
 
 // ---------- ui helpers ----------
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-// text in the language being studied, tagged so the device picks the right font
-const nat = (s) => `<span lang="${state.lang.code}">${esc(s)}</span>`;
+// text in the language being studied, tagged so the device picks the right font, and marked right-to-left for
+// Hebrew and the like ("rtl" in languages.json) so its punctuation lands on the correct side
+const rtlAttr = () => (state.lang.rtl ? ' dir="rtl"' : "");
+const nat = (s) => `<span lang="${state.lang.code}"${rtlAttr()}>${esc(s)}</span>`;
+// an English note can quote right-to-left words: fence each run off so it doesn't scramble the sentence around it
+const RTL_RUN = /[\u0590-\u08FF\uFB1D-\uFEFC]+(?:[\s.,…-]+[\u0590-\u08FF\uFB1D-\uFEFC]+)*[?!.…]*/g;
+const noteText = (s) => esc(s).replace(RTL_RUN, "<bdi>$&</bdi>");
 // topics are stored as slugs ("getting-around") and shown as names ("Getting Around")
 const topicName = (c) => c.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
 function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 // pronunciation block: "sounds like" spelling, tones when the language has them, and a usage note
 function pron(p) {
-  return `${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}`;
+  return `${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}${womanForm(p)}`;
 }
-const noteOf = (p) => (p.note ? `<div class="note">${esc(p.note)}</div>` : "");
+// where a woman says the phrase differently (Hebrew "I don't understand": mevin / mevina), its "female" form;
+// the female voice speaks that form, so both are shown
+function womanForm(p) {
+  const f = p.female;
+  if (!f) return "";
+  return `<div class="woman">A woman says: ${f.text ? `<b>${nat(f.text)}</b> ` : ""}${f.say ? `<i>${esc(f.say)}</i>` : ""}</div>`;
+}
+const noteOf = (p) => (p.note ? `<div class="note">${noteText(p.note)}</div>` : "");
 // languages marked "draft" in languages.json have not been checked by a native speaker
 function draftBanner() {
   return state.lang.draft
@@ -319,7 +331,7 @@ function renderQuiz() {
     const div = document.createElement("div");
     div.className = "choice";
     const label = toLang ? (listenOnly ? `Option ${i + 1}` : nat(o.text)) : esc(o.en);
-    div.innerHTML = `<button class="pick">${label}</button>${toLang ? `<button class="speak" aria-label="Play">🔊</button>` : ""}`;
+    div.innerHTML = `<button class="pick"${toLang ? rtlAttr() : ""}>${label}</button>${toLang ? `<button class="speak" aria-label="Play">🔊</button>` : ""}`;
     const pick = div.querySelector(".pick");
     if (toLang) div.querySelector(".speak").onclick = () => speak(o);
     pick.onclick = () => {
@@ -379,11 +391,12 @@ function entryHtml(p, fromFirst, withNote = true) {
       <div class="entry">
         <div>
           ${fromFirst ? "" : `<div class="en">${esc(p.en)}</div>`}
-          <div class="vi">${nat(p.text)}</div>
+          <div class="vi"${rtlAttr()}>${nat(p.text)}</div>
           ${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}
+          ${womanForm(p)}
           ${fromFirst ? `<div class="en">${esc(p.en)}</div>` : ""}
           ${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}
-          ${withNote && p.note ? `<div class="note">${esc(p.note)}</div>` : ""}
+          ${withNote && p.note ? `<div class="note">${noteText(p.note)}</div>` : ""}
         </div>
         <button class="speak" data-id="${p.id}" aria-label="Play">🔊</button>
       </div>`;

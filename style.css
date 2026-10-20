@@ -28,13 +28,15 @@ button.good { background: var(--good); color: #fff; border-color: var(--good); }
 button.bad { background: var(--bad); color: #fff; border-color: var(--bad); }
 button.speak { border: 1px solid var(--line); background: var(--card); color: var(--fg); border-radius: 999px; font-size: 20px; width: 48px; height: 48px; flex: none; }
 .choice { display: flex; gap: 8px; align-items: stretch; margin-top: 8px; }
-.choice .pick { flex: 1; text-align: left; padding: 13px 16px; font-size: 18px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+.choice .pick { flex: 1; text-align: start; padding: 13px 16px; font-size: 18px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
 .choice .pick.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 22%, var(--card)); }
 .choice .pick.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 22%, var(--card)); }
 .hidden { visibility: hidden; }
 .say { color: var(--accent); font-size: 18px; font-style: italic; }
 .tones { color: var(--muted); font-size: 14px; }
 .note { color: var(--muted); font-size: 14px; }
+.woman { font-size: 15px; }
+.woman i { color: var(--accent); }
 .orig { color: var(--muted); font-size: 15px; }
 .orig b { color: var(--fg); font-weight: 600; }
 /* flashcard: two faces in one grid cell (so both share the taller face's height) that turn over together */
