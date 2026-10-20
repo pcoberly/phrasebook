@@ -640,13 +640,52 @@ async function shareApp() {
     prompt("Copy this link to share PhraseBook:", url);
   }
 }
-function feedbackUrl() {
-  // the address is assembled here so it is not a plain mailto link sitting in the page for scrapers
+// Feedback goes by email. The address is assembled here so it is not a plain mailto link sitting in the page
+// for scrapers. A mailto: link does nothing on a laptop with no email app set up, and an iPhone lists only the
+// mail apps it knows (not Yahoo Mail), so every device is offered the same choices: Gmail, Yahoo Mail, its own
+// email app and a Copy button.
+function feedbackParts() {
   const to = ["pcob47-pb", "yahoo.com"].join("@");
+  const subject = "PhraseBook feedback";
   const body = `Hi! My feedback about PhraseBook:\n\n\n\n(To report a wrong or missing phrase, tell me the language and the phrase.)\n---\nLanguage: ${state.lang.name}\nVersion: ${state.version || "unknown"}`;
-  return `mailto:${to}?subject=${encodeURIComponent("PhraseBook feedback")}&body=${encodeURIComponent(body)}`;
+  const q = (o) => Object.entries(o).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join("&");
+  return {
+    to,
+    mailto: `mailto:${to}?${q({ subject, body })}`,
+    gmail: `https://mail.google.com/mail/?${q({ view: "cm", fs: "1", to, su: subject, body })}`,
+    yahoo: `https://compose.mail.yahoo.com/?${q({ to, subject, body })}`,
+  };
 }
-const sendFeedback = () => { track("feedback/click"); location.href = feedbackUrl(); };
+const feedbackUrl = () => feedbackParts().mailto;
+function openMailApp(url) { location.href = url; }
+function showFeedbackOptions() {
+  const box = $("#feedbackbox");
+  if (!box) return;
+  const f = feedbackParts();
+  box.innerHTML = `
+    <div>Send your feedback to <b>${esc(f.to)}</b></div>
+    <div class="row fbrow">
+      <button class="mini" data-fb="gmail">Gmail</button>
+      <button class="mini" data-fb="yahoo">Yahoo Mail</button>
+      <button class="mini" data-fb="mail">Email app</button>
+      <button class="mini ghost wide" data-fb="copy">Copy address</button>
+    </div>`;
+  box.hidden = false;
+  box.onclick = async (e) => {
+    const btn = e.target.closest("button[data-fb]");
+    if (!btn) return;
+    const parts = feedbackParts();
+    if (btn.dataset.fb === "mail") openMailApp(parts.mailto);
+    else if (btn.dataset.fb === "copy") {
+      try { await navigator.clipboard.writeText(parts.to); btn.textContent = "Copied ✓"; }
+      catch { prompt("Copy this address:", parts.to); }
+    } else window.open(parts[btn.dataset.fb], "_blank", "noopener");
+  };
+}
+function sendFeedback() {
+  track("feedback/click");
+  showFeedbackOptions();
+}
 
 function renderSettings() {
   const opt = (v, label, cur) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
@@ -683,6 +722,7 @@ function renderSettings() {
       <button class="act" id="share">Share this app</button>
       <button class="act" id="feedback">Send feedback</button>
     </div>
+    <div class="draft" id="feedbackbox" hidden></div>
     <p class="note about">PhraseBook${state.version ? ` · version ${esc(state.version.replace("phrasebook-", ""))}` : ""}. Your progress and settings stay on this device.${analyticsOn ? " The app counts anonymous visits and which features are used, with no cookies and no personal data." : ""}</p>`;
   $("#share").onclick = shareApp;
   $("#feedback").onclick = sendFeedback;
