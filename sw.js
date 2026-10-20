@@ -1,4 +1,4 @@
-const CACHE = "phrasebook-v16";
+const CACHE = "phrasebook-v17";
 // The app itself. Languages are not here: each one is a "pack" (lang/<code>/ and audio/<code>/)
 // that the page downloads into its own cache, "lang-<code>", only when you choose that language.
 const SHELL = ["./", "index.html", "style.css", "app.js", "phrases.json", "languages.json", "manifest.webmanifest", "icon-v3-180.png", "favicon-32.png", "favicon-48.png"];
@@ -57,6 +57,8 @@ self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
+  // Only this app's own files are handled here. Anything from another site (such as the analytics script) goes straight through.
+  if (url.origin !== self.location.origin) return;
   // The page is downloading or checking a language pack: go straight to the network.
   if (url.pathname.endsWith("/pack.json") || url.searchParams.has("sync")) return;
   const isPack = /\/(lang|audio)\//.test(url.pathname);

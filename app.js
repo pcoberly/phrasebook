@@ -9,6 +9,24 @@ const store = {
   remove(k) { try { localStorage.removeItem(k); } catch { /* private mode etc. */ } },
 };
 
+// Anonymous visit counts with Cloudflare Web Analytics: no cookies, no personal data. It stays switched off until
+// a token is pasted below. Open the app once with ?analytics=off on a device to leave that device uncounted
+// (?analytics=on undoes it). It is never loaded on localhost, and it fails quietly when offline.
+const ANALYTICS_TOKEN = "5720307f64814acea36e11d2a3b09d31"; // a public site token, safe to publish
+(function loadAnalytics() {
+  try {
+    const choice = new URLSearchParams(location.search).get("analytics");
+    if (choice === "off") localStorage.setItem("phrasebook-no-analytics", "1");
+    if (choice === "on") localStorage.removeItem("phrasebook-no-analytics");
+    if (!ANALYTICS_TOKEN || ["localhost", "127.0.0.1"].includes(location.hostname) || localStorage.getItem("phrasebook-no-analytics")) return;
+    const s = document.createElement("script");
+    s.type = "module"; // as in the snippet Cloudflare gives
+    s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    s.dataset.cfBeacon = JSON.stringify({ token: ANALYTICS_TOKEN });
+    document.head.appendChild(s);
+  } catch { /* storage or DOM unavailable: no analytics */ }
+})();
+
 const $ = (s) => document.querySelector(s);
 const main = $("#main");
 const state = {
@@ -643,7 +661,7 @@ function renderSettings() {
       <button class="act" id="share">Share this app</button>
       <button class="act" id="feedback">Send feedback</button>
     </div>
-    <p class="note about">PhraseBook${state.version ? ` · version ${esc(state.version.replace("phrasebook-", ""))}` : ""}. Your progress and settings stay on this device.</p>`;
+    <p class="note about">PhraseBook${state.version ? ` · version ${esc(state.version.replace("phrasebook-", ""))}` : ""}. Your progress and settings stay on this device.${ANALYTICS_TOKEN ? " The app counts anonymous visits, with no cookies and no personal data." : ""}</p>`;
   $("#share").onclick = shareApp;
   $("#feedback").onclick = sendFeedback;
   $("#round").onchange = () => {
