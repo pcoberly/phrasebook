@@ -14,6 +14,7 @@ GitHub Pages, so it needs no App Store account. Live at https://pcoberly.github.
 | `lang/<code>/guide.html` | That language's pronunciation guide |
 | `lang/<code>/pack.json` | Generated: a hash for every file in the language (do not edit) |
 | `audio/<code>/f/`, `audio/<code>/m/` | Generated: female and male MP3 for each phrase |
+| `audio/en/`, `lang/en/pack.json` | Generated: English audio for Play all, one small pack shared by every language and downloaded with the first one |
 | `app.js`, `index.html`, `style.css`, `sw.js`, `manifest.webmanifest`, `icon-v3-*.png` | The app itself |
 
 A device downloads the app plus only the languages chosen in Settings. Each language is a "pack"
@@ -26,6 +27,14 @@ A brand-new person sees a welcome screen that asks which language to learn, and 
 choose. Someone who already has a language on the device skips it. A link ending `?lang=ja` (any language code
 from `languages.json`) opens straight into that language and is then tidied out of the address bar, so you can
 send a friend a link for the language they want.
+
+## Play all
+
+The List's **▶ Play all** button reads the list aloud for listening on the move: each phrase in English, a pause,
+then the language (the other way round when the direction is language → English), round and round until paused.
+Settings has the pause length and "Say each phrase twice". Tapping 🔊 on a row while it plays jumps there; another
+tab pauses it in place, and a new topic starts it from the top. It keeps the screen on while playing, and the lock
+screen, headphones or a car can pause and skip. English speaks the `en` text with any `...` gap left out.
 
 ## Common jobs
 

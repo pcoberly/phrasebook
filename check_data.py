@@ -63,6 +63,14 @@ def main() -> int:
             if k not in ids:
                 problems.append(f"lang/{code}/phrases.json: {k!r} is not in phrases.json (a mistyped id?)")
 
+    # English audio, shared by every language for Play all
+    for i in ids:
+        for voice in ("f", "m"):
+            if not (ROOT / "audio" / "en" / voice / f"{i}.mp3").exists():
+                problems.append(f"audio/en/{voice}/{i}.mp3 is missing (run generate_audio.py)")
+    if not (ROOT / "lang" / "en" / "pack.json").exists():
+        problems.append("lang/en/pack.json is missing (run generate_audio.py)")
+
     app = re.search(r'const VERSION = "([^"]+)"', (ROOT / "app.js").read_text(encoding="utf-8"))
     sw = re.search(r'const CACHE = "([^"]+)"', (ROOT / "sw.js").read_text(encoding="utf-8"))
     if not app or not sw or app.group(1) != sw.group(1):

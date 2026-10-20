@@ -6,7 +6,8 @@ that are new, or whose text/voice/rate changed, are generated.
 
 It then writes lang/<lang>/pack.json (a hash for every file in the language), which the
 app uses to download or update just that language, and records each language's size in
-languages.json.
+languages.json. Last it does the same for English (audio/en/, lang/en/pack.json), which every
+language shares for Play all.
 
 Usage:  python generate_audio.py [--lang ja] [--force]
 """
@@ -35,6 +36,10 @@ HASHES = AUDIO / "hashes.json"
 RATE = "-20%"
 VOLUME = "+50%"  # the default output is quiet on a handheld device
 
+# English, for Play all in the List: a pack of its own ("en"), shared by every language, spoken at normal speed
+# because you already know it. Its text is the "en" of phrases.json, with any "..." gap left unspoken.
+ENGLISH = {"code": "en", "voices": {"f": "en-US-AvaNeural", "m": "en-US-AndrewNeural"}, "rate": "+0%"}
+
 
 def spoken(text: str) -> str:
     """The placeholder dots in phrases like "I would like..." are not spoken."""
@@ -47,6 +52,7 @@ def write_json(path: Path, data, **kwargs):
 
 async def make_audio(code: str, language: dict, texts: dict, shared_ids: list, hashes: dict, force: bool) -> int:
     made = 0
+    rate = language.get("rate", RATE)
     for folder, voice in language["voices"].items():
         (AUDIO / code / folder).mkdir(parents=True, exist_ok=True)
         for phrase_id in shared_ids:
@@ -57,13 +63,13 @@ async def make_audio(code: str, language: dict, texts: dict, shared_ids: list, h
             # the female voice says the woman's form where a phrase has one ("female": its own text, say and spoken)
             form = entry.get("female", {}) if folder == "f" else {}
             text = spoken(form.get("spoken") or form.get("text") or entry.get("spoken", entry["text"]))
-            digest = hashlib.sha1(f"{voice}|{RATE}|{VOLUME}|{text}".encode("utf-8")).hexdigest()
+            digest = hashlib.sha1(f"{voice}|{rate}|{VOLUME}|{text}".encode("utf-8")).hexdigest()
             out = AUDIO / code / folder / f"{phrase_id}.mp3"
             hkey = f"{code}/{folder}/{phrase_id}"
             if force or not out.exists() or hashes.get(hkey) != digest:
                 for attempt in range(5):  # the service sometimes answers 503 under load
                     try:
-                        await edge_tts.Communicate(text, voice, rate=RATE, volume=VOLUME).save(str(out))
+                        await edge_tts.Communicate(text, voice, rate=rate, volume=VOLUME).save(str(out))
                         break
                     except Exception as err:
                         if attempt == 4:
@@ -86,8 +92,13 @@ def build_pack(code: str, texts: dict, shared_ids: list) -> int:
     for path in paths:
         if path.exists():
             data = path.read_bytes()
+            if path.suffix in (".json", ".html"):
+                # git gives Windows CRLF line endings and the server LF ones: hash what the server sends,
+                # so a pack built on any computer matches and devices don't download it again for nothing
+                data = data.replace(b"\r\n", b"\n")
             files[path.relative_to(ROOT).as_posix()] = hashlib.sha1(data).hexdigest()[:12]
             total += len(data)
+    (ROOT / "lang" / code).mkdir(parents=True, exist_ok=True)
     write_json(ROOT / "lang" / code / "pack.json", {"bytes": total, "files": files}, indent=1)
     return total
 
@@ -115,6 +126,13 @@ async def main():
         print(f"{code}: {made} generated, pack is {language['bytes'] / 1e6:.2f} MB")
 
     write_json(LANGUAGES, languages, indent=2)
+
+    english = {p["id"]: {"text": p["en"]} for p in json.loads(SHARED.read_text(encoding="utf-8"))}
+    made = 0
+    if not args.lang or args.lang == "en":
+        made = await make_audio("en", ENGLISH, english, shared_ids, hashes, args.force)
+    size = build_pack("en", english, shared_ids)
+    print(f"en (English, shared): {made} generated, pack is {size / 1e6:.2f} MB")
 
 
 asyncio.run(main())

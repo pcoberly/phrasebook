@@ -70,6 +70,8 @@ th { color: var(--muted); font-weight: 600; font-size: 13px; }
 .group { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 22px 0 6px; }
 .entry { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
 .entry .en { font-size: 18px; font-weight: 600; }
+/* the phrase Play all is on */
+.entry.playing { margin: 0 -10px; padding-left: 10px; padding-right: 10px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 12%, var(--bg)); }
 .entry .vi { font-size: 20px; font-weight: 600; color: var(--accent); }
 /* collapsible Language section */
 .panel { margin: 8px 0; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }

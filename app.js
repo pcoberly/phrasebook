@@ -1,10 +1,11 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v24";
+const VERSION = "phrasebook-v25";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
+const GAP_CHOICES = ["1", "2", "3", "5"]; // seconds between the two sides of a phrase in Play all
 const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode etc. */ } },
@@ -58,7 +59,10 @@ const state = {
   phrases: [],    // shared phrases merged with the active language's text, say, tones, note
   mode: "list",
   progress: {},
-  settings: { voice: store.get("phrasebook-voice", "f"), speed: store.get("phrasebook-speed", "1"), round: store.get("phrasebook-round", "20") },
+  settings: {
+    voice: store.get("phrasebook-voice", "f"), speed: store.get("phrasebook-speed", "1"), round: store.get("phrasebook-round", "20"),
+    gap: store.get("phrasebook-gap", "2"), twice: store.get("phrasebook-twice", "no"), // Play all: seconds between, and say it twice
+  },
   last: null,
   firstRun: false, // true until a brand-new person has chosen a language
   choosing: null,  // the language being downloaded from the welcome screen
@@ -388,7 +392,7 @@ function renderSummary() {
 // one phrase as a row: the language text with how to say it, and the English, in the order you are studying
 function entryHtml(p, fromFirst, withNote = true) {
   return `
-      <div class="entry">
+      <div class="entry" data-entry="${p.id}">
         <div>
           ${fromFirst ? "" : `<div class="en">${esc(p.en)}</div>`}
           <div class="vi"${rtlAttr()}>${nat(p.text)}</div>
@@ -402,19 +406,177 @@ function entryHtml(p, fromFirst, withNote = true) {
       </div>`;
 }
 function wireSpeakButtons() {
-  main.querySelectorAll(".entry .speak").forEach((b) => b.onclick = () => speak(state.phrases.find((p) => p.id === b.dataset.id)));
+  main.querySelectorAll(".entry .speak").forEach((b) => b.onclick = () => {
+    const p = state.phrases.find((x) => x.id === b.dataset.id);
+    if (playAll && playAll.playing && state.mode === "list") jumpTo(p.id); // while playing, 🔊 moves the player there
+    else speak(p);
+  });
 }
-function renderList() {
+// the phrases the List shows, grouped by topic, in the order they appear
+function listGroups() {
   const cat = $("#cat").value;
-  const fromFirst = $("#dir").value === "from"; // English first unless studying the language → English
   const groups = {};
   for (const p of state.phrases) if (cat === "all" || p.cat === cat) (groups[p.cat] ||= []).push(p);
+  return groups;
+}
+function renderList() {
+  const fromFirst = $("#dir").value === "from"; // English first unless studying the language → English
+  const groups = listGroups();
+  const playing = playAll && playAll.playing;
   main.innerHTML = draftBanner() + Object.entries(groups).map(([c, ps]) => `
     <h2 class="group">${esc(topicName(c))}</h2>
-    ${ps.map((p) => entryHtml(p, fromFirst)).join("")}`).join("");
+    ${ps.map((p) => entryHtml(p, fromFirst)).join("")}`).join("") + `
+    <div class="row sticky"><button class="act${playing ? "" : " good"}" id="playall">${playing ? "⏸ Pause" : "▶ Play all"}</button></div>`;
   wireSpeakButtons();
-  hint("Tap 🔊 to hear a phrase");
+  $("#playall").onclick = () => (playAll && playAll.playing ? pausePlayAll() : startPlayAll());
+  if (playAll) markPlaying();
+  else hint("Tap 🔊 to hear a phrase, or ▶ to hear them all");
 }
+
+// ---------- play all: the List read aloud, for listening on the move ----------
+// Each phrase in the List plays in the direction you study: English, a pause, then the language (or the other way
+// round), then a pause before the next. It goes round the list until you pause it. The pause length and
+// "say each phrase twice" are in Settings. English comes from its own small pack ("en"), shared by every language.
+const EN = "en";
+const player = new Audio(); // one element for the whole run: iOS is likelier to keep a single player going
+let playAll = null; // { items, index, playing, run }
+let wakeLock = null;
+const sleep = (ms) => new Promise((ok) => setTimeout(ok, ms));
+let finishClip = null; // ends the clip playing now, when paused
+// Play one side of a phrase and resolve when it has finished (or failed, after the device's own voice has said it)
+function playClip(code, p) {
+  return new Promise((resolve) => {
+    const done = () => { player.onended = player.onerror = null; finishClip = null; resolve(); };
+    finishClip = done;
+    const pref = state.settings.voice;
+    const voice = pref === "mixed" ? (Math.random() < 0.5 ? "f" : "m") : pref;
+    player.onended = done;
+    player.onerror = () => { player.onended = player.onerror = null; deviceVoice(code, p).then(done); };
+    player.src = `audio/${code}/${voice}/${p.id}.mp3`;
+    player.playbackRate = code === EN ? 1 : parseFloat(state.settings.speed) || 1; // you already know the English
+    player.play().catch((err) => {
+      if (err && err.name === "NotAllowedError") pausePlayAll(); // the phone refused to play without a tap
+      if (finishClip === done) done();
+    });
+  });
+}
+// The audio file is missing (not downloaded yet): say it with the device's voice instead
+function deviceVoice(code, p) {
+  return new Promise((resolve) => {
+    if (!("speechSynthesis" in window)) { resolve(); return; }
+    const english = code === EN;
+    const u = new SpeechSynthesisUtterance((english ? p.en : p.spoken || p.text).replace(/\.\.\.|…/g, ""));
+    u.lang = english ? "en-US" : state.lang.ttsLang;
+    if (!english && browserVoice) u.voice = browserVoice;
+    u.rate = english ? 1 : 0.85;
+    const timer = setTimeout(resolve, 10000); // never wait for ever on a voice that doesn't report back
+    u.onend = u.onerror = () => { clearTimeout(timer); resolve(); };
+    speechSynthesis.speak(u);
+  });
+}
+async function runPlayAll(run) {
+  const pa = playAll;
+  const still = () => playAll === pa && pa.playing && pa.run === run;
+  while (still()) {
+    const p = pa.items[pa.index];
+    markPlaying();
+    const lang = state.lang.code;
+    const twice = state.settings.twice === "yes";
+    const order = $("#dir").value === "from" ? [lang, ...(twice ? [lang] : []), EN] : [EN, lang, ...(twice ? [lang] : [])];
+    for (const code of order) {
+      await playClip(code, p);
+      if (!still()) return;
+      await sleep(parseFloat(state.settings.gap) * 1000);
+      if (!still()) return;
+    }
+    pa.index = (pa.index + 1) % pa.items.length; // round again at the end
+  }
+}
+function startPlayAll() {
+  const items = Object.values(listGroups()).flat();
+  if (!items.length) return;
+  // the same list as last time carries on where it paused (with any phrases updated since); a different one starts at the top
+  if (!playAll || playAll.items.length !== items.length || playAll.items.some((p, i) => p.id !== items[i].id)) {
+    playAll = { items, index: 0, playing: false, run: 0 };
+  }
+  playAll.items = items;
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  playAll.playing = true;
+  playAll.run++;
+  track("playall/" + state.lang.code);
+  keepAwake(true);
+  setMediaSession();
+  runPlayAll(playAll.run);
+  if (state.mode === "list") renderList();
+}
+function pausePlayAll() {
+  if (!playAll || !playAll.playing) return;
+  playAll.playing = false;
+  playAll.run++;
+  player.pause();
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  finishClip?.();
+  keepAwake(false);
+  if ("mediaSession" in navigator) navigator.mediaSession.playbackState = "paused";
+  if (state.mode === "list") renderList();
+}
+// Stop and forget the place: the list it was playing has changed (topic, direction, language or tab)
+function stopPlayAll() {
+  pausePlayAll();
+  playAll = null;
+}
+function jumpTo(id) {
+  const i = playAll.items.findIndex((p) => p.id === id);
+  if (i < 0) return;
+  playAll.index = i;
+  playAll.run++;
+  player.pause();
+  finishClip?.();
+  runPlayAll(playAll.run);
+}
+// Highlight the phrase playing, keep it in view, and say where the player is
+function markPlaying() {
+  const pa = playAll;
+  const p = pa.items[pa.index];
+  main.querySelectorAll(".entry.playing").forEach((e) => e.classList.remove("playing"));
+  const row = main.querySelector(`[data-entry="${CSS.escape(p.id)}"]`);
+  if (state.mode === "list" && row) {
+    row.classList.add("playing");
+    if (pa.playing && !document.hidden) row.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+  if (state.mode === "list") hint(`${pa.playing ? "Playing" : "Paused at"} ${pa.index + 1} of ${pa.items.length}`);
+  if ("mediaSession" in navigator && "MediaMetadata" in window) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: p.en, artist: `${p.text} · ${state.lang.name}`, album: "PhraseBook",
+      artwork: [{ src: "icon-v3-512.png", sizes: "512x512", type: "image/png" }],
+    });
+    navigator.mediaSession.playbackState = pa.playing ? "playing" : "paused";
+  }
+}
+// The lock screen, headphones and the car can pause, resume and skip
+function setMediaSession() {
+  if (!("mediaSession" in navigator)) return;
+  const ms = navigator.mediaSession;
+  const skip = (d) => () => { if (playAll) jumpTo(playAll.items[(playAll.index + d + playAll.items.length) % playAll.items.length].id); };
+  const handlers = { play: startPlayAll, pause: pausePlayAll, nexttrack: skip(1), previoustrack: skip(-1) };
+  for (const [action, fn] of Object.entries(handlers)) {
+    try { ms.setActionHandler(action, fn); } catch { /* not supported here */ }
+  }
+}
+// Keep the screen on while playing (a phone in a car holder), so the phone doesn't lock and stop the sound
+async function keepAwake(on) {
+  try {
+    if (on && !wakeLock && "wakeLock" in navigator) {
+      wakeLock = await navigator.wakeLock.request("screen");
+      wakeLock.addEventListener("release", () => { wakeLock = null; });
+    } else if (!on && wakeLock) {
+      await wakeLock.release();
+      wakeLock = null;
+    }
+  } catch { /* refused or not supported: the screen may lock as usual */ }
+}
+// The phone gives the wake lock back when the app is hidden: take it again on return
+document.addEventListener("visibilitychange", () => { if (!document.hidden && playAll && playAll.playing) keepAwake(true); });
 
 // ---------- guide: one page per language ----------
 async function renderGuide() {
@@ -469,6 +631,7 @@ async function chooseFirstLanguage(code) {
         if (el) el.textContent = state.busy[code];
       });
       track("download/" + code);
+      syncPack(EN).catch(() => {}); // English for Play all follows in the background (and is retried later)
     }
     await useLanguage(code);
     track("language/" + code);
@@ -593,6 +756,7 @@ async function useLanguage(code) {
   state.progress = store.get(progressKey(code), {});
   state.last = null;
   state.round = null;
+  stopPlayAll();
   rebuildDirOptions();
   pickVoice();
 }
@@ -613,6 +777,7 @@ async function syncInstalled() {
       if (code === state.lang.code) say("");
     }
   }
+  syncPack(EN).catch(() => {}); // English, for Play all: shared by every language, kept current quietly
   return activeChanged;
 }
 
@@ -862,6 +1027,20 @@ function renderSettings() {
         ${ROUND_CHOICES.map((n) => opt(n, n, state.settings.round)).join("")}
       </select>
     </div>
+    <h2 class="group">Play all</h2>
+    <div class="setting">
+      <label for="gap">Pause between</label>
+      <select id="gap">
+        ${GAP_CHOICES.map((n) => opt(n, n === "1" ? "1 second" : `${n} seconds`, state.settings.gap)).join("")}
+      </select>
+    </div>
+    <div class="setting">
+      <label for="twice">Say each phrase twice</label>
+      <select id="twice">
+        ${opt("no", "No", state.settings.twice)}
+        ${opt("yes", "Yes", state.settings.twice)}
+      </select>
+    </div>
     <h2 class="group">About</h2>
     ${installPanel()}
     <div class="row">
@@ -884,6 +1063,9 @@ function renderSettings() {
       store.set("phrasebook-" + id, state.settings[id]);
       sample();
     };
+  }
+  for (const id of ["gap", "twice"]) {
+    $("#" + id).onchange = () => { state.settings[id] = $("#" + id).value; store.set("phrasebook-" + id, state.settings[id]); };
   }
   $("#sample").onclick = sample;
   // remember whether the panels are open, but only when the person opens or closes one
@@ -918,6 +1100,7 @@ function renderSettings() {
           if (el) el.textContent = state.busy[code];
         });
         track("download/" + code);
+        syncPack(EN).catch(() => {});
       }
       await useLanguage(code);
       delete state.busy[code];
@@ -963,16 +1146,19 @@ async function boot() {
   state.progress = store.get(progressKey(state.lang.code), {});
   pickVoice();
   rebuildTopicOptions();
-  $("#cat").onchange = () => { store.set("phrasebook-cat", $("#cat").value); state.last = null; resetRound(); render(); };
+  $("#cat").onchange = () => { store.set("phrasebook-cat", $("#cat").value); state.last = null; resetRound(); stopPlayAll(); render(); };
   rebuildDirOptions();
   $("#dir").onchange = () => { store.set("phrasebook-dir", $("#dir").value); state.last = null; resetRound(); render(); };
   if (!["f", "m", "mixed"].includes(state.settings.voice)) state.settings.voice = "f";
   if (!["1", "0.85", "0.7"].includes(state.settings.speed)) state.settings.speed = "1";
   if (!ROUND_CHOICES.includes(state.settings.round)) state.settings.round = "20";
+  if (!GAP_CHOICES.includes(state.settings.gap)) state.settings.gap = "2";
+  if (!["no", "yes"].includes(state.settings.twice)) state.settings.twice = "no";
   $("#listen").checked = store.get("phrasebook-listen", false);
   $("#listen").onchange = () => { store.set("phrasebook-listen", $("#listen").checked); render(); };
   document.querySelectorAll(".tab").forEach((b) => b.onclick = () => {
     state.mode = b.dataset.mode;
+    if (state.mode !== "list") pausePlayAll(); // Play all belongs to the List; it keeps its place for when you return
     track("tab/" + state.mode);
     document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t === b));
     // topic/direction/listening-only mean nothing on the guide and settings pages
