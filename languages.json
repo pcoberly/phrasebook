@@ -110,5 +110,18 @@
       "m": "zh-CN-YunyangNeural"
     },
     "bytes": 1672657
+  },
+  {
+    "code": "he",
+    "name": "Hebrew",
+    "native": "עברית",
+    "ttsLang": "he-IL",
+    "rtl": true,
+    "draft": true,
+    "voices": {
+      "f": "he-IL-HilaNeural",
+      "m": "he-IL-AvriNeural"
+    },
+    "bytes": 2106292
   }
 ]
