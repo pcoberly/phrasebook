@@ -43,7 +43,9 @@ Then run the checks below, commit and push to `main`; GitHub Pages rebuilds in a
 
 **Check before a release.** `python check_data.py` finds missing or mistyped phrase ids, empty text, missing audio
 or guides, and a version mismatch between `app.js` and `sw.js`. `node tests/sw-test.js` runs the service worker
-against a fake network and cache (online, offline, slow connection, audio byte ranges).
+against a fake network and cache (online, offline, slow connection, audio byte ranges). GitHub runs both on every
+push (`.github/workflows/check.yml`): a red ✗ beside the commit means something needs fixing, and GitHub emails you.
+A failed check does not stop the site updating, so fix it promptly.
 
 ## Things to know
 

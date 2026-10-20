@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v22";
+const VERSION = "phrasebook-v23";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -258,13 +258,41 @@ function buildRound() {
     if (picked.length >= Math.min(size, ordered.length)) break;
     if (!picked.includes(i)) picked.push(i);
   }
-  return { items: shuffle(picked), index: 0, correct: 0, missed: [] };
+  return { items: shuffle(picked), index: 0, correct: 0, missed: [], cat: $("#cat").value, dir: $("#dir").value, size: state.settings.round };
+}
+// The round in progress is saved after every answer, so if the phone closes the app in the background
+// it carries on where it was. One saved round per language; changing topic, direction or length starts afresh.
+const roundKey = (code) => "phrasebook-quiz-" + code;
+function saveRound() {
+  const r = state.round;
+  if (!r) return;
+  const ref = (i) => [i.p.id, i.dir];
+  store.set(roundKey(state.lang.code), {
+    items: r.items.map(ref), missed: r.missed.map((m) => r.items.indexOf(m)),
+    index: r.index, correct: r.correct, counted: !!r.counted, cat: r.cat, dir: r.dir, size: r.size,
+  });
+}
+function loadRound() {
+  const s = store.get(roundKey(state.lang.code), null);
+  if (!s || s.cat !== $("#cat").value || s.dir !== $("#dir").value || s.size !== state.settings.round) return null;
+  const items = [];
+  for (const [id, dir] of s.items) {
+    const p = state.phrases.find((x) => x.id === id);
+    if (!p) return null; // the phrase list changed since: start a new round
+    items.push({ p, dir, key: keyOf(p, dir) });
+  }
+  return { ...s, items, missed: s.missed.map((n) => items[n]).filter(Boolean) };
+}
+// Start afresh next time the quiz opens.
+function resetRound() {
+  state.round = null;
+  store.remove(roundKey(state.lang.code));
 }
 function renderQuiz() {
   if (state.phrases.length < 4) { main.innerHTML = `<div class="card">Need at least 4 phrases.</div>`; return; }
-  if (!state.round) state.round = buildRound();
+  if (!state.round) { state.round = loadRound() || buildRound(); saveRound(); }
   const round = state.round;
-  if (!round.items.length) { state.round = null; main.innerHTML = emptyTopic(); updateStatus(); return; }
+  if (!round.items.length) { resetRound(); main.innerHTML = emptyTopic(); updateStatus(); return; }
   if (round.index >= round.items.length) { renderSummary(); return; }
   const { p, dir, key } = round.items[round.index];
   const total = round.items.length;
@@ -302,6 +330,7 @@ function renderQuiz() {
       // record the answer and move on at once, so leaving this tab and coming back never asks (or scores) it twice
       if (ok) round.correct++; else round.missed.push(round.items[round.index]);
       round.index++;
+      saveRound();
       $("#score").textContent = `${round.correct} correct`;
       pick.classList.add(ok ? "right" : "wrong");
       [...box.children].forEach((c, j) => {
@@ -323,7 +352,7 @@ function renderQuiz() {
 // The score screen at the end of a round: how you did, and the questions you missed.
 function renderSummary() {
   const r = state.round;
-  if (!r.counted) { r.counted = true; track("quiz/finished/" + state.lang.code); } // once per round, not each time the screen is redrawn
+  if (!r.counted) { r.counted = true; saveRound(); track("quiz/finished/" + state.lang.code); } // once per round, not each time the screen is redrawn
   const total = r.items.length;
   const pct = total ? Math.round((100 * r.correct) / total) : 0;
   const message = r.correct === total ? "A perfect round!" : pct >= 80 ? "Great work." : pct >= 50 ? "Good effort." : "Keep going. These will stick.";
@@ -338,7 +367,7 @@ function renderSummary() {
       : `<p class="note" style="text-align:center">No mistakes this round.</p>`}
     <div class="row sticky"><button class="act good" id="newround">New round</button></div>`;
   wireSpeakButtons();
-  $("#newround").onclick = () => { state.round = null; render(); };
+  $("#newround").onclick = () => { resetRound(); render(); };
   window.scrollTo(0, 0);
   updateStatus();
 }
@@ -833,7 +862,7 @@ function renderSettings() {
   $("#round").onchange = () => {
     state.settings.round = $("#round").value;
     store.set("phrasebook-round", state.settings.round);
-    state.round = null; // the next quiz starts a fresh round of the new length
+    resetRound(); // the next quiz starts a fresh round of the new length
   };
   const sample = () => speak(state.phrases.find((p) => p.id === "hello") || state.phrases[0]);
   for (const id of ["voice", "speed"]) {
@@ -921,9 +950,9 @@ async function boot() {
   state.progress = store.get(progressKey(state.lang.code), {});
   pickVoice();
   rebuildTopicOptions();
-  $("#cat").onchange = () => { store.set("phrasebook-cat", $("#cat").value); state.last = null; state.round = null; render(); };
+  $("#cat").onchange = () => { store.set("phrasebook-cat", $("#cat").value); state.last = null; resetRound(); render(); };
   rebuildDirOptions();
-  $("#dir").onchange = () => { store.set("phrasebook-dir", $("#dir").value); state.last = null; state.round = null; render(); };
+  $("#dir").onchange = () => { store.set("phrasebook-dir", $("#dir").value); state.last = null; resetRound(); render(); };
   if (!["f", "m", "mixed"].includes(state.settings.voice)) state.settings.voice = "f";
   if (!["1", "0.85", "0.7"].includes(state.settings.speed)) state.settings.speed = "1";
   if (!ROUND_CHOICES.includes(state.settings.round)) state.settings.round = "20";
