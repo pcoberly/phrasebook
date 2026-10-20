@@ -9,23 +9,43 @@ const store = {
   remove(k) { try { localStorage.removeItem(k); } catch { /* private mode etc. */ } },
 };
 
-// Anonymous visit counts with Cloudflare Web Analytics: no cookies, no personal data. It stays switched off until
-// a token is pasted below. Open the app once with ?analytics=off on a device to leave that device uncounted
-// (?analytics=on undoes it). It is never loaded on localhost, and it fails quietly when offline.
-const ANALYTICS_TOKEN = "5720307f64814acea36e11d2a3b09d31"; // a public site token, safe to publish
+// Anonymous usage counts, with no cookies and no personal data: visits with Cloudflare Web Analytics, and
+// which features and languages are used with GoatCounter. Nothing is recorded about phrases, progress or scores.
+// Counting is off on localhost, for anyone whose browser says Do Not Track, and on a device opened once with
+// ?analytics=off (?analytics=on undoes it). It fails quietly when offline.
+const ANALYTICS_TOKEN = "5720307f64814acea36e11d2a3b09d31"; // Cloudflare: a public site token, safe to publish
+const GOATCOUNTER_URL = "https://phrasebook.goatcounter.com/count"; // GoatCounter: the public address of the counter
+let analyticsOn = false;
+const countQueue = []; // events that happen before GoatCounter's script has finished loading
 (function loadAnalytics() {
   try {
     const choice = new URLSearchParams(location.search).get("analytics");
     if (choice === "off") localStorage.setItem("phrasebook-no-analytics", "1");
     if (choice === "on") localStorage.removeItem("phrasebook-no-analytics");
-    if (!ANALYTICS_TOKEN || ["localhost", "127.0.0.1"].includes(location.hostname) || localStorage.getItem("phrasebook-no-analytics")) return;
-    const s = document.createElement("script");
-    s.type = "module"; // as in the snippet Cloudflare gives
-    s.src = "https://static.cloudflareinsights.com/beacon.min.js";
-    s.dataset.cfBeacon = JSON.stringify({ token: ANALYTICS_TOKEN });
-    document.head.appendChild(s);
+    if (["localhost", "127.0.0.1"].includes(location.hostname) || localStorage.getItem("phrasebook-no-analytics") || navigator.doNotTrack === "1") return;
+    analyticsOn = true;
+    if (ANALYTICS_TOKEN) {
+      const cf = document.createElement("script");
+      cf.type = "module"; // as in the snippet Cloudflare gives
+      cf.src = "https://static.cloudflareinsights.com/beacon.min.js";
+      cf.dataset.cfBeacon = JSON.stringify({ token: ANALYTICS_TOKEN });
+      document.head.appendChild(cf);
+    }
+    const gc = document.createElement("script");
+    gc.async = true;
+    gc.dataset.goatcounter = GOATCOUNTER_URL;
+    gc.src = "https://gc.zgo.at/count.js";
+    gc.onload = () => { if (window.goatcounter && window.goatcounter.count) while (countQueue.length) track(...countQueue.shift()); };
+    gc.onerror = () => { analyticsOn = false; countQueue.length = 0; }; // offline or blocked: stop trying
+    document.head.appendChild(gc);
   } catch { /* storage or DOM unavailable: no analytics */ }
 })();
+// Count one thing that happened, such as "quiz/finished/ja". Names never contain a phrase or a person.
+function track(name, title) {
+  if (!analyticsOn) return;
+  if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: title || name, event: true });
+  else if (countQueue.length < 50) countQueue.push([name, title]);
+}
 
 const $ = (s) => document.querySelector(s);
 const main = $("#main");
@@ -288,6 +308,7 @@ function renderQuiz() {
 // The score screen at the end of a round: how you did, and the questions you missed.
 function renderSummary() {
   const r = state.round;
+  if (!r.counted) { r.counted = true; track("quiz/finished/" + state.lang.code); } // once per round, not each time the screen is redrawn
   const total = r.items.length;
   const pct = total ? Math.round((100 * r.correct) / total) : 0;
   const message = r.correct === total ? "A perfect round!" : pct >= 80 ? "Great work." : pct >= 50 ? "Good effort." : "Keep going. These will stick.";
@@ -605,6 +626,7 @@ function installPanel() {
     </details>`;
 }
 async function shareApp() {
+  track("share/click");
   const url = new URL("./", location.href).href;
   const data = { title: "PhraseBook", text: "A free phrase book for travel: flashcards, quizzes and audio, and it works offline.", url };
   const btn = $("#share");
@@ -624,7 +646,7 @@ function feedbackUrl() {
   const body = `Hi! My feedback about PhraseBook:\n\n\n\n(To report a wrong or missing phrase, tell me the language and the phrase.)\n---\nLanguage: ${state.lang.name}\nVersion: ${state.version || "unknown"}`;
   return `mailto:${to}?subject=${encodeURIComponent("PhraseBook feedback")}&body=${encodeURIComponent(body)}`;
 }
-const sendFeedback = () => { location.href = feedbackUrl(); };
+const sendFeedback = () => { track("feedback/click"); location.href = feedbackUrl(); };
 
 function renderSettings() {
   const opt = (v, label, cur) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
@@ -661,7 +683,7 @@ function renderSettings() {
       <button class="act" id="share">Share this app</button>
       <button class="act" id="feedback">Send feedback</button>
     </div>
-    <p class="note about">PhraseBook${state.version ? ` · version ${esc(state.version.replace("phrasebook-", ""))}` : ""}. Your progress and settings stay on this device.${ANALYTICS_TOKEN ? " The app counts anonymous visits, with no cookies and no personal data." : ""}</p>`;
+    <p class="note about">PhraseBook${state.version ? ` · version ${esc(state.version.replace("phrasebook-", ""))}` : ""}. Your progress and settings stay on this device.${analyticsOn ? " The app counts anonymous visits and which features are used, with no cookies and no personal data." : ""}</p>`;
   $("#share").onclick = shareApp;
   $("#feedback").onclick = sendFeedback;
   $("#round").onchange = () => {
@@ -709,9 +731,11 @@ function renderSettings() {
           const el = document.querySelector(`[data-lang="${code}"] .lstate`);
           if (el) el.textContent = state.busy[code];
         });
+        track("download/" + code);
       }
       await useLanguage(code);
       delete state.busy[code];
+      track("language/" + code);
     } catch {
       state.busy[code] = "Couldn't download. Check you're online and try again.";
       setTimeout(() => { delete state.busy[code]; if (state.mode === "settings") renderSettings(); }, 5000);
@@ -751,12 +775,16 @@ async function boot() {
   $("#listen").onchange = () => { store.set("phrasebook-listen", $("#listen").checked); render(); };
   document.querySelectorAll(".tab").forEach((b) => b.onclick = () => {
     state.mode = b.dataset.mode;
+    track("tab/" + state.mode);
     document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t === b));
     // topic/direction/listening-only mean nothing on the guide and settings pages
     $(".opts").hidden = state.mode === "guide" || state.mode === "settings";
     render();
   });
   render();
+  // how the app was opened: in its language, and from the Home Screen or from a browser tab
+  track("open/" + state.lang.code);
+  track(matchMedia("(display-mode: standalone)").matches || navigator.standalone === true ? "mode/installed" : "mode/browser");
   $("#status").onclick = () => { if (state.updateReady) location.reload(); };
   checkForUpdates(true);
   document.addEventListener("visibilitychange", () => { if (!document.hidden) checkForUpdates(); });
