@@ -603,10 +603,14 @@ function installInfo() {
   const ios = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   const android = /Android/.test(ua);
   const safari = ios && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
+  // browsers other than Safari can add an app to the Home Screen from iOS 16.4 on (a UA with no version is treated as new enough)
+  const v = /OS (\d+)_(\d+)/.exec(ua);
+  const iosAllowsOtherBrowsers = !v || +v[1] > 16 || (+v[1] === 16 && +v[2] >= 4);
   let steps;
   if (installed) steps = [];
   else if (ios && safari) steps = ["Tap the Share button, the square with an arrow, at the bottom of Safari.", "Scroll down and tap <b>Add to Home Screen</b>.", "Tap <b>Add</b>. PhraseBook now opens from your Home Screen and works without a connection."];
-  else if (ios) steps = ["Open this page in <b>Safari</b>. Other browsers on an iPhone or iPad can't install apps. Use <b>Share this app</b> below to send yourself the link.", "In Safari, tap the Share button, then <b>Add to Home Screen</b>."];
+  else if (ios && iosAllowsOtherBrowsers) steps = ["Tap your browser's Share button, the square with an arrow, in the address bar or the ••• menu.", "Tap <b>Add to Home Screen</b>, then <b>Add</b>.", "PhraseBook now opens from your Home Screen and works without a connection."];
+  else if (ios) steps = ["This version of iOS only lets Safari add apps to the Home Screen. Open this page in <b>Safari</b>; <b>Share this app</b> below can send you the link.", "In Safari, tap the Share button, then <b>Add to Home Screen</b>."];
   else if (android) steps = ["Open this page in <b>Chrome</b> and tap the menu (⋮).", "Tap <b>Install app</b> or <b>Add to Home screen</b>.", "Tap <b>Install</b>. PhraseBook now opens from your Home screen and works without a connection."];
   else steps = ["In Chrome or Edge, click the install icon at the right end of the address bar, or open the menu and choose <b>Install PhraseBook</b>.", "In Safari on a Mac, choose <b>File → Add to Dock</b>.", "It then opens in its own window and works without a connection."];
   return { installed, steps };

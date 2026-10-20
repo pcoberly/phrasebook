@@ -44,4 +44,6 @@ changed (`app.js`, `style.css`, `index.html`, `sw.js`, icons), bump `CACHE` in `
   filename and a one-off re-add. Avoid changing the icon.
 - Service workers need HTTPS or `localhost`; opening `index.html` as a file will not work. Test locally with
   `python -m http.server 8765` and open http://localhost:8765.
-- Add to Home Screen from **Safari**, not Chrome on the iPhone.
+- On an iPhone, Add to Home Screen works from Safari, and from Chrome, Edge and Firefox on iOS 16.4 or newer
+  (Share menu → Add to Home Screen). Older iOS versions only allow it from Safari. The in-app install steps
+  (Settings → About) pick the right wording for the device.
