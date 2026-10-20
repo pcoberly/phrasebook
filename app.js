@@ -1,5 +1,7 @@
 "use strict";
 
+// This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
+const VERSION = "phrasebook-v22";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -63,6 +65,8 @@ const state = {
   round: null,    // the quiz round in progress: its questions, where you are, your score and your misses
   busy: {},      // language code -> message while it downloads
   note: "",       // temporary footer message
+  updateReady: false, // a newer version is waiting: the footer becomes a reload button
+  version: VERSION,
 };
 
 // ---------- speech ----------
@@ -119,6 +123,7 @@ function candidates() {
 }
 function next() {
   let items = candidates();
+  if (!items.length) return null; // a topic this language has no phrases for yet
   if (items.length > 1 && state.last) items = items.filter((i) => i.key !== state.last);
   const now = Date.now();
   const due = items.filter((i) => !state.progress[i.key] || state.progress[i.key].due <= now);
@@ -153,6 +158,11 @@ function updateStatus() {
   const known = Object.values(state.progress).filter((v) => v.box >= 3).length;
   $("#status").textContent = `${known} of ${all} cards learned`;
 }
+// a page's own line in the footer, such as "Tap 🔊 to hear a phrase"; it never covers the "new version" message
+function hint(text) {
+  if (state.updateReady) return;
+  $("#status").textContent = text;
+}
 function say(note, ms = 0) {
   if (state.updateReady) return; // never hide the "new version" message
   state.note = note;
@@ -161,8 +171,11 @@ function say(note, ms = 0) {
 }
 
 // ---------- cards ----------
+const emptyTopic = () => `<div class="card">${esc(state.lang.name)} has no phrases in this topic yet. Choose another topic.</div>`;
 function renderCard() {
-  const { p, dir, key } = next();
+  const item = next();
+  if (!item) { main.innerHTML = emptyTopic(); updateStatus(); return; }
+  const { p, dir, key } = item;
   const name = state.lang.name;
   const listenOnly = $("#listen").checked;
   const fromLang = dir === "from";
@@ -215,11 +228,10 @@ function renderCard() {
 }
 
 // ---------- quiz ----------
-function distractors(p, dir) {
-  const field = dir === "to" ? "text" : "en";
+function distractors(p) {
   // never offer a wrong option that is really a right answer: no same English, and no same text in the language
   // (French says Bonjour for both hello and good morning)
-  const others = state.phrases.filter((o) => o.id !== p.id && o[field] !== p[field] && o.text !== p.text && o.en !== p.en);
+  const others = state.phrases.filter((o) => o.id !== p.id && o.text !== p.text && o.en !== p.en);
   const same = shuffle(others.filter((o) => o.cat === p.cat));
   const rest = shuffle(others.filter((o) => o.cat !== p.cat));
   return [...same, ...rest].slice(0, 2);
@@ -252,6 +264,7 @@ function renderQuiz() {
   if (state.phrases.length < 4) { main.innerHTML = `<div class="card">Need at least 4 phrases.</div>`; return; }
   if (!state.round) state.round = buildRound();
   const round = state.round;
+  if (!round.items.length) { state.round = null; main.innerHTML = emptyTopic(); updateStatus(); return; }
   if (round.index >= round.items.length) { renderSummary(); return; }
   const { p, dir, key } = round.items[round.index];
   const total = round.items.length;
@@ -259,7 +272,7 @@ function renderQuiz() {
   const name = state.lang.name;
   const listenOnly = $("#listen").checked;
   const toLang = dir === "to";
-  const opts = shuffle([p, ...distractors(p, dir)]);
+  const opts = shuffle([p, ...distractors(p)]);
   main.innerHTML = `
     <div class="roundbar"><span>Question ${number} of ${total}</span><span id="score">${round.correct} correct</span></div>
     <div class="bar"><i style="width:${Math.round(100 * round.index / total)}%"></i></div>
@@ -297,7 +310,7 @@ function renderQuiz() {
       });
       speak(p);
       // the answer is already on screen, so show only what is new: how to say it
-      $("#reveal").innerHTML = `${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}`;
+      $("#reveal").innerHTML = pron(p);
       $("#nextrow").classList.remove("hidden");
       updateStatus();
     };
@@ -358,14 +371,14 @@ function renderList() {
     <h2 class="group">${esc(topicName(c))}</h2>
     ${ps.map((p) => entryHtml(p, fromFirst)).join("")}`).join("");
   wireSpeakButtons();
-  $("#status").textContent = "Tap 🔊 to hear a phrase";
+  hint("Tap 🔊 to hear a phrase");
 }
 
 // ---------- guide: one page per language ----------
 async function renderGuide() {
   const code = state.lang.code;
   main.innerHTML = `<p class="note">Loading…</p>`;
-  $("#status").textContent = `${state.lang.name} pronunciation guide`;
+  hint(`${state.lang.name} pronunciation guide`);
   try {
     const res = await fetch(`lang/${code}/guide.html`);
     if (!res.ok) throw new Error(res.status);
@@ -449,7 +462,26 @@ function packState(code) {
   const rec = store.get(packKey(code), null);
   return rec ? (rec.complete ? "installed" : "partial") : "none";
 }
-async function syncPack(code, onProgress) {
+// One download per language at a time: asking again while it runs joins the one under way (and hears its progress).
+const syncs = {};
+function syncPack(code, onProgress) {
+  let s = syncs[code];
+  if (!s) {
+    s = syncs[code] = { listeners: new Set() };
+    s.promise = downloadPack(code, (done, total) => s.listeners.forEach((f) => f(done, total)))
+      .finally(() => { delete syncs[code]; });
+  }
+  if (onProgress) s.listeners.add(onProgress);
+  return s.promise;
+}
+// Ask the browser to keep downloaded languages. Without this, Safari can clear a website's storage after a
+// week or so unused (a Home Screen app is safe). Safari, Chrome and Edge decide quietly; Firefox on a computer
+// or Android would ask with a pop-up instead, so it is not asked.
+function keepStorage() {
+  if (/Firefox\//.test(navigator.userAgent)) return;
+  try { navigator.storage?.persist?.().catch(() => {}); } catch { /* not supported */ }
+}
+async function downloadPack(code, onProgress) {
   if (!canCache) throw new Error("This browser cannot keep languages offline");
   const res = await fetch(`lang/${code}/pack.json`, { cache: "no-store" });
   if (!res.ok) throw new Error("pack.json " + res.status);
@@ -484,6 +516,7 @@ async function syncPack(code, onProgress) {
   await Promise.all([worker(), worker(), worker(), worker()]);
   rec.complete = true;
   store.set(packKey(code), rec);
+  keepStorage();
   return done;
 }
 async function removePack(code) {
@@ -545,7 +578,7 @@ async function syncInstalled() {
 // Whenever the app opens or comes back to the foreground with a connection, it checks for a newer version of
 // itself and for new phrases, audio and languages. With no connection it just keeps using what it has stored.
 async function swVersion() {
-  // the app's version is the cache name in sw.js, so there is one number to bump per release
+  // the server's version is the cache name in its sw.js; this copy's version is VERSION
   try {
     const text = await (await fetch("sw.js", { cache: "no-store" })).text();
     return /CACHE = "([^"]+)"/.exec(text)?.[1] || null;
@@ -558,25 +591,35 @@ function rebuildTopicOptions() {
   $("#cat").value = [...$("#cat").options].some((o) => o.value === current) ? current : "all";
 }
 // A newer app version is reloaded at once unless a quiz round is under way, in which case the footer offers it.
-function installUpdate() {
+// It reloads by itself only once for any one version: if the server is still part-way through a release and
+// hands back the old files, reloading again would go round in circles, so after that the footer offers it.
+function installUpdate(version) {
+  navigator.serviceWorker?.getRegistration().then((reg) => reg && reg.update()).catch(() => {});
   const r = state.round;
   const midRound = state.mode === "quiz" && r && r.index > 0 && r.index < r.items.length;
-  if (!midRound) { location.reload(); return; }
+  if (!midRound && store.get("phrasebook-reloaded-for", null) !== version) {
+    store.set("phrasebook-reloaded-for", version);
+    location.reload();
+    return;
+  }
   state.updateReady = true;
   state.note = "A new version is ready. Tap here to reload.";
   updateStatus();
 }
 let lastCheck = 0;
-async function checkForUpdates(force = false) {
-  if (!navigator.onLine || (!force && Date.now() - lastCheck < 30000)) return;
+let checking = null; // the check under way, so a second one waits for it instead of downloading the same files again
+function checkForUpdates(force = false) {
+  if (checking) return checking;
+  if (!navigator.onLine || (!force && Date.now() - lastCheck < 30000)) return Promise.resolve();
   lastCheck = Date.now();
+  checking = runUpdateCheck().finally(() => { checking = null; });
+  return checking;
+}
+async function runUpdateCheck() {
   const version = await swVersion();
-  if (version && state.version && version !== state.version) {
-    navigator.serviceWorker?.getRegistration().then((reg) => reg && reg.update()).catch(() => {});
-    installUpdate();
-    return;
-  }
-  if (version && !state.version) state.version = version;
+  // only a newer number counts: a server part-way through a release can briefly answer with the old one
+  const num = (v) => Number(/(\d+)$/.exec(v || "")?.[1] || 0);
+  if (num(version) > num(VERSION)) { installUpdate(version); return; }
   try {
     const [languages, shared] = await Promise.all([getJson("languages.json"), getJson("phrases.json")]);
     const listChanged = JSON.stringify(shared) !== JSON.stringify(state.shared);
@@ -718,7 +761,6 @@ function feedbackParts() {
     yahoo: `https://compose.mail.yahoo.com/?${q({ to, subject, body })}`,
   };
 }
-const feedbackUrl = () => feedbackParts().mailto;
 function openMailApp(url) { location.href = url; }
 function showFeedbackOptions() {
   const box = $("#feedbackbox");
@@ -844,7 +886,7 @@ function renderSettings() {
     }
     if (state.mode === "settings") renderSettings();
   };
-  $("#status").textContent = "Settings are saved on this device";
+  hint("Settings are saved on this device");
 }
 
 // ---------- boot ----------
@@ -871,7 +913,7 @@ async function boot() {
     const code = valid(saved) ? saved : usedBefore ? usedBefore.code : null;
     state.firstRun = !code; // brand new: ask which language, and download nothing until they say
     state.lang = state.languages.find((l) => l.code === (code || state.languages[0].code)); // a placeholder until they choose
-    if (!state.firstRun) await loadLanguageData();
+    if (!state.firstRun) { await loadLanguageData(); keepStorage(); }
   } catch {
     main.innerHTML = `<p class="note">Couldn't load the phrases. Open the app once while online.</p>`;
     return;

@@ -37,8 +37,13 @@ It makes only the missing or changed audio and rewrites each `pack.json`.
 `python -m edge_tts --list-voices`), create `lang/<code>/phrases.json` and `guide.html`, and run
 `python generate_audio.py`.
 
-**Release.** Commit and push to `main`; GitHub Pages rebuilds in a minute or two. If any app file
-changed (`app.js`, `style.css`, `index.html`, `sw.js`, icons), bump `CACHE` in `sw.js`. Phrase and audio changes need no bump.
+**Release.** If any app file changed (`app.js`, `style.css`, `index.html`, `sw.js`, icons), bump the
+version: `CACHE` in `sw.js` and `VERSION` in `app.js`, to the same new number. Phrase and audio changes need no bump.
+Then run the checks below, commit and push to `main`; GitHub Pages rebuilds in a minute or two.
+
+**Check before a release.** `python check_data.py` finds missing or mistyped phrase ids, empty text, missing audio
+or guides, and a version mismatch between `app.js` and `sw.js`. `node tests/sw-test.js` runs the service worker
+against a fake network and cache (online, offline, slow connection, audio byte ranges).
 
 ## Things to know
 
@@ -46,7 +51,12 @@ changed (`app.js`, `style.css`, `index.html`, `sw.js`, icons), bump `CACHE` in `
   with a connection it fetches the newest app files (the service worker asks the server every time, bypassing GitHub
   Pages' 10-minute cache), the newest phrase list, and only the language files that changed. A page that has been
   open since before a release reloads itself, or shows "A new version is ready. Tap here to reload." mid-quiz.
-  The app's version is the `CACHE` name in `sw.js`, so bump it on every app change. Offline it just shows what is stored.
+  The app compares its own `VERSION` with `CACHE` in the server's `sw.js`, and only a higher number counts as an
+  update. It reloads by itself once per version, so a release that is still reaching GitHub's servers can't make it
+  reload over and over. Offline it just shows what is stored, and on a connection too slow to answer within 3 seconds
+  it opens from what is stored and picks up the newer files in the background.
+- Downloading a language also asks the browser to keep it (`navigator.storage.persist()`); otherwise Safari may clear
+  a website's storage after a week or so unused. A Home Screen app is not affected.
 - The one thing iOS will not update remotely is the Home Screen icon (it is cached by URL), so a new icon needs a new
   filename and a one-off re-add. Avoid changing the icon.
 - Service workers need HTTPS or `localhost`; opening `index.html` as a file will not work. Test locally with
