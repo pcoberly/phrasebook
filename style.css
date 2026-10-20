@@ -84,6 +84,9 @@ th { color: var(--muted); font-weight: 600; font-size: 13px; }
 [open] > summary .chev::after { transform: translate(-50%, -30%) rotate(225deg); }
 .pval { margin-left: auto; font-weight: 400; color: var(--accent); }
 .pbody { padding: 0 12px 12px; }
+.steps { margin: 4px 0 8px; padding-left: 22px; }
+.steps li { margin: 6px 0; }
+.about { text-align: center; margin-top: 16px; }
 /* the two group headings, On this device and Available to download, share one look */
 .sub, .avail > summary { margin: 14px 0 4px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
 .avail { margin-top: 0; }

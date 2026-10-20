@@ -557,6 +557,57 @@ function languagePanel() {
       </div>
     </details>`;
 }
+// ---------- about: install steps, sharing and feedback ----------
+function installInfo() {
+  const ua = navigator.userAgent;
+  const installed = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  const ios = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const android = /Android/.test(ua);
+  const safari = ios && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
+  let steps;
+  if (installed) steps = [];
+  else if (ios && safari) steps = ["Tap the Share button, the square with an arrow, at the bottom of Safari.", "Scroll down and tap <b>Add to Home Screen</b>.", "Tap <b>Add</b>. PhraseBook now opens from your Home Screen and works without a connection."];
+  else if (ios) steps = ["Open this page in <b>Safari</b>. Other browsers on an iPhone or iPad can't install apps. Use <b>Share this app</b> below to send yourself the link.", "In Safari, tap the Share button, then <b>Add to Home Screen</b>."];
+  else if (android) steps = ["Open this page in <b>Chrome</b> and tap the menu (⋮).", "Tap <b>Install app</b> or <b>Add to Home screen</b>.", "Tap <b>Install</b>. PhraseBook now opens from your Home screen and works without a connection."];
+  else steps = ["In Chrome or Edge, click the install icon at the right end of the address bar, or open the menu and choose <b>Install PhraseBook</b>.", "In Safari on a Mac, choose <b>File → Add to Dock</b>.", "It then opens in its own window and works without a connection."];
+  return { installed, steps };
+}
+function installPanel() {
+  const { installed, steps } = installInfo();
+  const open = store.get("phrasebook-install-open", !installed);
+  return `
+    <details class="panel" id="installpanel"${open ? " open" : ""}>
+      <summary><span class="ptitle">Install on this device</span><span class="pval">${installed ? "Installed ✓" : ""}</span><span class="chev" aria-hidden="true"></span></summary>
+      <div class="pbody">
+        ${installed
+          ? `<p class="note">PhraseBook is installed on this device, and keeps itself up to date.</p>`
+          : `<ol class="steps">${steps.map((s) => `<li>${s}</li>`).join("")}</ol>
+        <p class="note">Once installed it updates itself, so there is no need to remove it and add it again.</p>`}
+      </div>
+    </details>`;
+}
+async function shareApp() {
+  const url = new URL("./", location.href).href;
+  const data = { title: "PhraseBook", text: "A free phrase book for travel: flashcards, quizzes and audio, and it works offline.", url };
+  const btn = $("#share");
+  try {
+    if (navigator.share) { await navigator.share(data); return; }
+    await navigator.clipboard.writeText(url);
+    btn.textContent = "Link copied ✓";
+    setTimeout(() => { if (btn.isConnected) btn.textContent = "Share this app"; }, 2500);
+  } catch (err) {
+    if (err && err.name === "AbortError") return; // the person closed the share sheet
+    prompt("Copy this link to share PhraseBook:", url);
+  }
+}
+function feedbackUrl() {
+  // the address is assembled here so it is not a plain mailto link sitting in the page for scrapers
+  const to = ["pcob47-pb", "yahoo.com"].join("@");
+  const body = `Hi! My feedback about PhraseBook:\n\n\n\n(To report a wrong or missing phrase, tell me the language and the phrase.)\n---\nLanguage: ${state.lang.name}\nVersion: ${state.version || "unknown"}`;
+  return `mailto:${to}?subject=${encodeURIComponent("PhraseBook feedback")}&body=${encodeURIComponent(body)}`;
+}
+const sendFeedback = () => { location.href = feedbackUrl(); };
+
 function renderSettings() {
   const opt = (v, label, cur) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
   main.innerHTML = `
@@ -585,7 +636,16 @@ function renderSettings() {
       <select id="round">
         ${ROUND_CHOICES.map((n) => opt(n, n, state.settings.round)).join("")}
       </select>
-    </div>`;
+    </div>
+    <h2 class="group">About</h2>
+    ${installPanel()}
+    <div class="row">
+      <button class="act" id="share">Share this app</button>
+      <button class="act" id="feedback">Send feedback</button>
+    </div>
+    <p class="note about">PhraseBook${state.version ? ` · version ${esc(state.version.replace("phrasebook-", ""))}` : ""}. Your progress and settings stay on this device.</p>`;
+  $("#share").onclick = shareApp;
+  $("#feedback").onclick = sendFeedback;
   $("#round").onchange = () => {
     state.settings.round = $("#round").value;
     store.set("phrasebook-round", state.settings.round);
@@ -602,7 +662,7 @@ function renderSettings() {
   $("#sample").onclick = sample;
   // remember whether the panels are open, but only when the person opens or closes one
   // (browsers also fire "toggle" when a panel that starts open is drawn)
-  for (const [id, key] of [["langpanel", "phrasebook-lang-open"], ["availpanel", "phrasebook-avail-open"]]) {
+  for (const [id, key] of [["langpanel", "phrasebook-lang-open"], ["availpanel", "phrasebook-avail-open"], ["installpanel", "phrasebook-install-open"]]) {
     const el = document.getElementById(id);
     if (!el) continue;
     let last = el.open;
