@@ -20,6 +20,13 @@ A device downloads the app plus only the languages chosen in Settings. Each lang
 stored in its own cache (`lang-<code>`) and removable from Settings. The app compares `pack.json`
 with what it holds, so an update downloads only the files that changed.
 
+## First open
+
+A brand-new person sees a welcome screen that asks which language to learn, and nothing is downloaded until they
+choose. Someone who already has a language on the device skips it. A link ending `?lang=ja` (any language code
+from `languages.json`) opens straight into that language and is then tidied out of the address bar, so you can
+send a friend a link for the language they want.
+
 ## Common jobs
 
 **Add or change a phrase.** Add it to `phrases.json` (once), then add an entry with the same `id`

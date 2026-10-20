@@ -58,6 +58,8 @@ const state = {
   progress: {},
   settings: { voice: store.get("phrasebook-voice", "f"), speed: store.get("phrasebook-speed", "1"), round: store.get("phrasebook-round", "20") },
   last: null,
+  firstRun: false, // true until a brand-new person has chosen a language
+  choosing: null,  // the language being downloaded from the welcome screen
   round: null,    // the quiz round in progress: its questions, where you are, your score and your misses
   busy: {},      // language code -> message while it downloads
   note: "",       // temporary footer message
@@ -374,7 +376,62 @@ async function renderGuide() {
   }
 }
 
+// ---------- first run: choose a language ----------
+function pickerRow(l) {
+  const note = state.busy[l.code] || `${(l.bytes / 1e6).toFixed(1)} MB${l.draft ? " · Draft translations" : ""}`;
+  return `
+    <div class="lang" data-lang="${l.code}">
+      <div class="linfo"><div class="lname">${esc(l.name)} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
+        <div class="note"><span class="lstate">${esc(note)}</span></div></div>
+      <div class="lbtn">${state.choosing ? "" : `<button class="mini" data-pick="${l.code}">Start</button>`}</div>
+    </div>`;
+}
+function renderWelcome() {
+  document.body.classList.add("firstrun");
+  const choices = [...state.languages].sort((a, b) => a.name.localeCompare(b.name));
+  main.innerHTML = `
+    <div class="welcome">
+      <h1>Welcome to PhraseBook</h1>
+      <p class="lead">Which language would you like to learn?</p>
+      <p class="note">Tap one to download it. That needs a connection once, and afterwards the app works without one. You can add more languages later in Settings.</p>
+      <div id="welcomelangs">${choices.map(pickerRow).join("")}</div>
+    </div>`;
+  $("#welcomelangs").onclick = (e) => {
+    const b = e.target.closest("button[data-pick]");
+    if (b) chooseFirstLanguage(b.dataset.pick);
+  };
+}
+async function chooseFirstLanguage(code) {
+  if (state.choosing) return;
+  state.choosing = code;
+  state.busy[code] = "Starting…";
+  renderWelcome();
+  try {
+    if (canCache) {
+      await syncPack(code, (done, total) => {
+        state.busy[code] = `Downloading ${done} of ${total}`;
+        const el = document.querySelector(`[data-lang="${code}"] .lstate`);
+        if (el) el.textContent = state.busy[code];
+      });
+      track("download/" + code);
+    }
+    await useLanguage(code);
+    track("language/" + code);
+    delete state.busy[code];
+    state.choosing = null;
+    state.firstRun = false;
+    document.body.classList.remove("firstrun");
+    render();
+  } catch {
+    state.choosing = null;
+    state.busy[code] = "Couldn't download. Check you're online and try again.";
+    renderWelcome();
+    setTimeout(() => { delete state.busy[code]; if (state.firstRun && !state.choosing) renderWelcome(); }, 5000);
+  }
+}
+
 function render() {
+  if (state.firstRun) { renderWelcome(); return; }
   if (state.mode === "cards") renderCard();
   else if (state.mode === "quiz") renderQuiz();
   else if (state.mode === "list") renderList();
@@ -466,7 +523,7 @@ async function useLanguage(code) {
 }
 // Keep the language in use, and any other downloaded one, up to date. Runs quietly when online.
 async function syncInstalled() {
-  if (!canCache || !navigator.onLine) return false;
+  if (state.firstRun || !canCache || !navigator.onLine) return false; // nothing downloads before a language is chosen
   const codes = state.languages.map((l) => l.code).filter((c) => c === state.lang.code || packState(c) !== "none");
   let activeChanged = false;
   for (const code of codes) {
@@ -527,6 +584,7 @@ async function checkForUpdates(force = false) {
     state.shared = shared;
     state.lang = languages.find((l) => l.code === state.lang.code) || state.lang;
     if (listChanged) rebuildTopicOptions();
+    if (state.firstRun) { if (!state.choosing) renderWelcome(); return; } // keep the picker's language list current
     const filesChanged = await syncInstalled();
     if (listChanged || filesChanged) {
       await loadLanguageData();
@@ -798,10 +856,22 @@ async function getJson(path) {
 async function boot() {
   try {
     [state.languages, state.shared] = await Promise.all([getJson("languages.json"), getJson("phrases.json")]);
+    const valid = (c) => state.languages.some((l) => l.code === c);
+    // A shared link such as ?lang=ja opens that language (and is then tidied out of the address bar)
+    const linked = new URLSearchParams(location.search).get("lang");
+    if (linked !== null) {
+      const u = new URL(location.href);
+      u.searchParams.delete("lang");
+      history.replaceState(null, "", u);
+      if (valid(linked)) store.set("phrasebook-lang", linked);
+    }
     const saved = store.get("phrasebook-lang", "");
-    const code = state.languages.some((l) => l.code === saved) ? saved : state.languages[0].code;
-    state.lang = state.languages.find((l) => l.code === code);
-    await loadLanguageData();
+    // someone who used the app before the picker existed has a language downloaded but never "chose" one
+    const usedBefore = state.languages.find((l) => packState(l.code) === "installed");
+    const code = valid(saved) ? saved : usedBefore ? usedBefore.code : null;
+    state.firstRun = !code; // brand new: ask which language, and download nothing until they say
+    state.lang = state.languages.find((l) => l.code === (code || state.languages[0].code)); // a placeholder until they choose
+    if (!state.firstRun) await loadLanguageData();
   } catch {
     main.innerHTML = `<p class="note">Couldn't load the phrases. Open the app once while online.</p>`;
     return;
@@ -827,7 +897,7 @@ async function boot() {
   });
   render();
   // how the app was opened: in its language, and from the Home Screen or from a browser tab
-  track("open/" + state.lang.code);
+  track(state.firstRun ? "welcome/shown" : "open/" + state.lang.code);
   track(matchMedia("(display-mode: standalone)").matches || navigator.standalone === true ? "mode/installed" : "mode/browser");
   $("#status").onclick = () => { if (state.updateReady) location.reload(); };
   checkForUpdates(true);
