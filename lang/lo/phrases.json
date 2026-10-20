@@ -71,5 +71,6 @@
   "sugar": {"text": "ນ້ຳຕານ", "say": "nahm tan"},
   "cheers": {"text": "ຊົນແກ້ວ", "say": "son keo", "note": "Literally \"clink glasses\". ໄຊໂຍ (sai yo) is also used"},
 
-  "help": {"text": "ຊ່ວຍແດ່", "say": "soo-ay dae"}
+  "help": {"text": "ຊ່ວຍແດ່", "say": "soo-ay dae"},
+  "pharmacy": {"text": "ຮ້ານຂາຍຢາຢູ່ໃສ", "say": "hahn kai yah yoo sai", "note": "Literally \"shop that sells medicine\""}
 }

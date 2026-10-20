@@ -65,5 +65,6 @@
   "milk": {"text": "Sữa", "say": "suh-ah", "tones": "broken", "note": "Sữa tươi is fresh milk"},
   "sugar": {"text": "Đường", "say": "doo-uhng", "tones": "falling", "note": "Ít đường (eet doo-uhng) is a little sugar; không đường (khohm doo-uhng) is none"},
   "cheers": {"text": "Một, hai, ba, dô!", "say": "moht, hi, bah, zoh", "tones": "heavy, flat, flat, flat", "note": "The usual toast: count one, two, three, then dô, often shouted. Chúc sức khỏe means good health"},
-  "help": {"text": "Giúp tôi với!", "say": "zoop toy vuh-ee", "tones": "rising, flat, rising"}
+  "help": {"text": "Giúp tôi với!", "say": "zoop toy vuh-ee", "tones": "rising, flat, rising"},
+  "pharmacy": {"text": "Nhà thuốc ở đâu?", "say": "nyah twohk uh dow", "tones": "falling, rising, dipping, flat"}
 }

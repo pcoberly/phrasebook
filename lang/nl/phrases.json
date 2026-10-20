@@ -71,5 +71,6 @@
   "sugar": {"text": "Suiker", "say": "SOW-ker"},
   "cheers": {"text": "Proost!", "say": "prohst"},
 
-  "help": {"text": "Help!", "say": "help", "note": "Shout it. The police are de politie (duh poh-LEE-tsee)"}
+  "help": {"text": "Help!", "say": "help", "note": "Shout it. The police are de politie (duh poh-LEE-tsee)"},
+  "pharmacy": {"text": "Waar is de apotheek?", "say": "vahr iss duh ah-poh-TAYK", "note": "A drogist (droh-KHIST) sells everyday medicine but not prescriptions"}
 }

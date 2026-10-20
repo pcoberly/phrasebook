@@ -71,5 +71,6 @@
   "sugar": {"text": "砂糖", "say": "satō", "note": "In a café, シュガー (shugā) also works"},
   "cheers": {"text": "乾杯！", "say": "kanpai", "note": "Wait until everyone has a glass, then say it together"},
 
-  "help": {"text": "助けて！", "say": "tasukete", "note": "Shout it. Police are keisatsu"}
+  "help": {"text": "助けて！", "say": "tasukete", "note": "Shout it. Police are keisatsu"},
+  "pharmacy": {"text": "薬局はどこですか", "say": "yakkyoku wa doko desu ka", "note": "Drugstores (doraggusutoa) sell everyday medicine; a yakkyoku fills prescriptions"}
 }

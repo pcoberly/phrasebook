@@ -71,5 +71,6 @@
   "sugar": {"text": "Du sucre", "say": "dew SEWK-ruh"},
   "cheers": {"text": "Santé !", "say": "sahn-TAY", "note": "Literally \"health\". À votre santé (ah VOH-truh) is the polite version"},
 
-  "help": {"text": "Au secours !", "say": "oh suh-KOOR", "note": "Shout it. The police are la police (lah poh-LEES)"}
+  "help": {"text": "Au secours !", "say": "oh suh-KOOR", "note": "Shout it. The police are la police (lah poh-LEES)"},
+  "pharmacy": {"text": "Où est la pharmacie ?", "say": "oo eh lah far-mah-SEE", "note": "Look for a green cross"}
 }

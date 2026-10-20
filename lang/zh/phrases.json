@@ -71,5 +71,6 @@
   "sugar": {"text": "糖", "say": "táng"},
   "cheers": {"text": "干杯", "say": "gānbēi", "note": "Literally \"dry the glass\""},
 
-  "help": {"text": "救命", "say": "jiùmìng", "note": "Shout it. The police are 警察 (jǐngchá)"}
+  "help": {"text": "救命", "say": "jiùmìng", "note": "Shout it. The police are 警察 (jǐngchá)"},
+  "pharmacy": {"text": "药店在哪里", "say": "yàodiàn zài nǎlǐ"}
 }

@@ -71,5 +71,6 @@
   "sugar": {"text": "Zucchero", "say": "DZOOK-keh-roh"},
   "cheers": {"text": "Salute!", "say": "sah-LOO-teh", "note": "Cin cin (cheen cheen) is also common"},
 
-  "help": {"text": "Aiuto!", "say": "ah-YOO-toh", "note": "Shout it. The police are la polizia (lah poh-lee-TSEE-ah)"}
+  "help": {"text": "Aiuto!", "say": "ah-YOO-toh", "note": "Shout it. The police are la polizia (lah poh-lee-TSEE-ah)"},
+  "pharmacy": {"text": "Dov'è la farmacia?", "say": "doh-VEH lah far-mah-CHEE-ah", "note": "Look for a green cross"}
 }

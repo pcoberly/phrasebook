@@ -71,5 +71,6 @@
   "sugar": {"text": "ស្ករ", "say": "skaw", "note": "មិនដាក់ស្ករ (min dak skaw) means without sugar"},
   "cheers": {"text": "ជល់មួយ", "say": "chol moo-ey", "note": "Literally \"clink one\". The usual toast as the glasses touch"},
 
-  "help": {"text": "ជួយខ្ញុំផង", "say": "joo-ey k'nyom pong"}
+  "help": {"text": "ជួយខ្ញុំផង", "say": "joo-ey k'nyom pong"},
+  "pharmacy": {"text": "ឱសថស្ថាននៅឯណា", "say": "aosot-sthan nov ae nah"}
 }

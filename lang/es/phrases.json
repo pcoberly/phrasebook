@@ -71,5 +71,6 @@
   "sugar": {"text": "Azúcar", "say": "ah-SOO-kar"},
   "cheers": {"text": "¡Salud!", "say": "sah-LOOD", "note": "Literally \"health\""},
 
-  "help": {"text": "¡Ayúdeme!", "say": "ah-YOO-deh-meh", "note": "¡Socorro! (soh-KOH-rroh) is the shout for help"}
+  "help": {"text": "¡Ayúdeme!", "say": "ah-YOO-deh-meh", "note": "¡Socorro! (soh-KOH-rroh) is the shout for help"},
+  "pharmacy": {"text": "¿Dónde está la farmacia?", "say": "DOHN-deh eh-STAH lah far-MAH-syah"}
 }

@@ -65,5 +65,6 @@
   {"id": "milk", "en": "Milk", "cat": "food"},
   {"id": "sugar", "en": "Sugar", "cat": "food"},
   {"id": "cheers", "en": "Cheers!", "cat": "food"},
-  {"id": "help", "en": "Help me!", "cat": "emergency"}
+  {"id": "help", "en": "Help me!", "cat": "emergency"},
+  {"id": "pharmacy", "en": "Where is the pharmacy?", "cat": "emergency"}
 ]

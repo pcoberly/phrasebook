@@ -71,5 +71,6 @@
   "sugar": {"text": "Zucker", "say": "TSOOK-er"},
   "cheers": {"text": "Prost!", "say": "prohst", "note": "Look people in the eye as you clink glasses"},
 
-  "help": {"text": "Hilfe!", "say": "HIL-fuh", "note": "Shout it. The police are die Polizei (dee po-lee-TSY)"}
+  "help": {"text": "Hilfe!", "say": "HIL-fuh", "note": "Shout it. The police are die Polizei (dee po-lee-TSY)"},
+  "pharmacy": {"text": "Wo ist die Apotheke?", "say": "voh ist dee ah-poh-TAY-kuh"}
 }

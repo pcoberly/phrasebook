@@ -1,7 +1,7 @@
 {
- "bytes": 1939044,
+ "bytes": 1967816,
  "files": {
-  "lang/fr/phrases.json": "b4723e610ace",
+  "lang/fr/phrases.json": "d770262f2c70",
   "lang/fr/guide.html": "50201f1a6ac4",
   "audio/fr/f/hello.mp3": "cecf635011e0",
   "audio/fr/f/good-morning.mp3": "6d8853730ab7",
@@ -70,6 +70,7 @@
   "audio/fr/f/sugar.mp3": "3f77e306f448",
   "audio/fr/f/cheers.mp3": "beedbe57ef33",
   "audio/fr/f/help.mp3": "c9333256a5ed",
+  "audio/fr/f/pharmacy.mp3": "3667d51f770c",
   "audio/fr/m/hello.mp3": "4fbed95181a8",
   "audio/fr/m/good-morning.mp3": "6548dc52e64c",
   "audio/fr/m/goodbye.mp3": "5108dc5db815",
@@ -136,6 +137,7 @@
   "audio/fr/m/milk.mp3": "7864cb60312e",
   "audio/fr/m/sugar.mp3": "c0f153aea7cd",
   "audio/fr/m/cheers.mp3": "a5a7e4884dee",
-  "audio/fr/m/help.mp3": "e3887a1f33a5"
+  "audio/fr/m/help.mp3": "e3887a1f33a5",
+  "audio/fr/m/pharmacy.mp3": "baebdc0781a9"
  }
 }
