@@ -14,9 +14,17 @@ import argparse
 import asyncio
 import hashlib
 import json
+import os
+import ssl
 from pathlib import Path
 
 import edge_tts
+import edge_tts.communicate
+
+# edge-tts trusts only certifi's certificates. Behind a proxy that re-signs HTTPS (as in a Claude Code
+# cloud session) it must trust the proxy's certificate instead, which SSL_CERT_FILE points to.
+if os.environ.get("SSL_CERT_FILE"):
+    edge_tts.communicate._SSL_CTX = ssl.create_default_context(cafile=os.environ["SSL_CERT_FILE"])
 
 ROOT = Path(__file__).parent
 LANGUAGES = ROOT / "languages.json"
