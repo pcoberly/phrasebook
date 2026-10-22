@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v27";
+const VERSION = "phrasebook-v28";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -464,6 +464,16 @@ function playFile(src, rate, onFail) {
 // file: that moment is then silence, not the start of the phrase. MP3s join by putting one after the other.
 const SILENCE = "audio/silence.mp3";
 let silenceBytes = null;
+// audio/silence.mp3 is made like the phrases (24 kHz mono, 48 kbps), so it is a run of identical 144-byte frames of
+// 24 ms each, and any whole number of them is valid audio: a pause can be cut to the length it needs
+const FRAME_BYTES = 144, FRAME_SECONDS = 0.024;
+function silenceOf(seconds) {
+  const parts = [];
+  for (let left = Math.round(seconds / FRAME_SECONDS) * FRAME_BYTES; left > 0; left -= silenceBytes.byteLength) {
+    parts.push(silenceBytes.slice(0, Math.min(left, silenceBytes.byteLength)));
+  }
+  return parts;
+}
 async function playSilence(seconds, still) {
   for (let i = 0; i < Math.max(1, Math.round(seconds)) && still(); i++) await playFile(SILENCE, 1, () => sleep(1000));
 }
@@ -483,8 +493,8 @@ async function playClip(code, p, gap, still) {
   } catch { /* offline and not downloaded */ }
   if (!still()) return;
   if (!clip) { await playSilence(gap, still); return still() && playFile(src, rate, sayIt); }
-  const seconds = Math.max(1, Math.round(gap * rate)); // the speed setting slows the silence too
-  const url = URL.createObjectURL(new Blob([...Array(seconds).fill(silenceBytes), clip], { type: "audio/mpeg" }));
+  // the clip plays at the phrase's speed, so the silence is cut to gap × speed and still lasts the pause you chose
+  const url = URL.createObjectURL(new Blob([...silenceOf(gap * rate), clip], { type: "audio/mpeg" }));
   try { await playFile(url, rate, sayIt); } finally { URL.revokeObjectURL(url); }
 }
 // The audio file is missing (not downloaded yet): say it with the device's voice instead
