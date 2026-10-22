@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v30";
+const VERSION = "phrasebook-v31";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -58,6 +58,7 @@ const state = {
   lang: null,     // the language being studied
   phrases: [],    // shared phrases merged with the active language's text, say, tones, note
   mode: "list",
+  topics: [],     // the topics chosen, as slugs ("food"); none means all of them
   progress: {},
   settings: {
     voice: store.get("phrasebook-voice", "f"), speed: store.get("phrasebook-speed", "1"), round: store.get("phrasebook-round", "20"),
@@ -136,11 +137,11 @@ function grade(key, ok) {
 }
 // "to" = English prompt, answer in the language; "from" = the other way round
 function candidates() {
-  const cat = $("#cat").value, dirSel = $("#dir").value;
+  const dirSel = $("#dir").value;
   const dirs = dirSel === "mixed" ? ["to", "from"] : [dirSel];
   const out = [];
   for (const p of state.phrases) {
-    if (cat !== "all" && p.cat !== cat) continue;
+    if (!inTopics(p)) continue;
     for (const dir of dirs) out.push({ p, dir, key: keyOf(p, dir) });
   }
   return out;
@@ -207,7 +208,7 @@ function say(note, ms = 0) {
 }
 
 // ---------- cards ----------
-const emptyTopic = () => `<div class="card">${esc(state.lang.name)} has no phrases in this topic yet. Choose another topic.</div>`;
+const emptyTopic = () => `<div class="card">${esc(state.lang.name)} has no phrases in ${state.topics.length > 1 ? "these topics" : "this topic"} yet. Choose another topic.</div>`;
 function renderCard() {
   const item = next();
   if (!item) { main.innerHTML = emptyTopic(); updateStatus(); return; }
@@ -294,7 +295,7 @@ function buildRound() {
     if (picked.length >= Math.min(size, ordered.length)) break;
     if (!picked.includes(i)) picked.push(i);
   }
-  return { items: shuffle(picked), index: 0, correct: 0, missed: [], cat: $("#cat").value, dir: $("#dir").value, size: state.settings.round };
+  return { items: shuffle(picked), index: 0, correct: 0, missed: [], cat: topicsKey(), dir: $("#dir").value, size: state.settings.round };
 }
 // The round in progress is saved after every answer, so if the phone closes the app in the background
 // it carries on where it was. One saved round per language; changing topic, direction or length starts afresh.
@@ -310,7 +311,7 @@ function saveRound() {
 }
 function loadRound() {
   const s = store.get(roundKey(state.lang.code), null);
-  if (!s || s.cat !== $("#cat").value || s.dir !== $("#dir").value || s.size !== state.settings.round) return null;
+  if (!s || s.cat !== topicsKey() || s.dir !== $("#dir").value || s.size !== state.settings.round) return null;
   const items = [];
   for (const [id, dir] of s.items) {
     const p = state.phrases.find((x) => x.id === id);
@@ -434,9 +435,8 @@ function wireSpeakButtons() {
 }
 // the phrases the List shows, grouped by topic, in the order they appear
 function listGroups() {
-  const cat = $("#cat").value;
   const groups = {};
-  for (const p of state.phrases) if (cat === "all" || p.cat === cat) (groups[p.cat] ||= []).push(p);
+  for (const p of state.phrases) if (inTopics(p)) (groups[p.cat] ||= []).push(p);
   return groups;
 }
 function renderList() {
@@ -863,11 +863,57 @@ async function swVersion() {
     return /CACHE = "([^"]+)"/.exec(text)?.[1] || null;
   } catch { return null; }
 }
+// ---------- topics: all of them, one, or several ----------
+const topicList = () => [...new Set(state.shared.map((p) => p.cat))]; // in the order phrases.json lists them
+const inTopics = (p) => !state.topics.length || state.topics.includes(p.cat);
+// what a saved quiz round was built from: "all", "food" or "food+numbers" (the first two as before several could be chosen)
+const topicsKey = () => state.topics.join("+") || "all";
+function topicLabel() {
+  const names = state.topics.map(topicName);
+  return !names.length ? "All Topics" : names.length <= 2 ? names.join(" + ") : `${names[0]} + ${names.length - 1} more`;
+}
+// the topics chosen, kept in phrases.json's order; choosing every one is the same as All Topics
+function tidyTopics(picked) {
+  const cats = topicList();
+  const kept = cats.filter((c) => picked.includes(c)); // a topic no longer offered drops out
+  return kept.length === cats.length ? [] : kept;
+}
 function rebuildTopicOptions() {
-  const current = $("#cat").value || store.get("phrasebook-cat", "all");
-  const cats = [...new Set(state.shared.map((p) => p.cat))];
-  $("#cat").innerHTML = `<option value="all">All Topics</option>` + cats.map((c) => `<option value="${c}">${esc(topicName(c))}</option>`).join("");
-  $("#cat").value = [...$("#cat").options].some((o) => o.value === current) ? current : "all";
+  state.topics = tidyTopics(state.topics);
+  $("#cat").textContent = topicLabel();
+}
+// The Topics button opens a checklist. The choice applies when it closes (Done, or a tap outside the list),
+// so ticking three topics doesn't restart the quiz round three times.
+function openTopics() {
+  const menu = $("#topicmenu");
+  const cats = topicList();
+  let picked = [...state.topics];
+  const count = (c) => state.phrases.filter((p) => p.cat === c).length;
+  menu.innerHTML = `<form method="dialog">
+    <label class="topic"><input type="checkbox" value="all"> All Topics</label>
+    ${cats.map((c) => `<label class="topic"><input type="checkbox" value="${c}"> ${esc(topicName(c))}<span class="note">${count(c)}</span></label>`).join("")}
+    <button class="act good">Done</button>
+  </form>`;
+  const tick = () => menu.querySelectorAll("input").forEach((i) => { i.checked = i.value === "all" ? !picked.length : picked.includes(i.value); });
+  tick();
+  menu.onchange = (e) => {
+    const v = e.target.value;
+    picked = v === "all" ? [] : tidyTopics(e.target.checked ? [...picked, v] : picked.filter((c) => c !== v));
+    tick();
+  };
+  menu.onclick = (e) => { if (e.target === menu) menu.close(); }; // the shaded area around the list
+  menu.onclose = () => setTopics(picked);
+  menu.showModal();
+}
+function setTopics(picked) {
+  if (picked.join("+") === state.topics.join("+")) return;
+  state.topics = picked;
+  store.set("phrasebook-topics", picked);
+  $("#cat").textContent = topicLabel();
+  state.last = null;
+  resetRound();
+  stopPlayAll();
+  render();
 }
 // A newer app version is reloaded at once unless a quiz round is under way, in which case the footer offers it.
 // It reloads by itself only once for any one version: if the server is still part-way through a release and
@@ -1217,8 +1263,12 @@ async function boot() {
   }
   state.progress = store.get(progressKey(state.lang.code), {});
   pickVoice();
+  // the chosen topics; before several could be chosen, one topic (or "all") was kept as "phrasebook-cat"
+  const oldTopic = store.get("phrasebook-cat", "all");
+  const saved = store.get("phrasebook-topics", oldTopic === "all" ? [] : [oldTopic]);
+  state.topics = Array.isArray(saved) ? saved : [];
   rebuildTopicOptions();
-  $("#cat").onchange = () => { store.set("phrasebook-cat", $("#cat").value); state.last = null; resetRound(); stopPlayAll(); render(); };
+  $("#cat").onclick = openTopics;
   rebuildDirOptions();
   $("#dir").onchange = () => { store.set("phrasebook-dir", $("#dir").value); state.last = null; resetRound(); render(); };
   if (!["f", "m", "mixed"].includes(state.settings.voice)) state.settings.voice = "f";
