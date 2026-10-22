@@ -25,6 +25,8 @@
   "ten": {"text": "ສິບ", "say": "sip"},
   "hundred": {"text": "ໜຶ່ງຮ້ອຍ", "say": "nuhng hoy"},
   "thousand": {"text": "ໜຶ່ງພັນ", "say": "nuhng pan", "note": "Prices are in kip and run into the thousands: ພັນ (pan) is a thousand, ແສນ (saen) a hundred thousand, ລ້ານ (lan) a million"},
+  "hundred-thousand": {"text": "ໜຶ່ງແສນ", "say": "nuhng saen"},
+  "million": {"text": "ໜຶ່ງລ້ານ", "say": "nuhng lan"},
 
   "how-much": {"text": "ເທົ່າໃດ", "say": "tow dai", "note": "Point at the item and say ອັນນີ້ເທົ່າໃດ (an nee tow dai), how much is this?"},
   "would-like": {"text": "ຂໍ…", "say": "kaw …", "note": "Literally \"I request …\"; the normal polite way to ask for something"},

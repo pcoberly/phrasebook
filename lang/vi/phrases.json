@@ -24,6 +24,8 @@
   "ten": {"text": "Mười", "say": "moo-ee", "tones": "falling"},
   "hundred": {"text": "Một trăm", "say": "moht chahm", "tones": "heavy, flat"},
   "thousand": {"text": "Một nghìn", "say": "moht ngin", "tones": "heavy, falling", "note": "Prices are often said in nghìn (thousands of đồng)"},
+  "hundred-thousand": {"text": "Một trăm nghìn", "say": "moht chahm ngin", "tones": "heavy, flat, falling", "note": "Written 100.000đ: Vietnam marks thousands with a dot, not a comma. Prices are often shortened to 100k"},
+  "million": {"text": "Một triệu", "say": "moht chee-yoh", "tones": "heavy, heavy", "note": "Written 1.000.000đ"},
   "how-much": {"text": "Bao nhiêu tiền?", "say": "bow nyew tee-en", "tones": "flat, flat, falling", "note": "\"Bow\" as in taking a bow. Bao nhiêu? on its own also works"},
   "would-like": {"text": "Cho tôi...", "say": "chaw toy", "tones": "flat, flat", "note": "Literally \"give me\"; the normal polite way to order. Cho tôi hai cà phê = two coffees, please"},
   "i-want": {"text": "Tôi muốn...", "say": "toy moo-uhn", "tones": "flat, rising", "note": "More direct; best with a verb. Tôi muốn đi ... = I want to go to ..."},

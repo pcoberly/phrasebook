@@ -25,6 +25,8 @@
   "ten": {"text": "Dix", "say": "dees"},
   "hundred": {"text": "Cent", "say": "sahn"},
   "thousand": {"text": "Mille", "say": "meel"},
+  "hundred-thousand": {"text": "Cent mille", "say": "sahn meel"},
+  "million": {"text": "Un million", "say": "uhn mee-LYOHN"},
 
   "how-much": {"text": "Combien ça coûte ?", "say": "kohm-BYAN sah KOOT", "note": "C'est combien ? (seh kohm-BYAN) is the casual version"},
   "would-like": {"text": "Je voudrais...", "say": "zhuh voo-DREH ...", "note": "The polite way to order. Je voudrais un café = I'd like a coffee. The audio uses un café as the example", "spoken": "Je voudrais un café"},

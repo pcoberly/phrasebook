@@ -25,6 +25,8 @@
   "ten": {"text": "Diez", "say": "dyehs"},
   "hundred": {"text": "Cien", "say": "syehn", "note": "Exactly 100. For 101 to 199 it becomes ciento"},
   "thousand": {"text": "Mil", "say": "meel"},
+  "hundred-thousand": {"text": "Cien mil", "say": "syehn meel"},
+  "million": {"text": "Un millón", "say": "oon mee-YOHN", "note": "Before a noun it takes de: un millón de pesos"},
 
   "how-much": {"text": "¿Cuánto cuesta?", "say": "KWAHN-toh KWEHS-tah", "note": "For more than one item say ¿Cuánto cuestan? (KWEHS-tahn)"},
   "would-like": {"text": "Quisiera...", "say": "kee-SYEH-rah ...", "note": "The polite way to say I would like. Quisiera un café = I'd like a coffee. The audio uses un café as the example", "spoken": "Quisiera un café"},

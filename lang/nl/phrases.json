@@ -25,6 +25,8 @@
   "ten": {"text": "Tien", "say": "teen"},
   "hundred": {"text": "Honderd", "say": "HON-dert"},
   "thousand": {"text": "Duizend", "say": "DOW-zent"},
+  "hundred-thousand": {"text": "Honderdduizend", "say": "HON-dert-DOW-zent"},
+  "million": {"text": "Een miljoen", "say": "ayn mil-YOON"},
 
   "how-much": {"text": "Hoeveel kost het?", "say": "hoo-VAYL kost uht", "note": "Wat kost dit? (vaht kost dit) means what does this cost"},
   "would-like": {"text": "Ik wil graag...", "say": "ik vil KHRAKH ...", "note": "Graag makes it polite. The audio uses een koffie as the example", "spoken": "Ik wil graag een koffie"},

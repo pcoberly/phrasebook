@@ -25,6 +25,8 @@
   "ten": {"text": "ដប់", "say": "dop"},
   "hundred": {"text": "មួយរយ", "say": "moo-ey roy"},
   "thousand": {"text": "មួយពាន់", "say": "moo-ey poan", "note": "Prices are in riel or US dollars. 4,000 riel is about one dollar"},
+  "hundred-thousand": {"text": "មួយសែន", "say": "moo-ey saen", "note": "Khmer has its own word, សែន (saen), for a hundred thousand"},
+  "million": {"text": "មួយលាន", "say": "moo-ey lee-un"},
 
   "how-much": {"text": "ថ្លៃប៉ុន្មាន", "say": "t'lay pon-man", "note": "Point at the item and say នេះថ្លៃប៉ុន្មាន (nih t'lay pon-man), how much is this?"},
   "would-like": {"text": "ខ្ញុំសុំ…", "say": "k'nyom som …", "note": "Literally \"I ask for …\"; the polite way to order"},

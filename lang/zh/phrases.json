@@ -25,6 +25,8 @@
   "ten": {"text": "十", "say": "shí"},
   "hundred": {"text": "一百", "say": "yìbǎi"},
   "thousand": {"text": "一千", "say": "yìqiān", "note": "Prices are in yuan, said as 块 (kuài): 十块 (shí kuài) is ten yuan"},
+  "hundred-thousand": {"text": "十万", "say": "shíwàn", "note": "Literally ten 万 (wàn): Chinese counts big numbers in wàn, ten thousands"},
+  "million": {"text": "一百万", "say": "yìbǎi wàn", "note": "Literally a hundred 万 (wàn)"},
 
   "how-much": {"text": "多少钱", "say": "duōshao qián", "note": "Point and say 这个多少钱 (zhège duōshao qián), how much is this?"},
   "would-like": {"text": "我想要...", "say": "wǒ xiǎng yào ...", "note": "A softer I'd like. The audio uses 一杯咖啡 (a coffee) as the example", "spoken": "我想要一杯咖啡"},

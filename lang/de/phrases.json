@@ -25,6 +25,8 @@
   "ten": {"text": "Zehn", "say": "tsayn"},
   "hundred": {"text": "Hundert", "say": "HOON-dert"},
   "thousand": {"text": "Tausend", "say": "TOW-zent"},
+  "hundred-thousand": {"text": "Hunderttausend", "say": "HOON-dert-TOW-zent"},
+  "million": {"text": "Eine Million", "say": "EYE-nuh mil-YOHN"},
 
   "how-much": {"text": "Was kostet das?", "say": "vahs KOS-tet dahs", "note": "Wie viel kostet das? (vee feel) is also common"},
   "would-like": {"text": "Ich hätte gern...", "say": "ikh HET-uh gairn ...", "note": "The polite way to order. The audio uses einen Kaffee as the example", "spoken": "Ich hätte gern einen Kaffee"},

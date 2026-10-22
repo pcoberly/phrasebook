@@ -25,6 +25,8 @@
   "ten": {"text": "十", "say": "jū"},
   "hundred": {"text": "百", "say": "hyaku"},
   "thousand": {"text": "千", "say": "sen", "note": "Prices are in yen. 10,000 is man (万)"},
+  "hundred-thousand": {"text": "十万", "say": "jūman", "note": "Literally ten man: Japanese counts big numbers in man (万), ten thousands"},
+  "million": {"text": "百万", "say": "hyakuman", "note": "Literally a hundred man (万)"},
 
   "how-much": {"text": "いくらですか", "say": "ikura desu ka", "note": "Point at the item and say kore wa ikura desu ka (how much is this?)"},
   "would-like": {"text": "…をください", "say": "… o kudasai", "note": "Literally \"give me …\". Kore o kudasai = this one, please", "spoken": "これをください"},

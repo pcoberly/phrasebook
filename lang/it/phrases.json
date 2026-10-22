@@ -25,6 +25,8 @@
   "ten": {"text": "Dieci", "say": "DYEH-chee"},
   "hundred": {"text": "Cento", "say": "CHEN-toh"},
   "thousand": {"text": "Mille", "say": "MEEL-leh", "note": "Two thousand is duemila (doo-eh-MEE-lah)"},
+  "hundred-thousand": {"text": "Centomila", "say": "chen-toh-MEE-lah"},
+  "million": {"text": "Un milione", "say": "oon mee-LYOH-neh"},
 
   "how-much": {"text": "Quanto costa?", "say": "KWAHN-toh KOS-tah", "note": "For more than one item say Quanto costano? (KOS-tah-noh)"},
   "would-like": {"text": "Vorrei...", "say": "vor-RAY ...", "note": "The polite way to order. The audio uses un caffè as the example", "spoken": "Vorrei un caffè"},

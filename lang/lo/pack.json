@@ -1,7 +1,7 @@
 {
- "bytes": 1985317,
+ "bytes": 2035866,
  "files": {
-  "lang/lo/phrases.json": "a458e2a408d2",
+  "lang/lo/phrases.json": "a44350e03b2b",
   "lang/lo/guide.html": "4934fbf602f4",
   "audio/lo/f/hello.mp3": "72084c5ffc9d",
   "audio/lo/f/good-morning.mp3": "46a843aefb39",
@@ -28,6 +28,8 @@
   "audio/lo/f/ten.mp3": "742da553324a",
   "audio/lo/f/hundred.mp3": "c7d514e8b448",
   "audio/lo/f/thousand.mp3": "5a74bcf34dc7",
+  "audio/lo/f/hundred-thousand.mp3": "3aebe77f4879",
+  "audio/lo/f/million.mp3": "2edc8145ab07",
   "audio/lo/f/how-much.mp3": "59f47bc529bb",
   "audio/lo/f/would-like.mp3": "0b2f87a9e679",
   "audio/lo/f/i-want.mp3": "76970fd72bc5",
@@ -96,6 +98,8 @@
   "audio/lo/m/ten.mp3": "347d44356cee",
   "audio/lo/m/hundred.mp3": "d219cd6ddb5f",
   "audio/lo/m/thousand.mp3": "6d026043f71a",
+  "audio/lo/m/hundred-thousand.mp3": "5f2642c654a9",
+  "audio/lo/m/million.mp3": "413e1897581b",
   "audio/lo/m/how-much.mp3": "31bacd61357c",
   "audio/lo/m/would-like.mp3": "2d592e713ab2",
   "audio/lo/m/i-want.mp3": "65f0d7b99210",

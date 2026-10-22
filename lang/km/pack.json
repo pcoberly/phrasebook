@@ -1,7 +1,7 @@
 {
- "bytes": 2012230,
+ "bytes": 2061411,
  "files": {
-  "lang/km/phrases.json": "b1fc2e64fff0",
+  "lang/km/phrases.json": "246faf10ad1e",
   "lang/km/guide.html": "4661d86568a6",
   "audio/km/f/hello.mp3": "d5a957f39b5d",
   "audio/km/f/good-morning.mp3": "85d426664940",
@@ -28,6 +28,8 @@
   "audio/km/f/ten.mp3": "c57038b82698",
   "audio/km/f/hundred.mp3": "7b32e01faa08",
   "audio/km/f/thousand.mp3": "00e2358377ac",
+  "audio/km/f/hundred-thousand.mp3": "d4a8894f2e21",
+  "audio/km/f/million.mp3": "a63135318cad",
   "audio/km/f/how-much.mp3": "17b9cab93393",
   "audio/km/f/would-like.mp3": "b54e4ad6d14e",
   "audio/km/f/i-want.mp3": "a3233cfb74ae",
@@ -96,6 +98,8 @@
   "audio/km/m/ten.mp3": "c595e9a4421b",
   "audio/km/m/hundred.mp3": "8dce9880d056",
   "audio/km/m/thousand.mp3": "bbb303c42aee",
+  "audio/km/m/hundred-thousand.mp3": "387107d5dd62",
+  "audio/km/m/million.mp3": "1708826cf808",
   "audio/km/m/how-much.mp3": "a9aa4b6fcd66",
   "audio/km/m/would-like.mp3": "97b468a8e9a8",
   "audio/km/m/i-want.mp3": "7b563924ed08",

@@ -25,6 +25,8 @@
   "ten": {"text": "עשר", "say": "E-ser", "spoken": "עֶשֶׂר"},
   "hundred": {"text": "מאה", "say": "me-A", "spoken": "מֵאָה"},
   "thousand": {"text": "אלף", "say": "E-lef", "spoken": "אֶלֶף"},
+  "hundred-thousand": {"text": "מאה אלף", "say": "me-A E-lef", "spoken": "מֵאָה אֶלֶף"},
+  "million": {"text": "מיליון", "say": "mil-YON", "spoken": "מִילְיוֹן"},
 
   "how-much": {"text": "כמה זה עולה?", "say": "KA-ma ze o-LE", "note": "For more than one item: כמה הם עולים (KA-ma hem o-LIM)?"},
   "would-like": {"text": "הייתי רוצה...", "say": "ha-YI-ti ro-TSE ...", "note": "The polite way to order. Written the same by a man or a woman, but said differently. The audio uses קפה (ka-FE), coffee, as the example", "spoken": "הָיִיתִי רוֹצֶה קָפֶה", "female": {"say": "ha-YI-ti ro-TSA ...", "spoken": "הָיִיתִי רוֹצָה קָפֶה"}},

@@ -24,6 +24,8 @@
   {"id": "ten", "en": "Ten", "cat": "numbers"},
   {"id": "hundred", "en": "One hundred", "cat": "numbers"},
   {"id": "thousand", "en": "One thousand", "cat": "numbers"},
+  {"id": "hundred-thousand", "en": "One hundred thousand", "cat": "numbers"},
+  {"id": "million", "en": "One million", "cat": "numbers"},
   {"id": "how-much", "en": "How much?", "cat": "shopping"},
   {"id": "would-like", "en": "I would like...", "cat": "shopping"},
   {"id": "i-want", "en": "I want...", "cat": "shopping"},
