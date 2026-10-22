@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v26";
+const VERSION = "phrasebook-v27";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -458,19 +458,34 @@ function playFile(src, rate, onFail) {
     });
   });
 }
-// Play one side of a phrase (if its file is missing, the device's own voice says it)
-function playClip(code, p) {
+// The pause before each clip is played as silence rather than timed: once the screen locks, iOS freezes the timers of
+// a page that has gone quiet, so a timed pause never ended and Play all stopped there. The silence (a second of it,
+// repeated) and the phrase are joined into one clip, since iOS can drop the first moment after the player changes
+// file: that moment is then silence, not the start of the phrase. MP3s join by putting one after the other.
+const SILENCE = "audio/silence.mp3";
+let silenceBytes = null;
+async function playSilence(seconds, still) {
+  for (let i = 0; i < Math.max(1, Math.round(seconds)) && still(); i++) await playFile(SILENCE, 1, () => sleep(1000));
+}
+// Play one side of a phrase after `gap` seconds of silence (if its file is missing, the device's own voice says it)
+async function playClip(code, p, gap, still) {
   const pref = state.settings.voice;
   const voice = pref === "mixed" ? (Math.random() < 0.5 ? "f" : "m") : pref;
   const rate = code === EN ? 1 : parseFloat(state.settings.speed) || 1; // you already know the English
-  return playFile(`audio/${code}/${voice}/${p.id}.mp3`, rate, () => deviceVoice(code, p));
-}
-// The pause between clips is played as silence, a second at a time, rather than timed: once the screen locks, iOS
-// freezes the timers of a page that has gone quiet, so a timed pause never ended and Play all stopped there.
-// A player that never falls silent is left running.
-const SILENCE = "audio/silence.mp3";
-async function playSilence(seconds, still) {
-  for (let i = 0; i < Math.max(1, Math.round(seconds)) && still(); i++) await playFile(SILENCE, 1, () => sleep(1000));
+  const src = `audio/${code}/${voice}/${p.id}.mp3`;
+  const sayIt = () => deviceVoice(code, p);
+  if (!gap) return playFile(src, rate, sayIt); // straight after a tap: play at once, while the phone still allows it
+  let clip = null;
+  try {
+    silenceBytes ||= await (await fetch(SILENCE)).arrayBuffer();
+    const res = await fetch(src);
+    if (res.ok) clip = await res.arrayBuffer();
+  } catch { /* offline and not downloaded */ }
+  if (!still()) return;
+  if (!clip) { await playSilence(gap, still); return still() && playFile(src, rate, sayIt); }
+  const seconds = Math.max(1, Math.round(gap * rate)); // the speed setting slows the silence too
+  const url = URL.createObjectURL(new Blob([...Array(seconds).fill(silenceBytes), clip], { type: "audio/mpeg" }));
+  try { await playFile(url, rate, sayIt); } finally { URL.revokeObjectURL(url); }
 }
 // The audio file is missing (not downloaded yet): say it with the device's voice instead
 function deviceVoice(code, p) {
@@ -489,6 +504,7 @@ function deviceVoice(code, p) {
 async function runPlayAll(run) {
   const pa = playAll;
   const still = () => playAll === pa && pa.playing && pa.run === run;
+  let first = true; // the first clip after a tap plays at once; every later one comes after the pause
   while (still()) {
     const p = pa.items[pa.index];
     markPlaying();
@@ -496,9 +512,8 @@ async function runPlayAll(run) {
     const twice = state.settings.twice === "yes";
     const order = $("#dir").value === "from" ? [lang, ...(twice ? [lang] : []), EN] : [EN, lang, ...(twice ? [lang] : [])];
     for (const code of order) {
-      await playClip(code, p);
-      if (!still()) return;
-      await playSilence(parseFloat(state.settings.gap), still);
+      await playClip(code, p, first ? 0 : parseFloat(state.settings.gap), still);
+      first = false;
       if (!still()) return;
     }
     pa.index = (pa.index + 1) % pa.items.length; // round again at the end
