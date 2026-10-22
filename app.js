@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v32";
+const VERSION = "phrasebook-v33";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -136,8 +136,9 @@ function grade(key, ok) {
   state.progress[key] = { box, due: Date.now() + INTERVALS[box] * DAY };
   store.set(progressKey(state.lang.code), state.progress);
 }
-// Phrases you don't want to practise (the beer phrase, if you don't drink), one list per language. Cards, new quiz
-// rounds and Play all leave them out; the List still shows them, faded, with a button to bring them back.
+// Phrases you don't want to practise (the beer phrase, if you don't drink), one list per language, shown as an empty
+// circle where the others have a filled ✓. Cards, new quiz rounds and Play all leave them out; the List still shows
+// them, faded. (Kept as "skipped" in storage, from when the control was a Skip link.)
 const skipKey = (code) => "phrasebook-skip-" + code;
 const isSkipped = (p) => state.skipped.has(p.id);
 function loadSkipped() {
@@ -208,7 +209,7 @@ function updateStatus() {
   const active = new Set(state.phrases.filter((p) => !isSkipped(p)).map((p) => p.id));
   const known = Object.entries(state.progress).filter(([k, v]) => v.box >= 3 && active.has(k.split(":")[0])).length;
   const skipped = state.phrases.length - active.size;
-  $("#status").textContent = `${known} of ${active.size * 2} cards learned${skipped ? ` · ${skipped} skipped` : ""}`;
+  $("#status").textContent = `${known} of ${active.size * 2} cards learned${skipped ? ` · ${skipped} left out` : ""}`;
 }
 // a page's own line in the footer, such as "Tap 🔊 to hear a phrase"; it never covers the "new version" message
 function hint(text) {
@@ -226,11 +227,26 @@ function say(note, ms = 0) {
 function emptyTopic() {
   const these = state.topics.length > 1 ? "these topics" : "this topic";
   const chosen = state.phrases.filter(inTopics);
-  if (chosen.length && chosen.every(isSkipped)) return `<div class="card">You've skipped every phrase in ${these}. Bring some back from the List, or choose another topic.</div>`;
+  if (chosen.length && chosen.every(isSkipped)) return `<div class="card">Every phrase in ${these} is left out of practice. Tick some back in the List, or choose another topic.</div>`;
   return `<div class="card">${esc(state.lang.name)} has no phrases in ${these} yet. Choose another topic.</div>`;
 }
-// "Skip this phrase", under a card's note or a quiz answer
-const skipLink = () => `<button class="link" id="skipit">Skip this phrase</button>`;
+// The ✓ circle: practise this phrase, or (empty) leave it out
+function practiseButton(p) {
+  const on = !isSkipped(p);
+  return `<button class="practise${on ? " on" : ""}" data-skip="${p.id}" aria-pressed="${on}" aria-label="Practise this phrase"></button>`;
+}
+// make every ✓ circle under root work; then(p, on) runs after each change
+function wirePractise(root, then = () => {}) {
+  root.querySelectorAll("button.practise").forEach((b) => b.onclick = (e) => {
+    e.stopPropagation();
+    const p = state.phrases.find((x) => x.id === b.dataset.skip);
+    const on = isSkipped(p); // tapping flips it
+    setSkipped(p, !on);
+    b.classList.toggle("on", on);
+    b.setAttribute("aria-pressed", on);
+    then(p, on);
+  });
+}
 function renderCard() {
   const item = next();
   if (!item) { main.innerHTML = emptyTopic(); updateStatus(); return; }
@@ -242,6 +258,7 @@ function renderCard() {
   const front = fromLang ? nat(p.text) : esc(p.en);
   // Two faces share one spot, so the card keeps one height and turns over like a real flashcard.
   main.innerHTML = `
+    <div class="cardwrap">
     <div class="flip" id="flip" role="button" tabindex="0" aria-label="Flip the card">
       <div class="flip-inner">
         <div class="card face front">
@@ -259,6 +276,8 @@ function renderCard() {
         </div>
       </div>
     </div>
+    ${practiseButton(p)}
+    </div>
     <div class="detail" id="detail"></div>
     <div class="row sticky hidden" id="grades">
       <button class="act bad" id="again">✗ Didn't know it</button>
@@ -268,6 +287,8 @@ function renderCard() {
   let seenAnswer = false;
   if (fromLang) { $("#say").onclick = (e) => { e.stopPropagation(); speak(p); }; speak(p); }
   $("#say2").onclick = (e) => { e.stopPropagation(); speak(p); };
+  // leaving it out keeps this card on screen (to grade, or to change your mind); it just won't come up again
+  wirePractise(main, (_, on) => say(on ? "Back in practice." : "Left out of practice. Tap the circle again to keep it.", 4000));
   const toggle = () => {
     const flipped = flip.classList.toggle("flipped");
     flip.setAttribute("aria-pressed", flipped);
@@ -275,8 +296,7 @@ function renderCard() {
     if (!seenAnswer) {
       // the first flip reveals the answer: show the usage note under the card and offer the grade buttons
       seenAnswer = true;
-      $("#detail").innerHTML = noteOf(p) + skipLink();
-      $("#skipit").onclick = () => { setSkipped(p, true); say("Skipped. Bring it back from the List.", 4000); render(); };
+      $("#detail").innerHTML = noteOf(p);
       $("#grades").classList.remove("hidden");
     }
   };
@@ -365,6 +385,7 @@ function renderQuiz() {
     <div class="roundbar"><span>Question ${number} of ${total}</span><span id="score">${round.correct} correct</span></div>
     <div class="bar"><i style="width:${Math.round(100 * round.index / total)}%"></i></div>
     <div class="card q">
+      ${practiseButton(p)}
       <div class="label">${toLang ? `Pick the ${name}` : "Pick the English"}</div>
       <div class="big">${toLang ? esc(p.en) : (listenOnly ? "🎧" : nat(p.text))}</div>
       ${toLang ? "" : `<button class="speak" id="say" aria-label="Play">🔊</button>`}
@@ -373,6 +394,7 @@ function renderQuiz() {
     <div class="reveal" id="reveal"></div>
     <div class="row sticky hidden" id="nextrow"><button class="act" id="next">${number === total ? "See score" : "Next"}</button></div>`;
   if (!toLang) { $("#say").onclick = () => speak(p); speak(p); }
+  wirePractise(main, (_, on) => say(on ? "Back in practice." : "Left out of later rounds. Tap the circle again to keep it.", 4000));
   const box = $("#choices");
   let answered = false;
   opts.forEach((o, i) => {
@@ -399,9 +421,7 @@ function renderQuiz() {
       });
       speak(p);
       // the answer is already on screen, so show only what is new: how to say it
-      $("#reveal").innerHTML = pron(p) + skipLink();
-      // it stays in this round, which is already chosen, and is left out of later ones
-      $("#skipit").onclick = () => { setSkipped(p, true); $("#skipit").outerHTML = `<div class="note">Skipped. It won't come up in later rounds.</div>`; };
+      $("#reveal").innerHTML = pron(p);
       $("#nextrow").classList.remove("hidden");
       updateStatus();
     };
@@ -451,7 +471,7 @@ function entryHtml(p, fromFirst, withNote = true, withSkip = false) {
         </div>
         <div class="side">
           <button class="speak" data-id="${p.id}" aria-label="Play">🔊</button>
-          ${withSkip ? `<button class="link" data-skip="${p.id}">${skipped ? "Bring back" : "Skip"}</button>` : ""}
+          ${withSkip ? practiseButton(p) : ""}
         </div>
       </div>`;
 }
@@ -477,14 +497,8 @@ function renderList() {
     ${ps.map((p) => entryHtml(p, fromFirst, true, true)).join("")}`).join("") + `
     <div class="row sticky"><button class="act${playing ? "" : " good"}" id="playall">${playing ? "⏸ Pause" : "▶ Play all"}</button></div>`;
   wireSpeakButtons();
-  // skip or bring back in place, so the List doesn't jump
-  main.querySelectorAll("[data-skip]").forEach((b) => b.onclick = () => {
-    const p = state.phrases.find((x) => x.id === b.dataset.skip);
-    const on = !isSkipped(p);
-    setSkipped(p, on);
-    b.closest(".entry").classList.toggle("skipped", on);
-    b.textContent = on ? "Bring back" : "Skip";
-  });
+  // changed in place, so the List doesn't jump
+  wirePractise(main, (p, on) => main.querySelector(`[data-entry="${CSS.escape(p.id)}"]`).classList.toggle("skipped", !on));
   $("#playall").onclick = () => (playAll && playAll.playing ? pausePlayAll() : startPlayAll());
   if (playAll) markPlaying();
   else hint("Tap 🔊 to hear a phrase, or ▶ to hear them all");
@@ -1186,10 +1200,10 @@ function renderSettings() {
         ${ROUND_CHOICES.map((n) => opt(n, n, state.settings.round)).join("")}
       </select>
     </div>
-    <h2 class="group">Skipped phrases</h2>
+    <h2 class="group">Left out of practice</h2>
     <div class="setting">
-      <span>${skippedCount ? `${skippedCount} skipped in ${esc(state.lang.name)}` : "None skipped. Skip a phrase from its card, the quiz or the List."}</span>
-      ${skippedCount ? `<button class="act" id="unskip" style="flex:none">Bring all back</button>` : ""}
+      <span>${skippedCount ? `${skippedCount} ${skippedCount === 1 ? "phrase" : "phrases"} left out in ${esc(state.lang.name)}` : "None. Tap a phrase's ✓ circle (in the List, on a card or in the quiz) to leave it out."}</span>
+      ${skippedCount ? `<button class="act" id="unskip" style="flex:none">Practise all</button>` : ""}
     </div>
     <h2 class="group">Play all</h2>
     <div class="setting">

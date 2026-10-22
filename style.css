@@ -60,7 +60,7 @@ button.speak { border: 1px solid var(--line); background: var(--card); color: va
 @media (prefers-reduced-motion: reduce) { .flip-inner { transition: none; -webkit-transition: none; } }
 .detail { text-align: center; padding-top: 10px; }
 .detail:empty { display: none; }
-.card.q { min-height: 0; padding: 14px 16px; gap: 6px; margin-top: 4px; }
+.card.q { min-height: 0; padding: 14px 16px; gap: 6px; margin-top: 4px; position: relative; }
 .card.q .big { font-size: 26px; }
 .roundbar { display: flex; justify-content: space-between; margin-top: 6px; font-size: 13px; color: var(--muted); }
 .bar { height: 4px; margin: 4px 0 6px; background: var(--line); border-radius: 2px; overflow: hidden; }
@@ -84,11 +84,17 @@ th { color: var(--muted); font-weight: 600; font-size: 13px; }
 /* the phrase Play all is on */
 .entry.playing { margin: 0 -10px; padding-left: 10px; padding-right: 10px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 12%, var(--bg)); }
 .entry .vi { font-size: 20px; font-weight: 600; color: var(--accent); }
-/* skipped phrases stay in the List, faded, with a button to bring them back */
-.entry .side { display: flex; flex-direction: column; align-items: center; gap: 2px; flex: none; width: 76px; } /* fits "Bring back", so every 🔊 lines up */
+/* Practise this phrase: a filled ✓ circle. An empty circle leaves it out of cards, quizzes and Play all.
+   (A star is kept free for favourites.) */
+button.practise { flex: none; width: 44px; height: 44px; padding: 0; border: 0; background: none; display: grid; place-items: center; }
+button.practise::before { content: ""; width: 26px; height: 26px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--muted); }
+button.practise.on::before { content: "✓"; background: var(--good); border-color: var(--good); color: var(--card); font-size: 15px; font-weight: 700; line-height: 22px; text-align: center; }
+.entry .side { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: none; }
 .entry.skipped > div:first-child { opacity: .4; }
-button.link { background: none; border: 0; padding: 6px 4px; color: var(--muted); font-size: 13px; text-decoration: underline; }
-.detail button.link, .reveal button.link { font-size: 14px; margin-top: 6px; }
+/* on a card it sits in the corner, outside the card that turns over, so it shows on both sides */
+.cardwrap { position: relative; }
+.cardwrap > .practise, .card.q > .practise { position: absolute; top: 4px; right: 4px; z-index: 2; }
+.cardwrap > .practise { top: 12px; }
 /* collapsible Language section */
 .panel { margin: 8px 0; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
 .panel > summary, .avail > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }

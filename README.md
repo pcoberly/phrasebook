@@ -44,9 +44,9 @@ reason a tapped 🔊 (cards, quiz, list) starts the hum at once and plays the ph
 ## Topics and skipped phrases
 
 The Topic button opens a checklist, so you can study several topics at once (Basics + Numbers before a market).
-A phrase you don't want to practise can be skipped from its card, after a quiz answer, or from the List. Skips are
-kept per language. Cards, new quiz rounds and Play all leave skipped phrases out; the List shows them faded with
-**Bring back**, and Settings has **Bring all back**.
+Every phrase has a ✓ circle (in the List, in the corner of a card and of a quiz question). Tap it to empty it and
+leave that phrase out of practice, kept per language: cards, new quiz rounds and Play all skip it, and the List shows
+it faded. Tap again to bring it back, or use **Practise all** in Settings. (A star is kept free for favourites.)
 
 ## Common jobs
 
