@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v25";
+const VERSION = "phrasebook-v26";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -443,22 +443,34 @@ let playAll = null; // { items, index, playing, run }
 let wakeLock = null;
 const sleep = (ms) => new Promise((ok) => setTimeout(ok, ms));
 let finishClip = null; // ends the clip playing now, when paused
-// Play one side of a phrase and resolve when it has finished (or failed, after the device's own voice has said it)
-function playClip(code, p) {
+// Play a file on the one player and resolve when it has finished (or failed, after onFail has run)
+function playFile(src, rate, onFail) {
   return new Promise((resolve) => {
     const done = () => { player.onended = player.onerror = null; finishClip = null; resolve(); };
     finishClip = done;
-    const pref = state.settings.voice;
-    const voice = pref === "mixed" ? (Math.random() < 0.5 ? "f" : "m") : pref;
     player.onended = done;
-    player.onerror = () => { player.onended = player.onerror = null; deviceVoice(code, p).then(done); };
-    player.src = `audio/${code}/${voice}/${p.id}.mp3`;
-    player.playbackRate = code === EN ? 1 : parseFloat(state.settings.speed) || 1; // you already know the English
+    player.onerror = () => { player.onended = player.onerror = null; onFail().then(done); };
+    player.src = src;
+    player.playbackRate = rate;
     player.play().catch((err) => {
       if (err && err.name === "NotAllowedError") pausePlayAll(); // the phone refused to play without a tap
       if (finishClip === done) done();
     });
   });
+}
+// Play one side of a phrase (if its file is missing, the device's own voice says it)
+function playClip(code, p) {
+  const pref = state.settings.voice;
+  const voice = pref === "mixed" ? (Math.random() < 0.5 ? "f" : "m") : pref;
+  const rate = code === EN ? 1 : parseFloat(state.settings.speed) || 1; // you already know the English
+  return playFile(`audio/${code}/${voice}/${p.id}.mp3`, rate, () => deviceVoice(code, p));
+}
+// The pause between clips is played as silence, a second at a time, rather than timed: once the screen locks, iOS
+// freezes the timers of a page that has gone quiet, so a timed pause never ended and Play all stopped there.
+// A player that never falls silent is left running.
+const SILENCE = "audio/silence.mp3";
+async function playSilence(seconds, still) {
+  for (let i = 0; i < Math.max(1, Math.round(seconds)) && still(); i++) await playFile(SILENCE, 1, () => sleep(1000));
 }
 // The audio file is missing (not downloaded yet): say it with the device's voice instead
 function deviceVoice(code, p) {
@@ -486,7 +498,7 @@ async function runPlayAll(run) {
     for (const code of order) {
       await playClip(code, p);
       if (!still()) return;
-      await sleep(parseFloat(state.settings.gap) * 1000);
+      await playSilence(parseFloat(state.settings.gap), still);
       if (!still()) return;
     }
     pa.index = (pa.index + 1) % pa.items.length; // round again at the end

@@ -79,7 +79,9 @@ const check = (name, ok, extra = "") => results.push(`${ok ? "PASS" : "FAIL"}  $
   const shell = await caches.open(CACHE_NAME);
   check("install caches the app shell", (await shell.match("app.js")) !== undefined);
   check("install skips the browser's own (up to 10-minute-old) copies", cacheModes[BASE + "app.js"] === "reload", String(cacheModes[BASE + "app.js"]));
-  check("install does not fetch any language files", !networkCalls.some((u) => /\/(lang|audio)\//.test(u)));
+  // language files sit in a folder per language (lang/ja/, audio/ja/f/); audio/silence.mp3, for Play all's pauses, is the app's own
+  check("install does not fetch any language files", !networkCalls.some((u) => /\/(lang|audio)\/[^/]+\//.test(u)));
+  check("install caches the silence Play all pauses with", (await shell.match("audio/silence.mp3")) !== undefined);
 
   await run("activate");
   const names = (await caches.keys()).sort().join(",");

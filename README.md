@@ -33,8 +33,10 @@ send a friend a link for the language they want.
 The List's **▶ Play all** button reads the list aloud for listening on the move: each phrase in English, a pause,
 then the language (the other way round when the direction is language → English), round and round until paused.
 Settings has the pause length and "Say each phrase twice". Tapping 🔊 on a row while it plays jumps there; another
-tab pauses it in place, and a new topic starts it from the top. It keeps the screen on while playing, and the lock
-screen, headphones or a car can pause and skip. English speaks the `en` text with any `...` gap left out.
+tab pauses it in place, and a new topic starts it from the top. It keeps the screen on while playing, carries on with
+the screen locked, and the lock screen, headphones or a car can pause and skip. The pauses are played as silence
+(`audio/silence.mp3`, part of the app) rather than timed, because iOS freezes a quiet page's timers once the screen
+locks. English speaks the `en` text with any `...` gap left out.
 
 ## Common jobs
 
