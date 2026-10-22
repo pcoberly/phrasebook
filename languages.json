@@ -123,5 +123,17 @@
       "m": "he-IL-AvriNeural"
     },
     "bytes": 2162646
+  },
+  {
+    "code": "ko",
+    "name": "Korean",
+    "native": "한국어",
+    "ttsLang": "ko-KR",
+    "draft": true,
+    "voices": {
+      "f": "ko-KR-SunHiNeural",
+      "m": "ko-KR-InJoonNeural"
+    },
+    "bytes": 2255888
   }
 ]
