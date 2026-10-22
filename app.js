@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v31";
+const VERSION = "phrasebook-v32";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -60,6 +60,7 @@ const state = {
   mode: "list",
   topics: [],     // the topics chosen, as slugs ("food"); none means all of them
   progress: {},
+  skipped: new Set(), // ids of the phrases you chose not to practise in this language
   settings: {
     voice: store.get("phrasebook-voice", "f"), speed: store.get("phrasebook-speed", "1"), round: store.get("phrasebook-round", "20"),
     gap: store.get("phrasebook-gap", "2"), twice: store.get("phrasebook-twice", "no"), // Play all: seconds between, and say it twice
@@ -135,13 +136,26 @@ function grade(key, ok) {
   state.progress[key] = { box, due: Date.now() + INTERVALS[box] * DAY };
   store.set(progressKey(state.lang.code), state.progress);
 }
+// Phrases you don't want to practise (the beer phrase, if you don't drink), one list per language. Cards, new quiz
+// rounds and Play all leave them out; the List still shows them, faded, with a button to bring them back.
+const skipKey = (code) => "phrasebook-skip-" + code;
+const isSkipped = (p) => state.skipped.has(p.id);
+function loadSkipped() {
+  const ids = store.get(skipKey(state.lang.code), []);
+  state.skipped = new Set(Array.isArray(ids) ? ids : []);
+}
+function setSkipped(p, on) {
+  if (on) state.skipped.add(p.id); else state.skipped.delete(p.id);
+  store.set(skipKey(state.lang.code), [...state.skipped]);
+  state.last = null;
+}
 // "to" = English prompt, answer in the language; "from" = the other way round
 function candidates() {
   const dirSel = $("#dir").value;
   const dirs = dirSel === "mixed" ? ["to", "from"] : [dirSel];
   const out = [];
   for (const p of state.phrases) {
-    if (!inTopics(p)) continue;
+    if (!inTopics(p) || isSkipped(p)) continue;
     for (const dir of dirs) out.push({ p, dir, key: keyOf(p, dir) });
   }
   return out;
@@ -191,9 +205,10 @@ function draftBanner() {
 function updateStatus() {
   $("#status").classList.toggle("ready", !!state.updateReady); // a pending app update turns the footer into a reload button
   if (state.note) { $("#status").textContent = state.note; return; }
-  const all = state.phrases.length * 2;
-  const known = Object.values(state.progress).filter((v) => v.box >= 3).length;
-  $("#status").textContent = `${known} of ${all} cards learned`;
+  const active = new Set(state.phrases.filter((p) => !isSkipped(p)).map((p) => p.id));
+  const known = Object.entries(state.progress).filter(([k, v]) => v.box >= 3 && active.has(k.split(":")[0])).length;
+  const skipped = state.phrases.length - active.size;
+  $("#status").textContent = `${known} of ${active.size * 2} cards learned${skipped ? ` · ${skipped} skipped` : ""}`;
 }
 // a page's own line in the footer, such as "Tap 🔊 to hear a phrase"; it never covers the "new version" message
 function hint(text) {
@@ -208,7 +223,14 @@ function say(note, ms = 0) {
 }
 
 // ---------- cards ----------
-const emptyTopic = () => `<div class="card">${esc(state.lang.name)} has no phrases in ${state.topics.length > 1 ? "these topics" : "this topic"} yet. Choose another topic.</div>`;
+function emptyTopic() {
+  const these = state.topics.length > 1 ? "these topics" : "this topic";
+  const chosen = state.phrases.filter(inTopics);
+  if (chosen.length && chosen.every(isSkipped)) return `<div class="card">You've skipped every phrase in ${these}. Bring some back from the List, or choose another topic.</div>`;
+  return `<div class="card">${esc(state.lang.name)} has no phrases in ${these} yet. Choose another topic.</div>`;
+}
+// "Skip this phrase", under a card's note or a quiz answer
+const skipLink = () => `<button class="link" id="skipit">Skip this phrase</button>`;
 function renderCard() {
   const item = next();
   if (!item) { main.innerHTML = emptyTopic(); updateStatus(); return; }
@@ -253,7 +275,8 @@ function renderCard() {
     if (!seenAnswer) {
       // the first flip reveals the answer: show the usage note under the card and offer the grade buttons
       seenAnswer = true;
-      $("#detail").innerHTML = noteOf(p);
+      $("#detail").innerHTML = noteOf(p) + skipLink();
+      $("#skipit").onclick = () => { setSkipped(p, true); say("Skipped. Bring it back from the List.", 4000); render(); };
       $("#grades").classList.remove("hidden");
     }
   };
@@ -376,7 +399,9 @@ function renderQuiz() {
       });
       speak(p);
       // the answer is already on screen, so show only what is new: how to say it
-      $("#reveal").innerHTML = pron(p);
+      $("#reveal").innerHTML = pron(p) + skipLink();
+      // it stays in this round, which is already chosen, and is left out of later ones
+      $("#skipit").onclick = () => { setSkipped(p, true); $("#skipit").outerHTML = `<div class="note">Skipped. It won't come up in later rounds.</div>`; };
       $("#nextrow").classList.remove("hidden");
       updateStatus();
     };
@@ -411,9 +436,10 @@ function renderSummary() {
 
 // ---------- study list ----------
 // one phrase as a row: the language text with how to say it, and the English, in the order you are studying
-function entryHtml(p, fromFirst, withNote = true) {
+function entryHtml(p, fromFirst, withNote = true, withSkip = false) {
+  const skipped = withSkip && isSkipped(p);
   return `
-      <div class="entry" data-entry="${p.id}">
+      <div class="entry${skipped ? " skipped" : ""}" data-entry="${p.id}">
         <div>
           ${fromFirst ? "" : `<div class="en">${esc(p.en)}</div>`}
           <div class="vi"${rtlAttr()}>${nat(p.text)}</div>
@@ -423,7 +449,10 @@ function entryHtml(p, fromFirst, withNote = true) {
           ${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}
           ${withNote && p.note ? `<div class="note">${noteText(p.note)}</div>` : ""}
         </div>
-        <button class="speak" data-id="${p.id}" aria-label="Play">🔊</button>
+        <div class="side">
+          <button class="speak" data-id="${p.id}" aria-label="Play">🔊</button>
+          ${withSkip ? `<button class="link" data-skip="${p.id}">${skipped ? "Bring back" : "Skip"}</button>` : ""}
+        </div>
       </div>`;
 }
 function wireSpeakButtons() {
@@ -445,9 +474,17 @@ function renderList() {
   const playing = playAll && playAll.playing;
   main.innerHTML = draftBanner() + Object.entries(groups).map(([c, ps]) => `
     <h2 class="group">${esc(topicName(c))}</h2>
-    ${ps.map((p) => entryHtml(p, fromFirst)).join("")}`).join("") + `
+    ${ps.map((p) => entryHtml(p, fromFirst, true, true)).join("")}`).join("") + `
     <div class="row sticky"><button class="act${playing ? "" : " good"}" id="playall">${playing ? "⏸ Pause" : "▶ Play all"}</button></div>`;
   wireSpeakButtons();
+  // skip or bring back in place, so the List doesn't jump
+  main.querySelectorAll("[data-skip]").forEach((b) => b.onclick = () => {
+    const p = state.phrases.find((x) => x.id === b.dataset.skip);
+    const on = !isSkipped(p);
+    setSkipped(p, on);
+    b.closest(".entry").classList.toggle("skipped", on);
+    b.textContent = on ? "Bring back" : "Skip";
+  });
   $("#playall").onclick = () => (playAll && playAll.playing ? pausePlayAll() : startPlayAll());
   if (playAll) markPlaying();
   else hint("Tap 🔊 to hear a phrase, or ▶ to hear them all");
@@ -551,7 +588,9 @@ async function runPlayAll(run) {
   const still = () => playAll === pa && pa.playing && pa.run === run;
   let first = true; // the first clip after a tap plays at once; every later one comes after the pause
   while (still()) {
+    if (pa.items.every(isSkipped)) { pausePlayAll(); return; }
     const p = pa.items[pa.index];
+    if (isSkipped(p)) { pa.index = (pa.index + 1) % pa.items.length; continue; } // skipped, perhaps while playing
     markPlaying();
     const lang = state.lang.code;
     const twice = state.settings.twice === "yes";
@@ -826,6 +865,7 @@ async function useLanguage(code) {
   }
   store.set("phrasebook-lang", code);
   state.progress = store.get(progressKey(code), {});
+  loadSkipped();
   state.last = null;
   state.round = null;
   stopPlayAll();
@@ -1117,6 +1157,7 @@ function sendFeedback() {
 }
 
 function renderSettings() {
+  const skippedCount = state.phrases.filter(isSkipped).length;
   const opt = (v, label, cur) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
   main.innerHTML = `
     ${languagePanel()}
@@ -1145,6 +1186,11 @@ function renderSettings() {
         ${ROUND_CHOICES.map((n) => opt(n, n, state.settings.round)).join("")}
       </select>
     </div>
+    <h2 class="group">Skipped phrases</h2>
+    <div class="setting">
+      <span>${skippedCount ? `${skippedCount} skipped in ${esc(state.lang.name)}` : "None skipped. Skip a phrase from its card, the quiz or the List."}</span>
+      ${skippedCount ? `<button class="act" id="unskip" style="flex:none">Bring all back</button>` : ""}
+    </div>
     <h2 class="group">Play all</h2>
     <div class="setting">
       <label for="gap">Pause between</label>
@@ -1167,6 +1213,7 @@ function renderSettings() {
     </div>
     <div class="draft" id="feedbackbox" hidden></div>
     <p class="note about">PhraseBook${state.version ? ` · version ${esc(state.version.replace("phrasebook-", ""))}` : ""}. Your progress and settings stay on this device.${analyticsOn ? " The app counts anonymous visits and which features are used, with no cookies and no personal data." : ""}</p>`;
+  if ($("#unskip")) $("#unskip").onclick = () => { state.skipped.clear(); store.set(skipKey(state.lang.code), []); state.last = null; renderSettings(); };
   $("#share").onclick = shareApp;
   $("#feedback").onclick = sendFeedback;
   $("#round").onchange = () => {
@@ -1262,6 +1309,7 @@ async function boot() {
     return;
   }
   state.progress = store.get(progressKey(state.lang.code), {});
+  loadSkipped();
   pickVoice();
   // the chosen topics; before several could be chosen, one topic (or "all") was kept as "phrasebook-cat"
   const oldTopic = store.get("phrasebook-cat", "all");

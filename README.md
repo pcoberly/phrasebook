@@ -41,6 +41,13 @@ after the player changes file. The "silence" is really a 42 Hz hum far too quiet
 adapters and some Bluetooth gear power down on pure digital silence and then miss the first syllable. For the same
 reason a tapped 🔊 (cards, quiz, list) starts the hum at once and plays the phrase with 0.4 seconds of it in front. English speaks the `en` text with any `...` gap left out.
 
+## Topics and skipped phrases
+
+The Topic button opens a checklist, so you can study several topics at once (Basics + Numbers before a market).
+A phrase you don't want to practise can be skipped from its card, after a quiz answer, or from the List. Skips are
+kept per language. Cards, new quiz rounds and Play all leave skipped phrases out; the List shows them faded with
+**Bring back**, and Settings has **Bring all back**.
+
 ## Common jobs
 
 **Add or change a phrase.** Add it to `phrases.json` (once), then add an entry with the same `id`

@@ -84,6 +84,11 @@ th { color: var(--muted); font-weight: 600; font-size: 13px; }
 /* the phrase Play all is on */
 .entry.playing { margin: 0 -10px; padding-left: 10px; padding-right: 10px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 12%, var(--bg)); }
 .entry .vi { font-size: 20px; font-weight: 600; color: var(--accent); }
+/* skipped phrases stay in the List, faded, with a button to bring them back */
+.entry .side { display: flex; flex-direction: column; align-items: center; gap: 2px; flex: none; width: 76px; } /* fits "Bring back", so every 🔊 lines up */
+.entry.skipped > div:first-child { opacity: .4; }
+button.link { background: none; border: 0; padding: 6px 4px; color: var(--muted); font-size: 13px; text-decoration: underline; }
+.detail button.link, .reveal button.link { font-size: 14px; margin-top: 6px; }
 /* collapsible Language section */
 .panel { margin: 8px 0; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
 .panel > summary, .avail > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
