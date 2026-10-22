@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v28";
+const VERSION = "phrasebook-v29";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -458,14 +458,16 @@ function playFile(src, rate, onFail) {
     });
   });
 }
-// The pause before each clip is played as silence rather than timed: once the screen locks, iOS freezes the timers of
-// a page that has gone quiet, so a timed pause never ended and Play all stopped there. The silence (a second of it,
-// repeated) and the phrase are joined into one clip, since iOS can drop the first moment after the player changes
-// file: that moment is then silence, not the start of the phrase. MP3s join by putting one after the other.
+// The pause before each clip is played, not timed: once the screen locks, iOS freezes the timers of a page that has
+// gone quiet, so a timed pause never ended and Play all stopped there. The pause and the phrase are joined into one
+// clip (MP3s join by putting one after the other), since iOS can drop the first moment after the player changes file.
+// The pause is not pure digital silence but a 42 Hz hum at about -63 dB, far too low and quiet to hear: wired
+// headphone adapters (and some Bluetooth gear) power down on digital silence and wake too late for the first syllable.
 const SILENCE = "audio/silence.mp3";
 let silenceBytes = null;
-// audio/silence.mp3 is made like the phrases (24 kHz mono, 48 kbps), so it is a run of identical 144-byte frames of
-// 24 ms each, and any whole number of them is valid audio: a pause can be cut to the length it needs
+// audio/silence.mp3 (5 s, the longest pause) is made like the phrases (24 kHz mono, 48 kbps, and no bit reservoir),
+// so it is a run of 144-byte frames of 24 ms each, one cycle of the hum per frame: any whole number of frames is valid
+// audio that ends where it began, so a pause can be cut to the length it needs
 const FRAME_BYTES = 144, FRAME_SECONDS = 0.024;
 function silenceOf(seconds) {
   const parts = [];
@@ -474,8 +476,9 @@ function silenceOf(seconds) {
   }
   return parts;
 }
-async function playSilence(seconds, still) {
-  for (let i = 0; i < Math.max(1, Math.round(seconds)) && still(); i++) await playFile(SILENCE, 1, () => sleep(1000));
+async function playJoined(parts, rate, onFail) {
+  const url = URL.createObjectURL(new Blob(parts, { type: "audio/mpeg" }));
+  try { await playFile(url, rate, onFail); } finally { URL.revokeObjectURL(url); }
 }
 // Play one side of a phrase after `gap` seconds of silence (if its file is missing, the device's own voice says it)
 async function playClip(code, p, gap, still) {
@@ -492,10 +495,12 @@ async function playClip(code, p, gap, still) {
     if (res.ok) clip = await res.arrayBuffer();
   } catch { /* offline and not downloaded */ }
   if (!still()) return;
-  if (!clip) { await playSilence(gap, still); return still() && playFile(src, rate, sayIt); }
-  // the clip plays at the phrase's speed, so the silence is cut to gap × speed and still lasts the pause you chose
-  const url = URL.createObjectURL(new Blob([...silenceOf(gap * rate), clip], { type: "audio/mpeg" }));
-  try { await playFile(url, rate, sayIt); } finally { URL.revokeObjectURL(url); }
+  if (!clip) { // the phrase isn't downloaded: the pause on its own, then the device's voice
+    if (silenceBytes) await playJoined(silenceOf(gap), 1, () => sleep(gap * 1000));
+    return still() && playFile(src, rate, sayIt);
+  }
+  // the clip plays at the phrase's speed, so the pause is cut to gap × speed and still lasts the pause you chose
+  await playJoined([...silenceOf(gap * rate), clip], rate, sayIt);
 }
 // The audio file is missing (not downloaded yet): say it with the device's voice instead
 function deviceVoice(code, p) {

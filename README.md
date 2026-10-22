@@ -37,7 +37,8 @@ tab pauses it in place, and a new topic starts it from the top. It keeps the scr
 the screen locked, and the lock screen, headphones or a car can pause and skip. The pauses are played as silence
 (`audio/silence.mp3`, part of the app) rather than timed, because iOS freezes a quiet page's timers once the screen
 locks. Each pause is joined to the front of the phrase after it, as one clip, because iOS can drop the first moment
-after the player changes file. English speaks the `en` text with any `...` gap left out.
+after the player changes file. The "silence" is really a 42 Hz hum far too quiet to hear, because wired headphone
+adapters and some Bluetooth gear power down on pure digital silence and then miss the first syllable. English speaks the `en` text with any `...` gap left out.
 
 ## Common jobs
 
