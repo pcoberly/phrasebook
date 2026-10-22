@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v29";
+const VERSION = "phrasebook-v30";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -84,17 +84,37 @@ function pickVoice() {
 }
 if ("speechSynthesis" in window) speechSynthesis.addEventListener("voiceschanged", pickVoice);
 
-let currentAudio = null;
-function speak(p) {
-  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+// Wired headphones (and some Bluetooth gear) doze off while nothing plays and wake too late for a phrase's first
+// syllable (see Play all). So a tap starts the faint hum at once, during the tap, the only moment iOS lets a page
+// start sound, and the same player then plays the phrase, once loaded, with a short lead of hum in front.
+const tapPlayer = new Audio();
+const TAP_LEAD = 0.4; // seconds of hum before the phrase: the phrase usually loads before the hum has got going
+let tapUrl = null;
+let tapRun = 0; // a newer tap (or Play all) makes an older one's phrase, still loading, never play
+function stopSpeaking() {
+  tapRun++;
+  tapPlayer.pause();
   if ("speechSynthesis" in window) speechSynthesis.cancel();
+}
+function speak(p) {
+  stopSpeaking();
+  const run = tapRun;
   const pref = state.settings.voice;
   const voice = pref === "mixed" ? (Math.random() < 0.5 ? "f" : "m") : pref;
-  const a = new Audio(`audio/${state.lang.code}/${voice}/${p.id}.mp3`);
-  a.playbackRate = parseFloat(state.settings.speed) || 1;
-  a.onerror = () => speakWithBrowserVoice(p); // audio file missing: fall back to the device's voice
-  currentAudio = a;
-  a.play().catch(() => {});
+  const rate = parseFloat(state.settings.speed) || 1;
+  tapPlayer.src = SILENCE;
+  tapPlayer.playbackRate = 1;
+  tapPlayer.play().catch(() => {});
+  // the phrase plays at its speed, hum and all, so the lead is cut to TAP_LEAD × speed to last TAP_LEAD
+  withLead(`audio/${state.lang.code}/${voice}/${p.id}.mp3`, TAP_LEAD * rate).then((parts) => {
+    if (run !== tapRun) return;
+    if (!parts) { tapPlayer.pause(); speakWithBrowserVoice(p); return; } // audio file missing: the device's voice
+    if (tapUrl) URL.revokeObjectURL(tapUrl);
+    tapUrl = URL.createObjectURL(new Blob(parts, { type: "audio/mpeg" }));
+    tapPlayer.src = tapUrl;
+    tapPlayer.playbackRate = rate;
+    tapPlayer.play().catch(() => {});
+  });
 }
 function speakWithBrowserVoice(p) {
   if (!("speechSynthesis" in window)) return;
@@ -476,6 +496,21 @@ function silenceOf(seconds) {
   }
   return parts;
 }
+// The file at src with `seconds` of hum in front, as MP3 parts to join; null if it can't be had (not downloaded, offline)
+async function withLead(src, seconds) {
+  try {
+    if (!silenceBytes) {
+      const res = await fetch(SILENCE);
+      if (res.ok) silenceBytes = await res.arrayBuffer();
+    }
+  } catch { /* no hum: the phrase on its own */ }
+  try {
+    const res = await fetch(src);
+    return res.ok ? [...(silenceBytes ? silenceOf(seconds) : []), await res.arrayBuffer()] : null;
+  } catch {
+    return null;
+  }
+}
 async function playJoined(parts, rate, onFail) {
   const url = URL.createObjectURL(new Blob(parts, { type: "audio/mpeg" }));
   try { await playFile(url, rate, onFail); } finally { URL.revokeObjectURL(url); }
@@ -488,19 +523,14 @@ async function playClip(code, p, gap, still) {
   const src = `audio/${code}/${voice}/${p.id}.mp3`;
   const sayIt = () => deviceVoice(code, p);
   if (!gap) return playFile(src, rate, sayIt); // straight after a tap: play at once, while the phone still allows it
-  let clip = null;
-  try {
-    silenceBytes ||= await (await fetch(SILENCE)).arrayBuffer();
-    const res = await fetch(src);
-    if (res.ok) clip = await res.arrayBuffer();
-  } catch { /* offline and not downloaded */ }
+  // the clip plays at the phrase's speed, so the pause is cut to gap × speed and still lasts the pause you chose
+  const parts = await withLead(src, gap * rate);
   if (!still()) return;
-  if (!clip) { // the phrase isn't downloaded: the pause on its own, then the device's voice
+  if (!parts) { // the phrase isn't downloaded: the pause on its own, then the device's voice
     if (silenceBytes) await playJoined(silenceOf(gap), 1, () => sleep(gap * 1000));
     return still() && playFile(src, rate, sayIt);
   }
-  // the clip plays at the phrase's speed, so the pause is cut to gap × speed and still lasts the pause you chose
-  await playJoined([...silenceOf(gap * rate), clip], rate, sayIt);
+  await playJoined(parts, rate, sayIt);
 }
 // The audio file is missing (not downloaded yet): say it with the device's voice instead
 function deviceVoice(code, p) {
@@ -542,7 +572,7 @@ function startPlayAll() {
     playAll = { items, index: 0, playing: false, run: 0 };
   }
   playAll.items = items;
-  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  stopSpeaking();
   playAll.playing = true;
   playAll.run++;
   track("playall/" + state.lang.code);
