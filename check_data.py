@@ -15,6 +15,22 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 
 
+def t_calls(text: str):
+    """The inside of each t(...) call in app.js, found by matching brackets outside quotes."""
+    for m in re.finditer(r"\bt\(", text):
+        depth, i, quote = 1, m.end(), None
+        while i < len(text) and depth:
+            c = text[i]
+            if quote:
+                if c == "\\": i += 1
+                elif c == quote: quote = None
+            elif c in "\"'`": quote = c
+            elif c == "(": depth += 1
+            elif c == ")": depth -= 1
+            i += 1
+        yield text[m.end():i - 1]
+
+
 def main() -> int:
     problems = []
     shared = json.loads((ROOT / "phrases.json").read_text(encoding="utf-8"))
@@ -70,6 +86,40 @@ def main() -> int:
                 problems.append(f"audio/en/{voice}/{i}.mp3 is missing (run generate_audio.py)")
     if not (ROOT / "lang" / "en" / "pack.json").exists():
         problems.append("lang/en/pack.json is missing (run generate_audio.py)")
+
+        # notes, "sounds like" spellings and guides written for speakers of another language (lang/<code>/for-<base>/)
+        for folder in sorted(folder.glob("for-*")):
+            base = folder.name[4:]
+            if base != "en" and not any(l.get("code") == base and l.get("base") for l in languages):
+                problems.append(f"{folder.relative_to(ROOT)}: {base!r} is not marked \"base\" in languages.json")
+            notes_file = folder / "notes.json"
+            if notes_file.exists():
+                try:
+                    notes = json.loads(notes_file.read_text(encoding="utf-8"))
+                except ValueError as err:
+                    problems.append(f"{notes_file.relative_to(ROOT)} can't be read: {err}")
+                    notes = {}
+                for k, entry in notes.items():
+                    if k not in ids:
+                        problems.append(f"{notes_file.relative_to(ROOT)}: {k!r} is not in phrases.json (a mistyped id?)")
+                    elif set(entry) - {"say", "note", "tones", "female"}:
+                        problems.append(f"{notes_file.relative_to(ROOT)}: {k!r} has {sorted(set(entry) - {'say', 'note', 'tones', 'female'})}, which only the language's own file can set")
+
+    # the app's own words: each language you can know translates them in lang/<code>/for-<code>/ui.json; one it
+    # misses shows in English, so that is a warning rather than a problem
+    app_text = (ROOT / "app.js").read_text(encoding="utf-8")
+    keys = set(re.findall(r'data-t(?:-aria)?="([^"]+)"', (ROOT / "index.html").read_text(encoding="utf-8")))
+    for call in t_calls(app_text):  # every quoted text in a t(...) call, such as both sides of t(many ? "..." : "...")
+        keys |= set(re.findall(r'"((?:[^"\\]|\\.)*)"', call.split(", {")[0]))
+    for steps in re.findall(r"steps = \[(.*?)\];", app_text):  # the install steps, passed to t() one by one
+        keys |= set(re.findall(r'"((?:[^"\\]|\\.)*)"', steps))
+    keys |= {re.sub(r"\\(.)", r"\1", k) for k in keys}
+    keys |= {l["name"] for l in languages} | {"English"} | {c.replace("-", " ").title() for c in {p.get("cat") for p in shared}}
+    for ui_file in sorted(ROOT.glob("lang/*/for-*/ui.json")):
+        have = json.loads(ui_file.read_text(encoding="utf-8"))
+        missing = sorted(k for k in keys if k not in have and "\\" not in k)
+        for k in missing:
+            print(f"warning: {ui_file.relative_to(ROOT)} has no translation for {k!r}")
 
     app = re.search(r'const VERSION = "([^"]+)"', (ROOT / "app.js").read_text(encoding="utf-8"))
     sw = re.search(r'const CACHE = "([^"]+)"', (ROOT / "sw.js").read_text(encoding="utf-8"))

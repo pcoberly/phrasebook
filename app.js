@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v36";
+const VERSION = "phrasebook-v37";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -52,6 +52,32 @@ function track(name, title) {
 
 const $ = (s) => document.querySelector(s);
 const main = $("#main");
+// ---------- the app's own words, in the language you know ----------
+// Buttons, labels and messages are written here in English. A language you know can translate them in its pack's
+// lang/<code>/for-<code>/ui.json (English text -> its own), which downloads only while it is the language you know.
+// Anything not translated stays in English. {name} marks a value filled in.
+let ui = {};
+function t(s, vars) {
+  const out = ui[s] ?? s;
+  return vars ? out.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m)) : out;
+}
+// a language's name, in the language you know ("Vietnamese", or "vietnamita" for a Spanish speaker)
+const langName = (l) => t(l.name);
+// the words in index.html itself: data-t names the text, data-t-aria the label read out by a screen reader
+function translatePage() {
+  document.documentElement.lang = state.known.code;
+  document.querySelectorAll("[data-t]").forEach((el) => { el.textContent = t(el.dataset.t); });
+  document.querySelectorAll("[data-t-aria]").forEach((el) => el.setAttribute("aria-label", t(el.dataset.tAria)));
+}
+// the interface text of the language you know (from its pack once downloaded, else straight from the server)
+async function loadUi(code) {
+  ui = {};
+  if (code === "en") return;
+  try {
+    const res = await fetch(`lang/${code}/for-${code}/ui.json`);
+    if (res.ok) ui = await res.json();
+  } catch { /* offline and not downloaded: English */ }
+}
 // English, the language you know unless you choose another (its text is the "en" of phrases.json; its audio a pack of its own)
 const ENGLISH = { code: "en", name: "English", native: "English", ttsLang: "en-US" };
 const state = {
@@ -109,7 +135,7 @@ function setMuted(on) {
   muted = on;
   store.set("phrasebook-mute", on);
   $("#mute").setAttribute("aria-pressed", on);
-  $("#mute").textContent = on ? "🔇 Muted" : "🔊 Sound on";
+  $("#mute").textContent = on ? t("🔇 Muted") : t("🔊 Sound on");
   if (on) stopSpeaking();
 }
 function speak(p) {
@@ -221,13 +247,13 @@ function pron(p) {
 function womanForm(p) {
   const f = p.female;
   if (!f) return "";
-  return `<div class="woman">A woman says: ${f.text ? `<b>${nat(f.text)}</b> ` : ""}${f.say ? `<i>${esc(f.say)}</i>` : ""}</div>`;
+  return `<div class="woman">${t("A woman says:")} ${f.text ? `<b>${nat(f.text)}</b> ` : ""}${f.say ? `<i>${esc(f.say)}</i>` : ""}</div>`;
 }
 const noteOf = (p) => (p.note ? `<div class="note">${noteText(p.note)}</div>` : "");
 // languages marked "draft" in languages.json have not been checked by a native speaker
 function draftBanner() {
   return state.lang.draft
-    ? `<p class="draft">Draft ${esc(state.lang.name)}: not yet checked by a native speaker. Trust the audio over the spelling, and check anything important with a local.</p>`
+    ? `<p class="draft">${t("Draft {name}: not yet checked by a native speaker. Trust the audio over the spelling, and check anything important with a local.", { name: esc(langName(state.lang)) })}</p>`
     : "";
 }
 function updateStatus() {
@@ -236,7 +262,7 @@ function updateStatus() {
   const active = new Set(state.phrases.filter((p) => !isSkipped(p)).map((p) => p.id));
   const known = Object.entries(state.progress).filter(([k, v]) => v.box >= 3 && active.has(k.split(":")[0])).length;
   const skipped = state.phrases.length - active.size;
-  $("#status").textContent = `${known} of ${active.size * 2} cards learned${skipped ? ` · ${skipped} left out` : ""}`;
+  $("#status").textContent = t("{known} of {all} cards learned", { known, all: active.size * 2 }) + (skipped ? " · " + t("{n} left out", { n: skipped }) : "");
 }
 // a page's own line in the footer, such as "Tap 🔊 to hear a phrase"; it never covers the "new version" message
 function hint(text) {
@@ -252,15 +278,17 @@ function say(note, ms = 0) {
 
 // ---------- cards ----------
 function emptyTopic() {
-  const these = state.topics.length > 1 ? "these topics" : "this topic";
+  const several = state.topics.length > 1;
   const chosen = state.phrases.filter(inTopics);
-  if (chosen.length && chosen.every(isSkipped)) return `<div class="card">Every phrase in ${these} is left out of practice. Tick some back in the List, or choose another topic.</div>`;
-  return `<div class="card">${esc(state.lang.name)} has no phrases in ${these} yet. Choose another topic.</div>`;
+  if (chosen.length && chosen.every(isSkipped)) {
+    return `<div class="card">${t(several ? "Every phrase in these topics is left out of practice. Tick some back in the List, or choose another topic." : "Every phrase in this topic is left out of practice. Tick some back in the List, or choose another topic.")}</div>`;
+  }
+  return `<div class="card">${t(several ? "{name} has no phrases in these topics yet. Choose another topic." : "{name} has no phrases in this topic yet. Choose another topic.", { name: esc(langName(state.lang)) })}</div>`;
 }
 // The ✓ circle: practise this phrase, or (empty) leave it out
 function practiseButton(p) {
   const on = !isSkipped(p);
-  return `<button class="practise${on ? " on" : ""}" data-skip="${p.id}" aria-pressed="${on}" aria-label="Practise this phrase"></button>`;
+  return `<button class="practise${on ? " on" : ""}" data-skip="${p.id}" aria-pressed="${on}" aria-label="${t("Practise this phrase")}"></button>`;
 }
 // make every ✓ circle under root work; then(p, on) runs after each change
 function wirePractise(root, then = () => {}) {
@@ -278,7 +306,8 @@ function renderCard() {
   const item = next();
   if (!item) { main.innerHTML = emptyTopic(); updateStatus(); return; }
   const { p, dir, key } = item;
-  const name = state.lang.name;
+  const name = esc(langName(state.lang));
+  const yourName = esc(langName(state.known));
   const listenOnly = $("#listen").checked;
   const fromLang = dir === "from";
   const showFront = !(fromLang && listenOnly);
@@ -286,19 +315,19 @@ function renderCard() {
   // Two faces share one spot, so the card keeps one height and turns over like a real flashcard.
   main.innerHTML = `
     <div class="cardwrap">
-    <div class="flip" id="flip" role="button" tabindex="0" aria-label="Flip the card">
+    <div class="flip" id="flip" role="button" tabindex="0" aria-label="${t("Flip the card")}">
       <div class="flip-inner">
         <div class="card face front">
-          <div class="label">${fromLang ? name : esc(state.known.name)}</div>
+          <div class="label">${fromLang ? name : yourName}</div>
           <div class="big">${showFront ? front : "🎧"}</div>
-          ${fromLang ? `<button class="speak" id="say" aria-label="Play">🔊</button>` : ""}
-          <div class="hint">Tap the card to flip it</div>
+          ${fromLang ? `<button class="speak" id="say" aria-label="${t("Play")}">🔊</button>` : ""}
+          <div class="hint">${t("Tap the card to flip it")}</div>
         </div>
         <div class="card face back">
-          <div class="label">${fromLang ? esc(state.known.name) : name}</div>
+          <div class="label">${fromLang ? yourName : name}</div>
           <div class="big">${fromLang ? own(p.known) : nat(p.text)}</div>
-          <button class="speak" id="say2" aria-label="Play">🔊</button>
-          <div class="orig">${fromLang ? name : esc(state.known.name)}: <b>${front}</b></div>
+          <button class="speak" id="say2" aria-label="${t("Play")}">🔊</button>
+          <div class="orig">${fromLang ? name : yourName}: <b>${front}</b></div>
           ${pron(p)}
         </div>
       </div>
@@ -307,15 +336,15 @@ function renderCard() {
     </div>
     <div class="detail" id="detail"></div>
     <div class="row sticky hidden" id="grades">
-      <button class="act bad" id="again">✗ Didn't know it</button>
-      <button class="act good" id="got">✓ Knew it</button>
+      <button class="act bad" id="again">${t("✗ Didn't know it")}</button>
+      <button class="act good" id="got">${t("✓ Knew it")}</button>
     </div>`;
   const flip = $("#flip");
   let seenAnswer = false;
   if (fromLang) { $("#say").onclick = (e) => { e.stopPropagation(); speak(p); }; autoSpeak(p); }
   $("#say2").onclick = (e) => { e.stopPropagation(); speak(p); };
   // leaving it out keeps this card on screen (to grade, or to change your mind); it just won't come up again
-  wirePractise(main, (_, on) => say(on ? "Back in practice." : "Left out of practice. Tap the circle again to keep it.", 4000));
+  wirePractise(main, (_, on) => say(on ? t("Back in practice.") : t("Left out of practice. Tap the circle again to keep it."), 4000));
   const toggle = () => {
     const flipped = flip.classList.toggle("flipped");
     flip.setAttribute("aria-pressed", flipped);
@@ -396,7 +425,7 @@ function resetRound() {
   store.remove(roundKey(state.lang.code));
 }
 function renderQuiz() {
-  if (state.phrases.length < 4) { main.innerHTML = `<div class="card">Need at least 4 phrases.</div>`; return; }
+  if (state.phrases.length < 4) { main.innerHTML = `<div class="card">${t("Need at least 4 phrases.")}</div>`; return; }
   if (!state.round) { state.round = loadRound() || buildRound(); saveRound(); }
   const round = state.round;
   if (!round.items.length) { resetRound(); main.innerHTML = emptyTopic(); updateStatus(); return; }
@@ -404,31 +433,31 @@ function renderQuiz() {
   const { p, dir, key } = round.items[round.index];
   const total = round.items.length;
   const number = round.index + 1;
-  const name = state.lang.name;
+  const name = esc(langName(state.lang));
   const listenOnly = $("#listen").checked;
   const toLang = dir === "to";
   const opts = shuffle([p, ...distractors(p)]);
   main.innerHTML = `
-    <div class="roundbar"><span>Question ${number} of ${total}</span><span id="score">${round.correct} correct</span></div>
+    <div class="roundbar"><span>${t("Question {n} of {total}", { n: number, total })}</span><span id="score">${t("{n} correct", { n: round.correct })}</span></div>
     <div class="bar"><i style="width:${Math.round(100 * round.index / total)}%"></i></div>
     <div class="card q">
       ${practiseButton(p)}
-      <div class="label">Pick the ${toLang ? name : esc(state.known.name)}</div>
+      <div class="label">${t("Pick the {name}", { name: toLang ? name : esc(langName(state.known)) })}</div>
       <div class="big">${toLang ? own(p.known) : (listenOnly ? "🎧" : nat(p.text))}</div>
-      ${toLang ? "" : `<button class="speak" id="say" aria-label="Play">🔊</button>`}
+      ${toLang ? "" : `<button class="speak" id="say" aria-label="${t("Play")}">🔊</button>`}
     </div>
     <div id="choices"></div>
     <div class="reveal" id="reveal"></div>
-    <div class="row sticky hidden" id="nextrow"><button class="act" id="next">${number === total ? "See score" : "Next"}</button></div>`;
+    <div class="row sticky hidden" id="nextrow"><button class="act" id="next">${number === total ? t("See score") : t("Next")}</button></div>`;
   if (!toLang) { $("#say").onclick = () => speak(p); autoSpeak(p); }
-  wirePractise(main, (_, on) => say(on ? "Back in practice." : "Left out of later rounds. Tap the circle again to keep it.", 4000));
+  wirePractise(main, (_, on) => say(on ? t("Back in practice.") : t("Left out of later rounds. Tap the circle again to keep it."), 4000));
   const box = $("#choices");
   let answered = false;
   opts.forEach((o, i) => {
     const div = document.createElement("div");
     div.className = "choice";
-    const label = toLang ? (listenOnly ? `Option ${i + 1}` : nat(o.text)) : own(o.known);
-    div.innerHTML = `<button class="pick"${toLang ? rtlAttr() : ""}>${label}</button>${toLang ? `<button class="speak" aria-label="Play">🔊</button>` : ""}`;
+    const label = toLang ? (listenOnly ? t("Option {n}", { n: i + 1 }) : nat(o.text)) : own(o.known);
+    div.innerHTML = `<button class="pick"${toLang ? rtlAttr() : ""}>${label}</button>${toLang ? `<button class="speak" aria-label="${t("Play")}">🔊</button>` : ""}`;
     const pick = div.querySelector(".pick");
     if (toLang) div.querySelector(".speak").onclick = () => speak(o);
     pick.onclick = () => {
@@ -440,7 +469,7 @@ function renderQuiz() {
       if (ok) round.correct++; else round.missed.push(round.items[round.index]);
       round.index++;
       saveRound();
-      $("#score").textContent = `${round.correct} correct`;
+      $("#score").textContent = t("{n} correct", { n: round.correct });
       pick.classList.add(ok ? "right" : "wrong");
       [...box.children].forEach((c, j) => {
         if (opts[j].id === p.id) c.querySelector(".pick").classList.add("right");
@@ -464,17 +493,17 @@ function renderSummary() {
   if (!r.counted) { r.counted = true; saveRound(); track("quiz/finished/" + state.lang.code); } // once per round, not each time the screen is redrawn
   const total = r.items.length;
   const pct = total ? Math.round((100 * r.correct) / total) : 0;
-  const message = r.correct === total ? "A perfect round!" : pct >= 80 ? "Great work." : pct >= 50 ? "Good effort." : "Keep going. These will stick.";
+  const message = t(r.correct === total ? "A perfect round!" : pct >= 80 ? "Great work." : pct >= 50 ? "Good effort." : "Keep going. These will stick.");
   main.innerHTML = `
     <div class="card q summary">
-      <div class="label">Round complete</div>
-      <div class="big">${r.correct} of ${total}</div>
+      <div class="label">${t("Round complete")}</div>
+      <div class="big">${t("{n} of {total}", { n: r.correct, total })}</div>
       <div class="hint">${message}</div>
     </div>
     ${r.missed.length
-      ? `<h2 class="group">To review (${r.missed.length})</h2>${r.missed.map((i) => entryHtml(i.p, i.dir === "from", false)).join("")}`
-      : `<p class="note" style="text-align:center">No mistakes this round.</p>`}
-    <div class="row sticky"><button class="act good" id="newround">New round</button></div>`;
+      ? `<h2 class="group">${t("To review ({n})", { n: r.missed.length })}</h2>${r.missed.map((i) => entryHtml(i.p, i.dir === "from", false)).join("")}`
+      : `<p class="note" style="text-align:center">${t("No mistakes this round.")}</p>`}
+    <div class="row sticky"><button class="act good" id="newround">${t("New round")}</button></div>`;
   wireSpeakButtons();
   $("#newround").onclick = () => { resetRound(); render(); };
   window.scrollTo(0, 0);
@@ -497,7 +526,7 @@ function entryHtml(p, fromFirst, withNote = true, withSkip = false) {
           ${withNote && p.note ? `<div class="note">${noteText(p.note)}</div>` : ""}
         </div>
         <div class="side">
-          <button class="speak" data-id="${p.id}" aria-label="Play">🔊</button>
+          <button class="speak" data-id="${p.id}" aria-label="${t("Play")}">🔊</button>
           ${withSkip ? practiseButton(p) : ""}
         </div>
       </div>`;
@@ -520,15 +549,15 @@ function renderList() {
   const groups = listGroups();
   const playing = playAll && playAll.playing;
   main.innerHTML = draftBanner() + Object.entries(groups).map(([c, ps]) => `
-    <h2 class="group">${esc(topicName(c))}</h2>
+    <h2 class="group">${esc(t(topicName(c)))}</h2>
     ${ps.map((p) => entryHtml(p, fromFirst, true, true)).join("")}`).join("") + `
-    <div class="row sticky"><button class="act${playing ? "" : " good"}" id="playall">${playing ? "⏸ Pause" : "▶ Play all"}</button></div>`;
+    <div class="row sticky"><button class="act${playing ? "" : " good"}" id="playall">${playing ? t("⏸ Pause") : t("▶ Play all")}</button></div>`;
   wireSpeakButtons();
   // changed in place, so the List doesn't jump
   wirePractise(main, (p, on) => main.querySelector(`[data-entry="${CSS.escape(p.id)}"]`).classList.toggle("skipped", !on));
   $("#playall").onclick = () => (playAll && playAll.playing ? pausePlayAll() : startPlayAll());
   if (playAll) markPlaying();
-  else hint("Tap 🔊 to hear a phrase, or ▶ to hear them all");
+  else hint(t("Tap 🔊 to hear a phrase, or ▶ to hear them all"));
 }
 
 // ---------- play all: the List read aloud, for listening on the move ----------
@@ -697,10 +726,10 @@ function markPlaying() {
     row.classList.add("playing");
     if (pa.playing && !document.hidden) row.scrollIntoView({ block: "center", behavior: "smooth" });
   }
-  if (state.mode === "list") hint(`${pa.playing ? "Playing" : "Paused at"} ${pa.index + 1} of ${pa.items.length}`);
+  if (state.mode === "list") hint(t(pa.playing ? "Playing {n} of {total}" : "Paused at {n} of {total}", { n: pa.index + 1, total: pa.items.length }));
   if ("mediaSession" in navigator && "MediaMetadata" in window) {
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: p.known, artist: `${p.text} · ${state.lang.name}`, album: "PhraseBook",
+      title: p.known, artist: `${p.text} · ${langName(state.lang)}`, album: "PhraseBook",
       artwork: [{ src: "icon-v3-512.png", sizes: "512x512", type: "image/png" }],
     });
     navigator.mediaSession.playbackState = pa.playing ? "playing" : "paused";
@@ -732,44 +761,62 @@ async function keepAwake(on) {
 document.addEventListener("visibilitychange", () => { if (!document.hidden && playAll && playAll.playing) keepAwake(true); });
 
 // ---------- guide: one page per language ----------
+// the guide written for speakers of the language you know (lang/<code>/for-<yours>/guide.html), else the English one
 async function renderGuide() {
   const code = state.lang.code;
-  main.innerHTML = `<p class="note">Loading…</p>`;
-  hint(`${state.lang.name} pronunciation guide`);
-  try {
-    const res = await fetch(`lang/${code}/guide.html`);
+  main.innerHTML = `<p class="note">${t("Loading…")}</p>`;
+  hint(t("{name} pronunciation guide", { name: langName(state.lang) }));
+  const get = async (path) => {
+    const res = await fetch(path);
     if (!res.ok) throw new Error(res.status);
-    const html = await res.text();
+    return res.text();
+  };
+  try {
+    const yours = state.known.code;
+    const html = await (yours !== "en" ? get(`lang/${code}/for-${yours}/guide.html`).catch(() => get(`lang/${code}/guide.html`)) : get(`lang/${code}/guide.html`));
     if (state.mode === "guide" && state.lang.code === code) main.innerHTML = html;
   } catch {
-    if (state.mode === "guide") main.innerHTML = `<p class="note">The guide isn't available offline until ${esc(state.lang.name)} has finished downloading.</p>`;
+    if (state.mode === "guide") main.innerHTML = `<p class="note">${t("The guide isn't available offline until {name} has finished downloading.", { name: esc(langName(state.lang)) })}</p>`;
   }
 }
 
 // ---------- first run: choose a language ----------
 function pickerRow(l) {
-  const note = state.busy[l.code] || `${(l.bytes / 1e6).toFixed(1)} MB${l.draft ? " · Draft translations" : ""}`;
+  const note = state.busy[l.code] || `${(l.bytes / 1e6).toFixed(1)} MB${l.draft ? " · " + t("Draft translations") : ""}`;
   return `
     <div class="lang" data-lang="${l.code}">
-      <div class="linfo"><div class="lname">${esc(l.name)} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
+      <div class="linfo"><div class="lname">${esc(langName(l))} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
         <div class="note"><span class="lstate">${esc(note)}</span></div></div>
-      <div class="lbtn">${state.choosing ? "" : `<button class="mini" data-pick="${l.code}">Start</button>`}</div>
+      <div class="lbtn">${state.choosing ? "" : `<button class="mini" data-pick="${l.code}">${t("Start")}</button>`}</div>
     </div>`;
 }
-// the "I speak" choices: English, then the others as "German (Deutsch)"
-const knownSelect = () => knownLanguages().map((l) => `<option value="${l.code}"${l.code === state.base ? " selected" : ""}>${esc(l === ENGLISH ? l.name : `${l.name} (${l.native})`)}</option>`).join("");
+// the "I speak" choices: English, then the others as "German (Deutsch)", or just "Español" when the names match
+const knownSelect = () => knownLanguages().map((l) => {
+  const name = langName(l);
+  const label = l === ENGLISH ? name : name.toLowerCase() === l.native.toLowerCase() ? l.native : `${name} (${l.native})`;
+  return `<option value="${l.code}"${l.code === state.base ? " selected" : ""}>${esc(label)}</option>`;
+}).join("");
 function renderWelcome() {
   document.body.classList.add("firstrun");
-  const choices = [...state.languages].sort((a, b) => a.name.localeCompare(b.name));
+  const choices = [...state.languages].sort((a, b) => langName(a).localeCompare(langName(b)));
   main.innerHTML = `
     <div class="welcome">
-      <h1>Welcome to PhraseBook</h1>
-      <div class="setting"><label for="wknown">I speak</label><select id="wknown">${knownSelect()}</select></div>
-      <p class="lead">Which language would you like to learn?</p>
-      <p class="note">Tap one to download it. That needs a connection once, and afterwards the app works without one. You can add more languages later in Settings.</p>
+      <h1>${t("Welcome to PhraseBook")}</h1>
+      <div class="setting"><label for="wknown">${t("I speak")}</label><select id="wknown">${knownSelect()}</select></div>
+      <p class="lead">${t("Which language would you like to learn?")}</p>
+      <p class="note">${t("Tap one to download it. That needs a connection once, and afterwards the app works without one. You can add more languages later in Settings.")}</p>
       <div id="welcomelangs">${choices.map(pickerRow).join("")}</div>
     </div>`;
-  $("#wknown").onchange = () => { state.base = $("#wknown").value; store.set("phrasebook-base", state.base); };
+  // the welcome screen changes to the language chosen (its interface text comes straight from the server)
+  $("#wknown").onchange = async () => {
+    state.base = $("#wknown").value;
+    store.set("phrasebook-base", state.base);
+    await loadUi(state.base);
+    state.known = knownLanguages().find((l) => l.code === state.base) || ENGLISH;
+    translatePage();
+    setMuted(muted);
+    renderWelcome();
+  };
   $("#welcomelangs").onclick = (e) => {
     const b = e.target.closest("button[data-pick]");
     if (b) chooseFirstLanguage(b.dataset.pick);
@@ -778,12 +825,12 @@ function renderWelcome() {
 async function chooseFirstLanguage(code) {
   if (state.choosing) return;
   state.choosing = code;
-  state.busy[code] = "Starting…";
+  state.busy[code] = t("Starting…");
   renderWelcome();
   try {
     if (canCache) {
       await syncPack(code, (done, total) => {
-        state.busy[code] = `Downloading ${done} of ${total}`;
+        state.busy[code] = t("Downloading {done} of {total}", { done, total });
         const el = document.querySelector(`[data-lang="${code}"] .lstate`);
         if (el) el.textContent = state.busy[code];
       });
@@ -799,7 +846,7 @@ async function chooseFirstLanguage(code) {
     render();
   } catch {
     state.choosing = null;
-    state.busy[code] = "Couldn't download. Check you're online and try again.";
+    state.busy[code] = t("Couldn't download. Check you're online and try again.");
     renderWelcome();
     setTimeout(() => { delete state.busy[code]; if (state.firstRun && !state.choosing) renderWelcome(); }, 5000);
   }
@@ -848,13 +895,16 @@ async function downloadPack(code, onProgress) {
   const res = await fetch(`lang/${code}/pack.json`, { cache: "no-store" });
   if (!res.ok) throw new Error("pack.json " + res.status);
   const manifest = await res.json();
+  // files written for speakers of a language (its notes and guide for them, or its interface text) come only while
+  // it is the language you know; switching away removes them below, as files no longer listed
+  const wanted = { ...manifest.files, ...(manifest.forBase?.[wantedKnown().code] || {}) };
   const rec = store.get(packKey(code), { complete: false, files: {} });
   const cache = await caches.open(cacheName(code));
   for (const path of Object.keys(rec.files)) {
-    if (!(path in manifest.files)) { await cache.delete(path); delete rec.files[path]; }
+    if (!(path in wanted)) { await cache.delete(path); delete rec.files[path]; }
   }
   const todo = [];
-  for (const [path, hash] of Object.entries(manifest.files)) {
+  for (const [path, hash] of Object.entries(wanted)) {
     if (rec.files[path] === hash && (await cache.match(path))) continue;
     todo.push(path);
   }
@@ -867,10 +917,10 @@ async function downloadPack(code, onProgress) {
   const worker = async () => {
     while (todo.length) {
       const path = todo.shift();
-      const r = await fetch(`${path}?sync=${manifest.files[path]}`); // ?sync makes the service worker step aside
+      const r = await fetch(`${path}?sync=${wanted[path]}`); // ?sync makes the service worker step aside
       if (!r.ok) throw new Error(`${path}: ${r.status}`);
       await cache.put(path, r);
-      rec.files[path] = manifest.files[path];
+      rec.files[path] = wanted[path];
       store.set(packKey(code), rec);
       onProgress?.(++done, total);
     }
@@ -899,10 +949,26 @@ async function loadLanguageData() {
       const r = await fetch(`lang/${k.code}/phrases.json`);
       if (r.ok) theirs = await r.json();
     } catch { /* offline and not downloaded */ }
-    if (!theirs) { say(`${k.name} isn't downloaded yet, so English is shown. Go online to get it.`, 6000); k = ENGLISH; }
+    if (!theirs) k = ENGLISH;
   }
   state.known = k;
-  state.phrases = state.shared.filter((p) => texts[p.id]).map((p) => ({ ...p, ...texts[p.id], known: theirs?.[p.id]?.text || p.en }));
+  await loadUi(k.code);
+  if (k.code !== wantedKnown().code) say(t("{name} isn't downloaded yet, so English is shown. Go online to get it.", { name: langName(wantedKnown()) }), 6000);
+  // notes, "sounds like" spellings and tones written for speakers of your language (lang/<code>/for-<yours>/notes.json),
+  // over the English ones; a phrase or field not yet written for them stays in English
+  let notes = {};
+  if (k !== ENGLISH) {
+    try {
+      const r = await fetch(`lang/${code}/for-${k.code}/notes.json`);
+      if (r.ok) notes = await r.json();
+    } catch { /* not written yet, or offline */ }
+  }
+  state.phrases = state.shared.filter((p) => texts[p.id]).map((p) => {
+    const mine = notes[p.id] || {};
+    const female = texts[p.id].female && { ...texts[p.id].female, ...mine.female };
+    return { ...p, ...texts[p.id], ...mine, ...(female ? { female } : {}), known: theirs?.[p.id]?.text || p.en };
+  });
+  translatePage();
 }
 // Packs downloaded only because they were the language you know, not chosen to learn. Switching away removes them,
 // so only what you use stays on the device (and is kept up to date). English's own pack is always one of these, as
@@ -927,12 +993,14 @@ async function setKnown(code) {
   state.base = code;
   store.set("phrasebook-base", code);
   const k = wantedKnown();
-  if (canCache && packState(k.code) !== "installed") {
+  if (canCache) {
     try {
-      await syncKnownPack(k.code, (done, total) => say(`Downloading ${k.name}: ${done} of ${total}`));
+      // its pack (with its interface text), then what the language being learned has written for its speakers
+      await syncKnownPack(k.code, (done, total) => say(t("Downloading {name}: {done} of {total}", { name: langName(k), done, total })));
+      if (!state.firstRun) await syncPack(state.lang.code);
       say("");
     } catch {
-      say(`Couldn't download ${k.name}. Check you're online and try again.`, 6000);
+      say(t("Couldn't download {name}. Check you're online and try again.", { name: langName(k) }), 6000);
     }
   }
   if (state.firstRun) return; // nothing is loaded until a language to learn is chosen
@@ -941,14 +1009,17 @@ async function setKnown(code) {
   state.last = null;
   stopPlayAll();
   rebuildDirOptions();
+  rebuildTopicOptions();
+  setMuted(muted);
   await dropKnownPack(before).catch(() => {});
+  syncInstalled().catch(() => {}); // the other downloaded languages: their files for the old language you spoke go, the new one's come
 }
 function rebuildDirOptions() {
-  const n = esc(state.lang.name);
+  const n = esc(langName(state.lang));
   const sel = $("#dir");
   const saved = store.get("phrasebook-dir", "mixed");
-  const k = esc(state.known.name);
-  sel.innerHTML = `<option value="mixed">Both Directions</option><option value="to">${k} → ${n}</option><option value="from">${n} → ${k}</option>`;
+  const k = esc(langName(state.known));
+  sel.innerHTML = `<option value="mixed">${t("Both Directions")}</option><option value="to">${k} → ${n}</option><option value="from">${n} → ${k}</option>`;
   sel.value = ["mixed", "to", "from"].includes(saved) ? saved : "mixed";
 }
 async function useLanguage(code) {
@@ -978,12 +1049,12 @@ async function syncInstalled() {
   const codes = state.languages.map((l) => l.code).filter((c) => c === state.lang.code || packState(c) !== "none");
   let activeChanged = false;
   for (const code of codes) {
-    const label = state.languages.find((l) => l.code === code).name;
+    const label = langName(state.languages.find((l) => l.code === code));
     try {
       const changed = await syncPack(code, (done, total) => {
-        if (code === state.lang.code) say(`Downloading ${label}: ${done} of ${total}`);
+        if (code === state.lang.code) say(t("Downloading {name}: {done} of {total}", { name: label, done, total }));
       });
-      if (changed && code === state.lang.code) { activeChanged = true; say(`${label} is ready to use offline`, 4000); }
+      if (changed && code === state.lang.code) { activeChanged = true; say(t("{name} is ready to use offline", { name: label }), 4000); }
       else if (code === state.lang.code && state.note) say("");
     } catch {
       if (code === state.lang.code) say("");
@@ -1009,8 +1080,8 @@ const inTopics = (p) => !state.topics.length || state.topics.includes(p.cat);
 // what a saved quiz round was built from: "all", "food" or "food+numbers" (the first two as before several could be chosen)
 const topicsKey = () => state.topics.join("+") || "all";
 function topicLabel() {
-  const names = state.topics.map(topicName);
-  return !names.length ? "All Topics" : names.length <= 2 ? names.join(" + ") : `${names[0]} + ${names.length - 1} more`;
+  const names = state.topics.map((c) => t(topicName(c)));
+  return !names.length ? t("All Topics") : names.length <= 2 ? names.join(" + ") : t("{first} + {n} more", { first: names[0], n: names.length - 1 });
 }
 // the topics chosen, kept in phrases.json's order; choosing every one is the same as All Topics
 function tidyTopics(picked) {
@@ -1030,9 +1101,9 @@ function openTopics() {
   let picked = [...state.topics];
   const count = (c) => state.phrases.filter((p) => p.cat === c).length;
   menu.innerHTML = `<form method="dialog">
-    <label class="topic"><input type="checkbox" value="all"> All Topics</label>
-    ${cats.map((c) => `<label class="topic"><input type="checkbox" value="${c}"> ${esc(topicName(c))}<span class="note">${count(c)}</span></label>`).join("")}
-    <button class="act good">Done</button>
+    <label class="topic"><input type="checkbox" value="all"> ${t("All Topics")}</label>
+    ${cats.map((c) => `<label class="topic"><input type="checkbox" value="${c}"> ${esc(t(topicName(c)))}<span class="note">${count(c)}</span></label>`).join("")}
+    <button class="act good">${t("Done")}</button>
   </form>`;
   const tick = () => menu.querySelectorAll("input").forEach((i) => { i.checked = i.value === "all" ? !picked.length : picked.includes(i.value); });
   tick();
@@ -1068,7 +1139,7 @@ function installUpdate(version) {
     return;
   }
   state.updateReady = true;
-  state.note = "A new version is ready. Tap here to reload.";
+  state.note = t("A new version is ready. Tap here to reload.");
   updateStatus();
 }
 let lastCheck = 0;
@@ -1110,7 +1181,7 @@ function languageGroups() {
   const order = store.get(langOrderKey, []);
   const rank = (code) => (order.includes(code) ? order.indexOf(code) : order.length); // new ones go to the end
   const mine = state.languages.filter(onDevice).sort((a, b) => rank(a.code) - rank(b.code));
-  const available = state.languages.filter((l) => !onDevice(l)).sort((a, b) => a.name.localeCompare(b.name)); // alphabetical
+  const available = state.languages.filter((l) => !onDevice(l)).sort((a, b) => langName(a).localeCompare(langName(b))); // alphabetical
   return { mine, available };
 }
 function moveLanguage(code, delta) {
@@ -1124,21 +1195,22 @@ function languageRow(l, position, count) {
   const ps = packState(l.code);
   const active = l.code === state.lang.code;
   const mb = `${(l.bytes / 1e6).toFixed(1)} MB`;
-  const yours = l.code === state.known.code ? " · Your language" : ""; // downloaded for prompts and Play all
-  const status = state.busy[l.code] || (active ? "In use" : ps === "installed" ? "Downloaded" + yours : ps === "partial" ? "Partly downloaded" + yours : "Not downloaded");
+  const yours = l.code === state.known.code ? " · " + t("Your language") : ""; // downloaded for prompts and Play all
+  const status = state.busy[l.code] || (active ? t("In use") : ps === "installed" ? t("Downloaded") + yours : ps === "partial" ? t("Partly downloaded") + yours : t("Not downloaded"));
+  const name = esc(langName(l));
   const buttons = state.busy[l.code] || active ? ""
-    : ps === "installed" ? `<button class="mini" data-act="use">Use</button><button class="mini ghost" data-act="remove" aria-label="Remove ${esc(l.name)} from this device" title="Remove from this device">✕</button>`
-    : `<button class="mini" data-act="download">${canCache ? "Download &amp; use" : "Use"}</button>`;
+    : ps === "installed" ? `<button class="mini" data-act="use">${t("Use")}</button><button class="mini ghost" data-act="remove" aria-label="${t("Remove {name} from this device", { name })}" title="${t("Remove from this device")}">✕</button>`
+    : `<button class="mini" data-act="download">${canCache ? t("Download &amp; use") : t("Use")}</button>`;
   // arrows only for languages on the device, where the order matters
   const arrows = position < 0 ? "" : `
         <div class="mv">
-          <button class="mvb" data-act="up" aria-label="Move ${esc(l.name)} up"${position === 0 ? " disabled" : ""}>▲</button>
-          <button class="mvb" data-act="down" aria-label="Move ${esc(l.name)} down"${position === count - 1 ? " disabled" : ""}>▼</button>
+          <button class="mvb" data-act="up" aria-label="${t("Move {name} up", { name })}"${position === 0 ? " disabled" : ""}>▲</button>
+          <button class="mvb" data-act="down" aria-label="${t("Move {name} down", { name })}"${position === count - 1 ? " disabled" : ""}>▼</button>
         </div>`;
   return `
       <div class="lang${active ? " current" : ""}" data-lang="${l.code}">${arrows}
-        <div class="linfo"><div class="lname">${esc(l.name)} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
-          <div class="note"><span class="lstate">${esc(status)}</span> · ${mb}${l.draft ? " · Draft translations" : ""}</div></div>
+        <div class="linfo"><div class="lname">${name} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
+          <div class="note"><span class="lstate">${esc(status)}</span> · ${mb}${l.draft ? " · " + t("Draft translations") : ""}</div></div>
         <div class="lbtn">${buttons}</div>
       </div>`;
 }
@@ -1150,16 +1222,16 @@ function languagePanel() {
   const availOpen = store.get("phrasebook-avail-open", available.length <= 5); // a long list starts folded
   return `
     <details class="panel" id="langpanel"${open ? " open" : ""}>
-      <summary><span class="ptitle">Learning</span><span class="pval">${esc(state.lang.name)}</span><span class="chev" aria-hidden="true"></span></summary>
+      <summary><span class="ptitle">${t("Learning")}</span><span class="pval">${esc(langName(state.lang))}</span><span class="chev" aria-hidden="true"></span></summary>
       <div class="pbody" id="langs">
-        <h3 class="sub">On this device (${mine.length})</h3>
+        <h3 class="sub">${t("On this device ({n})", { n: mine.length })}</h3>
         ${mine.map((l, i) => languageRow(l, i, mine.length)).join("")}
         ${available.length ? `
         <details class="avail" id="availpanel"${availOpen ? " open" : ""}>
-          <summary><span>Available to download (${available.length})</span><span class="chev" aria-hidden="true"></span></summary>
+          <summary><span>${t("Available to download ({n})", { n: available.length })}</span><span class="chev" aria-hidden="true"></span></summary>
           ${available.map((l) => languageRow(l, -1, 0)).join("")}
         </details>` : ""}
-        <p class="note">A language is stored on this device only once you download it. Removing one frees its space and keeps your progress. Use the arrows to put your languages in the order you want.</p>
+        <p class="note">${t("A language is stored on this device only once you download it. Removing one frees its space and keeps your progress. Use the arrows to put your languages in the order you want.")}</p>
       </div>
     </details>`;
 }
@@ -1180,35 +1252,35 @@ function installInfo() {
   else if (ios) steps = ["This version of iOS only lets Safari add apps to the Home Screen. Open this page in <b>Safari</b>; <b>Share this app</b> below can send you the link.", "In Safari, tap the Share button, then <b>Add to Home Screen</b>."];
   else if (android) steps = ["Open this page in <b>Chrome</b> and tap the menu (⋮).", "Tap <b>Install app</b> or <b>Add to Home screen</b>.", "Tap <b>Install</b>. PhraseBook now opens from your Home screen and works without a connection."];
   else steps = ["In Chrome or Edge, click the install icon at the right end of the address bar, or open the menu and choose <b>Install PhraseBook</b>.", "In Safari on a Mac, choose <b>File → Add to Dock</b>.", "It then opens in its own window and works without a connection."];
-  return { installed, steps };
+  return { installed, steps: steps.map((s) => t(s)) };
 }
 function installPanel() {
   const { installed, steps } = installInfo();
   const open = store.get("phrasebook-install-open", !installed);
   return `
     <details class="panel" id="installpanel"${open ? " open" : ""}>
-      <summary><span class="ptitle">Install on this device</span><span class="pval">${installed ? "Installed ✓" : ""}</span><span class="chev" aria-hidden="true"></span></summary>
+      <summary><span class="ptitle">${t("Install on this device")}</span><span class="pval">${installed ? t("Installed ✓") : ""}</span><span class="chev" aria-hidden="true"></span></summary>
       <div class="pbody">
         ${installed
-          ? `<p class="note">PhraseBook is installed on this device, and keeps itself up to date.</p>`
+          ? `<p class="note">${t("PhraseBook is installed on this device, and keeps itself up to date.")}</p>`
           : `<ol class="steps">${steps.map((s) => `<li>${s}</li>`).join("")}</ol>
-        <p class="note">Once installed it updates itself, so there is no need to remove it and add it again.</p>`}
+        <p class="note">${t("Once installed it updates itself, so there is no need to remove it and add it again.")}</p>`}
       </div>
     </details>`;
 }
 async function shareApp() {
   track("share/click");
   const url = new URL("./", location.href).href;
-  const data = { title: "PhraseBook", text: "A free phrase book for travel: flashcards, quizzes and audio, and it works offline.", url };
+  const data = { title: "PhraseBook", text: t("A free phrase book for travel: flashcards, quizzes and audio, and it works offline."), url };
   const btn = $("#share");
   try {
     if (navigator.share) { await navigator.share(data); return; }
     await navigator.clipboard.writeText(url);
-    btn.textContent = "Link copied ✓";
-    setTimeout(() => { if (btn.isConnected) btn.textContent = "Share this app"; }, 2500);
+    btn.textContent = t("Link copied ✓");
+    setTimeout(() => { if (btn.isConnected) btn.textContent = t("Share this app"); }, 2500);
   } catch (err) {
     if (err && err.name === "AbortError") return; // the person closed the share sheet
-    prompt("Copy this link to share PhraseBook:", url);
+    prompt(t("Copy this link to share PhraseBook:"), url);
   }
 }
 // Feedback goes by email. The address is assembled here so it is not a plain mailto link sitting in the page
@@ -1233,12 +1305,12 @@ function showFeedbackOptions() {
   if (!box) return;
   const f = feedbackParts();
   box.innerHTML = `
-    <div>Send your feedback to <b>${esc(f.to)}</b></div>
+    <div>${t("Send your feedback to")} <b>${esc(f.to)}</b></div>
     <div class="row fbrow">
       <button class="mini" data-fb="gmail">Gmail</button>
       <button class="mini" data-fb="yahoo">Yahoo Mail</button>
-      <button class="mini" data-fb="mail">Email app</button>
-      <button class="mini ghost wide" data-fb="copy">Copy address</button>
+      <button class="mini" data-fb="mail">${t("Email app")}</button>
+      <button class="mini ghost wide" data-fb="copy">${t("Copy address")}</button>
     </div>`;
   box.hidden = false;
   box.onclick = async (e) => {
@@ -1247,8 +1319,8 @@ function showFeedbackOptions() {
     const parts = feedbackParts();
     if (btn.dataset.fb === "mail") openMailApp(parts.mailto);
     else if (btn.dataset.fb === "copy") {
-      try { await navigator.clipboard.writeText(parts.to); btn.textContent = "Copied ✓"; }
-      catch { prompt("Copy this address:", parts.to); }
+      try { await navigator.clipboard.writeText(parts.to); btn.textContent = t("Copied ✓"); }
+      catch { prompt(t("Copy this address:"), parts.to); }
     } else window.open(parts[btn.dataset.fb], "_blank", "noopener");
   };
 }
@@ -1262,64 +1334,64 @@ function renderSettings() {
   const opt = (v, label, cur) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
   main.innerHTML = `
     ${languagePanel()}
-    <h2 class="group">Your language</h2>
+    <h2 class="group">${t("Your language")}</h2>
     <div class="setting">
-      <label for="known">I speak</label>
+      <label for="known">${t("I speak")}</label>
       <select id="known">${knownSelect()}</select>
     </div>
-    <p class="note">Prompts, answers and Play all use the language you speak. Notes, "sounds like" spellings and guides are in English for now.${state.base === state.lang.code ? ` While you learn ${esc(state.lang.name)}, English is used.` : ""}</p>
-    <h2 class="group">Audio</h2>
+    <p class="note">${t("Prompts, answers, notes, the guide and Play all use the language you speak. Anything not yet written for it shows in English.")}${state.base === state.lang.code ? " " + t("While you learn {name}, English is used.", { name: esc(langName(state.lang)) }) : ""}</p>
+    <h2 class="group">${t("Audio")}</h2>
     <div class="setting">
-      <label for="voice">Voice</label>
+      <label for="voice">${t("Voice")}</label>
       <select id="voice">
-        ${opt("f", "Female", state.settings.voice)}
-        ${opt("m", "Male", state.settings.voice)}
-        ${opt("mixed", "Mixed (random each time)", state.settings.voice)}
+        ${opt("f", t("Female"), state.settings.voice)}
+        ${opt("m", t("Male"), state.settings.voice)}
+        ${opt("mixed", t("Mixed (random each time)"), state.settings.voice)}
       </select>
     </div>
     <div class="setting">
-      <label for="speed">Speed</label>
+      <label for="speed">${t("Speed")}</label>
       <select id="speed">
-        ${opt("1", "Normal", state.settings.speed)}
-        ${opt("0.85", "Slower", state.settings.speed)}
-        ${opt("0.7", "Slowest", state.settings.speed)}
+        ${opt("1", t("Normal"), state.settings.speed)}
+        ${opt("0.85", t("Slower"), state.settings.speed)}
+        ${opt("0.7", t("Slowest"), state.settings.speed)}
       </select>
     </div>
-    <div class="row"><button class="act" id="sample">🔊 Hear a sample</button></div>
-    <h2 class="group">Quiz</h2>
+    <div class="row"><button class="act" id="sample">${t("🔊 Hear a sample")}</button></div>
+    <h2 class="group">${t("Quiz")}</h2>
     <div class="setting">
-      <label for="round">Questions per round</label>
+      <label for="round">${t("Questions per round")}</label>
       <select id="round">
         ${ROUND_CHOICES.map((n) => opt(n, n, state.settings.round)).join("")}
       </select>
     </div>
-    <h2 class="group">Left out of practice</h2>
+    <h2 class="group">${t("Left out of practice")}</h2>
     <div class="setting">
-      <span>${skippedCount ? `${skippedCount} ${skippedCount === 1 ? "phrase" : "phrases"} left out in ${esc(state.lang.name)}` : "None. Tap a phrase's ✓ circle (in the List, on a card or in the quiz) to leave it out."}</span>
-      ${skippedCount ? `<button class="act" id="unskip" style="flex:none">Practise all</button>` : ""}
+      <span>${skippedCount ? t(skippedCount === 1 ? "{n} phrase left out in {name}" : "{n} phrases left out in {name}", { n: skippedCount, name: esc(langName(state.lang)) }) : t("None. Tap a phrase's ✓ circle (in the List, on a card or in the quiz) to leave it out.")}</span>
+      ${skippedCount ? `<button class="act" id="unskip" style="flex:none">${t("Practise all")}</button>` : ""}
     </div>
-    <h2 class="group">Play all</h2>
+    <h2 class="group">${t("Play all")}</h2>
     <div class="setting">
-      <label for="gap">Pause between</label>
+      <label for="gap">${t("Pause between")}</label>
       <select id="gap">
-        ${GAP_CHOICES.map((n) => opt(n, n === "1" ? "1 second" : `${n} seconds`, state.settings.gap)).join("")}
+        ${GAP_CHOICES.map((n) => opt(n, n === "1" ? t("1 second") : t("{n} seconds", { n }), state.settings.gap)).join("")}
       </select>
     </div>
     <div class="setting">
-      <label for="twice">Say each phrase twice</label>
+      <label for="twice">${t("Say each phrase twice")}</label>
       <select id="twice">
-        ${opt("no", "No", state.settings.twice)}
-        ${opt("yes", "Yes", state.settings.twice)}
+        ${opt("no", t("No"), state.settings.twice)}
+        ${opt("yes", t("Yes"), state.settings.twice)}
       </select>
     </div>
-    <h2 class="group">About</h2>
+    <h2 class="group">${t("About")}</h2>
     ${installPanel()}
     <div class="row">
-      <button class="act" id="share">Share this app</button>
-      <button class="act" id="feedback">Send feedback</button>
+      <button class="act" id="share">${t("Share this app")}</button>
+      <button class="act" id="feedback">${t("Send feedback")}</button>
     </div>
     <div class="draft" id="feedbackbox" hidden></div>
-    <p class="note about">PhraseBook${state.version ? ` · version ${esc(state.version.replace("phrasebook-", ""))}` : ""}. Your progress and settings stay on this device.${analyticsOn ? " The app counts anonymous visits and which features are used, with no cookies and no personal data." : ""}</p>`;
+    <p class="note about">PhraseBook${state.version ? " · " + t("version {v}", { v: esc(state.version.replace("phrasebook-", "")) }) : ""}. ${t("Your progress and settings stay on this device.")}${analyticsOn ? " " + t("The app counts anonymous visits and which features are used, with no cookies and no personal data.") : ""}</p>`;
   if ($("#unskip")) $("#unskip").onclick = () => { state.skipped.clear(); store.set(skipKey(state.lang.code), []); state.last = null; renderSettings(); };
   $("#known").onchange = async () => { await setKnown($("#known").value); if (state.mode === "settings") renderSettings(); };
   $("#share").onclick = shareApp;
@@ -1360,15 +1432,15 @@ function renderSettings() {
       return;
     }
     if (btn.dataset.act === "remove") {
-      if (confirm(`Remove ${lang.name} from this device? Your progress is kept.`)) { await removePack(code); renderSettings(); }
+      if (confirm(t("Remove {name} from this device? Your progress is kept.", { name: langName(lang) }))) { await removePack(code); renderSettings(); }
       return;
     }
     try {
       if (btn.dataset.act === "download" && canCache) {
-        state.busy[code] = "Starting…";
+        state.busy[code] = t("Starting…");
         renderSettings();
         await syncPack(code, (done, total) => {
-          state.busy[code] = `Downloading ${done} of ${total}`;
+          state.busy[code] = t("Downloading {done} of {total}", { done, total });
           const el = document.querySelector(`[data-lang="${code}"] .lstate`);
           if (el) el.textContent = state.busy[code];
         });
@@ -1379,12 +1451,12 @@ function renderSettings() {
       delete state.busy[code];
       track("language/" + code);
     } catch {
-      state.busy[code] = "Couldn't download. Check you're online and try again.";
+      state.busy[code] = t("Couldn't download. Check you're online and try again.");
       setTimeout(() => { delete state.busy[code]; if (state.mode === "settings") renderSettings(); }, 5000);
     }
     if (state.mode === "settings") renderSettings();
   };
-  hint("Settings are saved on this device");
+  hint(t("Settings are saved on this device"));
 }
 
 // ---------- boot ----------
@@ -1420,6 +1492,7 @@ async function boot() {
     state.firstRun = !code; // brand new: ask which language, and download nothing until they say
     state.lang = state.languages.find((l) => l.code === (code || state.languages[0].code)); // a placeholder until they choose
     if (!state.firstRun) { await loadLanguageData(); keepStorage(); }
+    else { await loadUi(state.base); state.known = knownLanguages().find((l) => l.code === state.base) || ENGLISH; translatePage(); }
   } catch {
     main.innerHTML = `<p class="note">Couldn't load the phrases. Open the app once while online.</p>`;
     return;

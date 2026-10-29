@@ -17,19 +17,19 @@
 <body>
 <header>
   <nav>
-    <button data-mode="list" class="tab active">List</button>
-    <button data-mode="cards" class="tab">Cards</button>
-    <button data-mode="quiz" class="tab">Quiz</button>
-    <button data-mode="guide" class="tab">Guide</button>
-    <button data-mode="settings" class="tab gear" aria-label="Settings">⚙</button>
+    <button data-mode="list" class="tab active" data-t="List">List</button>
+    <button data-mode="cards" class="tab" data-t="Cards">Cards</button>
+    <button data-mode="quiz" class="tab" data-t="Quiz">Quiz</button>
+    <button data-mode="guide" class="tab" data-t="Guide">Guide</button>
+    <button data-mode="settings" class="tab gear" aria-label="Settings" data-t-aria="Settings">⚙</button>
   </nav>
   <div class="opts">
     <button id="cat" class="topics" aria-haspopup="dialog">All Topics</button>
-    <dialog id="topicmenu" aria-label="Topics"></dialog>
-    <select id="dir" aria-label="Direction">
+    <dialog id="topicmenu" aria-label="Topics" data-t-aria="Topics"></dialog>
+    <select id="dir" aria-label="Direction" data-t-aria="Direction">
       <option value="mixed">Both Directions</option>
     </select>
-    <label class="check"><input type="checkbox" id="listen"> Listening only</label>
+    <label class="check"><input type="checkbox" id="listen"> <span data-t="Listening only">Listening only</span></label>
     <button id="mute" class="mute" aria-pressed="false">🔊 Sound on</button>
   </div>
 </header>

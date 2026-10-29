@@ -83,23 +83,36 @@ async def make_audio(code: str, language: dict, texts: dict, shared_ids: list, h
     return made
 
 
+def file_hash(path: Path):
+    data = path.read_bytes()
+    if path.suffix in (".json", ".html"):
+        # git gives Windows CRLF line endings and the server LF ones: hash what the server sends,
+        # so a pack built on any computer matches and devices don't download it again for nothing
+        data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha1(data).hexdigest()[:12], len(data)
+
+
 def build_pack(code: str, texts: dict, shared_ids: list) -> int:
-    """List every file a device needs for this language, each with a short content hash."""
+    """List every file a device needs for this language, each with a short content hash.
+
+    Files written for speakers of another language (lang/<code>/for-<base>/: notes, "sounds like" spellings and a
+    guide for, say, Spanish speakers, or a language's own interface text) are listed apart under "forBase", so a
+    device downloads them only while that is the language it speaks."""
     paths = [ROOT / "lang" / code / "phrases.json", ROOT / "lang" / code / "guide.html"]
     for folder in ("f", "m"):
         paths += [AUDIO / code / folder / f"{i}.mp3" for i in shared_ids if i in texts]
     files, total = {}, 0
     for path in paths:
         if path.exists():
-            data = path.read_bytes()
-            if path.suffix in (".json", ".html"):
-                # git gives Windows CRLF line endings and the server LF ones: hash what the server sends,
-                # so a pack built on any computer matches and devices don't download it again for nothing
-                data = data.replace(b"\r\n", b"\n")
-            files[path.relative_to(ROOT).as_posix()] = hashlib.sha1(data).hexdigest()[:12]
-            total += len(data)
+            files[path.relative_to(ROOT).as_posix()], size = file_hash(path)
+            total += size
+    for_base = {}
+    for folder in sorted((ROOT / "lang" / code).glob("for-*")):
+        group = for_base.setdefault(folder.name[4:], {})
+        for path in sorted(folder.iterdir()):
+            group[path.relative_to(ROOT).as_posix()] = file_hash(path)[0]
     (ROOT / "lang" / code).mkdir(parents=True, exist_ok=True)
-    write_json(ROOT / "lang" / code / "pack.json", {"bytes": total, "files": files}, indent=1)
+    write_json(ROOT / "lang" / code / "pack.json", {"bytes": total, "files": files, **({"forBase": for_base} if for_base else {})}, indent=1)
     return total
 
 

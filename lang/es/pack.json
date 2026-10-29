@@ -143,5 +143,10 @@
   "audio/es/m/cheers.mp3": "3dffd9f6106b",
   "audio/es/m/help.mp3": "1481f4c3c216",
   "audio/es/m/pharmacy.mp3": "74e93d92fd63"
+ },
+ "forBase": {
+  "es": {
+   "lang/es/for-es/ui.json": "d069858c2278"
+  }
  }
 }
