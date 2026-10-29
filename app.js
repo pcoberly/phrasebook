@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v38";
+const VERSION = "phrasebook-v39";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1330,13 +1330,13 @@ function renderSettings() {
   const skippedCount = state.phrases.filter(isSkipped).length;
   const opt = (v, label, cur) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
   main.innerHTML = `
-    ${languagePanel()}
     <h2 class="group">${t("Your language")}</h2>
     <div class="setting">
       <label for="known">${t("I speak")}</label>
       <select id="known">${knownSelect()}</select>
     </div>
     <p class="note">${t("Prompts, answers, notes, the guide and Play all use the language you speak. Anything not yet written for it shows in English.")}${state.base === state.lang.code ? " " + t("While you learn {name}, English is used.", { name: esc(langName(state.lang)) }) : ""}</p>
+    ${languagePanel()}
     <h2 class="group">${t("Audio")}</h2>
     <div class="setting">
       <label for="voice">${t("Voice")}</label>
