@@ -145,9 +145,17 @@
   "audio/he/m/pharmacy.mp3": "210827bdd967"
  },
  "forBase": {
+  "de": {
+   "lang/he/for-de/guide.html": "6f8a3fc435e6",
+   "lang/he/for-de/notes.json": "a8d1053c0ef1"
+  },
   "es": {
    "lang/he/for-es/guide.html": "8379232b23f9",
    "lang/he/for-es/notes.json": "377b389c3520"
+  },
+  "fr": {
+   "lang/he/for-fr/guide.html": "1b81f12f8f45",
+   "lang/he/for-fr/notes.json": "c90af4961e8a"
   }
  }
 }

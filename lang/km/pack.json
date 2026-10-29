@@ -145,9 +145,17 @@
   "audio/km/m/pharmacy.mp3": "e0265825ef72"
  },
  "forBase": {
+  "de": {
+   "lang/km/for-de/guide.html": "c5c54741f405",
+   "lang/km/for-de/notes.json": "0a346eed36dd"
+  },
   "es": {
    "lang/km/for-es/guide.html": "02f8428426d5",
    "lang/km/for-es/notes.json": "fa273b1c3002"
+  },
+  "fr": {
+   "lang/km/for-fr/guide.html": "468fd78df097",
+   "lang/km/for-fr/notes.json": "29aa63839cc8"
   }
  }
 }
