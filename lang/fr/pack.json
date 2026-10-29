@@ -148,6 +148,9 @@
   "es": {
    "lang/fr/for-es/guide.html": "15727db26de4",
    "lang/fr/for-es/notes.json": "957eb411ec05"
+  },
+  "fr": {
+   "lang/fr/for-fr/ui.json": "d51925c5a9e5"
   }
  }
 }

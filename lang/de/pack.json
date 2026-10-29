@@ -145,6 +145,9 @@
   "audio/de/m/pharmacy.mp3": "a95ed53d8df2"
  },
  "forBase": {
+  "de": {
+   "lang/de/for-de/ui.json": "85554e9ffe6e"
+  },
   "es": {
    "lang/de/for-es/guide.html": "75e6bd7812fe",
    "lang/de/for-es/notes.json": "1c0b9e261769"
