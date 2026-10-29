@@ -143,5 +143,11 @@
   "audio/ja/m/cheers.mp3": "df605a85f6b8",
   "audio/ja/m/help.mp3": "d56e9f2675c0",
   "audio/ja/m/pharmacy.mp3": "eafb9320d252"
+ },
+ "forBase": {
+  "es": {
+   "lang/ja/for-es/guide.html": "450690721dd8",
+   "lang/ja/for-es/notes.json": "68a3e74a8bbb"
+  }
  }
 }

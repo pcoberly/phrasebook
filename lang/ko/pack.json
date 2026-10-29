@@ -143,5 +143,11 @@
   "audio/ko/m/cheers.mp3": "2376c57a84cc",
   "audio/ko/m/help.mp3": "51cfe94a6c9f",
   "audio/ko/m/pharmacy.mp3": "61bd066f42ec"
+ },
+ "forBase": {
+  "es": {
+   "lang/ko/for-es/guide.html": "44b284daec38",
+   "lang/ko/for-es/notes.json": "2d45c5dd2094"
+  }
  }
 }

@@ -143,5 +143,11 @@
   "audio/nl/m/cheers.mp3": "020a8e4905f1",
   "audio/nl/m/help.mp3": "64b3369f8a81",
   "audio/nl/m/pharmacy.mp3": "0d8ac452a8ee"
+ },
+ "forBase": {
+  "es": {
+   "lang/nl/for-es/guide.html": "2b79a93f7212",
+   "lang/nl/for-es/notes.json": "fb05ccf2e174"
+  }
  }
 }
