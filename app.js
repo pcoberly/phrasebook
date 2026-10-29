@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v39";
+const VERSION = "phrasebook-v40";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1487,6 +1487,12 @@ async function boot() {
     const usedBefore = state.languages.find((l) => packState(l.code) === "installed");
     const code = valid(saved) ? saved : usedBefore ? usedBefore.code : null;
     state.firstRun = !code; // brand new: ask which language, and download nothing until they say
+    // brand new, the language you know starts as the browser's own, when it is one the app is written in
+    if (state.firstRun && store.get("phrasebook-base", null) === null) {
+      const own = (navigator.languages || [navigator.language]).map((l) => String(l).slice(0, 2).toLowerCase())
+        .find((c) => knownLanguages().some((l) => l.code === c));
+      if (own) store.set("phrasebook-base", (state.base = own));
+    }
     state.lang = state.languages.find((l) => l.code === (code || state.languages[0].code)); // a placeholder until they choose
     if (!state.firstRun) { await loadLanguageData(); keepStorage(); }
     else { await loadUi(state.base); state.known = knownLanguages().find((l) => l.code === state.base) || ENGLISH; translatePage(); }
