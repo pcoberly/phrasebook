@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v35";
+const VERSION = "phrasebook-v36";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -101,6 +101,16 @@ function stopSpeaking() {
   tapRun++;
   tapPlayer.pause();
   if ("speechSynthesis" in window) speechSynthesis.cancel();
+}
+// Muted (on a bus, say): cards and the quiz stop speaking by themselves. A tap on 🔊, or Play all, still plays.
+let muted = store.get("phrasebook-mute", false);
+const autoSpeak = (p) => { if (!muted) speak(p); };
+function setMuted(on) {
+  muted = on;
+  store.set("phrasebook-mute", on);
+  $("#mute").setAttribute("aria-pressed", on);
+  $("#mute").textContent = on ? "🔇 Muted" : "🔊 Sound on";
+  if (on) stopSpeaking();
 }
 function speak(p) {
   stopSpeaking();
@@ -302,14 +312,14 @@ function renderCard() {
     </div>`;
   const flip = $("#flip");
   let seenAnswer = false;
-  if (fromLang) { $("#say").onclick = (e) => { e.stopPropagation(); speak(p); }; speak(p); }
+  if (fromLang) { $("#say").onclick = (e) => { e.stopPropagation(); speak(p); }; autoSpeak(p); }
   $("#say2").onclick = (e) => { e.stopPropagation(); speak(p); };
   // leaving it out keeps this card on screen (to grade, or to change your mind); it just won't come up again
   wirePractise(main, (_, on) => say(on ? "Back in practice." : "Left out of practice. Tap the circle again to keep it.", 4000));
   const toggle = () => {
     const flipped = flip.classList.toggle("flipped");
     flip.setAttribute("aria-pressed", flipped);
-    speak(p); // every flip plays the phrase, so you can hear it from either side
+    autoSpeak(p); // every flip plays the phrase, so you can hear it from either side
     if (!seenAnswer) {
       // the first flip reveals the answer: show the usage note under the card and offer the grade buttons
       seenAnswer = true;
@@ -410,7 +420,7 @@ function renderQuiz() {
     <div id="choices"></div>
     <div class="reveal" id="reveal"></div>
     <div class="row sticky hidden" id="nextrow"><button class="act" id="next">${number === total ? "See score" : "Next"}</button></div>`;
-  if (!toLang) { $("#say").onclick = () => speak(p); speak(p); }
+  if (!toLang) { $("#say").onclick = () => speak(p); autoSpeak(p); }
   wirePractise(main, (_, on) => say(on ? "Back in practice." : "Left out of later rounds. Tap the circle again to keep it.", 4000));
   const box = $("#choices");
   let answered = false;
@@ -436,7 +446,7 @@ function renderQuiz() {
         if (opts[j].id === p.id) c.querySelector(".pick").classList.add("right");
         if (toLang) c.querySelector(".pick").innerHTML = nat(opts[j].text);
       });
-      speak(p);
+      autoSpeak(p);
       // the answer is already on screen, so show only what is new: how to say it
       $("#reveal").innerHTML = pron(p);
       $("#nextrow").classList.remove("hidden");
@@ -1432,6 +1442,8 @@ async function boot() {
   if (!["no", "yes"].includes(state.settings.twice)) state.settings.twice = "no";
   $("#listen").checked = store.get("phrasebook-listen", false);
   $("#listen").onchange = () => { store.set("phrasebook-listen", $("#listen").checked); render(); };
+  setMuted(muted);
+  $("#mute").onclick = () => setMuted(!muted);
   document.querySelectorAll(".tab").forEach((b) => b.onclick = () => {
     state.mode = b.dataset.mode;
     if (state.mode !== "list") pausePlayAll(); // Play all belongs to the List; it keeps its place for when you return

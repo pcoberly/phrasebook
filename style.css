@@ -16,6 +16,9 @@ nav { display: flex; gap: 8px; }
 .opts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0; font-size: 14px; color: var(--muted); }
 .opts select { flex: 1 1 140px; min-width: 0; font-size: 16px; padding: 8px; } /* under 16px, an iPhone zooms in when it is tapped */
 .opts .check { display: flex; align-items: center; gap: 6px; }
+/* Mute: the app stops speaking by itself (🔊 and Play all still play when tapped) */
+.opts .mute { margin-left: auto; font-size: 15px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+.opts .mute[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
 /* the Topics button looks like the Direction box beside it, and opens a checklist */
 .opts .topics { flex: 1 1 140px; min-width: 0; font-size: 16px; padding: 8px 26px 8px 10px; text-align: left; border-radius: 8px;
   border: 1px solid var(--line); background: var(--card); color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: relative; }
