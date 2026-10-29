@@ -45,7 +45,8 @@ reason a tapped 🔊 (cards, quiz, list) starts the hum at once and plays the ph
 
 Settings → **I speak** (also on the welcome screen) chooses the language prompts and answers are shown in: English, or
 any language marked `"base": true` in `languages.json` (German, French and Spanish so far). Its own pack supplies the
-text and Play all's audio, so only that pack and the one being learned are downloaded. Notes, "sounds like" spellings,
+text and Play all's audio, so only that pack and the one being learned are downloaded. Switching to another
+language you know removes the old one's pack, unless it is a language you chose to learn. Notes, "sounds like" spellings,
 guides and the app's buttons are still written for English speakers. Learning the language you know (French from
 French) uses English instead, and so does a language you know that can't load yet (offline before it has
 downloaded). A link can set it too: `?lang=vi&speak=de` opens Vietnamese for a German speaker.

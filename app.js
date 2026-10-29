@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v34";
+const VERSION = "phrasebook-v35";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -780,7 +780,7 @@ async function chooseFirstLanguage(code) {
       track("download/" + code);
     }
     await useLanguage(code);
-    if (canCache) syncPack(state.known.code).catch(() => {}); // the language you know, for Play all, follows in the background (and is retried later)
+    if (canCache) syncKnownPack().catch(() => {}); // the language you know, for Play all, follows in the background (and is retried later)
     track("language/" + code);
     delete state.busy[code];
     state.choosing = null;
@@ -894,14 +894,32 @@ async function loadLanguageData() {
   state.known = k;
   state.phrases = state.shared.filter((p) => texts[p.id]).map((p) => ({ ...p, ...texts[p.id], known: theirs?.[p.id]?.text || p.en }));
 }
-// "I speak" changed: download that language if need be (its text and its audio for Play all), then use it
+// Packs downloaded only because they were the language you know, not chosen to learn. Switching away removes them,
+// so only what you use stays on the device (and is kept up to date). English's own pack is always one of these, as
+// English is never a language to learn here; a language you choose to learn stops being one.
+const KNOWN_ONLY = "phrasebook-known-only";
+const knownOnly = () => store.get(KNOWN_ONLY, []);
+function syncKnownPack(code = state.known.code, onProgress) {
+  if (code !== state.lang.code && packState(code) === "none" && !knownOnly().includes(code)) store.set(KNOWN_ONLY, [...knownOnly(), code]);
+  return syncPack(code, onProgress);
+}
+// the language you know was `before`: remove its pack unless something still needs it
+async function dropKnownPack(before) {
+  if (!canCache || before === state.known.code || before === state.lang.code || before === wantedKnown().code) return;
+  if (before !== ENGLISH.code && !knownOnly().includes(before)) return; // a language you chose to learn
+  await removePack(before);
+  store.set(KNOWN_ONLY, knownOnly().filter((c) => c !== before));
+}
+// "I speak" changed: download that language if need be (its text and its audio for Play all), use it, and remove
+// the one it replaces
 async function setKnown(code) {
+  const before = state.known.code;
   state.base = code;
   store.set("phrasebook-base", code);
   const k = wantedKnown();
-  if (k !== ENGLISH && canCache && packState(k.code) !== "installed") {
+  if (canCache && packState(k.code) !== "installed") {
     try {
-      await syncPack(k.code, (done, total) => say(`Downloading ${k.name}: ${done} of ${total}`));
+      await syncKnownPack(k.code, (done, total) => say(`Downloading ${k.name}: ${done} of ${total}`));
       say("");
     } catch {
       say(`Couldn't download ${k.name}. Check you're online and try again.`, 6000);
@@ -913,6 +931,7 @@ async function setKnown(code) {
   state.last = null;
   stopPlayAll();
   rebuildDirOptions();
+  await dropKnownPack(before).catch(() => {});
 }
 function rebuildDirOptions() {
   const n = esc(state.lang.name);
@@ -924,6 +943,7 @@ function rebuildDirOptions() {
 }
 async function useLanguage(code) {
   const previous = state.lang;
+  const before = state.known.code;
   state.lang = state.languages.find((l) => l.code === code);
   try {
     await loadLanguageData();
@@ -939,6 +959,8 @@ async function useLanguage(code) {
   stopPlayAll();
   rebuildDirOptions();
   pickVoice();
+  store.set(KNOWN_ONLY, knownOnly().filter((c) => c !== code)); // chosen to learn: it stays when you switch what you speak
+  dropKnownPack(before).catch(() => {}); // learning the language you speak means English is used for it, and the other way round
 }
 // Keep the language in use, and any other downloaded one, up to date. Runs quietly when online.
 async function syncInstalled() {
@@ -957,7 +979,7 @@ async function syncInstalled() {
       if (code === state.lang.code) say("");
     }
   }
-  syncPack(state.known.code).catch(() => {}); // the language you know, for Play all: kept current quietly
+  syncKnownPack().catch(() => {}); // the language you know, for Play all: kept current quietly
   return activeChanged;
 }
 
@@ -1092,7 +1114,8 @@ function languageRow(l, position, count) {
   const ps = packState(l.code);
   const active = l.code === state.lang.code;
   const mb = `${(l.bytes / 1e6).toFixed(1)} MB`;
-  const status = state.busy[l.code] || (active ? "In use" : ps === "installed" ? "Downloaded" : ps === "partial" ? "Partly downloaded" : "Not downloaded");
+  const yours = l.code === state.known.code ? " · Your language" : ""; // downloaded for prompts and Play all
+  const status = state.busy[l.code] || (active ? "In use" : ps === "installed" ? "Downloaded" + yours : ps === "partial" ? "Partly downloaded" + yours : "Not downloaded");
   const buttons = state.busy[l.code] || active ? ""
     : ps === "installed" ? `<button class="mini" data-act="use">Use</button><button class="mini ghost" data-act="remove" aria-label="Remove ${esc(l.name)} from this device" title="Remove from this device">✕</button>`
     : `<button class="mini" data-act="download">${canCache ? "Download &amp; use" : "Use"}</button>`;
@@ -1342,7 +1365,7 @@ function renderSettings() {
         track("download/" + code);
       }
       await useLanguage(code);
-      if (canCache) syncPack(state.known.code).catch(() => {});
+      if (canCache) syncKnownPack().catch(() => {});
       delete state.busy[code];
       track("language/" + code);
     } catch {
