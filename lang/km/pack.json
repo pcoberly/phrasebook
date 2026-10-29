@@ -143,5 +143,11 @@
   "audio/km/m/cheers.mp3": "b82a9c956b2a",
   "audio/km/m/help.mp3": "9bc3a354c2cc",
   "audio/km/m/pharmacy.mp3": "e0265825ef72"
+ },
+ "forBase": {
+  "es": {
+   "lang/km/for-es/guide.html": "4979ea91cbc7",
+   "lang/km/for-es/notes.json": "dfabc88cdb9e"
+  }
  }
 }
