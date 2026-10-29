@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v33";
+const VERSION = "phrasebook-v34";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -52,10 +52,14 @@ function track(name, title) {
 
 const $ = (s) => document.querySelector(s);
 const main = $("#main");
+// English, the language you know unless you choose another (its text is the "en" of phrases.json; its audio a pack of its own)
+const ENGLISH = { code: "en", name: "English", native: "English", ttsLang: "en-US" };
 const state = {
   languages: [],  // languages.json: every language the app offers
   shared: [],     // phrases.json: the phrases every language shares (id, English, topic)
   lang: null,     // the language being studied
+  base: store.get("phrasebook-base", "en"), // the language you know, as chosen ("I speak" in Settings)
+  known: ENGLISH, // the language you know, as in use: English when the chosen one is the one being studied, or can't load
   phrases: [],    // shared phrases merged with the active language's text, say, tones, note
   mode: "list",
   topics: [],     // the topics chosen, as slugs ("food"); none means all of them
@@ -173,6 +177,19 @@ function next() {
   return pick;
 }
 
+// ---------- the language you know ----------
+// Prompts, answers and Play all's other half are in the language you know: English, or a language marked "base" in
+// languages.json, whose own pack gives its text and audio. Notes, "sounds like" spellings, guides and the app's
+// buttons are written for English speakers, so they stay in English for now.
+const knownLanguages = () => [ENGLISH, ...state.languages.filter((l) => l.base)];
+// the one to use: the chosen one, unless it is the language being studied (French from French makes no sense)
+function wantedKnown() {
+  const k = knownLanguages().find((l) => l.code === state.base);
+  return k && k.code !== state.lang.code ? k : ENGLISH;
+}
+// text in the language you know, tagged so the device reads and hyphenates it as that language
+const own = (s) => `<span lang="${state.known.code}">${esc(s)}</span>`;
+
 // ---------- ui helpers ----------
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 // text in the language being studied, tagged so the device picks the right font, and marked right-to-left for
@@ -255,23 +272,23 @@ function renderCard() {
   const listenOnly = $("#listen").checked;
   const fromLang = dir === "from";
   const showFront = !(fromLang && listenOnly);
-  const front = fromLang ? nat(p.text) : esc(p.en);
+  const front = fromLang ? nat(p.text) : own(p.known);
   // Two faces share one spot, so the card keeps one height and turns over like a real flashcard.
   main.innerHTML = `
     <div class="cardwrap">
     <div class="flip" id="flip" role="button" tabindex="0" aria-label="Flip the card">
       <div class="flip-inner">
         <div class="card face front">
-          <div class="label">${fromLang ? name : "English"}</div>
+          <div class="label">${fromLang ? name : esc(state.known.name)}</div>
           <div class="big">${showFront ? front : "🎧"}</div>
           ${fromLang ? `<button class="speak" id="say" aria-label="Play">🔊</button>` : ""}
           <div class="hint">Tap the card to flip it</div>
         </div>
         <div class="card face back">
-          <div class="label">${fromLang ? "English" : name}</div>
-          <div class="big">${fromLang ? esc(p.en) : nat(p.text)}</div>
+          <div class="label">${fromLang ? esc(state.known.name) : name}</div>
+          <div class="big">${fromLang ? own(p.known) : nat(p.text)}</div>
           <button class="speak" id="say2" aria-label="Play">🔊</button>
-          <div class="orig">${fromLang ? name : "English"}: <b>${front}</b></div>
+          <div class="orig">${fromLang ? name : esc(state.known.name)}: <b>${front}</b></div>
           ${pron(p)}
         </div>
       </div>
@@ -309,9 +326,9 @@ function renderCard() {
 
 // ---------- quiz ----------
 function distractors(p) {
-  // never offer a wrong option that is really a right answer: no same English, and no same text in the language
-  // (French says Bonjour for both hello and good morning)
-  const others = state.phrases.filter((o) => o.id !== p.id && o.text !== p.text && o.en !== p.en);
+  // never offer a wrong option that is really a right answer: no same meaning in the language you know, and no same
+  // text in the language studied (French says Bonjour for both hello and good morning)
+  const others = state.phrases.filter((o) => o.id !== p.id && o.text !== p.text && o.known !== p.known);
   const same = shuffle(others.filter((o) => o.cat === p.cat));
   const rest = shuffle(others.filter((o) => o.cat !== p.cat));
   return [...same, ...rest].slice(0, 2);
@@ -386,8 +403,8 @@ function renderQuiz() {
     <div class="bar"><i style="width:${Math.round(100 * round.index / total)}%"></i></div>
     <div class="card q">
       ${practiseButton(p)}
-      <div class="label">${toLang ? `Pick the ${name}` : "Pick the English"}</div>
-      <div class="big">${toLang ? esc(p.en) : (listenOnly ? "🎧" : nat(p.text))}</div>
+      <div class="label">Pick the ${toLang ? name : esc(state.known.name)}</div>
+      <div class="big">${toLang ? own(p.known) : (listenOnly ? "🎧" : nat(p.text))}</div>
       ${toLang ? "" : `<button class="speak" id="say" aria-label="Play">🔊</button>`}
     </div>
     <div id="choices"></div>
@@ -400,7 +417,7 @@ function renderQuiz() {
   opts.forEach((o, i) => {
     const div = document.createElement("div");
     div.className = "choice";
-    const label = toLang ? (listenOnly ? `Option ${i + 1}` : nat(o.text)) : esc(o.en);
+    const label = toLang ? (listenOnly ? `Option ${i + 1}` : nat(o.text)) : own(o.known);
     div.innerHTML = `<button class="pick"${toLang ? rtlAttr() : ""}>${label}</button>${toLang ? `<button class="speak" aria-label="Play">🔊</button>` : ""}`;
     const pick = div.querySelector(".pick");
     if (toLang) div.querySelector(".speak").onclick = () => speak(o);
@@ -455,17 +472,17 @@ function renderSummary() {
 }
 
 // ---------- study list ----------
-// one phrase as a row: the language text with how to say it, and the English, in the order you are studying
+// one phrase as a row: the language text with how to say it, and the meaning in the language you know, in the order you are studying
 function entryHtml(p, fromFirst, withNote = true, withSkip = false) {
   const skipped = withSkip && isSkipped(p);
   return `
       <div class="entry${skipped ? " skipped" : ""}" data-entry="${p.id}">
         <div>
-          ${fromFirst ? "" : `<div class="en">${esc(p.en)}</div>`}
+          ${fromFirst ? "" : `<div class="en">${own(p.known)}</div>`}
           <div class="vi"${rtlAttr()}>${nat(p.text)}</div>
           ${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}
           ${womanForm(p)}
-          ${fromFirst ? `<div class="en">${esc(p.en)}</div>` : ""}
+          ${fromFirst ? `<div class="en">${own(p.known)}</div>` : ""}
           ${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}
           ${withNote && p.note ? `<div class="note">${noteText(p.note)}</div>` : ""}
         </div>
@@ -489,7 +506,7 @@ function listGroups() {
   return groups;
 }
 function renderList() {
-  const fromFirst = $("#dir").value === "from"; // English first unless studying the language → English
+  const fromFirst = $("#dir").value === "from"; // the language you know first, unless studying the language → yours
   const groups = listGroups();
   const playing = playAll && playAll.playing;
   main.innerHTML = draftBanner() + Object.entries(groups).map(([c, ps]) => `
@@ -505,10 +522,10 @@ function renderList() {
 }
 
 // ---------- play all: the List read aloud, for listening on the move ----------
-// Each phrase in the List plays in the direction you study: English, a pause, then the language (or the other way
-// round), then a pause before the next. It goes round the list until you pause it. The pause length and
-// "say each phrase twice" are in Settings. English comes from its own small pack ("en"), shared by every language.
-const EN = "en";
+// Each phrase in the List plays in the direction you study: the language you know, a pause, then the language studied
+// (or the other way round), then a pause before the next. It goes round the list until you pause it. The pause length
+// and "say each phrase twice" are in Settings. English comes from its own small pack ("en"), shared by every language;
+// another language you know comes from its own pack.
 const player = new Audio(); // one element for the whole run: iOS is likelier to keep a single player going
 let playAll = null; // { items, index, playing, run }
 let wakeLock = null;
@@ -570,7 +587,7 @@ async function playJoined(parts, rate, onFail) {
 async function playClip(code, p, gap, still) {
   const pref = state.settings.voice;
   const voice = pref === "mixed" ? (Math.random() < 0.5 ? "f" : "m") : pref;
-  const rate = code === EN ? 1 : parseFloat(state.settings.speed) || 1; // you already know the English
+  const rate = code !== state.lang.code ? 1 : parseFloat(state.settings.speed) || 1; // you already know your own language
   const src = `audio/${code}/${voice}/${p.id}.mp3`;
   const sayIt = () => deviceVoice(code, p);
   if (!gap) return playFile(src, rate, sayIt); // straight after a tap: play at once, while the phone still allows it
@@ -587,11 +604,11 @@ async function playClip(code, p, gap, still) {
 function deviceVoice(code, p) {
   return new Promise((resolve) => {
     if (!("speechSynthesis" in window)) { resolve(); return; }
-    const english = code === EN;
-    const u = new SpeechSynthesisUtterance((english ? p.en : p.spoken || p.text).replace(/\.\.\.|…/g, ""));
-    u.lang = english ? "en-US" : state.lang.ttsLang;
-    if (!english && browserVoice) u.voice = browserVoice;
-    u.rate = english ? 1 : 0.85;
+    const yours = code !== state.lang.code; // the language you know
+    const u = new SpeechSynthesisUtterance((yours ? p.known : p.spoken || p.text).replace(/\.\.\.|…/g, ""));
+    u.lang = yours ? state.known.ttsLang : state.lang.ttsLang;
+    if (!yours && browserVoice) u.voice = browserVoice;
+    u.rate = yours ? 1 : 0.85;
     const timer = setTimeout(resolve, 10000); // never wait for ever on a voice that doesn't report back
     u.onend = u.onerror = () => { clearTimeout(timer); resolve(); };
     speechSynthesis.speak(u);
@@ -608,7 +625,8 @@ async function runPlayAll(run) {
     markPlaying();
     const lang = state.lang.code;
     const twice = state.settings.twice === "yes";
-    const order = $("#dir").value === "from" ? [lang, ...(twice ? [lang] : []), EN] : [EN, lang, ...(twice ? [lang] : [])];
+    const yours = state.known.code;
+    const order = $("#dir").value === "from" ? [lang, ...(twice ? [lang] : []), yours] : [yours, lang, ...(twice ? [lang] : [])];
     for (const code of order) {
       await playClip(code, p, first ? 0 : parseFloat(state.settings.gap), still);
       first = false;
@@ -672,7 +690,7 @@ function markPlaying() {
   if (state.mode === "list") hint(`${pa.playing ? "Playing" : "Paused at"} ${pa.index + 1} of ${pa.items.length}`);
   if ("mediaSession" in navigator && "MediaMetadata" in window) {
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: p.en, artist: `${p.text} · ${state.lang.name}`, album: "PhraseBook",
+      title: p.known, artist: `${p.text} · ${state.lang.name}`, album: "PhraseBook",
       artwork: [{ src: "icon-v3-512.png", sizes: "512x512", type: "image/png" }],
     });
     navigator.mediaSession.playbackState = pa.playing ? "playing" : "paused";
@@ -728,16 +746,20 @@ function pickerRow(l) {
       <div class="lbtn">${state.choosing ? "" : `<button class="mini" data-pick="${l.code}">Start</button>`}</div>
     </div>`;
 }
+// the "I speak" choices: English, then the others as "German (Deutsch)"
+const knownSelect = () => knownLanguages().map((l) => `<option value="${l.code}"${l.code === state.base ? " selected" : ""}>${esc(l === ENGLISH ? l.name : `${l.name} (${l.native})`)}</option>`).join("");
 function renderWelcome() {
   document.body.classList.add("firstrun");
   const choices = [...state.languages].sort((a, b) => a.name.localeCompare(b.name));
   main.innerHTML = `
     <div class="welcome">
       <h1>Welcome to PhraseBook</h1>
+      <div class="setting"><label for="wknown">I speak</label><select id="wknown">${knownSelect()}</select></div>
       <p class="lead">Which language would you like to learn?</p>
       <p class="note">Tap one to download it. That needs a connection once, and afterwards the app works without one. You can add more languages later in Settings.</p>
       <div id="welcomelangs">${choices.map(pickerRow).join("")}</div>
     </div>`;
+  $("#wknown").onchange = () => { state.base = $("#wknown").value; store.set("phrasebook-base", state.base); };
   $("#welcomelangs").onclick = (e) => {
     const b = e.target.closest("button[data-pick]");
     if (b) chooseFirstLanguage(b.dataset.pick);
@@ -756,9 +778,9 @@ async function chooseFirstLanguage(code) {
         if (el) el.textContent = state.busy[code];
       });
       track("download/" + code);
-      syncPack(EN).catch(() => {}); // English for Play all follows in the background (and is retried later)
     }
     await useLanguage(code);
+    if (canCache) syncPack(state.known.code).catch(() => {}); // the language you know, for Play all, follows in the background (and is retried later)
     track("language/" + code);
     delete state.busy[code];
     state.choosing = null;
@@ -859,13 +881,45 @@ async function loadLanguageData() {
   const res = await fetch(`lang/${code}/phrases.json`);
   if (!res.ok) throw new Error(`lang/${code}/phrases.json ${res.status}`);
   const texts = await res.json();
-  state.phrases = state.shared.filter((p) => texts[p.id]).map((p) => ({ ...p, ...texts[p.id] }));
+  // the language you know: its text from its own pack, or English (also when that pack can't load, offline before
+  // it has downloaded); a phrase it has no text for yet shows in English
+  let k = wantedKnown(), theirs = null;
+  if (k !== ENGLISH) {
+    try {
+      const r = await fetch(`lang/${k.code}/phrases.json`);
+      if (r.ok) theirs = await r.json();
+    } catch { /* offline and not downloaded */ }
+    if (!theirs) { say(`${k.name} isn't downloaded yet, so English is shown. Go online to get it.`, 6000); k = ENGLISH; }
+  }
+  state.known = k;
+  state.phrases = state.shared.filter((p) => texts[p.id]).map((p) => ({ ...p, ...texts[p.id], known: theirs?.[p.id]?.text || p.en }));
+}
+// "I speak" changed: download that language if need be (its text and its audio for Play all), then use it
+async function setKnown(code) {
+  state.base = code;
+  store.set("phrasebook-base", code);
+  const k = wantedKnown();
+  if (k !== ENGLISH && canCache && packState(k.code) !== "installed") {
+    try {
+      await syncPack(k.code, (done, total) => say(`Downloading ${k.name}: ${done} of ${total}`));
+      say("");
+    } catch {
+      say(`Couldn't download ${k.name}. Check you're online and try again.`, 6000);
+    }
+  }
+  if (state.firstRun) return; // nothing is loaded until a language to learn is chosen
+  await loadLanguageData();
+  state.round = null; // reloaded from storage, with the new text
+  state.last = null;
+  stopPlayAll();
+  rebuildDirOptions();
 }
 function rebuildDirOptions() {
   const n = esc(state.lang.name);
   const sel = $("#dir");
   const saved = store.get("phrasebook-dir", "mixed");
-  sel.innerHTML = `<option value="mixed">Both Directions</option><option value="to">English → ${n}</option><option value="from">${n} → English</option>`;
+  const k = esc(state.known.name);
+  sel.innerHTML = `<option value="mixed">Both Directions</option><option value="to">${k} → ${n}</option><option value="from">${n} → ${k}</option>`;
   sel.value = ["mixed", "to", "from"].includes(saved) ? saved : "mixed";
 }
 async function useLanguage(code) {
@@ -903,7 +957,7 @@ async function syncInstalled() {
       if (code === state.lang.code) say("");
     }
   }
-  syncPack(EN).catch(() => {}); // English, for Play all: shared by every language, kept current quietly
+  syncPack(state.known.code).catch(() => {}); // the language you know, for Play all: kept current quietly
   return activeChanged;
 }
 
@@ -1063,7 +1117,7 @@ function languagePanel() {
   const availOpen = store.get("phrasebook-avail-open", available.length <= 5); // a long list starts folded
   return `
     <details class="panel" id="langpanel"${open ? " open" : ""}>
-      <summary><span class="ptitle">Language</span><span class="pval">${esc(state.lang.name)}</span><span class="chev" aria-hidden="true"></span></summary>
+      <summary><span class="ptitle">Learning</span><span class="pval">${esc(state.lang.name)}</span><span class="chev" aria-hidden="true"></span></summary>
       <div class="pbody" id="langs">
         <h3 class="sub">On this device (${mine.length})</h3>
         ${mine.map((l, i) => languageRow(l, i, mine.length)).join("")}
@@ -1175,6 +1229,12 @@ function renderSettings() {
   const opt = (v, label, cur) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
   main.innerHTML = `
     ${languagePanel()}
+    <h2 class="group">Your language</h2>
+    <div class="setting">
+      <label for="known">I speak</label>
+      <select id="known">${knownSelect()}</select>
+    </div>
+    <p class="note">Prompts, answers and Play all use the language you speak. Notes, "sounds like" spellings and guides are in English for now.${state.base === state.lang.code ? ` While you learn ${esc(state.lang.name)}, English is used.` : ""}</p>
     <h2 class="group">Audio</h2>
     <div class="setting">
       <label for="voice">Voice</label>
@@ -1228,6 +1288,7 @@ function renderSettings() {
     <div class="draft" id="feedbackbox" hidden></div>
     <p class="note about">PhraseBook${state.version ? ` · version ${esc(state.version.replace("phrasebook-", ""))}` : ""}. Your progress and settings stay on this device.${analyticsOn ? " The app counts anonymous visits and which features are used, with no cookies and no personal data." : ""}</p>`;
   if ($("#unskip")) $("#unskip").onclick = () => { state.skipped.clear(); store.set(skipKey(state.lang.code), []); state.last = null; renderSettings(); };
+  $("#known").onchange = async () => { await setKnown($("#known").value); if (state.mode === "settings") renderSettings(); };
   $("#share").onclick = shareApp;
   $("#feedback").onclick = sendFeedback;
   $("#round").onchange = () => {
@@ -1279,9 +1340,9 @@ function renderSettings() {
           if (el) el.textContent = state.busy[code];
         });
         track("download/" + code);
-        syncPack(EN).catch(() => {});
       }
       await useLanguage(code);
+      if (canCache) syncPack(state.known.code).catch(() => {});
       delete state.busy[code];
       track("language/" + code);
     } catch {
@@ -1310,6 +1371,14 @@ async function boot() {
       u.searchParams.delete("lang");
       history.replaceState(null, "", u);
       if (valid(linked)) store.set("phrasebook-lang", linked);
+    }
+    // ...and &speak=de sets the language you know (one marked "base", or English)
+    const speak = new URLSearchParams(location.search).get("speak");
+    if (speak !== null) {
+      const u = new URL(location.href);
+      u.searchParams.delete("speak");
+      history.replaceState(null, "", u);
+      if (knownLanguages().some((l) => l.code === speak)) store.set("phrasebook-base", (state.base = speak));
     }
     const saved = store.get("phrasebook-lang", "");
     // someone who used the app before the picker existed has a language downloaded but never "chose" one

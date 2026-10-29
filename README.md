@@ -9,7 +9,7 @@ GitHub Pages, so it needs no App Store account. Live at https://pcoberly.github.
 | Path | What it is |
 | --- | --- |
 | `phrases.json` | The phrases every language shares: `id`, English, topic (`cat`) |
-| `languages.json` | The languages on offer: name, code, voices, size (size is filled in by the script), and `rtl` for a right-to-left language such as Hebrew |
+| `languages.json` | The languages on offer: name, code, voices, size (size is filled in by the script), `rtl` for a right-to-left language such as Hebrew, and `base` for one that can be the language you know |
 | `lang/<code>/phrases.json` | That language's text for each phrase `id`: `text`, `say` (pronunciation), optional `tones`, `note`, `spoken`, and `female` (the woman's form, with its own `text`, `say` and `spoken`, where a woman says the phrase differently) |
 | `lang/<code>/guide.html` | That language's pronunciation guide |
 | `lang/<code>/pack.json` | Generated: a hash for every file in the language (do not edit) |
@@ -40,6 +40,15 @@ locks. Each pause is joined to the front of the phrase after it, as one clip, be
 after the player changes file. The "silence" is really a 42 Hz hum far too quiet to hear, because wired headphone
 adapters and some Bluetooth gear power down on pure digital silence and then miss the first syllable. For the same
 reason a tapped 🔊 (cards, quiz, list) starts the hum at once and plays the phrase with 0.4 seconds of it in front. English speaks the `en` text with any `...` gap left out.
+
+## The language you know
+
+Settings → **I speak** (also on the welcome screen) chooses the language prompts and answers are shown in: English, or
+any language marked `"base": true` in `languages.json` (German, French and Spanish so far). Its own pack supplies the
+text and Play all's audio, so only that pack and the one being learned are downloaded. Notes, "sounds like" spellings,
+guides and the app's buttons are still written for English speakers. Learning the language you know (French from
+French) uses English instead, and so does a language you know that can't load yet (offline before it has
+downloaded). A link can set it too: `?lang=vi&speak=de` opens Vietnamese for a German speaker.
 
 ## Topics and skipped phrases
 

@@ -50,6 +50,7 @@
     "name": "Spanish",
     "native": "Español",
     "ttsLang": "es-MX",
+    "base": true,
     "voices": {
       "f": "es-MX-DaliaNeural",
       "m": "es-MX-JorgeNeural"
@@ -61,6 +62,7 @@
     "name": "French",
     "native": "Français",
     "ttsLang": "fr-FR",
+    "base": true,
     "voices": {
       "f": "fr-FR-DeniseNeural",
       "m": "fr-FR-HenriNeural"
@@ -83,6 +85,7 @@
     "name": "German",
     "native": "Deutsch",
     "ttsLang": "de-DE",
+    "base": true,
     "voices": {
       "f": "de-DE-KatjaNeural",
       "m": "de-DE-ConradNeural"
