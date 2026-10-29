@@ -48,7 +48,7 @@ Settings → **I speak** (also on the welcome screen) chooses the language promp
 any language marked `"base": true` in `languages.json` (German, French and Spanish so far). Its own pack supplies the
 text and Play all's audio, so only that pack and the one being learned are downloaded. Switching to another
 language you know removes the old one's pack, unless it is a language you chose to learn. Notes, "sounds like" spellings,
-guides and the app's buttons come from the `for-<code>` files written for its speakers (Spanish so far, see the
+guides and the app's buttons come from the `for-<code>` files written for its speakers (Spanish so far, written for Latin America, see the
 table above), and fall back to English wherever one isn't written yet; those files download only while it is the
 language you speak, and switching away removes them. `check_data.py` warns about any button or message `ui.json` misses. Learning the language you know (French from
 French) uses English instead, and so does a language you know that can't load yet (offline before it has

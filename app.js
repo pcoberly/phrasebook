@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v37";
+const VERSION = "phrasebook-v38";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -790,12 +790,9 @@ function pickerRow(l) {
       <div class="lbtn">${state.choosing ? "" : `<button class="mini" data-pick="${l.code}">${t("Start")}</button>`}</div>
     </div>`;
 }
-// the "I speak" choices: English, then the others as "German (Deutsch)", or just "Español" when the names match
-const knownSelect = () => knownLanguages().map((l) => {
-  const name = langName(l);
-  const label = l === ENGLISH ? name : name.toLowerCase() === l.native.toLowerCase() ? l.native : `${name} (${l.native})`;
-  return `<option value="${l.code}"${l.code === state.base ? " selected" : ""}>${esc(label)}</option>`;
-}).join("");
+// the "I speak" choices, each in its own language (English, Deutsch, Español), whatever language the app is in,
+// so anyone can find theirs
+const knownSelect = () => knownLanguages().map((l) => `<option value="${l.code}"${l.code === state.base ? " selected" : ""} lang="${l.code}">${esc(l.native)}</option>`).join("");
 function renderWelcome() {
   document.body.classList.add("firstrun");
   const choices = [...state.languages].sort((a, b) => langName(a).localeCompare(langName(b)));
