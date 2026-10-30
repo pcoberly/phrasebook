@@ -1,6 +1,7 @@
 {
   "hello": {"say": "HA-lo", "note": "Guten Tag (GOU-tenn TAK) est la salutation polie de la journée. Dans le Sud on entend aussi Grüß Gott (gruss GOTT)"},
   "good-morning": {"say": "GOU-tenn MOR-guenn", "note": "Jusqu'à 10 ou 11 heures du matin"},
+  "good-night": {"say": "GOU-te NAKHT", "note": "Seulement au coucher ou en se quittant tard. Pour saluer le soir, on dit guten Abend (GOU-tenn A-bennt)"},
   "goodbye": {"say": "aouf VI-deur-zé-enn", "note": "Tschüss (tchuss) est la forme familière"},
   "please": {"say": "BI-te", "note": "Bitte veut aussi dire de rien et voici"},
   "thank-you": {"say": "DANN-ke", "note": "Danke schön (cheunn) et vielen Dank (FI-lenn dannk) veulent dire merci beaucoup"},

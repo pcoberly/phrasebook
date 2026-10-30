@@ -1,6 +1,7 @@
 [
   {"id": "hello", "en": "Hello", "cat": "basics"},
   {"id": "good-morning", "en": "Good morning", "cat": "basics"},
+  {"id": "good-night", "en": "Good night", "cat": "basics"},
   {"id": "goodbye", "en": "Goodbye", "cat": "basics"},
   {"id": "please", "en": "Please", "cat": "basics"},
   {"id": "thank-you", "en": "Thank you", "cat": "basics"},

@@ -1,6 +1,7 @@
 {
   "hello": {"text": "Hallo", "say": "HAH-loh", "note": "Guten Tag (GOO-ten TAHK) is the polite daytime greeting. In the South you also hear Grüß Gott (grews GOT)"},
   "good-morning": {"text": "Guten Morgen", "say": "GOO-ten MOR-gen", "note": "Used until about 10 or 11 in the morning"},
+  "good-night": {"text": "Gute Nacht", "say": "GOO-teh NAHKHT", "note": "Only at bedtime or when parting late. To greet someone in the evening, say guten Abend (GOO-ten AH-bent)"},
   "goodbye": {"text": "Auf Wiedersehen", "say": "owf VEE-der-zay-en", "note": "Tschüss (chews) is the casual version"},
   "please": {"text": "Bitte", "say": "BIT-uh", "note": "Bitte also means you're welcome and here you are"},
   "thank-you": {"text": "Danke", "say": "DAHN-kuh", "note": "Danke schön (shurn) and vielen Dank (FEE-len dahnk) mean thank you very much"},

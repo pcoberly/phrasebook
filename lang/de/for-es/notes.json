@@ -1,6 +1,7 @@
 {
   "hello": {"say": "JA-lo", "note": "Guten Tag (GU-ten TAK) es el saludo cortés de día. En el sur también se oye Grüß Gott (grüs GOT)"},
   "good-morning": {"say": "GU-ten MOR-guen", "note": "Se usa hasta las 10 o las 11 de la mañana"},
+  "good-night": {"say": "GU-te NAJT", "note": "Solo al irse a dormir o al despedirse tarde. Para saludar por la noche se dice guten Abend (GU-ten A-bent)"},
   "goodbye": {"say": "auf VI-der-ze-en", "note": "Tschüss (chüs) es la forma informal"},
   "please": {"say": "BI-te", "note": "Bitte también significa de nada y aquí tiene"},
   "thank-you": {"say": "DAN-ke", "note": "Danke schön (shön) y vielen Dank (FI-len dank) significan muchas gracias"},

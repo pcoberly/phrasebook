@@ -1,10 +1,11 @@
 {
- "bytes": 2061411,
+ "bytes": 2092719,
  "files": {
-  "lang/km/phrases.json": "246faf10ad1e",
+  "lang/km/phrases.json": "4af9d4dfdf86",
   "lang/km/guide.html": "4661d86568a6",
   "audio/km/f/hello.mp3": "d5a957f39b5d",
   "audio/km/f/good-morning.mp3": "85d426664940",
+  "audio/km/f/good-night.mp3": "42b4eeccdff2",
   "audio/km/f/goodbye.mp3": "f81b1a38f3cd",
   "audio/km/f/please.mp3": "0409b8ab7fb3",
   "audio/km/f/thank-you.mp3": "0404c96aebc1",
@@ -75,6 +76,7 @@
   "audio/km/f/pharmacy.mp3": "6481a1182763",
   "audio/km/m/hello.mp3": "7427d5e8b518",
   "audio/km/m/good-morning.mp3": "4026873c8210",
+  "audio/km/m/good-night.mp3": "f6a99efe0cde",
   "audio/km/m/goodbye.mp3": "98e0d00bd8bd",
   "audio/km/m/please.mp3": "c3d68ee469f3",
   "audio/km/m/thank-you.mp3": "3d7c6aa1c6bc",
@@ -147,15 +149,15 @@
  "forBase": {
   "de": {
    "lang/km/for-de/guide.html": "c5c54741f405",
-   "lang/km/for-de/notes.json": "0a346eed36dd"
+   "lang/km/for-de/notes.json": "0504a84237cd"
   },
   "es": {
    "lang/km/for-es/guide.html": "02f8428426d5",
-   "lang/km/for-es/notes.json": "fa273b1c3002"
+   "lang/km/for-es/notes.json": "ff3648cad8d2"
   },
   "fr": {
    "lang/km/for-fr/guide.html": "468fd78df097",
-   "lang/km/for-fr/notes.json": "29aa63839cc8"
+   "lang/km/for-fr/notes.json": "37fed5aae6e1"
   }
  }
 }

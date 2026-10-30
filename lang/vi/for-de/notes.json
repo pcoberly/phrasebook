@@ -1,6 +1,7 @@
 {
   "hello": {"say": "ssin tschao", "tones": "eben, fallend", "note": "Passt zu jeder Tageszeit"},
   "good-morning": {"say": "tschao buoi ssang", "tones": "fallend, fallend-steigend, steigend"},
+  "good-night": {"say": "tschuk ngu ngon", "tones": "steigend, fallend-steigend, eben", "note": "Sagt man, wenn jemand schlafen geht. Zur Begrüßung am Abend reicht xin chào"},
   "goodbye": {"say": "tam bijet", "tones": "schwer, schwer", "note": "Etwas förmlich; „bye bye“ hört man auch oft"},
   "please": {"say": "lam ön", "tones": "fallend, eben", "note": "Steht am Anfang der Bitte"},
   "thank-you": {"say": "gam ön", "tones": "fallend-steigend, eben", "note": "Im Süden sagt man oft Cám ơn, mit steigendem Ton"},

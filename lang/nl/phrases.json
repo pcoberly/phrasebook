@@ -1,6 +1,7 @@
 {
   "hello": {"text": "Hallo", "say": "HAH-loh", "note": "Goedendag (KHOO-den-dakh) is the polite daytime greeting"},
   "good-morning": {"text": "Goedemorgen", "say": "KHOO-duh-MOR-khen", "note": "Used until about noon"},
+  "good-night": {"text": "Welterusten", "say": "vel-tuh-RUHS-tuhn", "note": "Only at bedtime, literally \"rest well\". Good evening is goedenavond (khoo-duh-AH-vont)"},
   "goodbye": {"text": "Tot ziens", "say": "tot ZEENS", "note": "Doei (doo-ee) is the casual version"},
   "please": {"text": "Alstublieft", "say": "AHL-stew-bleeft", "note": "Alsjeblieft (AHL-shuh-bleeft) is the casual form. Both also mean here you are"},
   "thank-you": {"text": "Dank u", "say": "dahnk ew", "note": "Dank u wel (vel) means thank you very much. Bedankt (buh-DAHNKT) is the casual version"},

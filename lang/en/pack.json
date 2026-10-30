@@ -1,8 +1,9 @@
 {
- "bytes": 1417680,
+ "bytes": 1440144,
  "files": {
   "audio/en/f/hello.mp3": "422d929d82c4",
   "audio/en/f/good-morning.mp3": "6341b2c1af4a",
+  "audio/en/f/good-night.mp3": "fea60b3878e8",
   "audio/en/f/goodbye.mp3": "97cc8423f9df",
   "audio/en/f/please.mp3": "10a8d701b1f1",
   "audio/en/f/thank-you.mp3": "7827e5186fde",
@@ -73,6 +74,7 @@
   "audio/en/f/pharmacy.mp3": "68b11f244c5a",
   "audio/en/m/hello.mp3": "bbdb39b64a60",
   "audio/en/m/good-morning.mp3": "5e1e65662875",
+  "audio/en/m/good-night.mp3": "9c92c7df5c35",
   "audio/en/m/goodbye.mp3": "3744cbfe168f",
   "audio/en/m/please.mp3": "fea89d3e43a0",
   "audio/en/m/thank-you.mp3": "eb634aa0bdd4",

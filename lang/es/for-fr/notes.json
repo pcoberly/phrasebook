@@ -1,6 +1,7 @@
 {
   "hello": {"say": "O-la", "note": "Le h est muet. Buenos días, buenas tardes et buenas noches changent selon le moment de la journée"},
   "good-morning": {"say": "BOUÉ-noss DI-ass", "note": "Jusqu'à midi environ"},
+  "good-night": {"say": "BOUÉ-nass NO-tchéss", "note": "Veut dire bonsoir et bonne nuit : pour saluer après la tombée de la nuit et pour prendre congé au coucher"},
   "goodbye": {"say": "a-DIOSS", "note": "Hasta luego (ASS-ta LOUÉ-go) veut dire à plus tard"},
   "please": {"say": "por fa-BOR"},
   "thank-you": {"say": "GRA-ssiass", "note": "Muchas gracias (MOU-tchass) veut dire merci beaucoup"},

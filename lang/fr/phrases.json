@@ -1,6 +1,7 @@
 {
   "hello": {"text": "Bonjour", "say": "bohn-ZHOOR", "note": "Use it until the evening, then bonsoir (bohn-SWAHR). Greet shop and restaurant staff with it as you walk in"},
   "good-morning": {"text": "Bonjour", "say": "bohn-ZHOOR", "note": "French has no separate good morning: bonjour covers the whole day until the evening"},
+  "good-night": {"text": "Bonne nuit", "say": "bun NWEE", "note": "Only at bedtime or when parting late. To greet someone in the evening, say bonsoir (bohn-SWAHR)"},
   "goodbye": {"text": "Au revoir", "say": "oh ruh-VWAHR", "note": "Bonne journée (bun zhoor-NAY) is a friendly goodbye meaning have a good day"},
   "please": {"text": "S'il vous plaît", "say": "seel voo PLEH", "note": "Add it to every request"},
   "thank-you": {"text": "Merci", "say": "mehr-SEE", "note": "Merci beaucoup (boh-KOO) means thank you very much"},

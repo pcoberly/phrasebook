@@ -1,6 +1,7 @@
 {
   "hello": {"note": "Saludo de día. Por la mañana, ohayō gozaimasu; por la tarde-noche, konbanwa"},
   "good-morning": {"note": "La forma cortés; entre amigos basta con ohayō"},
+  "good-night": {"note": "Solo cuando alguien se va a dormir. Para saludar por la noche se dice konbanwa; entre amigos, basta con oyasumi"},
   "goodbye": {"note": "Suena a despedida definitiva, así que se usa menos de lo que crees. Los vendedores dicen arigatō gozaimashita cuando te vas"},
   "please": {"note": "Para pedir algo o al entregar algo. Después de una cosa también sirve kudasai"},
   "thank-you": {"note": "Usa arigatō gozaimashita por algo que acaba de terminar, como una comida"},

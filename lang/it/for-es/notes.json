@@ -1,6 +1,7 @@
 {
   "hello": {"say": "SAL-ve", "note": "Un hola cortés a cualquier hora. Ciao (chao) es informal, para amigos y conocidos"},
   "good-morning": {"say": "buon-YOR-no", "note": "Se usa hasta la tarde; después, buonasera (buo-na-SE-ra). Saluda con él al entrar en las tiendas"},
+  "good-night": {"say": "buo-na-NOT-te", "note": "Solo al irse a dormir o al despedirse tarde. Para saludar por la noche se usa buonasera"},
   "goodbye": {"say": "a-rri-ve-DER-chi", "note": "Buona giornata (BUO-na yor-NA-ta) significa que tengas buen día"},
   "please": {"say": "per fa-VO-re", "note": "Per piacere (pia-CHE-re) significa lo mismo"},
   "thank-you": {"say": "GRA-tsie", "note": "Grazie mille (MIL-le) es muchas gracias. La respuesta es prego (PRE-go)"},

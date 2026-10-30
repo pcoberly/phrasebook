@@ -1,6 +1,7 @@
 {
   "hello": {"note": "Se dice ní hǎo: cuando se juntan dos terceros tonos, el primero sube. 您好 (nín hǎo) es la forma cortés"},
   "good-morning": {"note": "A menudo se abrevia a 早 (zǎo)"},
+  "good-night": {"note": "Se dice antes de dormir o al despedirse tarde por la noche. Para saludar por la noche: 晚上好 (wǎnshang hǎo)"},
   "goodbye": {"note": "Literalmente «hasta volver a vernos»"},
   "please": {"note": "Va delante de la petición: 请给我… (qǐng gěi wǒ) significa por favor, deme…"},
   "thank-you": {"note": "La segunda sílaba es ligera y corta. La respuesta es 不客气 (bú kèqi), de nada"},

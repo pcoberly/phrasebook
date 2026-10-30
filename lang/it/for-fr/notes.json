@@ -1,6 +1,7 @@
 {
   "hello": {"say": "SAL-vé", "note": "Un bonjour poli à toute heure. Ciao (tchao) est familier, pour les amis et les connaissances"},
   "good-morning": {"say": "bouonn-DJOR-no", "note": "Jusqu'à l'après-midi, puis buonasera (bouo-na-SÉ-ra). Saluez le personnel en entrant dans une boutique"},
+  "good-night": {"say": "bouo-na-NOT-té", "note": "Seulement au coucher ou en se quittant tard. Le soir, on salue avec buonasera"},
   "goodbye": {"say": "a-rri-vé-DÈR-tchi", "note": "Buona giornata (BOUO-na djor-NA-ta) veut dire bonne journée"},
   "please": {"say": "pèr fa-VO-ré", "note": "Per piacere (pia-TCHÉ-ré) veut dire la même chose"},
   "thank-you": {"say": "GRA-tsié", "note": "Grazie mille (MIL-lé) veut dire merci mille fois. La réponse est prego (PRÈ-go)"},

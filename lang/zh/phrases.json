@@ -1,6 +1,7 @@
 {
   "hello": {"text": "你好", "say": "nǐ hǎo", "note": "Said as ní hǎo: when two third tones meet, the first rises. 您好 (nín hǎo) is the polite form"},
   "good-morning": {"text": "早上好", "say": "zǎoshang hǎo", "note": "Often shortened to 早 (zǎo)"},
+  "good-night": {"text": "晚安", "say": "wǎn'ān", "note": "Said at bedtime or when leaving late at night. Good evening is 晚上好 (wǎnshang hǎo)"},
   "goodbye": {"text": "再见", "say": "zàijiàn", "note": "Literally \"see you again\""},
   "please": {"text": "请", "say": "qǐng", "note": "Goes before the request: 请给我… (qǐng gěi wǒ) means please give me…"},
   "thank-you": {"text": "谢谢", "say": "xièxie", "note": "The second syllable is light and short. The reply is 不客气 (bú kèqi)"},

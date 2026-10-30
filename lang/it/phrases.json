@@ -1,6 +1,7 @@
 {
   "hello": {"text": "Salve", "say": "SAHL-veh", "note": "A polite hello at any time of day. Ciao (chow) is casual, for friends and people you know"},
   "good-morning": {"text": "Buongiorno", "say": "bwon-JOR-noh", "note": "Used until the afternoon, then buonasera (bwoh-nah-SEH-rah). Greet shop staff with it as you walk in"},
+  "good-night": {"text": "Buonanotte", "say": "bwoh-nah-NOT-teh", "note": "Only at bedtime or when parting late. Buonasera is the evening greeting"},
   "goodbye": {"text": "Arrivederci", "say": "ah-ree-veh-DEHR-chee", "note": "Buona giornata (BWOH-nah jor-NAH-tah) means have a good day"},
   "please": {"text": "Per favore", "say": "pehr fah-VOH-reh", "note": "Per piacere (pyah-CHEH-reh) means the same"},
   "thank-you": {"text": "Grazie", "say": "GRAH-tsyeh", "note": "Grazie mille (MEEL-leh) means thanks a lot. The reply is prego (PREH-goh)"},

@@ -1,6 +1,7 @@
 {
   "hello": {"say": "an-njŏng-ha-se-jo", "note": "Passt zu jeder Tageszeit und zu jedem Menschen"},
   "good-morning": {"say": "tscho-ŭn a-tschim-i-e-jo", "note": "Die meisten sagen den ganzen Tag 안녕하세요 (an-njŏng-ha-se-jo)"},
+  "good-night": {"say": "an-njŏng-hi tschu-mu-se-jo", "note": "Höflich, wörtlich „schlafen Sie in Frieden“. Unter Freunden 잘 자 (tschal tscha)"},
   "goodbye": {"say": "an-njŏng-hi kje-se-jo", "note": "Sagt man, wenn du gehst und der andere bleibt. Geht der andere, sag 안녕히 가세요 (an-njŏng-hi ka-se-jo)"},
   "please": {"say": "tschu-se-jo", "note": "Heißt „bitte geben Sie mir“ und steht nach dem, was du willst: 물 주세요 (mul tschu-se-jo), Wasser bitte"},
   "thank-you": {"say": "kam-sa-ham-ni-da", "note": "고마워요 (ko-ma-uo-jo) ist etwas weniger förmlich"},

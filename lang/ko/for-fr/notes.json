@@ -1,6 +1,7 @@
 {
   "hello": {"say": "ann-nyŏng-ha-sé-yo", "note": "Convient à toute heure et avec tout le monde"},
   "good-morning": {"say": "tcho-eunn a-tchim-i-é-yo", "note": "La plupart des gens disent 안녕하세요 (ann-nyŏng-ha-sé-yo) toute la journée"},
+  "good-night": {"say": "ann-nyŏng-hi tchou-mou-sé-yo", "note": "Poli, littéralement « dormez en paix ». Entre amis, 잘 자 (tchal tcha)"},
   "goodbye": {"say": "ann-nyŏng-hi kyé-sé-yo", "note": "Se dit quand vous partez et que l'autre reste. Si c'est lui qui part, dites 안녕히 가세요 (ann-nyŏng-hi ka-sé-yo)"},
   "please": {"say": "tchou-sé-yo", "note": "Veut dire « donnez-moi, s'il vous plaît » et se place après ce que vous voulez : 물 주세요 (moul tchou-sé-yo), de l'eau, s'il vous plaît"},
   "thank-you": {"say": "kamm-sa-hamm-ni-da", "note": "고마워요 (ko-ma-ouo-yo) est un peu moins formel"},

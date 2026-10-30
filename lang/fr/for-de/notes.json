@@ -1,6 +1,7 @@
 {
   "hello": {"say": "bõ-SCHUR", "note": "Bis zum Abend, danach bonsoir (bõ-SSUAR). Grüß damit das Personal, wenn du einen Laden oder ein Restaurant betrittst"},
   "good-morning": {"say": "bõ-SCHUR", "note": "Französisch hat kein eigenes Guten Morgen: bonjour gilt den ganzen Tag bis zum Abend"},
+  "good-night": {"say": "bonn NÜI", "note": "Nur vor dem Schlafen oder beim späten Abschied. Zur Begrüßung am Abend sagt man bonsoir (bõ-SSUAR)"},
   "goodbye": {"say": "o rö-WUAR", "note": "Bonne journée (bon schur-NE) ist ein freundlicher Abschied: schönen Tag noch"},
   "please": {"say": "ssil wu PLÄ", "note": "Gehört zu jeder Bitte"},
   "thank-you": {"say": "mär-SSI", "note": "Merci beaucoup (bo-KU) heißt vielen Dank"},

@@ -1,6 +1,7 @@
 {
   "hello": {"text": "こんにちは", "say": "konnichiwa", "note": "Daytime greeting. Ohayō gozaimasu in the morning, konbanwa in the evening"},
   "good-morning": {"text": "おはようございます", "say": "ohayō gozaimasu", "note": "The polite form; with friends it is just ohayō"},
+  "good-night": {"text": "おやすみなさい", "say": "oyasuminasai", "note": "Only when someone goes to bed. Good evening is konbanwa; with friends, just oyasumi"},
   "goodbye": {"text": "さようなら", "say": "sayōnara", "note": "Sounds final, so it is used less than you'd think. Shopkeepers say arigatō gozaimashita as you leave"},
   "please": {"text": "お願いします", "say": "onegai shimasu", "note": "When asking for something, or handing something over. After an item, kudasai also works"},
   "thank-you": {"text": "ありがとうございます", "say": "arigatō gozaimasu", "note": "Use arigatō gozaimashita for something that has just finished, such as a meal"},

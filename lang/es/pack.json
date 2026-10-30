@@ -1,10 +1,11 @@
 {
- "bytes": 2050726,
+ "bytes": 2080411,
  "files": {
-  "lang/es/phrases.json": "993c4eebfdd9",
+  "lang/es/phrases.json": "5c346f24cc4c",
   "lang/es/guide.html": "62ab354c4b83",
   "audio/es/f/hello.mp3": "10ad087c4bd1",
   "audio/es/f/good-morning.mp3": "d05ad4407f84",
+  "audio/es/f/good-night.mp3": "c849415d98d9",
   "audio/es/f/goodbye.mp3": "12c61172b8f9",
   "audio/es/f/please.mp3": "669da2ac261f",
   "audio/es/f/thank-you.mp3": "7ddf69a9cd2c",
@@ -75,6 +76,7 @@
   "audio/es/f/pharmacy.mp3": "00b325016b2b",
   "audio/es/m/hello.mp3": "bd60792cc6b6",
   "audio/es/m/good-morning.mp3": "2a8ef68266f5",
+  "audio/es/m/good-night.mp3": "2c40d68df8c2",
   "audio/es/m/goodbye.mp3": "d0f55abb8b40",
   "audio/es/m/please.mp3": "c2e37f24067d",
   "audio/es/m/thank-you.mp3": "02688347012d",
@@ -147,14 +149,14 @@
  "forBase": {
   "de": {
    "lang/es/for-de/guide.html": "451e85a2614d",
-   "lang/es/for-de/notes.json": "51f442a092e3"
+   "lang/es/for-de/notes.json": "7b13b7aea0a8"
   },
   "es": {
    "lang/es/for-es/ui.json": "3e43b0d92803"
   },
   "fr": {
    "lang/es/for-fr/guide.html": "d299dd349422",
-   "lang/es/for-fr/notes.json": "323d922eec04"
+   "lang/es/for-fr/notes.json": "bac0e6d5d5fe"
   }
  }
 }

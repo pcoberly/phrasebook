@@ -1,6 +1,7 @@
 {
   "hello": {"text": "សួស្តី", "say": "soo-sdei", "note": "Works any time of day. The formal version is ជំរាបសួរ (chum-reap-suor), said with palms together"},
   "good-morning": {"text": "អរុណសួស្តី", "say": "a-run soo-sdei", "note": "Rather formal; soo-sdei alone is fine all day"},
+  "good-night": {"text": "រាត្រីសួស្តី", "say": "rea-trei soo-sdei", "note": "Formal. At bedtime people often say គេងលក់ស្រួល (keng luk sruol), sleep well"},
   "goodbye": {"text": "លាសិនហើយ", "say": "lia sen haeuy", "note": "Literally \"goodbye for now\""},
   "please": {"text": "សូម", "say": "soum", "note": "Goes before a request: soum + what you want"},
   "thank-you": {"text": "អរគុណ", "say": "aw-kohn", "note": "អរគុណច្រើន (aw-kohn chraeun) means thank you very much"},

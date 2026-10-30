@@ -1,6 +1,7 @@
 {
   "hello": {"say": "sa-bai-di", "note": "Sirve a cualquier hora del día, y también como despedida informal"},
   "good-morning": {"say": "sa-bai-di ton sao", "note": "La mayoría dice sabaidee todo el día"},
+  "good-night": {"say": "la-ti sa-uat", "note": "Formal. Antes de dormir se suele decir ນອນຫຼັບຝັນດີ (non lap fan di), que duermas bien y sueñes bonito"},
   "goodbye": {"say": "la kon", "note": "Literalmente «adiós por ahora»"},
   "please": {"say": "ka-lu-na", "note": "Formal. En una tienda se suele decir ຂໍ (ko) delante de la cosa"},
   "thank-you": {"say": "kop chai", "note": "ຂອບໃຈຫຼາຍໆ (kop chai lai lai) es muchas gracias"},

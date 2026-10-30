@@ -1,6 +1,7 @@
 {
   "hello": {"text": "שלום", "say": "sha-LOM", "note": "Also means goodbye and peace. Friends often just say hi (hai)"},
   "good-morning": {"text": "בוקר טוב", "say": "BO-ker TOV", "note": "The usual reply is בוקר אור (BO-ker OR), morning of light"},
+  "good-night": {"text": "לילה טוב", "say": "LAI-la TOV", "note": "Said when parting in the evening and at bedtime. Good evening is ערב טוב (E-rev TOV)"},
   "goodbye": {"text": "להתראות", "say": "le-hit-ra-OT", "note": "Bye (bai) is very common, and shalom works too"},
   "please": {"text": "בבקשה", "say": "be-va-ka-SHA", "note": "Also means you're welcome and here you are"},
   "thank-you": {"text": "תודה", "say": "to-DA", "note": "תודה רבה (to-DA ra-BA) means thank you very much"},

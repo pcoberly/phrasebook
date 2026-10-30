@@ -1,6 +1,7 @@
 {
   "hello": {"say": "bon-ZHUR", "note": "Úsalo hasta la noche; después, bonsoir (bon-SUAR). Saluda con él al entrar en tiendas y restaurantes"},
   "good-morning": {"say": "bon-ZHUR", "note": "El francés no tiene un «buenos días» aparte: bonjour sirve para todo el día hasta la noche"},
+  "good-night": {"say": "bon NUI", "note": "Solo al irse a dormir o al despedirse tarde. Para saludar por la noche se dice bonsoir (bon-SUAR)"},
   "goodbye": {"say": "o re-VUAR", "note": "Bonne journée (bon zhur-NE) es una despedida amable: que tengas buen día"},
   "please": {"say": "sil vu PLE", "note": "Agrégalo a cada petición"},
   "thank-you": {"say": "mer-SI", "note": "Merci beaucoup (bo-KU) es muchas gracias"},

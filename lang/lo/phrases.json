@@ -1,6 +1,7 @@
 {
   "hello": {"text": "ສະບາຍດີ", "say": "sa-bai-dee", "note": "Works any time of day, and is also a casual goodbye"},
   "good-morning": {"text": "ສະບາຍດີຕອນເຊົ້າ", "say": "sa-bai-dee tawn sao", "note": "Most people just say sabaidee all day"},
+  "good-night": {"text": "ລາຕີສະຫວັດ", "say": "la-tee sa-wat", "note": "Formal. At bedtime people often say ນອນຫຼັບຝັນດີ (non lap fan dee), sleep well and sweet dreams"},
   "goodbye": {"text": "ລາກ່ອນ", "say": "la kawn", "note": "Literally \"farewell for now\""},
   "please": {"text": "ກະລຸນາ", "say": "ka-lu-na", "note": "Formal. In a shop people usually say ຂໍ (kaw) before the item"},
   "thank-you": {"text": "ຂອບໃຈ", "say": "kawp jai", "note": "ຂອບໃຈຫຼາຍໆ (kawp jai lai lai) means thank you very much"},

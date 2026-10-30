@@ -1,6 +1,7 @@
 {
   "hello": {"say": "HA-lo", "note": "Goedendag (KHOU-denn-dakh) est la salutation polie de la journée"},
   "good-morning": {"say": "KHOU-de-MOR-khenn", "note": "Jusqu'à midi environ"},
+  "good-night": {"say": "vèl-te-RUSS-tenn", "note": "Seulement au coucher, littéralement « repose-toi bien ». Bonsoir se dit goedenavond (khou-de-A-vonnt)"},
   "goodbye": {"say": "tot ZINSS", "note": "Doei (dou-i) est la forme familière"},
   "please": {"say": "AL-stu-blift", "note": "Alsjeblieft (AL-che-blift) est la forme familière. Les deux veulent aussi dire « voici » quand on tend quelque chose"},
   "thank-you": {"say": "dank u", "note": "Dank u wel (wèl) veut dire merci beaucoup. Bedankt (be-DANKT) est la forme familière"},

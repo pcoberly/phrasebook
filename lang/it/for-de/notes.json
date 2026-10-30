@@ -1,6 +1,7 @@
 {
   "hello": {"say": "SSAL-we", "note": "Ein höfliches Hallo zu jeder Tageszeit. Ciao (tschao) ist locker, für Freunde und Bekannte"},
   "good-morning": {"say": "buon-DSCHOR-no", "note": "Bis zum Nachmittag, dann buonasera (buo-na-SSE-ra). Grüß damit das Personal, wenn du einen Laden betrittst"},
+  "good-night": {"say": "buo-na-NOT-te", "note": "Nur vor dem Schlafen oder beim späten Abschied. Abends grüßt man mit buonasera"},
   "goodbye": {"say": "a-rri-we-DER-tschi", "note": "Buona giornata (BUO-na dschor-NA-ta) heißt schönen Tag noch"},
   "please": {"say": "per fa-WO-re", "note": "Per piacere (pja-TSCHE-re) heißt dasselbe"},
   "thank-you": {"say": "GRA-tsje", "note": "Grazie mille (MIL-le) heißt tausend Dank. Die Antwort ist prego (PRE-go)"},

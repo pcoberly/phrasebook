@@ -1,6 +1,7 @@
 {
   "hello": {"text": "Hola", "say": "OH-lah", "note": "The h is silent. Buenos días, buenas tardes and buenas noches change with the time of day"},
   "good-morning": {"text": "Buenos días", "say": "BWEH-nohs DEE-ahs", "note": "Used until about noon"},
+  "good-night": {"text": "Buenas noches", "say": "BWEH-nahs NOH-chehs", "note": "Both good evening and good night: a greeting after dark and a goodbye at bedtime"},
   "goodbye": {"text": "Adiós", "say": "ah-DYOHS", "note": "Hasta luego (AH-stah LWEH-goh) means see you later"},
   "please": {"text": "Por favor", "say": "por fah-BOR"},
   "thank-you": {"text": "Gracias", "say": "GRAH-syahs", "note": "Muchas gracias (MOO-chahs) means thank you very much"},

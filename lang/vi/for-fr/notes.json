@@ -1,6 +1,7 @@
 {
   "hello": {"say": "sinn tchao", "tones": "plat, descendant", "note": "Convient à toute heure de la journée"},
   "good-morning": {"say": "tchao bouôï sang", "tones": "descendant, plongeant, montant"},
+  "good-night": {"say": "tchouk ngou ngonn", "tones": "montant, plongeant, plat", "note": "Se dit quand quelqu'un va se coucher. Pour saluer le soir, xin chào suffit"},
   "goodbye": {"say": "tamm biêt", "tones": "lourd, lourd", "note": "Un peu formel ; on entend aussi souvent « bye bye »"},
   "please": {"say": "lamm eunn", "tones": "descendant, plat", "note": "Se place au début de la demande"},
   "thank-you": {"say": "gamm eunn", "tones": "plongeant, plat", "note": "Dans le Sud, on dit souvent Cám ơn, au ton montant"},

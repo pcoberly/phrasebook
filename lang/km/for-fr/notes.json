@@ -1,6 +1,7 @@
 {
   "hello": {"say": "sou-sdeï", "note": "Convient à toute heure. La forme formelle est ជំរាបសួរ (tchoumm-riep-souor), les paumes jointes"},
   "good-morning": {"say": "a-rounn sou-sdeï", "note": "Assez formel ; sou-sdeï tout seul convient toute la journée"},
+  "good-night": {"say": "réa-treï sou-sdeï", "note": "Formel. Au coucher, on dit souvent គេងលក់ស្រួល (kéng louk srouol), dors bien"},
   "goodbye": {"say": "lia sènn haeuï", "note": "Littéralement « au revoir pour l'instant »"},
   "please": {"say": "somm", "note": "Se place devant la demande : somm + ce que vous voulez"},
   "thank-you": {"say": "o-kounn", "note": "អរគុណច្រើន (o-kounn tchraeunn) veut dire merci beaucoup"},

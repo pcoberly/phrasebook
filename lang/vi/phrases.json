@@ -1,6 +1,7 @@
 {
   "hello": {"text": "Xin chào", "say": "sin chow", "tones": "flat, falling", "note": "Works any time of day"},
   "good-morning": {"text": "Chào buổi sáng", "say": "chow boo-ee sahng", "tones": "falling, dipping, rising"},
+  "good-night": {"text": "Chúc ngủ ngon", "say": "chook ngoo ngon", "tones": "rising, dipping, flat", "note": "Said when someone goes to bed. To greet someone in the evening, xin chào is enough"},
   "goodbye": {"text": "Tạm biệt", "say": "tahm bee-et", "tones": "heavy, heavy", "note": "Slightly formal; \"bye bye\" is also common"},
   "please": {"text": "Làm ơn", "say": "lahm uhn", "tones": "falling, flat", "note": "Goes at the start of a request"},
   "thank-you": {"text": "Cảm ơn", "say": "gahm uhn", "tones": "dipping, flat", "note": "In the South it is often Cám ơn, with a rising tone"},

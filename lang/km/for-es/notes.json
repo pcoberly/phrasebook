@@ -1,6 +1,7 @@
 {
   "hello": {"say": "su-sdei", "note": "Sirve a cualquier hora del día. La forma formal es ជំរាបសួរ (chum-riep-suor), con las palmas juntas"},
   "good-morning": {"say": "a-run su-sdei", "note": "Bastante formal; su-sdei solo sirve todo el día"},
+  "good-night": {"say": "rea-trei su-sdei", "note": "Formal. Antes de dormir se suele decir គេងលក់ស្រួល (keng luk sruol), que duermas bien"},
   "goodbye": {"say": "lia sen jaëi", "note": "Literalmente «adiós por ahora»"},
   "please": {"say": "som", "note": "Va delante de la petición: som + lo que quieres"},
   "thank-you": {"say": "o-kun", "note": "អរគុណច្រើន (o-kun chraën) es muchas gracias"},

@@ -1,6 +1,7 @@
 {
   "hello": {"say": "sa-baï-di", "note": "Convient à toute heure, et sert aussi d'au revoir familier"},
   "good-morning": {"say": "sa-baï-di tonn sao", "note": "La plupart des gens disent sabaidee toute la journée"},
+  "good-night": {"say": "la-ti sa-vat", "note": "Formel. Au coucher, on dit souvent ນອນຫຼັບຝັນດີ (nonn lap fann di), dors bien et fais de beaux rêves"},
   "goodbye": {"say": "la konn", "note": "Littéralement « au revoir pour l'instant »"},
   "please": {"say": "ka-lou-na", "note": "Formel. En magasin, on dit plutôt ຂໍ (ko) devant l'article"},
   "thank-you": {"say": "kop tchaï", "note": "ຂອບໃຈຫຼາຍໆ (kop tchaï laï laï) veut dire merci beaucoup"},

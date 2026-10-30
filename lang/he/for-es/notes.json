@@ -1,6 +1,7 @@
 {
   "hello": {"say": "sha-LOM", "note": "También significa adiós y paz. Entre amigos se dice mucho hi (jai)"},
   "good-morning": {"say": "BO-ker TOV", "note": "La respuesta habitual es בוקר אור (BO-ker OR), mañana de luz"},
+  "good-night": {"say": "LAI-la TOV", "note": "Se dice al despedirse por la noche y antes de dormir. Para saludar al anochecer: ערב טוב (E-rev TOV)"},
   "goodbye": {"say": "le-hit-ra-OT", "note": "Bye (bai) es muy común, y shalom también sirve"},
   "please": {"say": "be-va-ka-SHA", "note": "También significa de nada y aquí tiene"},
   "thank-you": {"say": "to-DA", "note": "תודה רבה (to-DA ra-BA) es muchas gracias"},

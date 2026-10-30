@@ -1,6 +1,7 @@
 {
   "hello": {"say": "HAL-lo", "note": "Goedendag (CHU-den-dach) ist der höfliche Gruß am Tag"},
   "good-morning": {"say": "CHU-de-MOR-chen", "note": "Bis etwa mittags"},
+  "good-night": {"say": "wel-te-RÜS-ten", "note": "Nur vor dem Schlafen, wörtlich „ruh dich gut aus“. Guten Abend heißt goedenavond (chu-de-A-wont)"},
   "goodbye": {"say": "tot SIENS", "note": "Doei (du-i) ist die lockere Form"},
   "please": {"say": "AL-stü-blieft", "note": "Alsjeblieft (AL-sche-blieft) ist die lockere Form. Beide heißen auch „bitte schön“, wenn man etwas reicht"},
   "thank-you": {"say": "dank ü", "note": "Dank u wel (wel) heißt vielen Dank. Bedankt (be-DANKT) ist die lockere Form"},

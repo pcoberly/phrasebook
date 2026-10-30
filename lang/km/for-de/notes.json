@@ -1,6 +1,7 @@
 {
   "hello": {"say": "ssu-sdej", "note": "Passt zu jeder Tageszeit. Die förmliche Form ist ជំរាបសួរ (tschum-rijep-ssuor), mit aneinandergelegten Handflächen"},
   "good-morning": {"say": "a-run ssu-sdej", "note": "Ziemlich förmlich; ssu-sdej allein geht den ganzen Tag"},
+  "good-night": {"say": "rea-trej ssu-sdej", "note": "Förmlich. Vor dem Schlafen sagt man oft គេងលក់ស្រួល (keng luk ssruol), schlaf gut"},
   "goodbye": {"say": "lia ssen haöi", "note": "Wörtlich „auf Wiedersehen für jetzt“"},
   "please": {"say": "ssom", "note": "Steht vor der Bitte: ssom + was du willst"},
   "thank-you": {"say": "o-kun", "note": "អរគុណច្រើន (o-kun tschraön) heißt vielen Dank"},

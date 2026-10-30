@@ -1,6 +1,7 @@
 {
   "hello": {"say": "sin chao", "tones": "llano, descendente", "note": "Sirve a cualquier hora del día"},
   "good-morning": {"say": "chao buoi sang", "tones": "descendente, ondulado, ascendente"},
+  "good-night": {"say": "chuk ngu ngon", "tones": "ascendente, ondulado, llano", "note": "Se dice cuando alguien se va a dormir. Para saludar por la noche basta con xin chào"},
   "goodbye": {"say": "tam biet", "tones": "pesado, pesado", "note": "Algo formal; también se oye mucho «bye bye»"},
   "please": {"say": "lam ën", "tones": "descendente, llano", "note": "Va al principio de la petición"},
   "thank-you": {"say": "gam ën", "tones": "ondulado, llano", "note": "En el sur se dice a menudo Cám ơn, con tono ascendente"},

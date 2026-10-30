@@ -1,6 +1,7 @@
 {
   "hello": {"say": "an-nyeong-ja-se-yo", "note": "Sirve a cualquier hora del día y con cualquier persona"},
   "good-morning": {"say": "cho-eun a-chim-i-e-yo", "note": "La mayoría dice 안녕하세요 (an-nyeong-ja-se-yo) todo el día"},
+  "good-night": {"say": "an-nyeong-ji chu-mu-se-yo", "note": "Cortés, literalmente «duerma en paz». Entre amigos, 잘 자 (chal cha)"},
   "goodbye": {"say": "an-nyeong-ji kie-se-yo", "note": "Se dice cuando te vas y la otra persona se queda. Si es ella la que se va, di 안녕히 가세요 (an-nyeong-ji ka-se-yo)"},
   "please": {"say": "chu-se-yo", "note": "Significa «deme, por favor» y va detrás de lo que quieres: 물 주세요 (mul chu-se-yo), agua, por favor"},
   "thank-you": {"say": "kam-sa-jam-ni-da", "note": "고마워요 (ko-ma-uo-yo) es algo menos formal"},

@@ -1,6 +1,7 @@
 {
   "hello": {"text": "안녕하세요", "say": "ahn-nyoung-ha-se-yo", "note": "Works any time of day, with anyone"},
   "good-morning": {"text": "좋은 아침이에요", "say": "jo-eun a-chim-i-e-yo", "note": "Most people just say 안녕하세요 (ahn-nyoung-ha-se-yo) all day"},
+  "good-night": {"text": "안녕히 주무세요", "say": "ahn-nyoung-hee ju-mu-se-yo", "note": "Polite, literally \"sleep in peace\". To friends, 잘 자 (jal ja)"},
   "goodbye": {"text": "안녕히 계세요", "say": "ahn-nyoung-hee gye-se-yo", "note": "Said when you leave and the other person stays. When they are the one leaving, say 안녕히 가세요 (ahn-nyoung-hee ga-se-yo)"},
   "please": {"text": "주세요", "say": "ju-se-yo", "note": "Means \"please give me\" and goes after what you want: 물 주세요 (mool ju-se-yo), water please"},
   "thank-you": {"text": "감사합니다", "say": "gam-sa-ham-ni-da", "note": "고마워요 (go-ma-wo-yo) is a little less formal"},

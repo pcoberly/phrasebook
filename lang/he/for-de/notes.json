@@ -1,6 +1,7 @@
 {
   "hello": {"say": "scha-LOM", "note": "Heißt auch auf Wiedersehen und Frieden. Unter Freunden sagt man oft hi (hai)"},
   "good-morning": {"say": "BO-ker TOW", "note": "Die übliche Antwort ist בוקר אור (BO-ker OR), Morgen des Lichts"},
+  "good-night": {"say": "LAI-la TOW", "note": "Sagt man abends zum Abschied und vor dem Schlafen. Guten Abend heißt ערב טוב (E-rew TOW)"},
   "goodbye": {"say": "le-hit-ra-OT", "note": "Bye (bai) ist sehr üblich, und schalom geht auch"},
   "please": {"say": "be-wa-ka-SCHA", "note": "Heißt auch gern geschehen und bitte schön"},
   "thank-you": {"say": "to-DA", "note": "תודה רבה (to-DA ra-BA) heißt vielen Dank"},
