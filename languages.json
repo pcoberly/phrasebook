@@ -138,5 +138,17 @@
       "m": "ko-KR-InJoonNeural"
     },
     "bytes": 2291911
+  },
+  {
+    "code": "id",
+    "name": "Indonesian",
+    "native": "Bahasa Indonesia",
+    "ttsLang": "id-ID",
+    "draft": true,
+    "voices": {
+      "f": "id-ID-GadisNeural",
+      "m": "id-ID-ArdiNeural"
+    },
+    "bytes": 2251745
   }
 ]
