@@ -1,12 +1,12 @@
 {
- "bytes": 2156261,
+ "bytes": 2150318,
  "files": {
-  "lang/de/phrases.json": "a5b534acf4b6",
+  "lang/de/phrases.json": "bb06ed640dca",
   "lang/de/guide.html": "963a39cfa6b2",
   "audio/de/f/hello.mp3": "467b53cc3568",
   "audio/de/f/good-morning.mp3": "77e1488498c5",
   "audio/de/f/good-night.mp3": "bc7e77492f35",
-  "audio/de/f/goodbye.mp3": "04fb7c9a61e6",
+  "audio/de/f/goodbye.mp3": "6d7b48870a8a",
   "audio/de/f/please.mp3": "b9917286e226",
   "audio/de/f/thank-you.mp3": "c4934ea2d8aa",
   "audio/de/f/yes.mp3": "ace2d8b47fb6",
@@ -77,7 +77,7 @@
   "audio/de/m/hello.mp3": "c9d0e017915d",
   "audio/de/m/good-morning.mp3": "ce5e05403982",
   "audio/de/m/good-night.mp3": "1cbff9c36566",
-  "audio/de/m/goodbye.mp3": "a60574478ba8",
+  "audio/de/m/goodbye.mp3": "82681eb3f809",
   "audio/de/m/please.mp3": "fdb09c2a7817",
   "audio/de/m/thank-you.mp3": "c3212680136f",
   "audio/de/m/yes.mp3": "cfdf9b58e3a6",
@@ -152,11 +152,11 @@
   },
   "es": {
    "lang/de/for-es/guide.html": "75e6bd7812fe",
-   "lang/de/for-es/notes.json": "4d4d8fb31bc8"
+   "lang/de/for-es/notes.json": "7364282fb530"
   },
   "fr": {
    "lang/de/for-fr/guide.html": "2ed4fc1733b5",
-   "lang/de/for-fr/notes.json": "ac8764f814b9"
+   "lang/de/for-fr/notes.json": "4e6fbd11df8b"
   }
  }
 }
