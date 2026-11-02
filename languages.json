@@ -150,5 +150,17 @@
       "m": "id-ID-ArdiNeural"
     },
     "bytes": 2251745
+  },
+  {
+    "code": "tl",
+    "name": "Tagalog",
+    "native": "Tagalog",
+    "ttsLang": "fil-PH",
+    "draft": true,
+    "voices": {
+      "f": "fil-PH-BlessicaNeural",
+      "m": "fil-PH-AngeloNeural"
+    },
+    "bytes": 2087979
   }
 ]
