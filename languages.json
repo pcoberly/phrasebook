@@ -162,5 +162,17 @@
       "m": "fil-PH-AngeloNeural"
     },
     "bytes": 2087979
+  },
+  {
+    "code": "th",
+    "name": "Thai",
+    "native": "ภาษาไทย",
+    "ttsLang": "th-TH",
+    "draft": true,
+    "voices": {
+      "f": "th-TH-PremwadeeNeural",
+      "m": "th-TH-NiwatNeural"
+    },
+    "bytes": 2089015
   }
 ]
