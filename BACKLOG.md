@@ -18,6 +18,3 @@ Use the star, kept free when skipping got the check circle, to mark favourite ph
 
 ## Native-speaker review
 Every language marked `draft` needs checking by a native speaker: Korean, Hebrew, Indonesian, Tagalog and Thai, plus the German and French notes and guides. The Thai tone marks and the Khmer and Lao spellings matter most.
-
-## Possible phrases
-- "Are you ready?" (Vietnamese: Bạn đã sẵn sàng chưa?)
