@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v45";
+const VERSION = "phrasebook-v46";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -762,6 +762,36 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden && pl
 
 // ---------- guide: one page per language ----------
 // the guide written for speakers of the language you know (lang/<code>/for-<yours>/guide.html), else the English one
+// What's new: the versions that brought a new language or feature (changes.json, newest first), reached from Settings
+async function renderChanges() {
+  try {
+    state.changes ||= await (await fetch("changes.json")).json();
+  } catch {
+    main.innerHTML = `<p class="note">${t("The list of changes isn't available offline yet. Open the app once while online.")}</p>`;
+    return;
+  }
+  if (state.mode !== "changes") return;
+  const locale = state.base === "es" ? "es-419" : state.base;
+  const current = parseInt((state.version || "").replace("phrasebook-v", ""), 10);
+  const names = (codes) => codes.map((c) => state.languages.find((l) => l.code === c)).filter(Boolean).map(langName);
+  const item = (it) => {
+    if (it.langs) {
+      const n = names(it.langs);
+      return n.length === 1 ? t("New language: {name}", { name: esc(n[0]) }) : t("New languages: {names}", { names: esc(new Intl.ListFormat(locale, { type: "conjunction" }).format(n)) });
+    }
+    return esc(it[state.base] || it.en);
+  };
+  const when = (d) => new Date(d + "T12:00:00").toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
+  main.innerHTML = `
+    <button class="mini ghost" id="back">‹ ${t("Settings")}</button>
+    <h2 class="group">${t("What's new")}</h2>
+    ${state.changes.map((c) => `
+      <div class="change">
+        <div class="ver">${t("version {v}", { v: "v" + c.v })} · ${when(c.date)}${c.v === current ? ` · <b>${t("This version")}</b>` : ""}</div>
+        <ul>${c.items.map((it) => `<li>${item(it)}</li>`).join("")}</ul>
+      </div>`).join("")}`;
+  $("#back").onclick = () => { state.mode = "settings"; render(); scrollTo(0, 0); };
+}
 async function renderGuide() {
   const code = state.lang.code;
   main.innerHTML = `<p class="note">${t("Loading…")}</p>`;
@@ -855,6 +885,7 @@ function render() {
   else if (state.mode === "quiz") renderQuiz();
   else if (state.mode === "list") renderList();
   else if (state.mode === "guide") renderGuide();
+  else if (state.mode === "changes") renderChanges();
   else renderSettings();
 }
 
@@ -1387,12 +1418,14 @@ function renderSettings() {
       <button class="act" id="share">${t("Share this app")}</button>
       <button class="act" id="feedback">${t("Send feedback")}</button>
     </div>
+    <div class="row"><button class="act" id="whatsnew">${t("What's new")}</button></div>
     <div class="draft" id="feedbackbox" hidden></div>
     <p class="note about">PhraseBook${state.version ? " · " + t("version {v}", { v: esc(state.version.replace("phrasebook-", "")) }) : ""}. ${t("Your progress and settings stay on this device.")}${analyticsOn ? " " + t("The app counts anonymous visits and which features are used, with no cookies and no personal data.") : ""}</p>`;
   if ($("#unskip")) $("#unskip").onclick = () => { state.skipped.clear(); store.set(skipKey(state.lang.code), []); state.last = null; renderSettings(); };
   $("#known").onchange = async () => { await setKnown($("#known").value); if (state.mode === "settings") renderSettings(); };
   $("#share").onclick = shareApp;
   $("#feedback").onclick = sendFeedback;
+  $("#whatsnew").onclick = () => { state.mode = "changes"; track("changes"); render(); scrollTo(0, 0); };
   $("#round").onchange = () => {
     state.settings.round = $("#round").value;
     store.set("phrasebook-round", state.settings.round);

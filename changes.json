@@ -1,0 +1,50 @@
+[
+ {"v": 46, "date": "2026-11-03", "items": [
+  {"en": "This list of what's new, linked from Settings", "de": "Diese Liste der Neuerungen, verlinkt in den Einstellungen", "fr": "Cette liste des nouveautés, accessible depuis les Réglages", "es": "Esta lista de novedades, enlazada desde Configuración"}]},
+ {"v": 45, "date": "2026-11-02", "items": [{"langs": ["th"]}]},
+ {"v": 44, "date": "2026-11-02", "items": [{"langs": ["tl"]}]},
+ {"v": 42, "date": "2026-11-01", "items": [{"langs": ["id"]}]},
+ {"v": 40, "date": "2026-10-29", "items": [
+  {"en": "A first visit opens in your browser's language when it's English, German, French or Spanish", "de": "Beim ersten Besuch öffnet sich die App in der Sprache deines Browsers, wenn es Englisch, Deutsch, Französisch oder Spanisch ist", "fr": "À la première visite, l'app s'ouvre dans la langue de votre navigateur s'il s'agit de l'anglais, de l'allemand, du français ou de l'espagnol", "es": "En la primera visita, la app se abre en el idioma de tu navegador si es inglés, alemán, francés o español"}]},
+ {"v": 38, "date": "2026-10-29", "items": [
+  {"en": "The whole app in German, French or Spanish: menus, notes, sounds-like spellings and guides", "de": "Die ganze App auf Deutsch, Französisch oder Spanisch: Menüs, Hinweise, Aussprachehilfen und Anleitungen", "fr": "Toute l'app en allemand, en français ou en espagnol : menus, notes, prononciations approchées et guides", "es": "Toda la app en alemán, francés o español: menús, notas, pronunciaciones aproximadas y guías"}]},
+ {"v": 36, "date": "2026-10-29", "items": [
+  {"en": "A mute button that stops the automatic speech, for the bus", "de": "Eine Stummtaste, die das automatische Sprechen abschaltet, etwa im Bus", "fr": "Un bouton muet qui coupe la lecture automatique, pour le bus", "es": "Un botón de silencio que detiene la voz automática, para el autobús"}]},
+ {"v": 34, "date": "2026-10-29", "items": [
+  {"en": "Choose the language you speak: English, German, French or Spanish", "de": "Wähle die Sprache, die du sprichst: Englisch, Deutsch, Französisch oder Spanisch", "fr": "Choisissez la langue que vous parlez : anglais, allemand, français ou espagnol", "es": "Elige el idioma que hablas: inglés, alemán, francés o español"}]},
+ {"v": 33, "date": "2026-10-22", "items": [
+  {"langs": ["ko"]},
+  {"en": "Leave a phrase out of practice with the circle beside it", "de": "Lass einen Satz mit dem Kreis daneben beim Üben aus", "fr": "Retirez une phrase de l'entraînement avec le cercle à côté", "es": "Deja una frase fuera de la práctica con el círculo de al lado"}]},
+ {"v": 31, "date": "2026-10-22", "items": [
+  {"en": "Choose several topics at once", "de": "Mehrere Themen auf einmal wählen", "fr": "Choisir plusieurs thèmes à la fois", "es": "Elige varios temas a la vez"}]},
+ {"v": 26, "date": "2026-10-22", "items": [
+  {"en": "Play all keeps going with the screen locked, without clipping the start of phrases", "de": "Alle abspielen läuft bei gesperrtem Bildschirm weiter, ohne den Anfang der Sätze abzuschneiden", "fr": "Tout écouter continue écran verrouillé, sans couper le début des phrases", "es": "Reproducir todo sigue con la pantalla bloqueada, sin cortar el principio de las frases"}]},
+ {"v": 25, "date": "2026-10-20", "items": [
+  {"en": "Play all: listen to the List hands-free, your language then the one you're learning", "de": "Alle abspielen: die Liste freihändig anhören, erst deine Sprache, dann die, die du lernst", "fr": "Tout écouter : la Liste sans les mains, votre langue puis celle que vous apprenez", "es": "Reproducir todo: escucha la Lista sin manos, tu idioma y luego el que aprendes"}]},
+ {"v": 24, "date": "2026-10-20", "items": [
+  {"langs": ["he"]},
+  {"en": "Right-to-left languages, and a woman's form wherever it differs", "de": "Sprachen, die von rechts nach links laufen, und die Form für Frauen, wo sie sich unterscheidet", "fr": "Les langues qui s'écrivent de droite à gauche, et la forme féminine quand elle diffère", "es": "Idiomas que se escriben de derecha a izquierda, y la forma femenina cuando cambia"}]},
+ {"v": 21, "date": "2026-10-20", "items": [
+  {"en": "A welcome screen that downloads only the language you choose", "de": "Ein Begrüßungsbildschirm, der nur die gewählte Sprache herunterlädt", "fr": "Un écran d'accueil qui ne télécharge que la langue choisie", "es": "Una pantalla de bienvenida que solo descarga el idioma que eliges"}]},
+ {"v": 16, "date": "2026-10-19", "items": [
+  {"en": "How to install the app, share it and send feedback, in Settings", "de": "App installieren, teilen und Feedback senden, in den Einstellungen", "fr": "Installer l'app, la partager et envoyer un avis, dans les Réglages", "es": "Cómo instalar la app, compartirla y enviar comentarios, en Configuración"}]},
+ {"v": 15, "date": "2026-10-19", "items": [{"langs": ["it", "zh"]}]},
+ {"v": 14, "date": "2026-10-19", "items": [{"langs": ["fr", "nl", "de"]}]},
+ {"v": 11, "date": "2026-10-19", "items": [
+  {"en": "The app updates itself", "de": "Die App aktualisiert sich selbst", "fr": "L'app se met à jour toute seule", "es": "La app se actualiza sola"}]},
+ {"v": 9, "date": "2026-10-19", "items": [
+  {"en": "Quiz rounds that end with a score; choose their length in Settings", "de": "Quizrunden mit Punktestand am Ende; ihre Länge stellst du in den Einstellungen ein", "fr": "Des séries de quiz avec un score à la fin ; leur longueur se règle dans les Réglages", "es": "Rondas de quiz que terminan con un puntaje; su duración se elige en Configuración"}]},
+ {"v": 8, "date": "2026-10-19", "items": [
+  {"langs": ["es"]},
+  {"en": "The tabs move to the bottom of the screen on phones", "de": "Die Reiter stehen auf dem Handy unten am Bildschirm", "fr": "Les onglets passent en bas de l'écran sur téléphone", "es": "Las pestañas pasan a la parte de abajo en el celular"}]},
+ {"v": 7, "date": "2026-10-19", "items": [
+  {"en": "Cards flip like a real flashcard", "de": "Karten drehen sich wie echte Karteikarten", "fr": "Les fiches se retournent comme de vraies cartes", "es": "Las tarjetas se voltean como una tarjeta de verdad"}]},
+ {"v": 4, "date": "2026-10-18", "items": [
+  {"en": "New topics: Food and Getting Around", "de": "Neue Themen: Essen und Unterwegs", "fr": "Nouveaux thèmes : Repas et Se déplacer", "es": "Nuevos temas: Comida y Transporte"}]},
+ {"v": 3, "date": "2026-10-18", "items": [{"langs": ["km", "lo"]}]},
+ {"v": 2, "date": "2026-10-18", "items": [
+  {"langs": ["ja"]},
+  {"en": "More than one language, each downloaded on its own", "de": "Mehrere Sprachen, jede einzeln heruntergeladen", "fr": "Plusieurs langues, chacune téléchargée séparément", "es": "Varios idiomas, cada uno se descarga por separado"}]},
+ {"v": 1, "date": "2026-10-17", "items": [
+  {"en": "The first version, with Vietnamese: List, Cards, Quiz and Guide", "de": "Die erste Version, mit Vietnamesisch: Liste, Karten, Quiz und Aussprache", "fr": "La première version, avec le vietnamien : Liste, Fiches, Quiz et Guide", "es": "La primera versión, con vietnamita: Lista, Tarjetas, Prueba y Guía"}]}
+]

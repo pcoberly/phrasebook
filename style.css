@@ -148,3 +148,8 @@ footer.ready { color: var(--accent); font-weight: 600; text-decoration: underlin
   .tab.active { background: transparent; color: var(--accent); border-top-color: var(--accent); font-weight: 600; }
   .tab.gear { flex: 1; width: auto; font-size: 20px; padding: 10px 0 8px; }
 }
+/* What's new */
+.change { margin: 0 0 14px; }
+.change .ver { color: var(--muted); font-size: 14px; }
+.change ul { margin: 4px 0 0; padding-left: 20px; }
+.change li { margin: 2px 0; }

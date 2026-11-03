@@ -126,6 +126,30 @@ def main() -> int:
     if not app or not sw or app.group(1) != sw.group(1):
         problems.append(f"VERSION in app.js ({app and app.group(1)}) and CACHE in sw.js ({sw and sw.group(1)}) must match")
 
+    # What's new (changes.json): newest first, no version later than this one, every line in every language you can speak
+    try:
+        changes = json.loads((ROOT / "changes.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError) as err:
+        changes = []
+        problems.append(f"changes.json can't be read: {err}")
+    current = int(app.group(1).rsplit("v", 1)[1]) if app else 0
+    bases = ["en"] + [l["code"] for l in languages if l.get("base")]
+    codes = {l["code"] for l in languages}
+    versions = [c.get("v") for c in changes]
+    if versions != sorted(versions, reverse=True) or len(set(versions)) != len(versions):
+        problems.append("changes.json: versions must be listed newest first, each once")
+    for c in changes:
+        if not isinstance(c.get("v"), int) or c["v"] > current:
+            problems.append(f"changes.json: version {c.get('v')!r} is not a version up to {current}")
+        if not re.fullmatch(r"\d{4}-\d\d-\d\d", str(c.get("date", ""))):
+            problems.append(f"changes.json: v{c.get('v')} needs a date like 2026-11-03")
+        for item in c.get("items") or [None]:
+            if isinstance(item, dict) and "langs" in item:
+                for code in set(item["langs"]) - codes:
+                    problems.append(f"changes.json: v{c.get('v')} names a language that isn't in languages.json: {code}")
+            elif not isinstance(item, dict) or any(not item.get(b) for b in bases):
+                problems.append(f"changes.json: v{c.get('v')} has a line missing one of {', '.join(bases)}")
+
     for p in problems:
         print(p)
     print(f"{len(problems)} problem(s) in {len(ids)} phrases and {len(languages)} languages" if problems else

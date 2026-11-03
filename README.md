@@ -17,6 +17,7 @@ GitHub Pages, so it needs no App Store account. Live at https://pcoberly.github.
 | `audio/<code>/f/`, `audio/<code>/m/` | Generated: female and male MP3 for each phrase |
 | `audio/en/`, `lang/en/pack.json` | Generated: English audio for Play all, one small pack shared by every language and downloaded with the first one |
 | `app.js`, `index.html`, `style.css`, `sw.js`, `manifest.webmanifest`, `icon-v3-*.png` | The app itself |
+| `changes.json` | What's new (Settings → What's new): each version that brought a new language or feature, newest first, in English, German, French and Spanish |
 
 A device downloads the app plus only the languages chosen in Settings. Each language is a "pack"
 stored in its own cache (`lang-<code>`) and removable from Settings. The app compares `pack.json`
@@ -75,6 +76,9 @@ right and keeps their punctuation on the correct side. Where a phrase changes wi
 
 **Release.** If any app file changed (`app.js`, `style.css`, `index.html`, `sw.js`, icons), bump the
 version: `CACHE` in `sw.js` and `VERSION` in `app.js`, to the same new number. Phrase and audio changes need no bump.
+A new language or feature also gets an entry at the top of `changes.json`: `{"langs": [...]}` for languages (named in
+each reader's language automatically), or a line in `en`, `de`, `fr` and `es` for a feature. Editing `changes.json`
+alone also needs a version bump, since the app caches it.
 Then run the checks below, commit and push to `main`; GitHub Pages rebuilds in a minute or two.
 
 **Check before a release.** `python check_data.py` finds missing or mistyped phrase ids, empty text, missing audio
