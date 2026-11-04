@@ -1,4 +1,6 @@
 [
+ {"v": 48, "date": "2026-11-04", "items": [
+  {"en": "A splash screen while the app opens, and quicker opening on a weak signal", "de": "Ein Startbildschirm, während die App öffnet, und schnelleres Öffnen bei schwachem Empfang", "fr": "Un écran d'accueil pendant l'ouverture de l'app, et une ouverture plus rapide quand le réseau est faible", "es": "Una pantalla de inicio mientras se abre la app, y una apertura más rápida con poca señal"}]},
  {"v": 46, "date": "2026-11-03", "items": [
   {"en": "This list of what's new, linked from Settings", "de": "Diese Liste der Neuerungen, verlinkt in den Einstellungen", "fr": "Cette liste des nouveautés, accessible depuis les Réglages", "es": "Esta lista de novedades, enlazada desde Configuración"}]},
  {"v": 45, "date": "2026-11-02", "items": [{"langs": ["th"]}]},

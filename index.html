@@ -13,8 +13,20 @@
 <meta name="apple-mobile-web-app-title" content="PhraseBook">
 <meta name="theme-color" content="#b3261e">
 <link rel="stylesheet" href="style.css">
+<style>
+  /* the splash, shown from the first moment while the app loads; here so it needs nothing else to arrive first */
+  html { background: #faf8f5; }
+  #splash { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+    background: #faf8f5; color: #1d1b1a; font: 600 22px -apple-system, system-ui, sans-serif; transition: opacity .25s; }
+  #splash img { width: 96px; height: 96px; border-radius: 22px; animation: splash 1.6s ease-in-out infinite; }
+  #splash.gone { opacity: 0; pointer-events: none; }
+  @keyframes splash { 50% { transform: scale(.94); opacity: .8; } }
+  @media (prefers-color-scheme: dark) { html, #splash { background: #161413; color: #f1ece7; } }
+  @media (prefers-reduced-motion: reduce) { #splash img { animation: none; } }
+</style>
 </head>
 <body>
+<div id="splash" aria-hidden="true"><img src="icon-v3-180.png" alt="">PhraseBook</div>
 <header>
   <nav>
     <button data-mode="list" class="tab active" data-t="List">List</button>

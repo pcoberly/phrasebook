@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v47";
+const VERSION = "phrasebook-v48";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1497,6 +1497,13 @@ function renderSettings() {
 }
 
 // ---------- boot ----------
+// the splash in index.html covers the page until the first screen is drawn, then fades away
+function hideSplash() {
+  const s = $("#splash");
+  if (!s) return;
+  s.classList.add("gone");
+  setTimeout(() => s.remove(), 300);
+}
 async function getJson(path) {
   const res = await fetch(path, { cache: "no-cache" });
   if (!res.ok) throw new Error(`${path} ${res.status}`);
@@ -1538,6 +1545,7 @@ async function boot() {
     else { await loadUi(state.base); state.known = knownLanguages().find((l) => l.code === state.base) || ENGLISH; translatePage(); }
   } catch {
     main.innerHTML = `<p class="note">Couldn't load the phrases. Open the app once while online.</p>`;
+    hideSplash();
     return;
   }
   state.progress = store.get(progressKey(state.lang.code), {});
@@ -1570,6 +1578,7 @@ async function boot() {
     render();
   });
   render();
+  hideSplash();
   // how the app was opened: in its language, and from the Home Screen or from a browser tab
   track(state.firstRun ? "welcome/shown" : "open/" + state.lang.code);
   track(matchMedia("(display-mode: standalone)").matches || navigator.standalone === true ? "mode/installed" : "mode/browser");

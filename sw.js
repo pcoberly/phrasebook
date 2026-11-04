@@ -1,4 +1,4 @@
-const CACHE = "phrasebook-v47"; // keep in step with VERSION in app.js (check_data.py checks)
+const CACHE = "phrasebook-v48"; // keep in step with VERSION in app.js (check_data.py checks)
 // The app itself. Languages are not here: each one is a "pack" (lang/<code>/ and audio/<code>/)
 // that the page downloads into its own cache, "lang-<code>", only when you choose that language.
 const SHELL = ["./", "index.html", "style.css", "app.js", "phrases.json", "languages.json", "changes.json", "manifest.webmanifest", "icon-v3-180.png", "favicon-32.png", "favicon-48.png", "audio/silence.mp3"];
@@ -43,9 +43,9 @@ async function packResponse(req) {
 // App files: take the network copy when online so updates show up at once, fall back to the cache offline.
 // "no-cache" makes the browser check with the server every time (a cheap not-modified answer when nothing
 // changed), instead of trusting the 10 minutes GitHub Pages allows it to keep a copy.
-// On a connection too slow to answer within SLOW_MS (hotel Wi-Fi) the stored copy is used, and the network
+// On a connection too slow to answer within SLOW_MS (hotel Wi-Fi, a weak signal) the stored copy is used, and the network
 // copy still replaces it in the background when it arrives.
-const SLOW_MS = 3000;
+const SLOW_MS = 1000;
 async function appResponse(e) {
   const req = e.request;
   const cache = await caches.open(CACHE);

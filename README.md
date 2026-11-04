@@ -95,7 +95,7 @@ A failed check does not stop the site updating, so fix it promptly.
   open since before a release reloads itself, or shows "A new version is ready. Tap here to reload." mid-quiz.
   The app compares its own `VERSION` with `CACHE` in the server's `sw.js`, and only a higher number counts as an
   update. It reloads by itself once per version, so a release that is still reaching GitHub's servers can't make it
-  reload over and over. Offline it just shows what is stored, and on a connection too slow to answer within 3 seconds
+  reload over and over. Offline it just shows what is stored, and on a connection too slow to answer within 1 second
   it opens from what is stored and picks up the newer files in the background.
 - Downloading a language also asks the browser to keep it (`navigator.storage.persist()`); otherwise Safari may clear
   a website's storage after a week or so unused. A Home Screen app is not affected.
