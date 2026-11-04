@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v46";
+const VERSION = "phrasebook-v47";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -15,7 +15,8 @@ const store = {
 // Anonymous usage counts, with no cookies and no personal data: visits with Cloudflare Web Analytics, and
 // which features and languages are used with GoatCounter. Nothing is recorded about phrases, progress or scores.
 // Counting is off on localhost, for anyone whose browser says Do Not Track, and on a device opened once with
-// ?analytics=off (?analytics=on undoes it). It fails quietly when offline.
+// ?analytics=mine, for the owner's own devices (?analytics=on undoes it). It fails quietly when offline.
+// ?analytics=off used to do this; it now does nothing, and devices it switched off count again.
 const ANALYTICS_TOKEN = "5720307f64814acea36e11d2a3b09d31"; // Cloudflare: a public site token, safe to publish
 const GOATCOUNTER_URL = "https://phrasebook.goatcounter.com/count"; // GoatCounter: the public address of the counter
 let analyticsOn = false;
@@ -23,9 +24,15 @@ const countQueue = []; // events that happen before GoatCounter's script has fin
 (function loadAnalytics() {
   try {
     const choice = new URLSearchParams(location.search).get("analytics");
-    if (choice === "off") localStorage.setItem("phrasebook-no-analytics", "1");
-    if (choice === "on") localStorage.removeItem("phrasebook-no-analytics");
-    if (["localhost", "127.0.0.1"].includes(location.hostname) || localStorage.getItem("phrasebook-no-analytics") || navigator.doNotTrack === "1") return;
+    localStorage.removeItem("phrasebook-no-analytics"); // set by the old ?analytics=off
+    if (choice === "mine") localStorage.setItem("phrasebook-not-counted", "1");
+    if (choice === "on") localStorage.removeItem("phrasebook-not-counted");
+    if (choice !== null) { // take it out of the address bar, so a copied or shared link doesn't carry it
+      const u = new URL(location.href);
+      u.searchParams.delete("analytics");
+      history.replaceState(null, "", u);
+    }
+    if (["localhost", "127.0.0.1"].includes(location.hostname) || localStorage.getItem("phrasebook-not-counted") || navigator.doNotTrack === "1") return;
     analyticsOn = true;
     if (ANALYTICS_TOKEN) {
       const cf = document.createElement("script");
