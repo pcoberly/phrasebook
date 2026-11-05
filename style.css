@@ -153,3 +153,5 @@ footer.ready { color: var(--accent); font-weight: 600; text-decoration: underlin
 .change .ver { color: var(--muted); font-size: 14px; }
 .change ul { margin: 4px 0 0; padding-left: 20px; }
 .change li { margin: 2px 0; }
+/* the example filled into a phrase with a gap: something to swap for your own */
+mark.example { color: inherit; background: color-mix(in srgb, var(--accent) 13%, transparent); border-bottom: 2px dotted var(--accent); border-radius: 4px; padding: 0 2px; }

@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v50";
+const VERSION = "phrasebook-v51";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -239,6 +239,11 @@ const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">"
 // Hebrew and the like ("rtl" in languages.json) so its punctuation lands on the correct side
 const rtlAttr = () => (state.lang.rtl ? ' dir="rtl"' : "");
 const nat = (s) => `<span lang="${state.lang.code}"${rtlAttr()}>${esc(s)}</span>`;
+// a phrase with a gap ("Which train for...?") shown with the example its audio uses filled in and marked, so what you
+// see matches what you hear: "filled" holds it as "Tàu nào đi ⟦Hà Nội⟧?". The quiz keeps the gap.
+const natFilled = (p) => p.filled
+  ? `<span lang="${state.lang.code}"${rtlAttr()}>${esc(p.filled).replace(/⟦(.*?)⟧/, `<mark class="example" title="${esc(t("An example: put in your own"))}">$1</mark>`)}</span>`
+  : nat(p.text);
 // an English note can quote right-to-left words: fence each run off so it doesn't scramble the sentence around it
 const RTL_RUN = /[\u0590-\u08FF\uFB1D-\uFEFC]+(?:[\s.,…-]+[\u0590-\u08FF\uFB1D-\uFEFC]+)*[?!.…]*/g;
 const noteText = (s) => esc(s).replace(RTL_RUN, "<bdi>$&</bdi>");
@@ -254,7 +259,7 @@ function pron(p) {
 function womanForm(p) {
   const f = p.female;
   if (!f) return "";
-  return `<div class="woman">${t("A woman says:")} ${f.text ? `<b>${nat(f.text)}</b> ` : ""}${f.say ? `<i>${esc(f.say)}</i>` : ""}</div>`;
+  return `<div class="woman">${t("A woman says:")} ${f.text ? `<b>${natFilled(f)}</b> ` : ""}${f.say ? `<i>${esc(f.say)}</i>` : ""}</div>`;
 }
 const noteOf = (p) => (p.note ? `<div class="note">${noteText(p.note)}</div>` : "");
 // languages marked "draft" in languages.json have not been checked by a native speaker
@@ -318,7 +323,7 @@ function renderCard() {
   const listenOnly = $("#listen").checked;
   const fromLang = dir === "from";
   const showFront = !(fromLang && listenOnly);
-  const front = fromLang ? nat(p.text) : own(p.known);
+  const front = fromLang ? natFilled(p) : own(p.known);
   // Two faces share one spot, so the card keeps one height and turns over like a real flashcard.
   main.innerHTML = `
     <div class="cardwrap">
@@ -332,7 +337,7 @@ function renderCard() {
         </div>
         <div class="card face back">
           <div class="label">${fromLang ? yourName : name}</div>
-          <div class="big">${fromLang ? own(p.known) : nat(p.text)}</div>
+          <div class="big">${fromLang ? own(p.known) : natFilled(p)}</div>
           <button class="speak" id="say2" aria-label="${t("Play")}">🔊</button>
           <div class="orig">${fromLang ? name : yourName}: <b>${front}</b></div>
           ${pron(p)}
@@ -525,7 +530,7 @@ function entryHtml(p, fromFirst, withNote = true, withSkip = false) {
       <div class="entry${skipped ? " skipped" : ""}" data-entry="${p.id}">
         <div>
           ${fromFirst ? "" : `<div class="en">${own(p.known)}</div>`}
-          <div class="vi"${rtlAttr()}>${nat(p.text)}</div>
+          <div class="vi"${rtlAttr()}>${natFilled(p)}</div>
           ${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}
           ${womanForm(p)}
           ${fromFirst ? `<div class="en">${own(p.known)}</div>` : ""}

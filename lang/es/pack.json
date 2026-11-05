@@ -1,7 +1,7 @@
 {
- "bytes": 2080411,
+ "bytes": 2085362,
  "files": {
-  "lang/es/phrases.json": "5c346f24cc4c",
+  "lang/es/phrases.json": "e818b449b4ce",
   "lang/es/guide.html": "62ab354c4b83",
   "audio/es/f/hello.mp3": "10ad087c4bd1",
   "audio/es/f/good-morning.mp3": "d05ad4407f84",
@@ -54,10 +54,10 @@
   "audio/es/f/train-station.mp3": "313550788de9",
   "audio/es/f/where-train-station.mp3": "dd7c25634eff",
   "audio/es/f/where-bus-station.mp3": "3601cf64f91f",
-  "audio/es/f/which-train.mp3": "159eefdbab54",
+  "audio/es/f/which-train.mp3": "cf943c3121a7",
   "audio/es/f/buy-ticket.mp3": "18226f42e35d",
-  "audio/es/f/two-tickets.mp3": "1169d555d8ac",
-  "audio/es/f/trip-length.mp3": "2590b035de38",
+  "audio/es/f/two-tickets.mp3": "5a658a7889a4",
+  "audio/es/f/trip-length.mp3": "deaef8776958",
   "audio/es/f/delicious.mp3": "8c2831f2f55c",
   "audio/es/f/allergic.mp3": "65e807ff88bf",
   "audio/es/f/love-dish.mp3": "09a58724d56c",
@@ -125,10 +125,10 @@
   "audio/es/m/train-station.mp3": "05ebf4446e74",
   "audio/es/m/where-train-station.mp3": "d1910f4239bf",
   "audio/es/m/where-bus-station.mp3": "fd8d6f2def07",
-  "audio/es/m/which-train.mp3": "2d69dc84a62a",
+  "audio/es/m/which-train.mp3": "7ebae3af3d1b",
   "audio/es/m/buy-ticket.mp3": "abe5fb662eaf",
-  "audio/es/m/two-tickets.mp3": "cd78289062c6",
-  "audio/es/m/trip-length.mp3": "97d771e1c5f5",
+  "audio/es/m/two-tickets.mp3": "b52f133078e1",
+  "audio/es/m/trip-length.mp3": "0d94b52e3d13",
   "audio/es/m/delicious.mp3": "70a4d4c74b21",
   "audio/es/m/allergic.mp3": "0899ce0cc783",
   "audio/es/m/love-dish.mp3": "554b72656770",
@@ -149,14 +149,14 @@
  "forBase": {
   "de": {
    "lang/es/for-de/guide.html": "451e85a2614d",
-   "lang/es/for-de/notes.json": "7b13b7aea0a8"
+   "lang/es/for-de/notes.json": "b21b4141104c"
   },
   "es": {
-   "lang/es/for-es/ui.json": "8ee5536b43bc"
+   "lang/es/for-es/ui.json": "559c0edeb4c9"
   },
   "fr": {
    "lang/es/for-fr/guide.html": "d299dd349422",
-   "lang/es/for-fr/notes.json": "bac0e6d5d5fe"
+   "lang/es/for-fr/notes.json": "8a65b8a27a95"
   }
  }
 }

@@ -126,6 +126,21 @@ def main() -> int:
     if not app or not sw or app.group(1) != sw.group(1):
         problems.append(f"VERSION in app.js ({app and app.group(1)}) and CACHE in sw.js ({sw and sw.group(1)}) must match")
 
+    # a phrase with a gap can show its audio's example filled in: "filled" marks exactly one example, ⟦like this⟧
+    for lang in languages:
+        try:
+            texts = json.loads((ROOT / "lang" / lang["code"] / "phrases.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        for pid, e in texts.items():
+            for form in (e, e.get("female") or {}):
+                filled = form.get("filled")
+                if filled is None:
+                    continue
+                gap = re.search(r"\.\.\.|…", form.get("text", e.get("text", "")))
+                if not gap or filled.count("⟦") != 1 or filled.count("⟧") != 1 or not re.search(r"⟦[^⟦⟧]+⟧", filled):
+                    problems.append(f"lang/{lang['code']}/phrases.json: {pid} \"filled\" must mark one example, ⟦like this⟧, in a phrase with a gap")
+
     # What's new (changes.json): newest first, no version later than this one, every line in every language you can speak
     try:
         changes = json.loads((ROOT / "changes.json").read_text(encoding="utf-8"))
