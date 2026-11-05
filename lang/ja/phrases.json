@@ -54,10 +54,10 @@
   "train-station": {"text": "駅", "say": "eki", "note": "Any station. Add the name: Tōkyō-eki"},
   "where-train-station": {"text": "駅はどこですか", "say": "eki wa doko desu ka"},
   "where-bus-station": {"text": "バスターミナルはどこですか", "say": "basu tāminaru wa doko desu ka"},
-  "which-train": {"text": "…行きはどの電車ですか", "say": "… iki wa dono densha desu ka", "note": "行き (iki) means bound for. Swap in any destination; the audio uses Hanoi (ハノイ) as the example", "spoken": "ハノイ行きはどの電車ですか"},
+  "which-train": {"text": "…行きはどの電車ですか", "say": "… yuki wa dono densha desu ka", "note": "行き (yuki) means bound for, and is read yuki on the railways, as in station announcements; iki is also heard. Swap in any destination; the audio uses Tokyo (東京, tōkyō) as the example", "spoken": "東京ゆきはどの電車ですか"},
   "buy-ticket": {"text": "切符はどこで買えますか", "say": "kippu wa doko de kaemasu ka", "note": "Kippu is a ticket. Machines are common, and many have an English button"},
-  "two-tickets": {"text": "…まで二枚お願いします", "say": "… made nimai onegai shimasu", "note": "Mai counts tickets: ichi-mai (1), nimai (2), san-mai (3). The audio uses Hanoi as the example", "spoken": "ハノイまで二枚お願いします"},
-  "trip-length": {"text": "…までどのくらいかかりますか", "say": "… made dono kurai kakarimasu ka", "note": "The audio uses Hanoi (ハノイ) as the example", "spoken": "ハノイまでどのくらいかかりますか"},
+  "two-tickets": {"text": "…まで二枚お願いします", "say": "… made nimai onegai shimasu", "note": "Mai counts tickets: ichi-mai (1), nimai (2), san-mai (3). The audio uses Tokyo (東京, tōkyō) as the example", "spoken": "東京まで二枚お願いします"},
+  "trip-length": {"text": "…までどのくらいかかりますか", "say": "… made dono kurai kakarimasu ka", "note": "The audio uses Tokyo (東京, tōkyō) as the example", "spoken": "東京までどのくらいかかりますか"},
 
   "delicious": {"text": "おいしい！", "say": "oishii", "note": "Said to the cook, it is the best compliment"},
   "allergic": {"text": "…のアレルギーがあります", "say": "… no arerugī ga arimasu", "note": "Add the food: ebi (shrimp), tamago (egg), piinattsu (peanuts). The audio uses egg as the example", "spoken": "卵のアレルギーがあります"},
