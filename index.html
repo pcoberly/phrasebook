@@ -17,7 +17,7 @@
   /* the splash, shown from the first moment while the app loads; here so it needs nothing else to arrive first */
   html { background: #faf8f5; }
   #splash { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
-    background: #faf8f5; color: #1d1b1a; font: 600 22px -apple-system, system-ui, sans-serif; transition: opacity .25s; }
+    background: #faf8f5; color: #1d1b1a; font: 600 22px -apple-system, system-ui, sans-serif; transition: opacity .4s ease; }
   #splash img { width: 96px; height: 96px; border-radius: 22px; animation: splash 1.6s ease-in-out infinite; }
   #splash.gone { opacity: 0; pointer-events: none; }
   @keyframes splash { 50% { transform: scale(.94); opacity: .8; } }

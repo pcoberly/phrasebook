@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v48";
+const VERSION = "phrasebook-v49";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1497,12 +1497,16 @@ function renderSettings() {
 }
 
 // ---------- boot ----------
-// the splash in index.html covers the page until the first screen is drawn, then fades away
+// the splash in index.html covers the page until the first screen is drawn, then fades away. It stays at least
+// SPLASH_MS from the start, so a quick open is a calm fade rather than a flash.
+const SPLASH_MS = 750;
 function hideSplash() {
   const s = $("#splash");
   if (!s) return;
-  s.classList.add("gone");
-  setTimeout(() => s.remove(), 300);
+  setTimeout(() => {
+    s.classList.add("gone");
+    setTimeout(() => s.remove(), 450);
+  }, Math.max(0, SPLASH_MS - performance.now()));
 }
 async function getJson(path) {
   const res = await fetch(path, { cache: "no-cache" });
