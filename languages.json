@@ -174,5 +174,17 @@
       "m": "th-TH-NiwatNeural"
     },
     "bytes": 2089015
+  },
+  {
+    "code": "ru",
+    "name": "Russian",
+    "native": "Русский",
+    "ttsLang": "ru-RU",
+    "draft": true,
+    "voices": {
+      "f": "ru-RU-SvetlanaNeural",
+      "m": "ru-RU-DmitryNeural"
+    },
+    "bytes": 2266587
   }
 ]
