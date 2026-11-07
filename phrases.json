@@ -36,7 +36,6 @@
   {"id": "too-expensive", "en": "Too expensive", "cat": "shopping"},
   {"id": "discount", "en": "Can you lower the price?", "cat": "shopping"},
   {"id": "card", "en": "Do you accept credit cards?", "cat": "shopping"},
-  {"id": "bill", "en": "The bill, please", "cat": "shopping"},
   {"id": "reservation", "en": "I have a reservation", "cat": "hotel"},
   {"id": "checkout-time", "en": "What time is check-out?", "cat": "hotel"},
   {"id": "breakfast", "en": "Is breakfast included?", "cat": "hotel"},
@@ -68,6 +67,7 @@
   {"id": "milk", "en": "Milk", "cat": "food"},
   {"id": "sugar", "en": "Sugar", "cat": "food"},
   {"id": "cheers", "en": "Cheers!", "cat": "food"},
+  {"id": "bill", "en": "The bill, please", "cat": "food"},
   {"id": "help", "en": "Help me!", "cat": "emergency"},
   {"id": "pharmacy", "en": "Where is the pharmacy?", "cat": "emergency"}
 ]
