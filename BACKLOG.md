@@ -17,7 +17,7 @@ Right-to-left support is already there from Hebrew. Like Hebrew, Arabic needs me
 Use the star, kept free when skipping got the check circle, to mark favourite phrases, with a way to practise only those.
 
 ## Native-speaker review
-Every language marked `draft` needs checking by a native speaker: Korean, Hebrew, Indonesian, Tagalog, Thai and Russian, plus the German and French notes and guides. The Thai tone marks and the Khmer and Lao spellings matter most.
+Every language marked `draft` needs checking by a native speaker: Korean, Hebrew, Indonesian, Tagalog, Thai, Russian and Turkish, plus the German and French notes and guides. Check first the ambulance numbers in the "I need a doctor" notes, then the Thai tone marks and the Khmer and Lao spellings.
 
 ## Speaking practice
 Practise saying a phrase, in two steps.
