@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v57";
+const VERSION = "phrasebook-v58";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -926,19 +926,29 @@ function progress(code) {
     if (pct) pct.textContent = p + "%";
   };
 }
-// a short message over the bottom of the screen, with an optional button; it closes itself after a while
-function toast(message, action) {
-  document.querySelector(".toast")?.remove();
-  const el = document.createElement("div");
-  el.className = "toast";
-  el.setAttribute("role", "status");
-  el.innerHTML = `<span class="tmsg">${message}</span>${action ? `<button class="mini" data-t-act>${esc(action.label)}</button>` : ""}<button class="tclose" aria-label="${esc(t("Close"))}">✕</button>`;
-  document.body.appendChild(el);
-  requestAnimationFrame(() => el.classList.add("in"));
-  const close = () => { el.classList.remove("in"); setTimeout(() => el.remove(), 250); };
-  el.querySelector(".tclose").onclick = close;
-  if (action) el.querySelector("[data-t-act]").onclick = () => { close(); action.run(); };
-  setTimeout(close, 10000);
+// a language is ready to learn: a pop-up in the middle of the screen, over a dimmed page, that leads to its phrases.
+// It stays until the person chooses.
+function readyDialog(lang, downloaded) {
+  document.querySelector("dialog.ready")?.remove();
+  const d = document.createElement("dialog");
+  d.className = "ready";
+  d.setAttribute("aria-labelledby", "readytitle");
+  const name = esc(langName(lang));
+  d.innerHTML = `
+    <div class="readyicon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h2 id="readytitle">${downloaded ? t("{name} is ready", { name }) : t("Now learning {name}", { name })}</h2>
+    <p class="native" lang="${lang.code}">${esc(lang.native)}</p>
+    ${downloaded ? `<p class="note">${t("It's on this device and works offline.")}</p>` : ""}
+    <button class="act good" data-go>${t("Start learning")}</button>
+    <button class="later" data-later>${t("Not now")}</button>`;
+  document.body.appendChild(d);
+  const close = () => { d.close(); d.remove(); };
+  d.querySelector("[data-go]").onclick = () => { close(); goTo("list"); };
+  d.querySelector("[data-later]").onclick = close;
+  d.addEventListener("click", (e) => { if (e.target === d) close(); }); // a tap on the dimmed page around it
+  d.addEventListener("cancel", (e) => { e.preventDefault(); close(); }); // Escape
+  d.showModal();
+  d.querySelector("[data-go]").focus();
 }
 // go to a page as if its tab had been tapped
 function goTo(mode) {
@@ -949,7 +959,6 @@ function goTo(mode) {
   render();
   scrollTo(0, 0);
 }
-const startLearning = () => ({ label: t("Start learning"), run: () => goTo("list") });
 
 // ---------- first run: choose a language ----------
 function pickerRow(l) {
@@ -1628,8 +1637,7 @@ function renderSettings() {
       delete state.dl[code];
       track("language/" + code);
       // say so wherever the person is now, and offer the way to the phrases
-      const name = esc(langName(lang));
-      toast(downloading ? t("✓ {name} is downloaded and ready", { name }) : t("✓ Now learning {name}", { name }), startLearning());
+      readyDialog(lang, downloading);
       if (state.mode !== "settings" && state.mode !== "quiz") render();
     } catch {
       delete state.dl[code];

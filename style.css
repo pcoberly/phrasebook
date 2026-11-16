@@ -41,6 +41,7 @@ select { font-size: 16px; padding: 6px; border-radius: 8px; border: 1px solid va
 .row { display: flex; gap: 10px; margin-top: 12px; }
 button.act { flex: 1; padding: 16px; font-size: 18px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
 button.good { background: var(--good); color: #fff; border-color: var(--good); }
+@media (prefers-color-scheme: dark) { button.good { color: #161413; } } /* white on the light green of dark mode is hard to read */
 button.bad { background: var(--bad); color: #fff; border-color: var(--bad); }
 button.speak { border: 1px solid var(--line); background: var(--card); color: var(--fg); border-radius: 999px; font-size: 20px; width: 48px; height: 48px; flex: none; }
 .choice { display: flex; gap: 8px; align-items: stretch; margin-top: 8px; }
@@ -169,13 +170,19 @@ mark.example { color: inherit; background: color-mix(in srgb, var(--accent) 13%,
 .dl .bar { flex: 1; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
 .dl .bar > span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 4px; transition: width .3s; }
 .dl .pct { font-size: 17px; font-weight: 600; color: var(--fg); min-width: 3.2em; text-align: right; font-variant-numeric: tabular-nums; }
-/* a message over the bottom of the screen, such as "Thai is ready" */
-.toast { position: fixed; left: 16px; right: 16px; bottom: calc(var(--tab-h) + 14px + env(safe-area-inset-bottom, 0px)); max-width: 528px; margin: 0 auto; z-index: 50;
-  display: flex; align-items: center; gap: 10px; padding: 12px 12px 12px 16px; border-radius: 14px; background: var(--card); color: var(--fg);
-  border: 1px solid var(--accent); box-shadow: 0 6px 24px rgb(0 0 0 / .18); opacity: 0; transform: translateY(12px); transition: opacity .25s, transform .25s; }
-.toast.in { opacity: 1; transform: none; }
-.toast .tmsg { flex: 1; font-weight: 600; }
-.toast .tclose { background: none; border: 0; color: var(--muted); font-size: 18px; padding: 4px 6px; }
+/* a language is ready: a pop-up in the middle of the screen, over the page dimmed */
+dialog.ready { width: min(340px, calc(100vw - 48px)); padding: 28px 24px 18px; border: 0; border-radius: 20px; background: var(--card); color: var(--fg);
+  text-align: center; box-shadow: 0 12px 40px rgb(0 0 0 / .3); }
+dialog.ready::backdrop { background: rgb(0 0 0 / .5); }
+dialog.ready[open] { animation: pop .22s ease-out; }
+@keyframes pop { from { opacity: 0; transform: scale(.94); } }
+.readyicon { width: 64px; height: 64px; margin: 0 auto 12px; border-radius: 50%; background: var(--good); display: grid; place-items: center; }
+.readyicon svg { width: 36px; height: 36px; fill: none; stroke: var(--bg); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+dialog.ready h2 { margin: 0; font-size: 24px; }
+dialog.ready .native { margin: 4px 0 10px; font-size: 18px; color: var(--muted); }
+dialog.ready .note { margin: 0 0 18px; }
+dialog.ready .act { width: 100%; }
+dialog.ready .later { margin-top: 8px; width: 100%; padding: 10px; border: 0; background: none; color: var(--muted); font-size: 16px; }
 /* search, on the List only: a 🔍 button that turns the controls row into a search box */
 body:not([data-mode="list"]) .searchbtn { display: none; }
 .searchbtn { padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--fg); display: inline-flex; }
