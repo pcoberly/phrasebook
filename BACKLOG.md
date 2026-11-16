@@ -26,3 +26,11 @@ Practise saying a phrase, in two steps.
 2. **"Did it understand you?" (optional, later).** Run the phone's speech recognition (Chrome uses Google's, Safari Apple's) and compare what it heard with the phrase: a match, a near miss, or "it heard something else", showing what it heard. It needs a connection, since the recording goes to Google or Apple. Khmer, Lao and probably Tagalog may not be supported, and one-syllable words like the numbers are unreliable, so match generously. Test it in the iPhone Home Screen app first, where support has been patchy. A few hours.
 
 Not planned: sound-by-sound scoring like Duolingo's needs a paid cloud service and a server, which would end PhraseBook being free, offline and private.
+
+## Search
+Find a phrase without scrolling, for when you need to say something now.
+
+- **Where:** a 🔍 button at the end of the List's controls row. Tapping it turns that row into a search box, with the topic, direction and listening-only controls set aside until you close it with ✕. List only; Cards and Quiz are for practice.
+- **What it matches:** your own language first ("toilet", or "Toilette" in German), then the phrase itself and its sounds-like spelling ("xin", "kráp"). Ignore accents and case ("cafe" finds "café"), and match the start of words ("pharm" finds the pharmacy). Leave the notes out, as they'd add noise.
+- **Results:** the List filters as you type, with the matches highlighted, and 🔊 still plays. Search every topic whatever is chosen, and say so in the box ("Search all phrases"). Play all plays just the results. With no match, say so rather than showing an empty page.
+- About an hour or two.
