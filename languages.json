@@ -186,5 +186,17 @@
       "m": "ru-RU-DmitryNeural"
     },
     "bytes": 2267031
+  },
+  {
+    "code": "tr",
+    "name": "Turkish",
+    "native": "Türkçe",
+    "ttsLang": "tr-TR",
+    "draft": true,
+    "voices": {
+      "f": "tr-TR-EmelNeural",
+      "m": "tr-TR-AhmetNeural"
+    },
+    "bytes": 2199144
   }
 ]

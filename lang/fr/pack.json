@@ -40,7 +40,6 @@
   "audio/fr/f/too-expensive.mp3": "815448674d6a",
   "audio/fr/f/discount.mp3": "1308cb812232",
   "audio/fr/f/card.mp3": "c813bab94307",
-  "audio/fr/f/bill.mp3": "47a03f59db89",
   "audio/fr/f/reservation.mp3": "d3741218cd52",
   "audio/fr/f/checkout-time.mp3": "d201bfa0d4df",
   "audio/fr/f/breakfast.mp3": "5ed5d95a2406",
@@ -72,6 +71,7 @@
   "audio/fr/f/milk.mp3": "5d0e33d24a03",
   "audio/fr/f/sugar.mp3": "3f77e306f448",
   "audio/fr/f/cheers.mp3": "beedbe57ef33",
+  "audio/fr/f/bill.mp3": "47a03f59db89",
   "audio/fr/f/help.mp3": "c9333256a5ed",
   "audio/fr/f/pharmacy.mp3": "3667d51f770c",
   "audio/fr/m/hello.mp3": "4fbed95181a8",
@@ -111,7 +111,6 @@
   "audio/fr/m/too-expensive.mp3": "0bfe79a7f622",
   "audio/fr/m/discount.mp3": "940bd1677ccd",
   "audio/fr/m/card.mp3": "cafb0c29498d",
-  "audio/fr/m/bill.mp3": "f1202334459a",
   "audio/fr/m/reservation.mp3": "90449b2107fe",
   "audio/fr/m/checkout-time.mp3": "374aec48e06c",
   "audio/fr/m/breakfast.mp3": "0d420818cfd1",
@@ -143,6 +142,7 @@
   "audio/fr/m/milk.mp3": "7864cb60312e",
   "audio/fr/m/sugar.mp3": "c0f153aea7cd",
   "audio/fr/m/cheers.mp3": "a5a7e4884dee",
+  "audio/fr/m/bill.mp3": "f1202334459a",
   "audio/fr/m/help.mp3": "e3887a1f33a5",
   "audio/fr/m/pharmacy.mp3": "baebdc0781a9"
  },
@@ -156,7 +156,7 @@
    "lang/fr/for-es/notes.json": "e9907f5d5b80"
   },
   "fr": {
-   "lang/fr/for-fr/ui.json": "3cfe161e59f4"
+   "lang/fr/for-fr/ui.json": "706cc5d7204d"
   }
  }
 }

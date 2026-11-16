@@ -1,4 +1,5 @@
 [
+ {"v": 53, "date": "2026-11-16", "items": [{"langs": ["tr"]}]},
  {"v": 51, "date": "2026-11-05", "items": [
   {"en": "Phrases with a gap show the example their audio uses, highlighted, and each language's examples use one of its own cities", "de": "Sätze mit einer Lücke zeigen das Beispiel aus dem Audio, hervorgehoben, und jede Sprache nimmt eine eigene Stadt als Beispiel", "fr": "Les phrases à trou affichent l'exemple de l'audio, surligné, et chaque langue prend une de ses propres villes comme exemple", "es": "Las frases con un hueco muestran el ejemplo del audio, resaltado, y cada idioma usa una de sus propias ciudades como ejemplo"}]},
  {"v": 50, "date": "2026-11-05", "items": [{"langs": ["ru"]}]},
