@@ -36,7 +36,7 @@
   "million": {"text": "百万", "say": "hyakuman", "note": "Literally a hundred man (万)"},
 
   "how-much": {"text": "いくらですか", "say": "ikura desu ka", "note": "Point at the item and say kore wa ikura desu ka (how much is this?)"},
-  "would-like": {"text": "…をください", "say": "… o kudasai", "note": "Literally \"give me …\". Kore o kudasai = this one, please", "spoken": "これをください", "filled": "⟦これ⟧をください"},
+  "would-like": {"text": "…をお願いします", "say": "… o onegai shimasu", "note": "The polite way to order or ask for something, in a restaurant, café or shop: literally \"… please\". …をください (… o kudasai), give me …, also works but is more direct. The audio uses コーヒー (kōhī), coffee, as the example", "spoken": "コーヒーをお願いします", "filled": "⟦コーヒー⟧をお願いします"},
   "i-want": {"text": "…が欲しいです", "say": "… ga hoshii desu", "note": "Direct; fine with friends, a little blunt to a shopkeeper", "spoken": "これが欲しいです", "filled": "⟦これ⟧が欲しいです"},
   "do-you-have": {"text": "…はありますか", "say": "… wa arimasu ka", "note": "Put the item in the gap. The audio uses water (mizu) as the example", "spoken": "水はありますか", "filled": "⟦水⟧はありますか"},
   "just-looking": {"text": "見ているだけです", "say": "mite iru dake desu", "note": "A polite way to decline help"},
