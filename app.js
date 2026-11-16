@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v59";
+const VERSION = "phrasebook-v60";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1399,7 +1399,7 @@ function languagePanel() {
   const { mine, available } = languageGroups();
   const addOpen = store.get("phrasebook-add-open", mine.length <= 1);
   return `
-    <h2 class="group">${t("Learning")}</h2>
+    ${sectionTitle("Learning")}
     <div id="langs">
       <h3 class="sub">${t("On this device ({n})", { n: mine.length })}</h3>
       ${mine.map((l, i) => languageRow(l, i, mine.length)).join("")}
@@ -1508,18 +1508,39 @@ function sendFeedback() {
   showFeedbackOptions();
 }
 
+// Settings sections: each a card whose title has an icon, so the page reads as a few clear groups
+const SECTION_ICONS = {
+  "Your language": '<path d="M4 5h16v10H9l-5 4z"/>',
+  "Learning": '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>',
+  "Audio": '<path d="M4 9.5h4L13 5v14l-5-4.5H4z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/>',
+  "Quiz": '<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .8-1 1.5v.5"/><circle cx="12" cy="17" r="1.1" class="dot"/>',
+  "Left out of practice": '<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
+  "Play all": '<circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l5.5-3.5z" class="dot"/>',
+  "About": '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r="1.1" class="dot"/>',
+};
+const sectionTitle = (key) => `<h2 class="group sh"><span class="si" aria-hidden="true"><svg viewBox="0 0 24 24">${SECTION_ICONS[key]}</svg></span>${t(key)}</h2>`;
+// wrap each title and what follows it, up to the next title, in a <section class="sect">
+function sectionize(root) {
+  for (const h of [...root.querySelectorAll(":scope > h2.sh")]) {
+    const sect = document.createElement("section");
+    sect.className = "sect";
+    h.before(sect);
+    let el = h;
+    while (el && !(el !== h && el.matches?.("h2.sh"))) { const next = el.nextElementSibling; sect.appendChild(el); el = next; }
+  }
+}
 function renderSettings() {
   const skippedCount = state.phrases.filter(isSkipped).length;
   const opt = (v, label, cur) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
   main.innerHTML = `
-    <h2 class="group">${t("Your language")}</h2>
+    ${sectionTitle("Your language")}
     <div class="setting">
       <label for="known">${t("I speak")}</label>
       <select id="known">${knownSelect()}</select>
     </div>
     <p class="note">${t("Prompts, answers, notes, the guide and Play all use the language you speak. Anything not yet written for it shows in English.")}${state.base === state.lang.code ? " " + t("While you learn {name}, English is used.", { name: esc(langName(state.lang)) }) : ""}</p>
     ${languagePanel()}
-    <h2 class="group">${t("Audio")}</h2>
+    ${sectionTitle("Audio")}
     <div class="setting">
       <label for="voice">${t("Voice")}</label>
       <select id="voice">
@@ -1537,19 +1558,19 @@ function renderSettings() {
       </select>
     </div>
     <div class="row"><button class="act" id="sample">${t("🔊 Hear a sample")}</button></div>
-    <h2 class="group">${t("Quiz")}</h2>
+    ${sectionTitle("Quiz")}
     <div class="setting">
       <label for="round">${t("Questions per round")}</label>
       <select id="round">
         ${ROUND_CHOICES.map((n) => opt(n, n, state.settings.round)).join("")}
       </select>
     </div>
-    <h2 class="group">${t("Left out of practice")}</h2>
+    ${sectionTitle("Left out of practice")}
     <div class="setting">
       <span>${skippedCount ? t(skippedCount === 1 ? "{n} phrase left out in {name}" : "{n} phrases left out in {name}", { n: skippedCount, name: esc(langName(state.lang)) }) : t("None. Tap a phrase's ✓ circle (in the List, on a card or in the quiz) to leave it out.")}</span>
       ${skippedCount ? `<button class="act" id="unskip" style="flex:none">${t("Practise all")}</button>` : ""}
     </div>
-    <h2 class="group">${t("Play all")}</h2>
+    ${sectionTitle("Play all")}
     <div class="setting">
       <label for="gap">${t("Pause between")}</label>
       <select id="gap">
@@ -1563,7 +1584,7 @@ function renderSettings() {
         ${opt("yes", t("Yes"), state.settings.twice)}
       </select>
     </div>
-    <h2 class="group">${t("About")}</h2>
+    ${sectionTitle("About")}
     ${installPanel()}
     <div class="row">
       <button class="act" id="share">${t("Share this app")}</button>
@@ -1572,6 +1593,7 @@ function renderSettings() {
     <div class="row"><button class="act" id="whatsnew">${t("What's new")}</button></div>
     <div class="draft" id="feedbackbox" hidden></div>
     <p class="note about">PhraseBook${state.version ? " · " + t("version {v}", { v: esc(state.version.replace("phrasebook-", "")) }) : ""}. ${t("Your progress and settings stay on this device.")}${analyticsOn ? " " + t("The app counts anonymous visits and which features are used, with no cookies and no personal data.") : ""}</p>`;
+  sectionize(main);
   if ($("#unskip")) $("#unskip").onclick = () => { state.skipped.clear(); store.set(skipKey(state.lang.code), []); state.last = null; renderSettings(); };
   $("#known").onchange = async () => { await setKnown($("#known").value); if (state.mode === "settings") renderSettings(); };
   $("#share").onclick = shareApp;

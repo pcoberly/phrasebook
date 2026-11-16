@@ -202,3 +202,13 @@ mark.hit { color: inherit; background: color-mix(in srgb, #f5c400 45%, transpare
 .addlang .atext { flex: 1; display: flex; flex-direction: column; }
 .addlang .acount { font-size: 14px; font-weight: 400; color: var(--muted); }
 .addlang[aria-expanded="true"] .chev::after { transform: translate(-50%, -30%) rotate(225deg); }
+/* Settings: each section a card with a clear title, so the groups stand out */
+.sect { margin: 14px 0; padding: 4px 16px 14px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); box-shadow: 0 1px 4px rgb(0 0 0 / .05); }
+.sect > h2.sh { display: flex; align-items: center; gap: 10px; margin: 12px 0 6px; font-size: 18px; font-weight: 700; text-transform: none; letter-spacing: 0; color: var(--fg); }
+.sh .si { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+.sh .si svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sh .si .dot { fill: currentColor; stroke: none; }
+/* things that are cards themselves sit on the page colour inside a section, so they don't vanish into it */
+.sect .lang, .sect .panel, .sect button.act:not(.good) { background: var(--bg); }
+.sect .setting:last-child { border-bottom: 0; }
+.sect > :last-child { margin-bottom: 0; }
