@@ -1,4 +1,9 @@
 {
+ "Close": "Cerrar",
+ "Start learning": "Empezar",
+ "Tap a language to switch to it, or to download it if it isn't on this device yet.": "Toca un idioma para cambiar a él, o para descargarlo si todavía no está en este dispositivo.",
+ "✓ Now learning {name}": "✓ Ahora aprendes {name}",
+ "✓ {name} is downloaded and ready": "✓ {name} está descargado y listo",
  "An example: put in your own": "Un ejemplo: pon el tuyo",
  "What's new": "Novedades",
  "New language: {name}": "Nuevo idioma: {name}",

@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v53";
+const VERSION = "phrasebook-v54";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -107,6 +107,7 @@ const state = {
   choosing: null,  // the language being downloaded from the welcome screen
   round: null,    // the quiz round in progress: its questions, where you are, your score and your misses
   busy: {},      // language code -> message while it downloads
+  dl: {},        // language code -> percent downloaded, shown as a bar
   note: "",       // temporary footer message
   updateReady: false, // a newer version is waiting: the footer becomes a reload button
   version: VERSION,
@@ -822,13 +823,57 @@ async function renderGuide() {
   }
 }
 
+// a language's status while it downloads: a bar with the percentage, which progress() then moves along
+function dlStatus(code) {
+  if (!(code in state.dl)) return `<span class="lstate">${esc(state.busy[code])}</span>`;
+  const p = state.dl[code];
+  return `<span class="dl"><span class="bar"><span style="width:${p}%"></span></span><span class="pct">${p}%</span></span>`;
+}
+// the callback syncPack calls as files arrive: updates the bar in place, without redrawing the page
+function progress(code) {
+  state.dl[code] = 0;
+  return (done, total) => {
+    const p = total ? Math.floor((done / total) * 100) : 0;
+    state.dl[code] = p;
+    const row = document.querySelector(`[data-lang="${code}"]`);
+    if (!row) return;
+    if (!row.querySelector(".dl")) { const st = row.querySelector(".lstate"); if (st) st.outerHTML = dlStatus(code); }
+    const bar = row.querySelector(".dl .bar > span"), pct = row.querySelector(".dl .pct");
+    if (bar) bar.style.width = p + "%";
+    if (pct) pct.textContent = p + "%";
+  };
+}
+// a short message over the bottom of the screen, with an optional button; it closes itself after a while
+function toast(message, action) {
+  document.querySelector(".toast")?.remove();
+  const el = document.createElement("div");
+  el.className = "toast";
+  el.setAttribute("role", "status");
+  el.innerHTML = `<span class="tmsg">${message}</span>${action ? `<button class="mini" data-t-act>${esc(action.label)}</button>` : ""}<button class="tclose" aria-label="${esc(t("Close"))}">✕</button>`;
+  document.body.appendChild(el);
+  requestAnimationFrame(() => el.classList.add("in"));
+  const close = () => { el.classList.remove("in"); setTimeout(() => el.remove(), 250); };
+  el.querySelector(".tclose").onclick = close;
+  if (action) el.querySelector("[data-t-act]").onclick = () => { close(); action.run(); };
+  setTimeout(close, 10000);
+}
+// go to a page as if its tab had been tapped
+function goTo(mode) {
+  state.mode = mode;
+  document.querySelectorAll(".tab").forEach((b) => b.classList.toggle("active", b.dataset.mode === mode));
+  $(".opts").hidden = mode === "guide" || mode === "settings" || mode === "changes";
+  render();
+  scrollTo(0, 0);
+}
+const startLearning = () => ({ label: t("Start learning"), run: () => goTo("list") });
+
 // ---------- first run: choose a language ----------
 function pickerRow(l) {
-  const note = state.busy[l.code] || `${(l.bytes / 1e6).toFixed(1)} MB${l.draft ? " · " + t("Draft translations") : ""}`;
+  const note = state.busy[l.code] ? dlStatus(l.code) : `<span class="lstate">${esc(`${(l.bytes / 1e6).toFixed(1)} MB${l.draft ? " · " + t("Draft translations") : ""}`)}</span>`;
   return `
-    <div class="lang" data-lang="${l.code}">
+    <div class="lang tap" data-lang="${l.code}">
       <div class="linfo"><div class="lname">${esc(langName(l))} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
-        <div class="note"><span class="lstate">${esc(note)}</span></div></div>
+        <div class="note">${note}</div></div>
       <div class="lbtn">${state.choosing ? "" : `<button class="mini" data-pick="${l.code}">${t("Start")}</button>`}</div>
     </div>`;
 }
@@ -857,8 +902,8 @@ function renderWelcome() {
     renderWelcome();
   };
   $("#welcomelangs").onclick = (e) => {
-    const b = e.target.closest("button[data-pick]");
-    if (b) chooseFirstLanguage(b.dataset.pick);
+    const row = e.target.closest("[data-lang]"); // the row itself, not only its Start button
+    if (row) chooseFirstLanguage(row.dataset.lang);
   };
 }
 async function chooseFirstLanguage(code) {
@@ -868,23 +913,21 @@ async function chooseFirstLanguage(code) {
   renderWelcome();
   try {
     if (canCache) {
-      await syncPack(code, (done, total) => {
-        state.busy[code] = t("Downloading {done} of {total}", { done, total });
-        const el = document.querySelector(`[data-lang="${code}"] .lstate`);
-        if (el) el.textContent = state.busy[code];
-      });
+      await syncPack(code, progress(code));
       track("download/" + code);
     }
     await useLanguage(code);
     if (canCache) syncKnownPack().catch(() => {}); // the language you know, for Play all, follows in the background (and is retried later)
     track("language/" + code);
     delete state.busy[code];
+    delete state.dl[code];
     state.choosing = null;
     state.firstRun = false;
     document.body.classList.remove("firstrun");
     render();
   } catch {
     state.choosing = null;
+    delete state.dl[code];
     state.busy[code] = t("Couldn't download. Check you're online and try again.");
     renderWelcome();
     setTimeout(() => { delete state.busy[code]; if (state.firstRun && !state.choosing) renderWelcome(); }, 5000);
@@ -1247,10 +1290,11 @@ function languageRow(l, position, count) {
           <button class="mvb" data-act="up" aria-label="${t("Move {name} up", { name })}"${position === 0 ? " disabled" : ""}>▲</button>
           <button class="mvb" data-act="down" aria-label="${t("Move {name} down", { name })}"${position === count - 1 ? " disabled" : ""}>▼</button>
         </div>`;
+  const line = state.busy[l.code] ? dlStatus(l.code) : `<span class="lstate">${esc(status)}</span> · ${mb}${l.draft ? " · " + t("Draft translations") : ""}`;
   return `
-      <div class="lang${active ? " current" : ""}" data-lang="${l.code}">${arrows}
-        <div class="linfo"><div class="lname">${name} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
-          <div class="note"><span class="lstate">${esc(status)}</span> · ${mb}${l.draft ? " · " + t("Draft translations") : ""}</div></div>
+      <div class="lang${active ? " current" : state.busy[l.code] ? "" : " tap"}" data-lang="${l.code}">${arrows}
+        <div class="linfo"><div class="lname">${active ? "✓ " : ""}${name} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
+          <div class="note">${line}</div></div>
         <div class="lbtn">${buttons}</div>
       </div>`;
 }
@@ -1271,7 +1315,7 @@ function languagePanel() {
           <summary><span>${t("Available to download ({n})", { n: available.length })}</span><span class="chev" aria-hidden="true"></span></summary>
           ${available.map((l) => languageRow(l, -1, 0)).join("")}
         </details>` : ""}
-        <p class="note">${t("A language is stored on this device only once you download it. Removing one frees its space and keeps your progress. Use the arrows to put your languages in the order you want.")}</p>
+        <p class="note">${t("Tap a language to switch to it, or to download it if it isn't on this device yet.")} ${t("A language is stored on this device only once you download it. Removing one frees its space and keeps your progress. Use the arrows to put your languages in the order you want.")}</p>
       </div>
     </details>`;
 }
@@ -1464,10 +1508,17 @@ function renderSettings() {
     el.addEventListener("toggle", () => { if (el.open !== last) { last = el.open; store.set(key, last); } });
   }
   $("#langs").onclick = async (e) => {
-    const btn = e.target.closest("button[data-act]");
-    if (!btn) return;
-    const code = btn.closest("[data-lang]").dataset.lang;
+    const row = e.target.closest("[data-lang]");
+    if (!row || e.target.closest(".mv")) return;
+    const code = row.dataset.lang;
     const lang = state.languages.find((l) => l.code === code);
+    // a tap anywhere on the row uses the language, or downloads it first; the buttons do the same, plus remove
+    let act = e.target.closest("button[data-act]")?.dataset.act;
+    if (!act) {
+      if (state.busy[code] || code === state.lang.code) return;
+      act = packState(code) === "installed" || !canCache ? "use" : "download";
+    }
+    const btn = { dataset: { act } };
     if (btn.dataset.act === "up" || btn.dataset.act === "down") {
       moveLanguage(code, btn.dataset.act === "up" ? -1 : 1);
       renderSettings();
@@ -1478,21 +1529,25 @@ function renderSettings() {
       return;
     }
     try {
-      if (btn.dataset.act === "download" && canCache) {
+      const downloading = btn.dataset.act === "download" && canCache;
+      if (downloading) {
         state.busy[code] = t("Starting…");
+        const p = progress(code);
         renderSettings();
-        await syncPack(code, (done, total) => {
-          state.busy[code] = t("Downloading {done} of {total}", { done, total });
-          const el = document.querySelector(`[data-lang="${code}"] .lstate`);
-          if (el) el.textContent = state.busy[code];
-        });
+        await syncPack(code, p);
         track("download/" + code);
       }
       await useLanguage(code);
       if (canCache) syncKnownPack().catch(() => {});
       delete state.busy[code];
+      delete state.dl[code];
       track("language/" + code);
+      // say so wherever the person is now, and offer the way to the phrases
+      const name = esc(langName(lang));
+      toast(downloading ? t("✓ {name} is downloaded and ready", { name }) : t("✓ Now learning {name}", { name }), startLearning());
+      if (state.mode !== "settings" && state.mode !== "quiz") render();
     } catch {
+      delete state.dl[code];
       state.busy[code] = t("Couldn't download. Check you're online and try again.");
       setTimeout(() => { delete state.busy[code]; if (state.mode === "settings") renderSettings(); }, 5000);
     }
