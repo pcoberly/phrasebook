@@ -11,7 +11,9 @@ html, body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.4 
 body { min-height: 100vh; padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom); max-width: 560px; margin: 0 auto; }
 header { padding-top: 12px; }
 nav { display: flex; gap: 8px; }
-.tab { flex: 1; padding: 12px 4px; border: 1px solid var(--line); background: var(--card); color: var(--fg); border-radius: 12px; font-size: 17px; }
+.tab { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 4px; border: 1px solid var(--line); background: var(--card); color: var(--fg); border-radius: 12px; font-size: 17px; }
+.tab .ti { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tab .ti .dot { fill: currentColor; stroke: none; }
 .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 .opts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0; font-size: 14px; color: var(--muted); }
 .opts select { flex: 1 1 140px; min-width: 0; font-size: 16px; padding: 8px; } /* under 16px, an iPhone zooms in when it is tapped */
@@ -77,7 +79,6 @@ button.speak { border: 1px solid var(--line); background: var(--card); color: va
 table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 8px 0; }
 th, td { text-align: left; padding: 7px 8px 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { color: var(--muted); font-weight: 600; font-size: 13px; }
-.tab.gear { flex: none; width: 48px; font-size: 20px; padding: 8px 0; }
 [hidden] { display: none !important; }
 .setting { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .setting select { font-size: 17px; padding: 8px; max-width: 60%; }
@@ -140,13 +141,18 @@ footer.ready { color: var(--accent); font-weight: 600; text-decoration: underlin
 
 /* On a small screen the tabs move to a tray at the bottom, where the thumb is, and the top is left for the cards */
 @media (max-width: 600px) {
-  :root { --tab-h: calc(56px + env(safe-area-inset-bottom, 0px)); }
+  :root { --tab-h: calc(64px + env(safe-area-inset-bottom, 0px)); }
   body { padding-bottom: var(--tab-h); }
   header { padding-top: 8px; }
-  nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; gap: 0; padding: 0 8px env(safe-area-inset-bottom, 0px); background: var(--card); border-top: 1px solid var(--line); }
-  .tab { border: 0; border-top: 3px solid transparent; border-radius: 0; background: transparent; color: var(--muted); padding: 14px 0 12px; font-size: 15px; }
-  .tab.active { background: transparent; color: var(--accent); border-top-color: var(--accent); font-weight: 600; }
-  .tab.gear { flex: 1; width: auto; font-size: 20px; padding: 10px 0 8px; }
+  /* a tinted tray with a firm edge and a shadow, so it reads as the app's controls, not more page */
+  nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; gap: 0; padding: 0 4px env(safe-area-inset-bottom, 0px);
+    background: color-mix(in srgb, var(--accent) 7%, var(--card)); border-top: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+    box-shadow: 0 -4px 16px rgb(0 0 0 / .08); }
+  .tab { flex-direction: column; gap: 3px; min-width: 0; border: 0; border-radius: 0; background: transparent; color: var(--fg); padding: 7px 0 6px; font-size: 12px; font-weight: 600; }
+  .tab .tl { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 2px; }
+  .tab .ti { width: 24px; height: 24px; padding: 3px 16px; border-radius: 15px; box-sizing: content-box; transition: background .2s; }
+  .tab.active { background: transparent; color: var(--accent); }
+  .tab.active .ti { background: color-mix(in srgb, var(--accent) 16%, transparent); }
 }
 /* What's new */
 .change { margin: 0 0 14px; }

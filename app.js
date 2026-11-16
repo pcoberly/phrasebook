@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v54";
+const VERSION = "phrasebook-v55";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -75,7 +75,16 @@ function translatePage() {
   document.documentElement.lang = state.known.code;
   document.querySelectorAll("[data-t]").forEach((el) => { el.textContent = t(el.dataset.t); });
   document.querySelectorAll("[data-t-aria]").forEach((el) => el.setAttribute("aria-label", t(el.dataset.tAria)));
+  fitTabs();
 }
+// a tab label too long for the bottom tray (Einstellungen, Configuración) is set a little smaller rather than cut off
+function fitTabs() {
+  document.querySelectorAll(".tab .tl").forEach((el) => {
+    el.style.fontSize = "";
+    for (let size = parseFloat(getComputedStyle(el).fontSize); el.scrollWidth > el.clientWidth && size > 9; size -= 0.5) el.style.fontSize = size - 0.5 + "px";
+  });
+}
+addEventListener("resize", fitTabs);
 // the interface text of the language you know (from its pack once downloaded, else straight from the server)
 async function loadUi(code) {
   ui = {};
