@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v56";
+const VERSION = "phrasebook-v57";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -117,6 +117,7 @@ const state = {
   round: null,    // the quiz round in progress: its questions, where you are, your score and your misses
   busy: {},      // language code -> message while it downloads
   dl: {},        // language code -> percent downloaded, shown as a bar
+  query: "",     // the List's search, across every topic; empty when not searching
   note: "",       // temporary footer message
   updateReady: false, // a newer version is waiting: the footer becomes a reload button
   version: VERSION,
@@ -241,19 +242,20 @@ function wantedKnown() {
   return k && k.code !== state.lang.code ? k : ENGLISH;
 }
 // text in the language you know, tagged so the device reads and hyphenates it as that language
-const own = (s) => `<span lang="${state.known.code}">${esc(s)}</span>`;
+// "mark" highlights what the List's search matched
+const own = (s, mark) => `<span lang="${state.known.code}">${mark ? hl(s) : esc(s)}</span>`;
 
 // ---------- ui helpers ----------
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 // text in the language being studied, tagged so the device picks the right font, and marked right-to-left for
 // Hebrew and the like ("rtl" in languages.json) so its punctuation lands on the correct side
 const rtlAttr = () => (state.lang.rtl ? ' dir="rtl"' : "");
-const nat = (s) => `<span lang="${state.lang.code}"${rtlAttr()}>${esc(s)}</span>`;
+const nat = (s, mark) => `<span lang="${state.lang.code}"${rtlAttr()}>${mark ? hl(s) : esc(s)}</span>`;
 // a phrase with a gap ("Which train for...?") shown with the example its audio uses filled in and marked, so what you
 // see matches what you hear: "filled" holds it as "Tàu nào đi ⟦Hà Nội⟧?". The quiz keeps the gap.
-const natFilled = (p) => p.filled
+const natFilled = (p, mark) => p.filled
   ? `<span lang="${state.lang.code}"${rtlAttr()}>${esc(p.filled).replace(/⟦(.*?)⟧/, `<mark class="example" title="${esc(t("An example: put in your own"))}">$1</mark>`)}</span>`
-  : nat(p.text);
+  : nat(p.text, mark);
 // an English note can quote right-to-left words: fence each run off so it doesn't scramble the sentence around it
 const RTL_RUN = /[\u0590-\u08FF\uFB1D-\uFEFC]+(?:[\s.,…-]+[\u0590-\u08FF\uFB1D-\uFEFC]+)*[?!.…]*/g;
 const noteText = (s) => esc(s).replace(RTL_RUN, "<bdi>$&</bdi>");
@@ -539,11 +541,11 @@ function entryHtml(p, fromFirst, withNote = true, withSkip = false) {
   return `
       <div class="entry${skipped ? " skipped" : ""}" data-entry="${p.id}">
         <div>
-          ${fromFirst ? "" : `<div class="en">${own(p.known)}</div>`}
-          <div class="vi"${rtlAttr()}>${natFilled(p)}</div>
-          ${p.say ? `<div class="say">${esc(p.say)}</div>` : ""}
+          ${fromFirst ? "" : `<div class="en">${own(p.known, withSkip)}</div>`}
+          <div class="vi"${rtlAttr()}>${natFilled(p, withSkip)}</div>
+          ${p.say ? `<div class="say">${withSkip ? hl(p.say) : esc(p.say)}</div>` : ""}
           ${womanForm(p)}
-          ${fromFirst ? `<div class="en">${own(p.known)}</div>` : ""}
+          ${fromFirst ? `<div class="en">${own(p.known, withSkip)}</div>` : ""}
           ${p.tones ? `<div class="tones">${esc(p.tones)}</div>` : ""}
           ${withNote && p.note ? `<div class="note">${noteText(p.note)}</div>` : ""}
         </div>
@@ -560,16 +562,88 @@ function wireSpeakButtons() {
     else speak(p);
   });
 }
-// the phrases the List shows, grouped by topic, in the order they appear
+// the phrases the List shows, grouped by topic, in the order they appear: those in the chosen topics, or while
+// searching, those in any topic that match
 function listGroups() {
   const groups = {};
-  for (const p of state.phrases) if (inTopics(p)) (groups[p.cat] ||= []).push(p);
+  for (const p of state.phrases) if (state.query ? matches(p) : inTopics(p)) (groups[p.cat] ||= []).push(p);
   return groups;
+}
+
+// ---------- search ----------
+// Accents and case don't count ("cafe" finds "café", "nusse" finds "Nüsse"). Each character is folded on its own,
+// so a match can be mapped back onto the text as written to highlight it.
+const fold = (ch) => ch.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().replace(/ß/g, "ss");
+function folded(s) {
+  let out = "";
+  const start = []; // where each original character begins in the folded text
+  for (const ch of s) { start.push(out.length); out += fold(ch); }
+  start.push(out.length);
+  return { out, start };
+}
+// where the query is found in a text: at the start of a word for queries in a script written with spaces between
+// words ("pharm" finds pharmacy, "arm" doesn't), anywhere for Thai, Chinese, Japanese and the like
+function hits(s) {
+  const q = fold(state.query);
+  if (!q || !s) return [];
+  const { out } = folded(s);
+  const anywhere = /[^\p{Script=Latin}\p{Script=Cyrillic}\p{Script=Greek}\p{Script=Hebrew}\p{Script=Hangul}\s\d\p{P}]/u.test(state.query);
+  const found = [];
+  for (let i = out.indexOf(q); i >= 0; i = out.indexOf(q, i + 1)) {
+    if (anywhere || i === 0 || !/[\p{L}\p{N}]/u.test(out[i - 1])) found.push(i);
+  }
+  return found;
+}
+const plain = (s) => (s || "").replace(/[⟦⟧]/g, "");
+function matches(p) {
+  return [p.known, p.en, p.text, plain(p.filled), p.say, p.female?.text, p.female?.say].some((s) => hits(s).length);
+}
+// the text, escaped, with what the search matched in <mark class="hit">
+function hl(s) {
+  const at = state.query ? hits(s) : [];
+  if (!at.length) return esc(s);
+  const { start } = folded(s);
+  const chars = [...s], q = fold(state.query).length;
+  let html = "", i = 0;
+  for (const a of at) {
+    const from = start.findIndex((x) => x >= a), to = start.findIndex((x) => x >= a + q);
+    if (from < i) continue;
+    html += esc(chars.slice(i, from).join("")) + `<mark class="hit">${esc(chars.slice(from, to).join(""))}</mark>`;
+    i = to;
+  }
+  return html + esc(chars.slice(i).join(""));
+}
+function openSearch() {
+  $(".opts").classList.add("searching");
+  $(".search").hidden = false;
+  $("#q").placeholder = t("Search all phrases");
+  $("#q").focus();
+  track("search/open");
+}
+function closeSearch(redraw = true) {
+  if (!$(".opts").classList.contains("searching")) return;
+  $(".opts").classList.remove("searching");
+  $(".search").hidden = true;
+  $("#q").value = "";
+  if (state.query) {
+    state.query = "";
+    if (playAll) stopPlayAll(); // it was playing the results
+    if (redraw && state.mode === "list") renderList();
+  }
 }
 function renderList() {
   const fromFirst = $("#dir").value === "from"; // the language you know first, unless studying the language → yours
   const groups = listGroups();
   const playing = playAll && playAll.playing;
+  if (state.query) {
+    const n = Object.values(groups).flat().length;
+    if (!n) {
+      main.innerHTML = `<p class="note searchnote">${t("No phrase matches “{q}”.", { q: esc(state.query) })}</p>`;
+      hint("");
+      return;
+    }
+    hint(t(n === 1 ? "1 phrase found, in any topic" : "{n} phrases found, in any topic", { n }));
+  }
   main.innerHTML = draftBanner() + Object.entries(groups).map(([c, ps]) => `
     <h2 class="group">${esc(t(topicName(c)))}</h2>
     ${ps.map((p) => entryHtml(p, fromFirst, true, true)).join("")}`).join("") + `
@@ -579,7 +653,7 @@ function renderList() {
   wirePractise(main, (p, on) => main.querySelector(`[data-entry="${CSS.escape(p.id)}"]`).classList.toggle("skipped", !on));
   $("#playall").onclick = () => (playAll && playAll.playing ? pausePlayAll() : startPlayAll());
   if (playAll) markPlaying();
-  else hint(t("Tap 🔊 to hear a phrase, or ▶ to hear them all"));
+  else if (!state.query) hint(t("Tap 🔊 to hear a phrase, or ▶ to hear them all"));
 }
 
 // ---------- play all: the List read aloud, for listening on the move ----------
@@ -869,6 +943,7 @@ function toast(message, action) {
 // go to a page as if its tab had been tapped
 function goTo(mode) {
   state.mode = mode;
+  if (mode !== "list") closeSearch(false);
   document.querySelectorAll(".tab").forEach((b) => b.classList.toggle("active", b.dataset.mode === mode));
   $(".opts").hidden = mode === "guide" || mode === "settings" || mode === "changes";
   render();
@@ -944,6 +1019,7 @@ async function chooseFirstLanguage(code) {
 }
 
 function render() {
+  document.body.dataset.mode = state.mode; // search is only on the List
   if (state.firstRun) { renderWelcome(); return; }
   if (state.mode === "cards") renderCard();
   else if (state.mode === "quiz") renderQuiz();
@@ -1641,9 +1717,21 @@ async function boot() {
   $("#listen").onchange = () => { store.set("phrasebook-listen", $("#listen").checked); render(); };
   setMuted(muted);
   $("#mute").onclick = () => setMuted(!muted);
+  $("#searchbtn").onclick = openSearch;
+  $("#qclose").onclick = () => closeSearch();
+  $("#q").oninput = () => {
+    state.query = $("#q").value.trim();
+    if (playAll) stopPlayAll(); // the list it was playing has changed
+    renderList();
+    scrollTo(0, 0);
+  };
+  $("#q").onkeydown = (e) => {
+    if (e.key === "Escape") closeSearch();
+    if (e.key === "Enter") $("#q").blur(); // put the keyboard away to see the results
+  };
   document.querySelectorAll(".tab").forEach((b) => b.onclick = () => {
     state.mode = b.dataset.mode;
-    if (state.mode !== "list") pausePlayAll(); // Play all belongs to the List; it keeps its place for when you return
+    if (state.mode !== "list") { pausePlayAll(); closeSearch(false); } // Play all belongs to the List; it keeps its place for when you return
     track("tab/" + state.mode);
     document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t === b));
     // topic/direction/listening-only mean nothing on the guide and settings pages

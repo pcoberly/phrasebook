@@ -1,4 +1,10 @@
 {
+ "Search": "Rechercher",
+ "Close search": "Fermer la recherche",
+ "Search all phrases": "Chercher dans toutes les phrases",
+ "No phrase matches “{q}”.": "Aucune phrase ne correspond à « {q} ».",
+ "1 phrase found, in any topic": "1 phrase trouvée, tous thèmes confondus",
+ "{n} phrases found, in any topic": "{n} phrases trouvées, tous thèmes confondus",
  "Close": "Fermer",
  "Start learning": "Commencer",
  "Tap a language to switch to it, or to download it if it isn't on this device yet.": "Touchez une langue pour passer à elle, ou pour la télécharger si elle n'est pas encore sur cet appareil.",

@@ -1,4 +1,10 @@
 {
+ "Search": "Suchen",
+ "Close search": "Suche schließen",
+ "Search all phrases": "Alle Sätze durchsuchen",
+ "No phrase matches “{q}”.": "Kein Satz passt zu „{q}“.",
+ "1 phrase found, in any topic": "1 Satz gefunden, in allen Themen",
+ "{n} phrases found, in any topic": "{n} Sätze gefunden, in allen Themen",
  "Close": "Schließen",
  "Start learning": "Loslegen",
  "Tap a language to switch to it, or to download it if it isn't on this device yet.": "Tippe auf eine Sprache, um zu ihr zu wechseln oder sie herunterzuladen, wenn sie noch nicht auf diesem Gerät ist.",

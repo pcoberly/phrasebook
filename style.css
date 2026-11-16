@@ -176,3 +176,14 @@ mark.example { color: inherit; background: color-mix(in srgb, var(--accent) 13%,
 .toast.in { opacity: 1; transform: none; }
 .toast .tmsg { flex: 1; font-weight: 600; }
 .toast .tclose { background: none; border: 0; color: var(--muted); font-size: 18px; padding: 4px 6px; }
+/* search, on the List only: a 🔍 button that turns the controls row into a search box */
+body:not([data-mode="list"]) .searchbtn { display: none; }
+.searchbtn { padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--fg); display: inline-flex; }
+.searchbtn svg, .qclose svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+.opts.searching > :not(.search):not(dialog) { display: none; }
+.search { display: flex; gap: 8px; flex: 1 1 100%; }
+.search input { flex: 1; min-width: 0; font-size: 16px; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--accent); background: var(--card); color: var(--fg); }
+.search .qclose { flex: none; width: 42px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--fg); font-size: 17px; }
+mark.hit { color: inherit; background: color-mix(in srgb, #f5c400 45%, transparent); border-radius: 3px; }
+.searchnote { text-align: center; margin-top: 32px; font-size: 16px; }
+.search input::-webkit-search-cancel-button { display: none; } /* the ✕ beside the box closes the search; one ✕ is enough */
