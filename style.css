@@ -194,3 +194,11 @@ body:not([data-mode="list"]) .searchbtn { display: none; }
 mark.hit { color: inherit; background: color-mix(in srgb, #f5c400 45%, transparent); border-radius: 3px; }
 .searchnote { text-align: center; margin-top: 32px; font-size: 16px; }
 .search input::-webkit-search-cancel-button { display: none; } /* the ✕ beside the box closes the search; one ✕ is enough */
+/* Add a language: a full-width button under the languages on this device, opening the ones to download */
+.addlang { width: 100%; display: flex; align-items: center; gap: 12px; margin: 10px 0 4px; padding: 14px 14px 14px 16px; text-align: left;
+  border: 1.5px dashed var(--accent); border-radius: 14px; background: color-mix(in srgb, var(--accent) 6%, var(--card)); color: var(--fg); font-size: 17px; font-weight: 600; }
+.addlang .plus { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: #fff; font-size: 20px; line-height: 1; }
+@media (prefers-color-scheme: dark) { .addlang .plus { color: #161413; } }
+.addlang .atext { flex: 1; display: flex; flex-direction: column; }
+.addlang .acount { font-size: 14px; font-weight: 400; color: var(--muted); }
+.addlang[aria-expanded="true"] .chev::after { transform: translate(-50%, -30%) rotate(225deg); }

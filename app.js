@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v58";
+const VERSION = "phrasebook-v59";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1392,26 +1392,27 @@ function languageRow(l, position, count) {
         <div class="lbtn">${buttons}</div>
       </div>`;
 }
-// The whole Language section folds away, leaving one line that names the language in use.
-// Whether it (and the Available list) is open is remembered.
+// The languages: those on this device always in view, and below them a clear "Add a language" button that opens the
+// ones to download. That list starts open for someone with only one language (adding another is the likely next step),
+// and is remembered once opened or closed.
 function languagePanel() {
   const { mine, available } = languageGroups();
-  const open = store.get("phrasebook-lang-open", false);
-  const availOpen = store.get("phrasebook-avail-open", available.length <= 5); // a long list starts folded
+  const addOpen = store.get("phrasebook-add-open", mine.length <= 1);
   return `
-    <details class="panel" id="langpanel"${open ? " open" : ""}>
-      <summary><span class="ptitle">${t("Learning")}</span><span class="pval">${esc(langName(state.lang))}</span><span class="chev" aria-hidden="true"></span></summary>
-      <div class="pbody" id="langs">
-        <h3 class="sub">${t("On this device ({n})", { n: mine.length })}</h3>
-        ${mine.map((l, i) => languageRow(l, i, mine.length)).join("")}
-        ${available.length ? `
-        <details class="avail" id="availpanel"${availOpen ? " open" : ""}>
-          <summary><span>${t("Available to download ({n})", { n: available.length })}</span><span class="chev" aria-hidden="true"></span></summary>
-          ${available.map((l) => languageRow(l, -1, 0)).join("")}
-        </details>` : ""}
-        <p class="note">${t("Tap a language to switch to it, or to download it if it isn't on this device yet.")} ${t("A language is stored on this device only once you download it. Removing one frees its space and keeps your progress. Use the arrows to put your languages in the order you want.")}</p>
-      </div>
-    </details>`;
+    <h2 class="group">${t("Learning")}</h2>
+    <div id="langs">
+      <h3 class="sub">${t("On this device ({n})", { n: mine.length })}</h3>
+      ${mine.map((l, i) => languageRow(l, i, mine.length)).join("")}
+      ${available.length ? `
+      <button class="addlang" id="addlang" aria-expanded="${addOpen}" aria-controls="availlist">
+        <span class="plus" aria-hidden="true">＋</span><span class="atext">${t("Add a language")}<span class="acount">${t("{n} available", { n: available.length })}</span></span><span class="chev" aria-hidden="true"></span>
+      </button>
+      <div id="availlist"${addOpen ? "" : " hidden"}>
+        <h3 class="sub">${t("Available to download ({n})", { n: available.length })}</h3>
+        ${available.map((l) => languageRow(l, -1, 0)).join("")}
+      </div>` : ""}
+      <p class="note">${t("Tap a language to switch to it, or to download it if it isn't on this device yet.")} ${t("A language is stored on this device only once you download it. Removing one frees its space and keeps your progress. Use the arrows to put your languages in the order you want.")}</p>
+    </div>`;
 }
 // ---------- about: install steps, sharing and feedback ----------
 function installInfo() {
@@ -1595,7 +1596,13 @@ function renderSettings() {
   $("#sample").onclick = sample;
   // remember whether the panels are open, but only when the person opens or closes one
   // (browsers also fire "toggle" when a panel that starts open is drawn)
-  for (const [id, key] of [["langpanel", "phrasebook-lang-open"], ["availpanel", "phrasebook-avail-open"], ["installpanel", "phrasebook-install-open"]]) {
+  if ($("#addlang")) $("#addlang").onclick = () => {
+    const open = $("#availlist").hidden;
+    $("#availlist").hidden = !open;
+    $("#addlang").setAttribute("aria-expanded", open);
+    store.set("phrasebook-add-open", open);
+  };
+  for (const [id, key] of [["installpanel", "phrasebook-install-open"]]) {
     const el = document.getElementById(id);
     if (!el) continue;
     let last = el.open;
