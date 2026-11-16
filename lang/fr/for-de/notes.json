@@ -1,14 +1,20 @@
 {
   "hello": {"say": "bõ-SCHUR", "note": "Bis zum Abend, danach bonsoir (bõ-SSUAR). Grüß damit das Personal, wenn du einen Laden oder ein Restaurant betrittst"},
+  "how-are-you": {"say": "ko-mã ta-le WU", "note": "Unter Freunden: ça va ? (ssa WA)"},
+  "im-well": {"say": "sche wä BJẼ, mär-SSI"},
   "good-morning": {"say": "bõ-SCHUR", "note": "Französisch hat kein eigenes Guten Morgen: bonjour gilt den ganzen Tag bis zum Abend"},
   "good-night": {"say": "bonn NÜI", "note": "Nur vor dem Schlafen oder beim späten Abschied. Zur Begrüßung am Abend sagt man bonsoir (bõ-SSUAR)"},
   "goodbye": {"say": "o rö-WUAR", "note": "Bonne journée (bon schur-NE) ist ein freundlicher Abschied: schönen Tag noch"},
   "please": {"say": "ssil wu PLÄ", "note": "Gehört zu jeder Bitte"},
   "thank-you": {"say": "mär-SSI", "note": "Merci beaucoup (bo-KU) heißt vielen Dank"},
+  "youre-welcome": {"say": "de RJẼ", "note": "Förmlicher: je vous en prie (sche wu sã PRI)"},
   "yes": {"say": "ui"},
   "no": {"say": "nõ", "note": "Das n ist nasal und kaum zu hören"},
   "excuse-me": {"say": "äks-kü-SE mua", "note": "Pardon (par-DÕ) geht auch, um vorbeizukommen oder sich zu entschuldigen"},
   "my-name": {"say": "sche ma-PÄL ...", "note": "Wörtlich „ich nenne mich“. Das Audio nimmt Peter als Beispielnamen"},
+  "your-name": {"say": "ko-mã wu sa-ple WU"},
+  "where-from": {"say": "du we-ne WU"},
+  "its-beautiful": {"say": "ssä BO"},
   "dont-understand": {"say": "sche ne kõ-PRÃ pa", "note": "Beim schnellen Sprechen fällt das ne weg: je comprends pas"},
   "speak-slowly": {"say": "par-LE lãt-MÃ ssil wu PLÄ"},
   "repeat": {"say": "pu-we-WU re-pe-TE"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "dü SSÜ-kre"},
   "cheers": {"say": "ssã-TE", "note": "Wörtlich „Gesundheit“. À votre santé (a WO-tre) ist die höfliche Form"},
   "help": {"say": "o ssö-KUR", "note": "Ruf es laut. Die Polizei ist la police (la po-LISS)"},
+  "need-doctor": {"say": "sche be-SUẼ dẽ med-SSẼ"},
   "pharmacy": {"say": "u ä la far-ma-SSI", "note": "Achte auf ein grünes Kreuz"}
 }

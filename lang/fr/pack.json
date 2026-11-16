@@ -1,18 +1,24 @@
 {
- "bytes": 2034565,
+ "bytes": 2231343,
  "files": {
-  "lang/fr/phrases.json": "d85deec84dc9",
+  "lang/fr/phrases.json": "9107a9499755",
   "lang/fr/guide.html": "50201f1a6ac4",
   "audio/fr/f/hello.mp3": "cecf635011e0",
+  "audio/fr/f/how-are-you.mp3": "e8caa367eaee",
+  "audio/fr/f/im-well.mp3": "de81c72f1b8c",
   "audio/fr/f/good-morning.mp3": "6d8853730ab7",
   "audio/fr/f/good-night.mp3": "7cf62472cb79",
   "audio/fr/f/goodbye.mp3": "760bf6c14d8b",
   "audio/fr/f/please.mp3": "80504d2753a4",
   "audio/fr/f/thank-you.mp3": "abe1b21e6e57",
+  "audio/fr/f/youre-welcome.mp3": "4269f0af262c",
   "audio/fr/f/yes.mp3": "c339a0e36d99",
   "audio/fr/f/no.mp3": "18fdac509dfe",
   "audio/fr/f/excuse-me.mp3": "8fc51cb5944c",
   "audio/fr/f/my-name.mp3": "5f979eb09120",
+  "audio/fr/f/your-name.mp3": "c8200435a252",
+  "audio/fr/f/where-from.mp3": "a83472e8a551",
+  "audio/fr/f/its-beautiful.mp3": "9669b159ba10",
   "audio/fr/f/dont-understand.mp3": "cde6d02ba31b",
   "audio/fr/f/speak-slowly.mp3": "8173f0fcfaab",
   "audio/fr/f/repeat.mp3": "8bda71274590",
@@ -73,17 +79,24 @@
   "audio/fr/f/cheers.mp3": "beedbe57ef33",
   "audio/fr/f/bill.mp3": "47a03f59db89",
   "audio/fr/f/help.mp3": "c9333256a5ed",
+  "audio/fr/f/need-doctor.mp3": "acd17475aff6",
   "audio/fr/f/pharmacy.mp3": "3667d51f770c",
   "audio/fr/m/hello.mp3": "4fbed95181a8",
+  "audio/fr/m/how-are-you.mp3": "e64dca6bbae4",
+  "audio/fr/m/im-well.mp3": "9a36eddcd3ce",
   "audio/fr/m/good-morning.mp3": "6548dc52e64c",
   "audio/fr/m/good-night.mp3": "7c7350217a34",
   "audio/fr/m/goodbye.mp3": "5108dc5db815",
   "audio/fr/m/please.mp3": "3de48db981b7",
   "audio/fr/m/thank-you.mp3": "455d987cc96b",
+  "audio/fr/m/youre-welcome.mp3": "a02a1b9c08c1",
   "audio/fr/m/yes.mp3": "9d7f976287f1",
   "audio/fr/m/no.mp3": "7a1fcf6825ea",
   "audio/fr/m/excuse-me.mp3": "586b0bfc6f7b",
   "audio/fr/m/my-name.mp3": "efa9331a9e26",
+  "audio/fr/m/your-name.mp3": "6d9e94c41a78",
+  "audio/fr/m/where-from.mp3": "8aaf53f4ebac",
+  "audio/fr/m/its-beautiful.mp3": "fe32b406966a",
   "audio/fr/m/dont-understand.mp3": "d6a51c81431e",
   "audio/fr/m/speak-slowly.mp3": "3452b98ab21e",
   "audio/fr/m/repeat.mp3": "94370839e225",
@@ -144,19 +157,20 @@
   "audio/fr/m/cheers.mp3": "a5a7e4884dee",
   "audio/fr/m/bill.mp3": "f1202334459a",
   "audio/fr/m/help.mp3": "e3887a1f33a5",
+  "audio/fr/m/need-doctor.mp3": "c901056a0a38",
   "audio/fr/m/pharmacy.mp3": "baebdc0781a9"
  },
  "forBase": {
   "de": {
    "lang/fr/for-de/guide.html": "380c6f6ffad5",
-   "lang/fr/for-de/notes.json": "09963b250f5e"
+   "lang/fr/for-de/notes.json": "c413603da8bb"
   },
   "es": {
    "lang/fr/for-es/guide.html": "15727db26de4",
-   "lang/fr/for-es/notes.json": "e9907f5d5b80"
+   "lang/fr/for-es/notes.json": "b51cfbc1f8d9"
   },
   "fr": {
-   "lang/fr/for-fr/ui.json": "706cc5d7204d"
+   "lang/fr/for-fr/ui.json": "b825eae5ad2c"
   }
  }
 }

@@ -1,10 +1,12 @@
 {
   "hello": {"note": "Gruß am Tag. Morgens ohayō gozaimasu, abends konbanwa"},
+  "how-are-you": {"note": "Für jemanden, den man länger nicht gesehen hat, kein Alltagsgruß"},
   "good-morning": {"note": "Die höfliche Form; unter Freunden reicht ohayō"},
   "good-night": {"note": "Nur, wenn jemand schlafen geht. Guten Abend heißt konbanwa; unter Freunden reicht oyasumi"},
   "goodbye": {"note": "Klingt endgültig und wird darum seltener benutzt, als man denkt. Verkäufer sagen arigatō gozaimashita, wenn du gehst"},
   "please": {"note": "Beim Bitten um etwas oder beim Überreichen. Nach einer Sache geht auch kudasai"},
   "thank-you": {"note": "Arigatō gozaimashita für etwas gerade Abgeschlossenes, etwa ein Essen"},
+  "youre-welcome": {"note": "Oft nur いいえ (iie), keine Ursache"},
   "yes": {"note": "Heißt oft nur „ich höre zu“, nicht immer Zustimmung"},
   "no": {"note": "Wird oft abgemildert: chotto… („das ist etwas…“) ist eine höfliche Absage"},
   "excuse-me": {"note": "Ruft jemanden, entschuldigt sich und dankt für die Mühe"},
@@ -47,5 +49,8 @@
   "sugar": {"note": "Im Café geht auch シュガー (shugā)"},
   "cheers": {"note": "Warte, bis alle ein Glas haben, und sagt es dann gemeinsam"},
   "help": {"note": "Ruf es laut. Die Polizei ist keisatsu"},
-  "pharmacy": {"note": "Drogerien (doraggusutoa) verkaufen Alltagsmedizin; eine yakkyoku gibt Rezepte aus"}
+  "need-doctor": {"note": "Den Krankenwagen ruft man unter 119"},
+  "pharmacy": {"note": "Drogerien (doraggusutoa) verkaufen Alltagsmedizin; eine yakkyoku gibt Rezepte aus"},
+  "where-from": {"note": "Die Antwort: …から来ました (… kara kimashita), ich komme aus …"},
+  "its-beautiful": {"note": "ね (ne) bittet um Zustimmung, wie nicht wahr?"}
 }

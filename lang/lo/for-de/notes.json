@@ -1,14 +1,20 @@
 {
   "hello": {"say": "ssa-bai-di", "note": "Passt zu jeder Tageszeit und ist auch ein lockeres Tschüss"},
+  "how-are-you": {"say": "ssa-bai-di bo", "note": "Die Antwort ist ສະບາຍດີ (ssa-bai-di), mir geht's gut"},
+  "im-well": {"say": "ssa-bai-di, kop tschai"},
   "good-morning": {"say": "ssa-bai-di ton ssao", "note": "Die meisten sagen den ganzen Tag sabaidee"},
   "good-night": {"say": "la-ti ssa-wat", "note": "Förmlich. Vor dem Schlafen sagt man oft ນອນຫຼັບຝັນດີ (non lap fan di), schlaf gut und träum schön"},
   "goodbye": {"say": "la kon", "note": "Wörtlich „auf Wiedersehen für jetzt“"},
   "please": {"say": "ka-lu-na", "note": "Förmlich. Im Laden sagt man meist ຂໍ (ko) vor der Sache"},
   "thank-you": {"say": "kop tschai", "note": "ຂອບໃຈຫຼາຍໆ (kop tschai lai lai) heißt vielen Dank"},
+  "youre-welcome": {"say": "bo pen njang", "note": "Wörtlich das ist nichts; auch macht nichts"},
   "yes": {"say": "men", "note": "Wörtlich „es ist“. ເຈົ້າ (tschao) ist auch ein höfliches Ja"},
   "no": {"say": "bo", "note": "ບໍ່ແມ່ນ (bo men) heißt „nein, ist es nicht“"},
   "excuse-me": {"say": "ko tot", "note": "Entschuldigung und Verzeihung"},
   "my-name": {"say": "koi ssu …", "note": "ຂ້ອຍ (koi) heißt ich"},
+  "your-name": {"say": "tschao ssu njang"},
+  "where-from": {"say": "tschao ma tschak ssai"},
+  "its-beautiful": {"say": "ngam lai"},
   "dont-understand": {"say": "koi bo kao tschai"},
   "speak-slowly": {"say": "ka-lu-na wao ssa ssa", "note": "Ein Wort zu wiederholen, wie in ssa ssa, macht es sanfter"},
   "repeat": {"say": "ka-lu-na wao ik tua nöng"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "nam tan"},
   "cheers": {"say": "sson keo", "note": "Wörtlich „stoßt an“. ໄຊໂຍ (ssai jo) hört man auch"},
   "help": {"say": "ssuai dae"},
+  "need-doctor": {"say": "koi tong kan mo"},
   "pharmacy": {"say": "han kai ja ju ssai", "note": "Wörtlich „Laden, der Medizin verkauft“"}
 }

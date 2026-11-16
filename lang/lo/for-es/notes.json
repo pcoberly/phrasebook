@@ -1,14 +1,20 @@
 {
   "hello": {"say": "sa-bai-di", "note": "Sirve a cualquier hora del día, y también como despedida informal"},
+  "how-are-you": {"say": "sa-bai-di bo", "note": "Se responde ສະບາຍດີ (sa-bai-di), estoy bien"},
+  "im-well": {"say": "sa-bai-di, kop chai"},
   "good-morning": {"say": "sa-bai-di ton sao", "note": "La mayoría dice sabaidee todo el día"},
   "good-night": {"say": "la-ti sa-uat", "note": "Formal. Antes de dormir se suele decir ນອນຫຼັບຝັນດີ (non lap fan di), que duermas bien y sueñes bonito"},
   "goodbye": {"say": "la kon", "note": "Literalmente «adiós por ahora»"},
   "please": {"say": "ka-lu-na", "note": "Formal. En una tienda se suele decir ຂໍ (ko) delante de la cosa"},
   "thank-you": {"say": "kop chai", "note": "ຂອບໃຈຫຼາຍໆ (kop chai lai lai) es muchas gracias"},
+  "youre-welcome": {"say": "bo pen ñang", "note": "Literalmente no es nada; también no importa"},
   "yes": {"say": "men", "note": "Literalmente «es». ເຈົ້າ (chao) también se usa como sí cortés"},
   "no": {"say": "bo", "note": "ບໍ່ແມ່ນ (bo men) significa «no, no es»"},
   "excuse-me": {"say": "ko tot", "note": "Perdón y disculpe"},
   "my-name": {"say": "koi su …", "note": "ຂ້ອຍ (koi) significa yo"},
+  "your-name": {"say": "chao su ñang"},
+  "where-from": {"say": "chao ma chak sai"},
+  "its-beautiful": {"say": "ngam lai"},
   "dont-understand": {"say": "koi bo kao chai"},
   "speak-slowly": {"say": "ka-lu-na vao sa sa", "note": "Repetir una palabra, como en sa sa, la suaviza"},
   "repeat": {"say": "ka-lu-na vao ik tua nëng"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "nam tan"},
   "cheers": {"say": "son keo", "note": "Literalmente «choca los vasos». También se dice ໄຊໂຍ (sai yo)"},
   "help": {"say": "suai dae"},
+  "need-doctor": {"say": "koi tong kan mo"},
   "pharmacy": {"say": "jan kai ya yu sai", "note": "Literalmente «tienda que vende medicinas»"}
 }

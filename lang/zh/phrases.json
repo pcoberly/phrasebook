@@ -1,14 +1,20 @@
 {
   "hello": {"text": "你好", "say": "nǐ hǎo", "note": "Said as ní hǎo: when two third tones meet, the first rises. 您好 (nín hǎo) is the polite form"},
+  "how-are-you": {"text": "你好吗", "say": "nǐ hǎo ma", "note": "A little textbook; friends ask 最近怎么样 (zuìjìn zěnmeyàng), how have you been?"},
+  "im-well": {"text": "我很好，谢谢", "say": "wǒ hěn hǎo, xièxie", "note": "Three third tones in a row: said wó hén hǎo"},
   "good-morning": {"text": "早上好", "say": "zǎoshang hǎo", "note": "Often shortened to 早 (zǎo)"},
   "good-night": {"text": "晚安", "say": "wǎn'ān", "note": "Said at bedtime or when leaving late at night. Good evening is 晚上好 (wǎnshang hǎo)"},
   "goodbye": {"text": "再见", "say": "zàijiàn", "note": "Literally \"see you again\""},
   "please": {"text": "请", "say": "qǐng", "note": "Goes before the request: 请给我… (qǐng gěi wǒ) means please give me…"},
   "thank-you": {"text": "谢谢", "say": "xièxie", "note": "The second syllable is light and short. The reply is 不客气 (bú kèqi)"},
+  "youre-welcome": {"text": "不客气", "say": "bú kèqi", "note": "不 (bù) becomes bú before a fourth tone"},
   "yes": {"text": "是", "say": "shì", "note": "Chinese often repeats the verb instead of saying yes. 对 (duì) means that's right"},
   "no": {"text": "不是", "say": "bú shì", "note": "不 (bù) means not, and turns to bú before a fourth tone. 没有 (méiyǒu) means don't have"},
   "excuse-me": {"text": "不好意思", "say": "bù hǎoyìsi", "note": "Gets attention and says sorry. 对不起 (duìbuqǐ) is a stronger sorry"},
   "my-name": {"text": "我叫...", "say": "wǒ jiào ...", "note": "The audio uses Peter (彼得, Bǐdé) as the example name", "spoken": "我叫彼得", "filled": "我叫⟦彼得⟧"},
+  "your-name": {"text": "您叫什么名字", "say": "nín jiào shénme míngzi", "note": "您 (nín) is the polite you"},
+  "where-from": {"text": "您是哪国人", "say": "nín shì nǎ guó rén", "note": "Literally which country's person are you? The reply: 我是…人 (wǒ shì … rén)"},
+  "its-beautiful": {"text": "真漂亮", "say": "zhēn piàoliang"},
   "dont-understand": {"text": "我听不懂", "say": "wǒ tīng bu dǒng", "note": "Literally \"I listen but don't understand\""},
   "speak-slowly": {"text": "请说慢一点", "say": "qǐng shuō màn yìdiǎn"},
   "repeat": {"text": "请再说一遍", "say": "qǐng zài shuō yí biàn", "note": "一 (yī) changes to yí before a fourth tone"},
@@ -75,5 +81,6 @@
   "cheers": {"text": "干杯", "say": "gānbēi", "note": "Literally \"dry the glass\""},
 
   "help": {"text": "救命", "say": "jiùmìng", "note": "Shout it. The police are 警察 (jǐngchá)"},
+  "need-doctor": {"text": "我需要看医生", "say": "wǒ xūyào kàn yīshēng", "note": "Literally I need to see a doctor. For an ambulance, call 120"},
   "pharmacy": {"text": "药店在哪里", "say": "yàodiàn zài nǎlǐ"}
 }

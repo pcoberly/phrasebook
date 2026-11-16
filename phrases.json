@@ -1,14 +1,20 @@
 [
   {"id": "hello", "en": "Hello", "cat": "basics"},
+  {"id": "how-are-you", "en": "How are you?", "cat": "basics"},
+  {"id": "im-well", "en": "I'm well, thank you!", "cat": "basics"},
   {"id": "good-morning", "en": "Good morning", "cat": "basics"},
   {"id": "good-night", "en": "Good night", "cat": "basics"},
   {"id": "goodbye", "en": "Goodbye", "cat": "basics"},
   {"id": "please", "en": "Please", "cat": "basics"},
   {"id": "thank-you", "en": "Thank you", "cat": "basics"},
+  {"id": "youre-welcome", "en": "You're welcome", "cat": "basics"},
   {"id": "yes", "en": "Yes", "cat": "basics"},
   {"id": "no", "en": "No", "cat": "basics"},
   {"id": "excuse-me", "en": "Excuse me / Sorry", "cat": "basics"},
   {"id": "my-name", "en": "My name is...", "cat": "basics"},
+  {"id": "your-name", "en": "What is your name?", "cat": "basics"},
+  {"id": "where-from", "en": "Where are you from?", "cat": "basics"},
+  {"id": "its-beautiful", "en": "It's beautiful", "cat": "basics"},
   {"id": "dont-understand", "en": "I don't understand", "cat": "basics"},
   {"id": "speak-slowly", "en": "Please speak slowly", "cat": "basics"},
   {"id": "repeat", "en": "Can you repeat that?", "cat": "basics"},
@@ -69,5 +75,6 @@
   {"id": "cheers", "en": "Cheers!", "cat": "food"},
   {"id": "bill", "en": "The bill, please", "cat": "food"},
   {"id": "help", "en": "Help me!", "cat": "emergency"},
+  {"id": "need-doctor", "en": "I need a doctor", "cat": "emergency"},
   {"id": "pharmacy", "en": "Where is the pharmacy?", "cat": "emergency"}
 ]

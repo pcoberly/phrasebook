@@ -1,14 +1,20 @@
 {
   "hello": {"say": "bon-ZHUR", "note": "Úsalo hasta la noche; después, bonsoir (bon-SUAR). Saluda con él al entrar en tiendas y restaurantes"},
+  "how-are-you": {"say": "ko-man ta-le VU", "note": "Entre amigos: ça va ? (sa VA)"},
+  "im-well": {"say": "zhe ve BIEN, mer-SI"},
   "good-morning": {"say": "bon-ZHUR", "note": "El francés no tiene un «buenos días» aparte: bonjour sirve para todo el día hasta la noche"},
   "good-night": {"say": "bon NUI", "note": "Solo al irse a dormir o al despedirse tarde. Para saludar por la noche se dice bonsoir (bon-SUAR)"},
   "goodbye": {"say": "o re-VUAR", "note": "Bonne journée (bon zhur-NE) es una despedida amable: que tengas buen día"},
   "please": {"say": "sil vu PLE", "note": "Agrégalo a cada petición"},
   "thank-you": {"say": "mer-SI", "note": "Merci beaucoup (bo-KU) es muchas gracias"},
+  "youre-welcome": {"say": "de RIEN", "note": "Más formal: je vous en prie (zhe vu san PRI)"},
   "yes": {"say": "ui"},
   "no": {"say": "non", "note": "La n es nasal y apenas suena"},
   "excuse-me": {"say": "eks-kü-ZE mua", "note": "Pardon (par-DON) también sirve para pasar o pedir perdón"},
   "my-name": {"say": "zhe ma-PEL ...", "note": "Literalmente «me llamo», como en español. El audio usa Peter como nombre de ejemplo"},
+  "your-name": {"say": "ko-man vu za-ple VU"},
+  "where-from": {"say": "du ve-ne VU"},
+  "its-beautiful": {"say": "se BO"},
   "dont-understand": {"say": "zhe ne kom-PRAN pa", "note": "Al hablar rápido el ne desaparece: je comprends pas"},
   "speak-slowly": {"say": "par-LE lant-MAN sil vu PLE"},
   "repeat": {"say": "pu-ve-VU re-pe-TE"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "dü SÜ-kre"},
   "cheers": {"say": "san-TE", "note": "Literalmente «salud», como en español. À votre santé (a VO-tre) es la forma cortés"},
   "help": {"say": "o se-KUR", "note": "Grítalo. La policía es la police (la po-LIS)"},
+  "need-doctor": {"say": "zhe be-SUAN dan med-SAN"},
   "pharmacy": {"say": "u e la far-ma-SI", "note": "Busca una cruz verde"}
 }

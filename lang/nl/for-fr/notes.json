@@ -1,14 +1,20 @@
 {
   "hello": {"say": "HA-lo", "note": "Goedendag (KHOU-denn-dakh) est la salutation polie de la journée"},
+  "how-are-you": {"say": "hou KHAT ète"},
+  "im-well": {"say": "KHOUT, DANK u vèl"},
   "good-morning": {"say": "KHOU-de-MOR-khenn", "note": "Jusqu'à midi environ"},
   "good-night": {"say": "vèl-te-RUSS-tenn", "note": "Seulement au coucher, littéralement « repose-toi bien ». Bonsoir se dit goedenavond (khou-de-A-vonnt)"},
   "goodbye": {"say": "tot ZINSS", "note": "Doei (dou-i) est la forme familière"},
   "please": {"say": "AL-stu-blift", "note": "Alsjeblieft (AL-che-blift) est la forme familière. Les deux veulent aussi dire « voici » quand on tend quelque chose"},
   "thank-you": {"say": "dank u", "note": "Dank u wel (wèl) veut dire merci beaucoup. Bedankt (be-DANKT) est la forme familière"},
+  "youre-welcome": {"say": "khrakh khe-DANN"},
   "yes": {"say": "ya"},
   "no": {"say": "né"},
   "excuse-me": {"say": "par-DONN", "note": "Excuseer (èks-ku-ZÉR) marche aussi, et sert à appeler le serveur"},
   "my-name": {"say": "mèïn nam iss ...", "note": "Ik heet... (ik hét) marche aussi. L'audio prend Peter comme exemple"},
+  "your-name": {"say": "hou HÉT u"},
+  "where-from": {"say": "var komt u vann-DANN"},
+  "its-beautiful": {"say": "èt iss PRAKH-tekh"},
   "dont-understand": {"say": "ik be-KHRÈÏP et nit"},
   "speak-slowly": {"say": "keunt u LANG-za-mer PRA-tenn al-stu-BLIFT"},
   "repeat": {"say": "keunt u dat hèr-HA-lenn"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "SEUI-ker"},
   "cheers": {"say": "prost"},
   "help": {"say": "hèlp", "note": "Criez-le. La police se dit de politie (de po-LI-tsi)"},
+  "need-doctor": {"say": "ik hèp eunn DOK-teur NO-dekh", "note": "Pour une ambulance, appelez le 112"},
   "pharmacy": {"say": "war iss de a-po-TÉK", "note": "Une drogist (dro-KHIST) vend les médicaments courants, mais pas sur ordonnance"}
 }

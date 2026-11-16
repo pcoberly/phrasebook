@@ -1,14 +1,20 @@
 {
   "hello": {"text": "Halo", "say": "HAH-loh", "note": "Casual and fine anywhere. Selamat pagi, siang, sore and malam change with the time of day"},
+  "how-are-you": {"text": "Apa kabar?", "say": "AH-pah KAH-bahr", "note": "Literally what news? The reply is baik (bah-EE), well"},
+  "im-well": {"text": "Baik, terima kasih!", "say": "bah-EE, tuh-REE-mah KAH-see"},
   "good-morning": {"text": "Selamat pagi", "say": "suh-LAH-maht PAH-gee", "note": "Until about 11 in the morning"},
   "good-night": {"text": "Selamat tidur", "say": "suh-LAH-maht TEE-door", "note": "At bedtime; literally \"safe sleep\". Selamat malam (suh-LAH-maht MAH-lahm) is good evening, and also a goodbye at night"},
   "goodbye": {"text": "Sampai jumpa", "say": "SAHM-pye JOOM-pah", "note": "Literally \"until we meet\". Dah (dah) is a casual bye"},
   "please": {"text": "Tolong", "say": "TOH-long", "note": "For asking someone to do something: tolong ... Silakan (see-LAH-kahn) is \"please, go ahead\" when offering"},
   "thank-you": {"text": "Terima kasih", "say": "tuh-REE-mah KAH-see", "note": "The reply is sama-sama (SAH-mah SAH-mah)"},
+  "youre-welcome": {"text": "Sama-sama", "say": "SAH-mah SAH-mah", "note": "Literally same-same"},
   "yes": {"text": "Ya", "say": "yah"},
   "no": {"text": "Tidak", "say": "TEE-dah", "note": "The final k is a catch in the throat, barely heard. In speech it is often nggak (ng-GAHK)"},
   "excuse-me": {"text": "Permisi", "say": "pur-MEE-see", "note": "To get past someone or get attention. To apologise, say maaf (mah-AHF)"},
   "my-name": {"text": "Nama saya...", "say": "NAH-mah SAH-yah", "note": "Saya (I) and Anda (you) are polite and safe for a visitor"},
+  "your-name": {"text": "Siapa nama Anda?", "say": "see-AH-pah NAH-mah AHN-dah"},
+  "where-from": {"text": "Anda dari mana?", "say": "AHN-dah DAH-ree MAH-nah", "note": "The reply: Saya dari ... (SAH-yah DAH-ree), I'm from ..."},
+  "its-beautiful": {"text": "Indah sekali!", "say": "IN-dah suh-KAH-lee", "note": "For views and places. Cantik (CHAHN-tee) is pretty, for people and things"},
   "dont-understand": {"text": "Saya tidak mengerti", "say": "SAH-yah TEE-dah muh-NGUR-tee"},
   "speak-slowly": {"text": "Tolong bicara pelan-pelan", "say": "TOH-long bee-CHAH-rah puh-LAHN puh-LAHN", "note": "Pelan-pelan, slowly: Indonesian often doubles words"},
   "repeat": {"text": "Bisa diulangi?", "say": "BEE-sah dee-oo-LAH-ngee"},
@@ -69,5 +75,6 @@
   "sugar": {"text": "Gula", "say": "GOO-lah", "note": "Tanpa gula (TAHN-pah GOO-lah) means no sugar, worth knowing since drinks come sweet"},
   "cheers": {"text": "Bersulang!", "say": "bur-SOO-lahng", "note": "The standard toast, though often people just raise a glass"},
   "help": {"text": "Tolong!", "say": "TOH-long", "note": "The same word as please when asking a favour"},
+  "need-doctor": {"text": "Saya perlu dokter", "say": "SAH-yah pur-LOO DOK-tur", "note": "For an ambulance, call 119"},
   "pharmacy": {"text": "Apotek di mana?", "say": "ah-poh-TEK dee MAH-nah", "note": "Signs say Apotek or Apotik"}
 }

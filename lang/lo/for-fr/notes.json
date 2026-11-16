@@ -1,14 +1,20 @@
 {
   "hello": {"say": "sa-baï-di", "note": "Convient à toute heure, et sert aussi d'au revoir familier"},
+  "how-are-you": {"say": "sa-baï-di bo", "note": "On répond ສະບາຍດີ (sa-baï-di), ça va bien"},
+  "im-well": {"say": "sa-baï-di, kop tchaï"},
   "good-morning": {"say": "sa-baï-di tonn sao", "note": "La plupart des gens disent sabaidee toute la journée"},
   "good-night": {"say": "la-ti sa-vat", "note": "Formel. Au coucher, on dit souvent ນອນຫຼັບຝັນດີ (nonn lap fann di), dors bien et fais de beaux rêves"},
   "goodbye": {"say": "la konn", "note": "Littéralement « au revoir pour l'instant »"},
   "please": {"say": "ka-lou-na", "note": "Formel. En magasin, on dit plutôt ຂໍ (ko) devant l'article"},
   "thank-you": {"say": "kop tchaï", "note": "ຂອບໃຈຫຼາຍໆ (kop tchaï laï laï) veut dire merci beaucoup"},
+  "youre-welcome": {"say": "bo pènn gnang", "note": "Littéralement ce n'est rien ; aussi pas grave"},
   "yes": {"say": "mènn", "note": "Littéralement « c'est ». ເຈົ້າ (tchao) sert aussi de oui poli"},
   "no": {"say": "bo", "note": "ບໍ່ແມ່ນ (bo mènn) veut dire « non, ce n'est pas ça »"},
   "excuse-me": {"say": "ko tot", "note": "Pardon et excusez-moi"},
   "my-name": {"say": "koï sou …", "note": "ຂ້ອຍ (koï) veut dire je"},
+  "your-name": {"say": "tchao sou gnang"},
+  "where-from": {"say": "tchao ma tchak saï"},
+  "its-beautiful": {"say": "ngamm laï"},
   "dont-understand": {"say": "koï bo kao tchaï"},
   "speak-slowly": {"say": "ka-lou-na vao sa sa", "note": "Répéter un mot, comme dans sa sa, l'adoucit"},
   "repeat": {"say": "ka-lou-na vao ik toua neung"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "namm tann"},
   "cheers": {"say": "sonn kéo", "note": "Littéralement « trinquez ». On dit aussi ໄຊໂຍ (saï yo)"},
   "help": {"say": "souaï dè"},
+  "need-doctor": {"say": "koï tong kann mo"},
   "pharmacy": {"say": "hann kaï ya you saï", "note": "Littéralement « boutique qui vend des médicaments »"}
 }

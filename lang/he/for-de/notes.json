@@ -1,14 +1,20 @@
 {
   "hello": {"say": "scha-LOM", "note": "Heißt auch auf Wiedersehen und Frieden. Unter Freunden sagt man oft hi (hai)"},
+  "how-are-you": {"say": "ma nisch-MA", "note": "Locker und sehr üblich. Höflicher ist מה שלומך, zu einem Mann ma schlom-CHA, zu einer Frau ma schlo-MECH"},
+  "im-well": {"say": "a-NI be-SSE-der, to-DA"},
   "good-morning": {"say": "BO-ker TOW", "note": "Die übliche Antwort ist בוקר אור (BO-ker OR), Morgen des Lichts"},
   "good-night": {"say": "LAI-la TOW", "note": "Sagt man abends zum Abschied und vor dem Schlafen. Guten Abend heißt ערב טוב (E-rew TOW)"},
   "goodbye": {"say": "le-hit-ra-OT", "note": "Bye (bai) ist sehr üblich, und schalom geht auch"},
   "please": {"say": "be-wa-ka-SCHA", "note": "Heißt auch gern geschehen und bitte schön"},
   "thank-you": {"say": "to-DA", "note": "תודה רבה (to-DA ra-BA) heißt vielen Dank"},
+  "youre-welcome": {"say": "be-wa-ka-SCHA", "note": "Heißt auch bitte und bitte schön"},
   "yes": {"say": "ken"},
   "no": {"say": "lo"},
   "excuse-me": {"say": "sli-CHA", "note": "Heißt auch Entschuldigung und ruft den Kellner"},
   "my-name": {"say": "kor-IM li ...", "note": "Wörtlich „man nennt mich“, gleich für Mann und Frau. Das Audio nimmt Peter als Beispielnamen"},
+  "your-name": {"say": "eich kor-IM le-CHA", "note": "Zu einem Mann. Zu einer Frau spricht man das letzte Wort LACH"},
+  "where-from": {"say": "me-EI-fo a-TA", "note": "Zu einem Mann. Zu einer Frau את (AT)"},
+  "its-beautiful": {"say": "ja-FE me-OD"},
   "dont-understand": {"say": "a-NI lo me-WIN", "female": {"say": "a-NI lo me-wi-NA"}},
   "speak-slowly": {"say": "ef-SCHAR le-da-BER le-AT jo-TER", "note": "Wörtlich „ist es möglich, langsamer zu sprechen?“. אפשר (ef-SCHAR) mit einem Verb ist eine höfliche Art, um alles zu bitten, egal wen du fragst"},
   "repeat": {"say": "ef-SCHAR lach-SOR al SE"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "SSU-kar"},
   "cheers": {"say": "le-CHA-jim", "note": "Wörtlich „aufs Leben“"},
   "help": {"say": "ha-ZI-lu", "note": "Ruf es laut. Die Polizei ist משטרה (misch-ta-RA), unter 100"},
+  "need-doctor": {"say": "a-NI za-RICH ro-FE", "female": {"say": "a-NI zri-CHA ro-FE"}, "note": "Den Krankenwagen (Magen David Adom) ruft man unter 101"},
   "pharmacy": {"say": "ej-FO bejt ha-mir-KA-chat", "note": "Viele nennen einfach die große Kette, סופר-פארם (SSU-per farm)"}
 }

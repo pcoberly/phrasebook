@@ -1,14 +1,20 @@
 {
   "hello": {"text": "Hallo", "say": "HAH-loh", "note": "Goedendag (KHOO-den-dakh) is the polite daytime greeting"},
+  "how-are-you": {"text": "Hoe gaat het?", "say": "hoo KHAHT ut"},
+  "im-well": {"text": "Goed, dank u wel!", "say": "KHOOT, DAHNK ew vel"},
   "good-morning": {"text": "Goedemorgen", "say": "KHOO-duh-MOR-khen", "note": "Used until about noon"},
   "good-night": {"text": "Welterusten", "say": "vel-tuh-RUHS-tuhn", "note": "Only at bedtime, literally \"rest well\". Good evening is goedenavond (khoo-duh-AH-vont)"},
   "goodbye": {"text": "Tot ziens", "say": "tot ZEENS", "note": "Doei (doo-ee) is the casual version"},
   "please": {"text": "Alstublieft", "say": "AHL-stew-bleeft", "note": "Alsjeblieft (AHL-shuh-bleeft) is the casual form. Both also mean here you are"},
   "thank-you": {"text": "Dank u", "say": "dahnk ew", "note": "Dank u wel (vel) means thank you very much. Bedankt (buh-DAHNKT) is the casual version"},
+  "youre-welcome": {"text": "Graag gedaan", "say": "khrahkh khuh-DAHN"},
   "yes": {"text": "Ja", "say": "yah"},
   "no": {"text": "Nee", "say": "nay"},
   "excuse-me": {"text": "Pardon", "say": "par-DON", "note": "Excuseer (ek-skew-ZAIR) also works, and gets a waiter's attention"},
   "my-name": {"text": "Mijn naam is...", "say": "mine nahm iss ...", "note": "Ik heet... (ik hayt) also works. The audio uses Peter as the example name", "spoken": "Mijn naam is Peter", "filled": "Mijn naam is ⟦Peter⟧"},
+  "your-name": {"text": "Hoe heet u?", "say": "hoo HAYT ew"},
+  "where-from": {"text": "Waar komt u vandaan?", "say": "vahr komt ew fahn-DAHN"},
+  "its-beautiful": {"text": "Het is prachtig!", "say": "ut iss PRAHKH-tukh"},
   "dont-understand": {"text": "Ik begrijp het niet", "say": "ik buh-KHRYP uht neet"},
   "speak-slowly": {"text": "Kunt u langzamer praten, alstublieft?", "say": "kunt ew LAHNG-zah-mer PRAH-ten ahl-stew-BLEEFT"},
   "repeat": {"text": "Kunt u dat herhalen?", "say": "kunt ew daht her-HAH-len"},
@@ -75,5 +81,6 @@
   "cheers": {"text": "Proost!", "say": "prohst"},
 
   "help": {"text": "Help!", "say": "help", "note": "Shout it. The police are de politie (duh poh-LEE-tsee)"},
+  "need-doctor": {"text": "Ik heb een dokter nodig", "say": "ik hep un DOK-tuhr NOH-dukh", "note": "For an ambulance, call 112"},
   "pharmacy": {"text": "Waar is de apotheek?", "say": "vahr iss duh ah-poh-TAYK", "note": "A drogist (droh-KHIST) sells everyday medicine but not prescriptions"}
 }

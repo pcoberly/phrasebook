@@ -1,14 +1,20 @@
 {
   "hello": {"say": "ku-mus-TA", "note": "Wörtlich „wie geht's?“, vom spanischen ¿cómo está? Mit po wird es höflich: Kumusta po"},
+  "how-are-you": {"say": "ku-mus-TA po ka-JO", "note": "Po und kayo machen es höflich; unter Freunden Kumusta ka?"},
+  "im-well": {"say": "ma-BU-ti po, ssa-LA-mat"},
   "good-morning": {"say": "ma-gan-DANG u-MA-ga", "note": "Mit po für Ältere und Fremde: Magandang umaga po"},
   "good-night": {"say": "ma-gan-DANG ga-BI", "note": "Heißt guten Abend und gute Nacht. Vor dem Schlafen sagt man in der Familie auch Tulog na, Zeit zu schlafen"},
   "goodbye": {"say": "pa-A-lam", "note": "Klingt endgültig. Meist sagt man Sige (also dann) oder Ingat (pass auf dich auf)"},
   "please": {"say": "pa-ki-U-ssap", "note": "Wörtlich „ich bitte um einen Gefallen“. Im Alltag hängt man paki- vor das Verb (pakiulit, bitte wiederholen), und po macht es höflich"},
   "thank-you": {"say": "ssa-LA-mat po", "note": "Po macht es höflich; unter Freunden reicht salamat. Die Antwort ist walang anuman"},
+  "youre-welcome": {"say": "ua-LANG a-nu-MAN", "note": "Wörtlich das ist nichts"},
   "yes": {"say": "O-po", "note": "Das höfliche Ja, für Ältere und Fremde. Oo ist das einfache Ja"},
   "no": {"say": "hin-DI po", "note": "Hindi heißt nein, po macht es höflich. Am Ende steht ein kurzer Stopp im Hals"},
   "excuse-me": {"say": "pa-SSEN-ssja na po", "note": "Entschuldigung. Um vorbeizukommen oder jemanden anzusprechen, sagt man oft einfach excuse me po"},
   "my-name": {"say": "a-KO ssi", "note": "Ako heißt ich, si steht vor einem Namen. Ikaw heißt du; kayo ist höflicher"},
+  "your-name": {"say": "a-NO po ang pa-NGA-lan nin-JO"},
+  "where-from": {"say": "ta-ga-ssa-AN po ka-JO", "note": "Taga- heißt aus: taga-Maynila, aus Manila"},
+  "its-beautiful": {"say": "ang gan-DA"},
   "dont-understand": {"say": "hin-DI ko po na-i-in-tin-DI-han"},
   "speak-slowly": {"say": "da-HAN da-HAN lang po", "note": "Wörtlich „nur langsam“"},
   "repeat": {"say": "pa-ki-U-lit po"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "a-SSU-kal", "note": "Vom spanischen azúcar"},
   "cheers": {"say": "TA-gai", "note": "Mabuhay! (es lebe hoch) ist der förmliche Trinkspruch"},
   "help": {"say": "TU-long", "note": "Saklolo! ist ein verzweifelterer Hilferuf"},
+  "need-doctor": {"say": "kai-LA-ngan ko nang dok-TOR", "note": "Den Krankenwagen ruft man unter 911"},
   "pharmacy": {"say": "na-ssa-AN po ang bo-TI-ka", "note": "Botika kommt vom spanischen botica. Auf Schildern steht auch pharmacy oder drugstore"}
 }

@@ -1,14 +1,20 @@
 {
   "hello": {"text": "ສະບາຍດີ", "say": "sa-bai-dee", "note": "Works any time of day, and is also a casual goodbye"},
+  "how-are-you": {"text": "ສະບາຍດີບໍ?", "say": "sa-bai-dee baw", "note": "The reply is ສະບາຍດີ (sa-bai-dee), I'm well"},
+  "im-well": {"text": "ສະບາຍດີ, ຂອບໃຈ!", "say": "sa-bai-dee, kawp jai"},
   "good-morning": {"text": "ສະບາຍດີຕອນເຊົ້າ", "say": "sa-bai-dee tawn sao", "note": "Most people just say sabaidee all day"},
   "good-night": {"text": "ລາຕີສະຫວັດ", "say": "la-tee sa-wat", "note": "Formal. At bedtime people often say ນອນຫຼັບຝັນດີ (non lap fan dee), sleep well and sweet dreams"},
   "goodbye": {"text": "ລາກ່ອນ", "say": "la kawn", "note": "Literally \"farewell for now\""},
   "please": {"text": "ກະລຸນາ", "say": "ka-lu-na", "note": "Formal. In a shop people usually say ຂໍ (kaw) before the item"},
   "thank-you": {"text": "ຂອບໃຈ", "say": "kawp jai", "note": "ຂອບໃຈຫຼາຍໆ (kawp jai lai lai) means thank you very much"},
+  "youre-welcome": {"text": "ບໍ່ເປັນຫຍັງ", "say": "baw pen nyang", "note": "Literally it's nothing; also never mind"},
   "yes": {"text": "ແມ່ນ", "say": "men", "note": "Literally \"it is\". ເຈົ້າ (jao) is also used as a polite yes"},
   "no": {"text": "ບໍ່", "say": "baw", "note": "ບໍ່ແມ່ນ (baw men) means \"no, it isn't\""},
   "excuse-me": {"text": "ຂໍໂທດ", "say": "kaw tote", "note": "Excuse me and sorry"},
   "my-name": {"text": "ຂ້ອຍຊື່…", "say": "koy sue …", "note": "ຂ້ອຍ (koy) means I"},
+  "your-name": {"text": "ເຈົ້າຊື່ຫຍັງ?", "say": "jao sue nyang"},
+  "where-from": {"text": "ເຈົ້າມາຈາກໃສ?", "say": "jao ma jak sai"},
+  "its-beautiful": {"text": "ງາມຫຼາຍ!", "say": "ngam lai"},
   "dont-understand": {"text": "ຂ້ອຍບໍ່ເຂົ້າໃຈ", "say": "koy baw kow jai"},
   "speak-slowly": {"text": "ກະລຸນາເວົ້າຊ້າໆ", "say": "ka-lu-na wow sah sah", "note": "Saying a word twice, as in sah sah, softens it"},
   "repeat": {"text": "ກະລຸນາເວົ້າອີກເທື່ອໜຶ່ງ", "say": "ka-lu-na wow eek too-a nuhng"},
@@ -75,5 +81,6 @@
   "cheers": {"text": "ຊົນແກ້ວ", "say": "son keo", "note": "Literally \"clink glasses\". ໄຊໂຍ (sai yo) is also used"},
 
   "help": {"text": "ຊ່ວຍແດ່", "say": "soo-ay dae"},
+  "need-doctor": {"text": "ຂ້ອຍຕ້ອງການໝໍ", "say": "koy tawng kan maw"},
   "pharmacy": {"text": "ຮ້ານຂາຍຢາຢູ່ໃສ", "say": "hahn kai yah yoo sai", "note": "Literally \"shop that sells medicine\""}
 }

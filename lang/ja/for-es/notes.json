@@ -1,10 +1,12 @@
 {
   "hello": {"note": "Saludo de día. Por la mañana, ohayō gozaimasu; por la tarde-noche, konbanwa"},
+  "how-are-you": {"note": "Para alguien a quien no ves hace tiempo, no un saludo diario"},
   "good-morning": {"note": "La forma cortés; entre amigos basta con ohayō"},
   "good-night": {"note": "Solo cuando alguien se va a dormir. Para saludar por la noche se dice konbanwa; entre amigos, basta con oyasumi"},
   "goodbye": {"note": "Suena a despedida definitiva, así que se usa menos de lo que crees. Los vendedores dicen arigatō gozaimashita cuando te vas"},
   "please": {"note": "Para pedir algo o al entregar algo. Después de una cosa también sirve kudasai"},
   "thank-you": {"note": "Usa arigatō gozaimashita por algo que acaba de terminar, como una comida"},
+  "youre-welcome": {"note": "A menudo solo いいえ (iie), no es nada"},
   "yes": {"note": "A menudo solo significa «te escucho», no siempre que está de acuerdo"},
   "no": {"note": "Se suele suavizar: chotto… («es un poco…») es una negativa cortés"},
   "excuse-me": {"note": "Sirve para llamar la atención, pedir perdón y agradecer la molestia"},
@@ -47,5 +49,8 @@
   "sugar": {"note": "En una cafetería también sirve シュガー (shugā)"},
   "cheers": {"note": "Espera a que todos tengan su vaso y díganlo todos a la vez"},
   "help": {"note": "Grítalo. La policía es keisatsu"},
-  "pharmacy": {"note": "Las droguerías (doraggusutoa) venden medicinas corrientes; un yakkyoku dispensa recetas"}
+  "need-doctor": {"note": "Para una ambulancia, llama al 119"},
+  "pharmacy": {"note": "Las droguerías (doraggusutoa) venden medicinas corrientes; un yakkyoku dispensa recetas"},
+  "where-from": {"note": "La respuesta: …から来ました (… kara kimashita), vengo de …"},
+  "its-beautiful": {"note": "ね (ne) pide acuerdo, como ¿verdad?"}
 }

@@ -1,14 +1,20 @@
 {
   "hello": {"say": "cha-LOMM", "note": "Veut aussi dire au revoir et paix. Entre amis, on dit souvent hi (haï)"},
+  "how-are-you": {"say": "ma nich-MA", "note": "Familier et très courant. Plus poli : מה שלומך, ma chlom-KHA à un homme, ma chlo-MÈKH à une femme"},
+  "im-well": {"say": "a-NI bé-SÈ-dèr, to-DA"},
   "good-morning": {"say": "BO-kèr TOV", "note": "La réponse habituelle est בוקר אור (BO-kèr OR), matin de lumière"},
   "good-night": {"say": "LAÏ-la TOV", "note": "Se dit en se quittant le soir et au coucher. Bonsoir se dit ערב טוב (É-rèv TOV)"},
   "goodbye": {"say": "lé-hit-ra-OT", "note": "Bye (baï) est très courant, et shalom marche aussi"},
   "please": {"say": "bé-va-ka-CHA", "note": "Veut aussi dire de rien et voici"},
   "thank-you": {"say": "to-DA", "note": "תודה רבה (to-DA ra-BA) veut dire merci beaucoup"},
+  "youre-welcome": {"say": "bé-va-ka-CHA", "note": "Veut aussi dire s'il vous plaît, et voici"},
   "yes": {"say": "kènn"},
   "no": {"say": "lo"},
   "excuse-me": {"say": "sli-KHA", "note": "Veut aussi dire pardon, et sert à appeler le serveur"},
   "my-name": {"say": "kor-IMM li ...", "note": "Littéralement « on m'appelle », pareil pour un homme et une femme. L'audio prend Peter comme exemple"},
+  "your-name": {"say": "eïkh kor-IMM lé-KHA", "note": "À un homme. À une femme, le dernier mot se dit LAKH"},
+  "where-from": {"say": "mé-EÏ-fo a-TA", "note": "À un homme. À une femme, את (AT)"},
+  "its-beautiful": {"say": "ya-FÉ mé-OD"},
   "dont-understand": {"say": "a-NI lo mé-VINN", "female": {"say": "a-NI lo mé-vi-NA"}},
   "speak-slowly": {"say": "èf-CHAR lé-da-BÈR lé-AT yo-TÈR", "note": "Littéralement « est-il possible de parler plus lentement ? ». אפשר (èf-CHAR) suivi d'un verbe est une façon polie de demander n'importe quoi, à n'importe qui"},
   "repeat": {"say": "èf-CHAR lakh-ZOR al ZÉ"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "SOU-kar"},
   "cheers": {"say": "lé-KHA-yimm", "note": "Littéralement « à la vie »"},
   "help": {"say": "ha-TSI-lou", "note": "Criez-le. La police se dit משטרה (mich-ta-RA), au 100"},
+  "need-doctor": {"say": "a-NI tsa-RIKH ro-FÉ", "female": {"say": "a-NI tsri-KHA ro-FÉ"}, "note": "Pour une ambulance (Magen David Adom), appelez le 101"},
   "pharmacy": {"say": "èï-FO bèït ha-mir-KA-khat", "note": "Beaucoup disent simplement le nom de la grande chaîne, סופר-פארם (SOU-pèr farm)"}
 }

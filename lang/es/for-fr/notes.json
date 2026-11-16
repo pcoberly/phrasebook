@@ -1,14 +1,20 @@
 {
   "hello": {"say": "O-la", "note": "Le h est muet. Buenos días, buenas tardes et buenas noches changent selon le moment de la journée"},
+  "how-are-you": {"say": "KO-mo èss-TA", "note": "La forme polie ; entre amis, ¿Cómo estás?"},
+  "im-well": {"say": "BIÈNN, GRA-ssiass"},
   "good-morning": {"say": "BOUÉ-noss DI-ass", "note": "Jusqu'à midi environ"},
   "good-night": {"say": "BOUÉ-nass NO-tchéss", "note": "Veut dire bonsoir et bonne nuit : pour saluer après la tombée de la nuit et pour prendre congé au coucher"},
   "goodbye": {"say": "a-DIOSS", "note": "Hasta luego (ASS-ta LOUÉ-go) veut dire à plus tard"},
   "please": {"say": "por fa-BOR"},
   "thank-you": {"say": "GRA-ssiass", "note": "Muchas gracias (MOU-tchass) veut dire merci beaucoup"},
+  "youre-welcome": {"say": "dé NA-da"},
   "yes": {"say": "si", "note": "L'accent le distingue de si, « si » au sens de condition"},
   "no": {"say": "no"},
   "excuse-me": {"say": "pèr-DONN", "note": "Con permiso (konn pèr-MI-sso) pour passer. Disculpe (diss-KOUL-pé) pour appeler le serveur"},
   "my-name": {"say": "mé YA-mo ...", "note": "Littéralement « je m'appelle », comme en français. L'audio prend Peter comme exemple"},
+  "your-name": {"say": "KO-mo sé YA-ma", "note": "Littéralement comment vous appelez-vous ?"},
+  "where-from": {"say": "dé DONN-dé èss", "note": "Entre amis, ¿De dónde eres?"},
+  "its-beautiful": {"say": "ké bo-NI-to", "note": "Hermoso (èr-MO-sso) est plus fort, pour un paysage"},
   "dont-understand": {"say": "no ènn-TIÈNN-do"},
   "speak-slowly": {"say": "A-blé mass dèss-PA-ssio por fa-BOR", "note": "Hable est la forme de politesse (usted) de « parler »"},
   "repeat": {"say": "POUÉ-dé ré-pé-TIR-lo", "note": "Puede veut dire « pouvez-vous », à la forme de politesse"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "a-SSOU-kar"},
   "cheers": {"say": "sa-LOUD", "note": "Littéralement « santé »"},
   "help": {"say": "a-YOU-dé-mé", "note": "¡Socorro! (so-KO-rro) est l'appel au secours"},
+  "need-doctor": {"say": "né-ssé-SI-to oun MÉ-di-ko"},
   "pharmacy": {"say": "DONN-dé èss-TA la far-MA-ssia"}
 }

@@ -1,14 +1,20 @@
 {
   "hello": {"say": "HA-lo", "note": "Familier et partout bienvenu. Selamat pagi, siang, sore et malam changent selon le moment de la journée"},
+  "how-are-you": {"say": "A-pa KA-bar", "note": "Littéralement quelles nouvelles ? On répond baik, bien"},
+  "im-well": {"say": "ba-I, te-RI-ma KA-ssi"},
   "good-morning": {"say": "se-LA-matt PA-gui", "note": "Jusqu'à 11 heures environ"},
   "good-night": {"say": "se-LA-matt TI-dour", "note": "Au coucher ; littéralement « sommeil paisible ». Selamat malam veut dire bonsoir et sert aussi à se quitter le soir"},
   "goodbye": {"say": "SAMM-paï DJOUMM-pa", "note": "Littéralement « jusqu'à ce qu'on se revoie ». Dah est un salut familier"},
   "please": {"say": "TO-long", "note": "Pour demander à quelqu'un de faire quelque chose : tolong ... Silakan veut dire « je vous en prie » quand on propose"},
   "thank-you": {"say": "te-RI-ma KA-ssi", "note": "On répond sama-sama"},
+  "youre-welcome": {"say": "SA-ma SA-ma", "note": "Littéralement pareillement"},
   "yes": {"say": "ya"},
   "no": {"say": "TI-da", "note": "Le k final est un simple coup de glotte, à peine audible. À l'oral on dit souvent nggak"},
   "excuse-me": {"say": "per-MI-ssi", "note": "Pour passer ou attirer l'attention. Pour s'excuser, on dit maaf"},
   "my-name": {"say": "NA-ma SA-ya", "note": "Saya (je) et Anda (vous) sont polis et sûrs pour un visiteur"},
+  "your-name": {"say": "si-A-pa NA-ma ANN-da"},
+  "where-from": {"say": "ANN-da DA-ri MA-na", "note": "Réponse : Saya dari ..., je viens de ..."},
+  "its-beautiful": {"say": "INN-da se-KA-li", "note": "Pour un paysage ou un lieu. Cantik veut dire joli, pour les gens et les objets"},
   "dont-understand": {"say": "SA-ya TI-da me-NGUER-ti"},
   "speak-slowly": {"say": "TO-long bi-TCHA-ra pe-LANN pe-LANN", "note": "Pelan-pelan, lentement : l'indonésien redouble souvent les mots"},
   "repeat": {"say": "BI-ssa di-ou-LA-ngui"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "GOU-la", "note": "Tanpa gula veut dire sans sucre ; utile, car les boissons arrivent sucrées"},
   "cheers": {"say": "ber-SOU-lang", "note": "Le toast habituel, même si souvent on lève simplement son verre"},
   "help": {"say": "TO-long", "note": "Le même mot que s'il vous plaît pour demander un service"},
+  "need-doctor": {"say": "SA-ya per-LOU DOK-ter", "note": "Pour une ambulance, appelez le 119"},
   "pharmacy": {"say": "a-po-TÈK di MA-na", "note": "Les panneaux disent Apotek ou Apotik"}
 }

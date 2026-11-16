@@ -1,14 +1,20 @@
 {
   "hello": {"say": "kou-mous-TA", "note": "Littéralement « comment ça va ? », de l'espagnol ¿cómo está? Avec po, c'est poli : Kumusta po"},
+  "how-are-you": {"say": "kou-mous-TA po ka-YO", "note": "Po et kayo le rendent poli ; à un ami, Kumusta ka ?"},
+  "im-well": {"say": "ma-BOU-ti po, sa-LA-matt"},
   "good-morning": {"say": "ma-gann-DANG ou-MA-ga", "note": "Ajoutez po pour les aînés et les inconnus : Magandang umaga po"},
   "good-night": {"say": "ma-gann-DANG ga-BI", "note": "Veut dire bonsoir et bonne nuit. Au coucher, en famille, on dit aussi Tulog na, au lit"},
   "goodbye": {"say": "pa-A-lamm", "note": "Sonne définitif. On dit plus souvent Sige (bon, allez) ou Ingat (prends soin de toi)"},
   "please": {"say": "pa-ki-OU-ssap", "note": "Littéralement « je demande une faveur ». Au quotidien, on met paki- devant le verbe (pakiulit, répétez s'il vous plaît), et po rend poli"},
   "thank-you": {"say": "sa-LA-matt po", "note": "Po le rend poli ; entre amis, salamat suffit. On répond walang anuman"},
+  "youre-welcome": {"say": "wa-LANG a-nou-MANN", "note": "Littéralement ce n'est rien"},
   "yes": {"say": "O-po", "note": "Le oui poli, pour les aînés et les inconnus. Oo est le oui simple"},
   "no": {"say": "hinn-DI po", "note": "Hindi veut dire non, po le rend poli. Il finit par un coup de glotte"},
   "excuse-me": {"say": "pa-SSÈNN-sya na po", "note": "Pardon. Pour passer ou attirer l'attention, on dit souvent simplement excuse me po"},
   "my-name": {"say": "a-KO si", "note": "Ako veut dire je, et si se met devant un prénom. Ikaw, c'est tu ; kayo est plus poli"},
+  "your-name": {"say": "a-NO po ang pa-NGA-lann ninn-YO"},
+  "where-from": {"say": "ta-ga-ssa-ANN po ka-YO", "note": "Taga- veut dire de : taga-Maynila, de Manille"},
+  "its-beautiful": {"say": "ang gann-DA"},
   "dont-understand": {"say": "hinn-DI ko po na-i-inn-tinn-DI-hann"},
   "speak-slowly": {"say": "da-HANN da-HANN lang po", "note": "Littéralement « juste lentement »"},
   "repeat": {"say": "pa-ki-OU-litt po"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "a-SSOU-kal", "note": "De l'espagnol azúcar"},
   "cheers": {"say": "TA-gaï", "note": "Mabuhay ! (vive ...) est le toast formel"},
   "help": {"say": "TOU-long", "note": "Saklolo ! est un appel au secours plus désespéré"},
+  "need-doctor": {"say": "kaï-LA-ngann ko nang dok-TOR", "note": "Pour une ambulance, appelez le 911"},
   "pharmacy": {"say": "na-ssa-ANN po ang bo-TI-ka", "note": "Botika vient de l'espagnol botica. Les panneaux disent aussi pharmacy ou drugstore"}
 }

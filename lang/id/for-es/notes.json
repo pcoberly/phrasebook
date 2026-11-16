@@ -1,14 +1,20 @@
 {
   "hello": {"say": "JA-lo", "note": "Informal y sirve en cualquier lugar. Selamat pagi, siang, sore y malam cambian según la hora del día"},
+  "how-are-you": {"say": "A-pa KA-bar", "note": "Literalmente ¿qué noticias? Se responde baik, bien"},
+  "im-well": {"say": "ba-I, te-RI-ma KA-si"},
   "good-morning": {"say": "se-LA-mat PA-gui", "note": "Hasta las 11 de la mañana, más o menos"},
   "good-night": {"say": "se-LA-mat TI-dur", "note": "Al irse a dormir; literalmente «sueño seguro». Selamat malam es buenas noches como saludo y también para despedirse"},
   "goodbye": {"say": "SAM-pai YUM-pa", "note": "Literalmente «hasta que nos veamos». Dah es un chao informal"},
   "please": {"say": "TO-long", "note": "Para pedir que alguien haga algo: tolong ... Silakan es «adelante, por favor» al ofrecer algo"},
   "thank-you": {"say": "te-RI-ma KA-si", "note": "Se responde sama-sama"},
+  "youre-welcome": {"say": "SA-ma SA-ma", "note": "Literalmente igualmente"},
   "yes": {"say": "ya"},
   "no": {"say": "TI-da", "note": "La k final es solo un corte en la garganta, casi no se oye. Al hablar se dice mucho nggak"},
   "excuse-me": {"say": "per-MI-si", "note": "Para pasar o llamar la atención. Para pedir perdón se dice maaf"},
   "my-name": {"say": "NA-ma SA-ya", "note": "Saya (yo) y Anda (usted) son corteses y seguros para un visitante"},
+  "your-name": {"say": "si-A-pa NA-ma AN-da"},
+  "where-from": {"say": "AN-da DA-ri MA-na", "note": "La respuesta: Saya dari ..., soy de ..."},
+  "its-beautiful": {"say": "IN-da se-KA-li", "note": "Para paisajes y lugares. Cantik es bonito, para personas y cosas"},
   "dont-understand": {"say": "SA-ya TI-da me-NGUER-ti"},
   "speak-slowly": {"say": "TO-long bi-CHA-ra pe-LAN pe-LAN", "note": "Pelan-pelan, despacio: el indonesio duplica mucho las palabras"},
   "repeat": {"say": "BI-sa di-u-LA-ngui"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "GU-la", "note": "Tanpa gula significa sin azúcar; útil, porque las bebidas vienen dulces"},
   "cheers": {"say": "ber-SU-lang", "note": "El brindis de siempre, aunque muchas veces solo se levanta la copa"},
   "help": {"say": "TO-long", "note": "La misma palabra que por favor al pedir algo"},
+  "need-doctor": {"say": "SA-ya per-LU DOK-ter", "note": "Para una ambulancia, llama al 119"},
   "pharmacy": {"say": "a-po-TEK di MA-na", "note": "Los letreros dicen Apotek o Apotik"}
 }

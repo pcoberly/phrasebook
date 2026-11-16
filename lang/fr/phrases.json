@@ -1,14 +1,20 @@
 {
   "hello": {"text": "Bonjour", "say": "bohn-ZHOOR", "note": "Use it until the evening, then bonsoir (bohn-SWAHR). Greet shop and restaurant staff with it as you walk in"},
+  "how-are-you": {"text": "Comment allez-vous ?", "say": "koh-mahn tah-lay VOO", "note": "With friends: ça va ? (sah VAH)"},
+  "im-well": {"text": "Je vais bien, merci !", "say": "zhuh vay BYAN, mehr-SEE"},
   "good-morning": {"text": "Bonjour", "say": "bohn-ZHOOR", "note": "French has no separate good morning: bonjour covers the whole day until the evening"},
   "good-night": {"text": "Bonne nuit", "say": "bun NWEE", "note": "Only at bedtime or when parting late. To greet someone in the evening, say bonsoir (bohn-SWAHR)"},
   "goodbye": {"text": "Au revoir", "say": "oh ruh-VWAHR", "note": "Bonne journée (bun zhoor-NAY) is a friendly goodbye meaning have a good day"},
   "please": {"text": "S'il vous plaît", "say": "seel voo PLEH", "note": "Add it to every request"},
   "thank-you": {"text": "Merci", "say": "mehr-SEE", "note": "Merci beaucoup (boh-KOO) means thank you very much"},
+  "youre-welcome": {"text": "De rien", "say": "duh RYAN", "note": "More formal: je vous en prie (zhuh voo zahn PREE)"},
   "yes": {"text": "Oui", "say": "wee"},
   "no": {"text": "Non", "say": "noh", "note": "The n is nasal and barely sounded"},
   "excuse-me": {"text": "Excusez-moi", "say": "ehk-skew-ZAY mwah", "note": "Pardon (par-DOHN) also works to get past someone or say sorry"},
   "my-name": {"text": "Je m'appelle...", "say": "zhuh mah-PEL ...", "note": "Literally \"I call myself\". The audio uses Peter as the example name", "spoken": "Je m'appelle Peter", "filled": "Je m'appelle ⟦Peter⟧"},
+  "your-name": {"text": "Comment vous appelez-vous ?", "say": "koh-mahn voo zah-play VOO"},
+  "where-from": {"text": "D'où venez-vous ?", "say": "doo vuh-nay VOO"},
+  "its-beautiful": {"text": "C'est beau !", "say": "say BOH"},
   "dont-understand": {"text": "Je ne comprends pas", "say": "zhuh nuh kohm-PRAHN pah", "note": "In fast speech the ne disappears: je comprends pas"},
   "speak-slowly": {"text": "Parlez lentement, s'il vous plaît", "say": "par-LAY lahnt-MAHN seel voo PLEH"},
   "repeat": {"text": "Pouvez-vous répéter ?", "say": "poo-vay-VOO ray-pay-TAY"},
@@ -75,5 +81,6 @@
   "cheers": {"text": "Santé !", "say": "sahn-TAY", "note": "Literally \"health\". À votre santé (ah VOH-truh) is the polite version"},
 
   "help": {"text": "Au secours !", "say": "oh suh-KOOR", "note": "Shout it. The police are la police (lah poh-LEES)"},
+  "need-doctor": {"text": "J'ai besoin d'un médecin", "say": "zhay buh-ZWAN dun mayd-SAN"},
   "pharmacy": {"text": "Où est la pharmacie ?", "say": "oo eh lah far-mah-SEE", "note": "Look for a green cross"}
 }

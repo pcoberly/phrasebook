@@ -1,14 +1,20 @@
 {
   "hello": {"say": "SDRAST-wuj-tje", "note": "Das höfliche Hallo; das erste в ist stumm. Привет (pri-WJET) ist hallo unter Freunden"},
+  "how-are-you": {"say": "kak di-LA", "note": "Locker. Bei Fremden: Как у вас дела? (kak u was di-LA)"},
+  "im-well": {"say": "cha-ra-SCHO, sspa-SSI-ba"},
   "good-morning": {"say": "DOB-ra-je U-tra"},
   "good-night": {"say": "sspa-KOJ-naj NO-tschi", "note": "Vor dem Schlafen. Guten Abend heißt Добрый вечер (DOB-ryj WJE-tschir)"},
   "goodbye": {"say": "da sswi-DA-ni-ja", "note": "Пока (pa-KA) ist tschüss unter Freunden"},
   "please": {"say": "pa-SCHA-lus-ta", "note": "Heißt auch gern geschehen und bitte schön, wenn man etwas reicht"},
   "thank-you": {"say": "sspa-SSI-ba", "note": "Большое спасибо (bal-SCHO-je sspa-SSI-ba) heißt vielen Dank"},
+  "youre-welcome": {"say": "pa-SCHA-lus-ta", "note": "Dasselbe Wort wie bitte. Не за что (NJE sa-schta), keine Ursache, geht auch"},
   "yes": {"say": "da"},
   "no": {"say": "njet"},
   "excuse-me": {"say": "is-wi-NI-tje", "note": "Entschuldigung, auch um jemanden anzusprechen. Um vorbeizukommen, sagt man Разрешите (ras-ri-SCHY-tje)"},
   "my-name": {"say": "mi-NJA sa-WUT", "note": "Wörtlich man nennt mich..."},
+  "your-name": {"say": "kak was sa-WUT"},
+  "where-from": {"say": "at-KU-da wy"},
+  "its-beautiful": {"say": "O-tschin kra-SSI-wa"},
   "dont-understand": {"say": "ja ni pa-ni-MA-ju"},
   "speak-slowly": {"say": "ga-wa-RI-tje, pa-SCHA-lus-ta, MJED-li-nje-je"},
   "repeat": {"say": "paf-ta-RI-tje, pa-SCHA-lus-ta"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "SSA-char"},
   "cheers": {"say": "sa sda-RO-wje", "note": "Auf die Gesundheit. Vor dem Trinken ist ein kurzer Trinkspruch üblich"},
   "help": {"say": "pa-ma-GI-tje"},
+  "need-doctor": {"say": "mnje NU-schyn wratsch", "note": "Den Krankenwagen ruft man unter 103, vom Handy auch 112"},
   "pharmacy": {"say": "gdje ap-TJE-ka"}
 }

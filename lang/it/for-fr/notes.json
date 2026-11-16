@@ -1,14 +1,20 @@
 {
   "hello": {"say": "SAL-vé", "note": "Un bonjour poli à toute heure. Ciao (tchao) est familier, pour les amis et les connaissances"},
+  "how-are-you": {"say": "KO-mé STA", "note": "Entre amis : come stai?"},
+  "im-well": {"say": "BÈ-né, GRA-tsié"},
   "good-morning": {"say": "bouonn-DJOR-no", "note": "Jusqu'à l'après-midi, puis buonasera (bouo-na-SÉ-ra). Saluez le personnel en entrant dans une boutique"},
   "good-night": {"say": "bouo-na-NOT-té", "note": "Seulement au coucher ou en se quittant tard. Le soir, on salue avec buonasera"},
   "goodbye": {"say": "a-rri-vé-DÈR-tchi", "note": "Buona giornata (BOUO-na djor-NA-ta) veut dire bonne journée"},
   "please": {"say": "pèr fa-VO-ré", "note": "Per piacere (pia-TCHÉ-ré) veut dire la même chose"},
   "thank-you": {"say": "GRA-tsié", "note": "Grazie mille (MIL-lé) veut dire merci mille fois. La réponse est prego (PRÈ-go)"},
+  "youre-welcome": {"say": "PRÈ-go", "note": "Veut aussi dire je vous en prie, quand on offre quelque chose"},
   "yes": {"say": "si", "note": "L'accent le distingue de si, « se »"},
   "no": {"say": "no"},
   "excuse-me": {"say": "mi SKOU-zi", "note": "Sert aussi à appeler le serveur. Permesso (pèr-MÈSS-so) sert à passer"},
   "my-name": {"say": "mi KIA-mo ...", "note": "Littéralement « je m'appelle », comme en français. L'audio prend Peter comme exemple"},
+  "your-name": {"say": "KO-mé si KIA-ma"},
+  "where-from": {"say": "di do-VÈ"},
+  "its-beautiful": {"say": "è bèl-LISS-si-mo"},
   "dont-understand": {"say": "nonn ka-PISS-ko"},
   "speak-slowly": {"say": "PAR-li piou lènn-ta-MÈNN-té pèr fa-VO-ré", "note": "Parli est la forme de politesse (Lei) de « parler »"},
   "repeat": {"say": "pouo ri-PÈ-té-ré", "note": "Può veut dire « pouvez-vous », à la forme de politesse"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "DZOUK-ké-ro"},
   "cheers": {"say": "sa-LOU-té", "note": "On entend aussi souvent cin cin (tchinn tchinn)"},
   "help": {"say": "a-YOU-to", "note": "Criez-le. La police se dit la polizia (la po-li-TSI-a)"},
+  "need-doctor": {"say": "o bi-ZO-gno di oun MÈ-di-ko", "note": "Pour une ambulance, appelez le 118"},
   "pharmacy": {"say": "do-VÈ la far-ma-TCHI-a", "note": "Cherchez une croix verte"}
 }

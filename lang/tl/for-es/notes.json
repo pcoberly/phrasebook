@@ -1,14 +1,20 @@
 {
   "hello": {"say": "ku-mus-TA", "note": "Literalmente «¿cómo está?», del español. Con po es cortés: Kumusta po"},
+  "how-are-you": {"say": "ku-mus-TA po ka-YO", "note": "Po y kayo lo hacen cortés; a un amigo, ¿Kumusta ka?"},
+  "im-well": {"say": "ma-BU-ti po, sa-LA-mat"},
   "good-morning": {"say": "ma-gan-DANG u-MA-ga", "note": "Agrega po con mayores y desconocidos: Magandang umaga po"},
   "good-night": {"say": "ma-gan-DANG ga-BI", "note": "Sirve para buenas noches como saludo y al irse a dormir. En familia también se dice Tulog na, a dormir"},
   "goodbye": {"say": "pa-A-lam", "note": "Suena definitivo. Se dice más Sige (bueno, dale) o Ingat (cuídate)"},
   "please": {"say": "pa-ki-U-sap", "note": "Literalmente «pido un favor». En el día a día se pone paki- delante del verbo (pakiulit, repita por favor), y po lo hace cortés"},
   "thank-you": {"say": "sa-LA-mat po", "note": "Po lo hace cortés; entre amigos basta salamat. Se responde walang anuman"},
+  "youre-welcome": {"say": "ua-LANG a-nu-MAN", "note": "Literalmente no es nada"},
   "yes": {"say": "O-po", "note": "El sí cortés, para mayores y desconocidos. Oo es el sí simple"},
   "no": {"say": "jin-DI po", "note": "Hindi es no y po lo hace cortés. Termina con un corte en la garganta"},
   "excuse-me": {"say": "pa-SEN-sya na po", "note": "Perdón. Para pasar o llamar la atención, muchas veces se dice excuse me po"},
   "my-name": {"say": "a-KO si", "note": "Ako es yo, y si va delante de un nombre. Ikaw es tú; kayo es más cortés"},
+  "your-name": {"say": "a-NO po ang pa-NGA-lan nin-YO"},
+  "where-from": {"say": "ta-ga-sa-AN po ka-YO", "note": "Taga- significa de: taga-Maynila, de Manila"},
+  "its-beautiful": {"say": "ang gan-DA"},
   "dont-understand": {"say": "jin-DI ko po na-i-in-tin-DI-jan"},
   "speak-slowly": {"say": "da-JAN da-JAN lang po", "note": "Literalmente «solo despacio»"},
   "repeat": {"say": "pa-ki-U-lit po"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "a-SU-kal", "note": "Viene de azúcar"},
   "cheers": {"say": "TA-gai", "note": "¡Mabuhay! (¡viva!) es el brindis formal"},
   "help": {"say": "TU-long", "note": "¡Saklolo! es un grito de auxilio más desesperado"},
+  "need-doctor": {"say": "kai-LA-ngan ko nang dok-TOR", "note": "Para una ambulancia, llama al 911"},
   "pharmacy": {"say": "na-sa-AN po ang bo-TI-ka", "note": "Botika viene de botica. Los letreros también dicen pharmacy o drugstore"}
 }

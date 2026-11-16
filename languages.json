@@ -8,7 +8,7 @@
       "f": "vi-VN-HoaiMyNeural",
       "m": "vi-VN-NamMinhNeural"
     },
-    "bytes": 2031536
+    "bytes": 2239981
   },
   {
     "code": "ja",
@@ -19,7 +19,7 @@
       "f": "ja-JP-NanamiNeural",
       "m": "ja-JP-KeitaNeural"
     },
-    "bytes": 2147107
+    "bytes": 2400756
   },
   {
     "code": "km",
@@ -31,7 +31,7 @@
       "f": "km-KH-SreymomNeural",
       "m": "km-KH-PisethNeural"
     },
-    "bytes": 2094002
+    "bytes": 2309524
   },
   {
     "code": "lo",
@@ -43,7 +43,7 @@
       "f": "lo-LA-KeomanyNeural",
       "m": "lo-LA-ChanthavongNeural"
     },
-    "bytes": 2073175
+    "bytes": 2279840
   },
   {
     "code": "es",
@@ -55,7 +55,7 @@
       "f": "es-MX-DaliaNeural",
       "m": "es-MX-JorgeNeural"
     },
-    "bytes": 2085362
+    "bytes": 2284372
   },
   {
     "code": "fr",
@@ -67,7 +67,7 @@
       "f": "fr-FR-DeniseNeural",
       "m": "fr-FR-HenriNeural"
     },
-    "bytes": 2034565
+    "bytes": 2231343
   },
   {
     "code": "nl",
@@ -78,7 +78,7 @@
       "f": "nl-NL-ColetteNeural",
       "m": "nl-NL-MaartenNeural"
     },
-    "bytes": 2239724
+    "bytes": 2464211
   },
   {
     "code": "de",
@@ -90,7 +90,7 @@
       "f": "de-DE-KatjaNeural",
       "m": "de-DE-ConradNeural"
     },
-    "bytes": 2154742
+    "bytes": 2366065
   },
   {
     "code": "it",
@@ -101,7 +101,7 @@
       "f": "it-IT-ElsaNeural",
       "m": "it-IT-DiegoNeural"
     },
-    "bytes": 1984203
+    "bytes": 2155335
   },
   {
     "code": "zh",
@@ -112,7 +112,7 @@
       "f": "zh-CN-XiaoxiaoNeural",
       "m": "zh-CN-YunyangNeural"
     },
-    "bytes": 1739191
+    "bytes": 1906309
   },
   {
     "code": "he",
@@ -125,7 +125,7 @@
       "f": "he-IL-HilaNeural",
       "m": "he-IL-AvriNeural"
     },
-    "bytes": 2190930
+    "bytes": 2406145
   },
   {
     "code": "ko",
@@ -137,7 +137,7 @@
       "f": "ko-KR-SunHiNeural",
       "m": "ko-KR-InJoonNeural"
     },
-    "bytes": 2292289
+    "bytes": 2571283
   },
   {
     "code": "id",
@@ -149,7 +149,7 @@
       "f": "id-ID-GadisNeural",
       "m": "id-ID-ArdiNeural"
     },
-    "bytes": 2252001
+    "bytes": 2482073
   },
   {
     "code": "tl",
@@ -161,7 +161,7 @@
       "f": "fil-PH-BlessicaNeural",
       "m": "fil-PH-AngeloNeural"
     },
-    "bytes": 2088274
+    "bytes": 2296297
   },
   {
     "code": "th",
@@ -173,7 +173,7 @@
       "f": "th-TH-PremwadeeNeural",
       "m": "th-TH-NiwatNeural"
     },
-    "bytes": 2090017
+    "bytes": 2301711
   },
   {
     "code": "ru",
@@ -185,7 +185,7 @@
       "f": "ru-RU-SvetlanaNeural",
       "m": "ru-RU-DmitryNeural"
     },
-    "bytes": 2267031
+    "bytes": 2483121
   },
   {
     "code": "tr",
@@ -197,6 +197,6 @@
       "f": "tr-TR-EmelNeural",
       "m": "tr-TR-AhmetNeural"
     },
-    "bytes": 2199144
+    "bytes": 2423669
   }
 ]

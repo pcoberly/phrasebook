@@ -1,14 +1,20 @@
 {
   "hello": {"say": "HA-lo", "note": "Guten Tag (GOU-tenn TAK) est la salutation polie de la journée. Dans le Sud on entend aussi Grüß Gott (gruss GOTT)"},
+  "how-are-you": {"say": "vi GUÉT èss I-nenn", "note": "Entre amis : Wie geht's?"},
+  "im-well": {"say": "GOUT, DANN-ke"},
   "good-morning": {"say": "GOU-tenn MOR-guenn", "note": "Jusqu'à 10 ou 11 heures du matin"},
   "good-night": {"say": "GOU-te NAKHT", "note": "Seulement au coucher ou en se quittant tard. Pour saluer le soir, on dit guten Abend (GOU-tenn A-bennt)"},
   "goodbye": {"say": "tchuss", "note": "L'au revoir de tous les jours. Bis später (biss CHPÈ-teur) veut dire à plus tard, bis bald (biss BALT) à bientôt. Auf Wiedersehen est la forme polie, pour les commerces et les inconnus"},
   "please": {"say": "BI-te", "note": "Bitte veut aussi dire de rien et voici"},
   "thank-you": {"say": "DANN-ke", "note": "Danke schön (cheunn) et vielen Dank (FI-lenn dannk) veulent dire merci beaucoup"},
+  "youre-welcome": {"say": "BI-te CHEUNN", "note": "Gern geschehen (guèrn gue-CHÉ-enn) se dit aussi"},
   "yes": {"say": "ya"},
   "no": {"say": "naïnn", "note": ""},
   "excuse-me": {"say": "ènnt-CHOUL-di-goung", "note": "Veut aussi dire pardon. Verzeihung (fèr-TSAÏ-oung) est plus formel"},
   "my-name": {"say": "ikh HAÏ-sse ...", "note": "Mein Name ist... marche aussi. L'audio prend Peter comme exemple"},
+  "your-name": {"say": "vi HAÏ-ssenn zi"},
+  "where-from": {"say": "vo-HÈR KOMM-menn zi"},
+  "its-beautiful": {"say": "VOUNN-deur-cheunn"},
   "dont-understand": {"say": "ikh fèr-CHTÉ-e nikht", "note": "Ce ch est un souffle léger à l'avant de la bouche, entre kh et ch"},
   "speak-slowly": {"say": "CHPRÈ-khenn zi BI-te LANG-za-meu"},
   "repeat": {"say": "KEU-nenn zi dass vi-deur-HO-lenn"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "TSOU-keu"},
   "cheers": {"say": "prosst", "note": "Regardez les gens dans les yeux en trinquant"},
   "help": {"say": "HIL-fe", "note": "Criez-le. La police se dit die Polizei (di po-li-TSAÏ)"},
+  "need-doctor": {"say": "ikh BRAOU-khe AÏ-nenn ARTST", "note": "Pour une ambulance, appelez le 112"},
   "pharmacy": {"say": "vo isst di a-po-TÉ-ke"}
 }

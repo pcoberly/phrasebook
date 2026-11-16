@@ -1,14 +1,20 @@
 {
   "hello": {"text": "Salve", "say": "SAHL-veh", "note": "A polite hello at any time of day. Ciao (chow) is casual, for friends and people you know"},
+  "how-are-you": {"text": "Come sta?", "say": "KOH-meh STAH", "note": "With friends: come stai?"},
+  "im-well": {"text": "Bene, grazie!", "say": "BEH-neh, GRAH-tsyeh"},
   "good-morning": {"text": "Buongiorno", "say": "bwon-JOR-noh", "note": "Used until the afternoon, then buonasera (bwoh-nah-SEH-rah). Greet shop staff with it as you walk in"},
   "good-night": {"text": "Buonanotte", "say": "bwoh-nah-NOT-teh", "note": "Only at bedtime or when parting late. Buonasera is the evening greeting"},
   "goodbye": {"text": "Arrivederci", "say": "ah-ree-veh-DEHR-chee", "note": "Buona giornata (BWOH-nah jor-NAH-tah) means have a good day"},
   "please": {"text": "Per favore", "say": "pehr fah-VOH-reh", "note": "Per piacere (pyah-CHEH-reh) means the same"},
   "thank-you": {"text": "Grazie", "say": "GRAH-tsyeh", "note": "Grazie mille (MEEL-leh) means thanks a lot. The reply is prego (PREH-goh)"},
+  "youre-welcome": {"text": "Prego", "say": "PREH-goh", "note": "Also please, go ahead, when offering something"},
   "yes": {"text": "Sì", "say": "see", "note": "The accent mark tells it apart from si, meaning oneself"},
   "no": {"text": "No", "say": "noh"},
   "excuse-me": {"text": "Mi scusi", "say": "mee SKOO-zee", "note": "Also gets a waiter's attention. Permesso (pehr-MEHS-soh) is for getting past someone"},
   "my-name": {"text": "Mi chiamo...", "say": "mee KYAH-moh ...", "note": "Literally \"I call myself\". The audio uses Peter as the example name", "spoken": "Mi chiamo Peter", "filled": "Mi chiamo ⟦Peter⟧"},
+  "your-name": {"text": "Come si chiama?", "say": "KOH-meh see KYAH-mah"},
+  "where-from": {"text": "Di dov'è?", "say": "dee doh-VEH"},
+  "its-beautiful": {"text": "È bellissimo!", "say": "eh bel-LEES-see-moh"},
   "dont-understand": {"text": "Non capisco", "say": "nohn kah-PEE-skoh"},
   "speak-slowly": {"text": "Parli più lentamente, per favore", "say": "PAR-lee pyoo len-tah-MEN-teh pehr fah-VOH-reh", "note": "Parli is the polite (Lei) form of speak"},
   "repeat": {"text": "Può ripetere?", "say": "pwoh ree-PEH-teh-reh", "note": "Può means can you, in the polite form"},
@@ -75,5 +81,6 @@
   "cheers": {"text": "Salute!", "say": "sah-LOO-teh", "note": "Cin cin (cheen cheen) is also common"},
 
   "help": {"text": "Aiuto!", "say": "ah-YOO-toh", "note": "Shout it. The police are la polizia (lah poh-lee-TSEE-ah)"},
+  "need-doctor": {"text": "Ho bisogno di un medico", "say": "oh bee-ZOH-nyoh dee oon MEH-dee-koh", "note": "For an ambulance, call 118"},
   "pharmacy": {"text": "Dov'è la farmacia?", "say": "doh-VEH lah far-mah-CHEE-ah", "note": "Look for a green cross"}
 }

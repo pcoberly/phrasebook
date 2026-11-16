@@ -1,14 +1,20 @@
 {
   "hello": {"say": "ZDRAST-vouï-tyé", "note": "Le bonjour poli ; le premier в est muet. Привет (pri-VYÈTT), c'est salut, entre amis"},
+  "how-are-you": {"say": "kak di-LA", "note": "Familier. Avec un inconnu : Как у вас дела ? (kak ou vass di-LA)"},
+  "im-well": {"say": "kha-ra-CHO, spa-SSI-ba"},
   "good-morning": {"say": "DOB-ra-yé OU-tra"},
   "good-night": {"say": "spa-KOÏ-naï NO-tchi", "note": "Au coucher. Bonsoir se dit Добрый вечер (DOB-ryï VYÉ-tchir)"},
   "goodbye": {"say": "da svi-DA-ni-ya", "note": "Пока (pa-KA), c'est salut, entre amis"},
   "please": {"say": "pa-JA-lous-ta", "note": "Veut aussi dire de rien, et voici quand on tend quelque chose"},
   "thank-you": {"say": "spa-SSI-ba", "note": "Большое спасибо (bal-CHO-yé spa-SSI-ba) veut dire merci beaucoup"},
+  "youre-welcome": {"say": "pa-JA-lous-ta", "note": "Le même mot que s'il vous plaît. Не за что (NYÉ za-chta), il n'y a pas de quoi, se dit aussi"},
   "yes": {"say": "da"},
   "no": {"say": "nyètt"},
   "excuse-me": {"say": "iz-vi-NI-tyé", "note": "Pardon, et excusez-moi pour attirer l'attention. Pour passer, on dit Разрешите (raz-ri-CHY-tyé)"},
   "my-name": {"say": "mi-NYA za-VOUTT", "note": "Littéralement on m'appelle..."},
+  "your-name": {"say": "kak vass za-VOUTT"},
+  "where-from": {"say": "at-KOU-da vy"},
+  "its-beautiful": {"say": "O-tchinn kra-SSI-va"},
   "dont-understand": {"say": "ya ni pa-ni-MA-you"},
   "speak-slowly": {"say": "ga-va-RI-tyé, pa-JA-lous-ta, MYÈD-li-nyé-yé"},
   "repeat": {"say": "paf-ta-RI-tyé, pa-JA-lous-ta"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "SA-khar"},
   "cheers": {"say": "za zda-RO-vyé", "note": "À la santé. Un petit toast avant de boire est de coutume"},
   "help": {"say": "pa-ma-GUI-tyé"},
+  "need-doctor": {"say": "mnyé NOU-jynn vratch", "note": "Pour une ambulance, appelez le 103, ou le 112 depuis un portable"},
   "pharmacy": {"say": "gdyé ap-TYÉ-ka"}
 }

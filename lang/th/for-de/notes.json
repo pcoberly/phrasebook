@@ -1,14 +1,20 @@
 {
   "hello": {"say": "ssà-wàt-die kráp", "female": {"say": "ssà-wàt-die kâ"}, "note": "Hallo und tschüss, zu jeder Tageszeit. Männer beenden höfliche Sätze mit ครับ (kráp), Frauen mit ค่ะ (kâ)"},
+  "how-are-you": {"say": "ssà-baai-die mái kráp", "female": {"say": "ssà-baai-die mái ká"}, "note": "Die Antwort ist สบายดี (ssà-baai-die), mir geht's gut"},
+  "im-well": {"say": "ssà-baai-die kòp-kun kráp", "female": {"say": "ssà-baai-die kòp-kun kâ"}},
   "good-morning": {"say": "à-run ssà-wàt kráp", "female": {"say": "à-run ssà-wàt kâ"}, "note": "Ziemlich förmlich; die meisten sagen den ganzen Tag สวัสดี (ssà-wàt-die)"},
   "good-night": {"say": "raa-drie ssà-wàt kráp", "female": {"say": "raa-drie ssà-wàt kâ"}, "note": "Förmlich und selten. Unter Freunden ฝันดี (fǎn die), träum schön"},
   "goodbye": {"say": "laa gòn kráp", "female": {"say": "laa gòn kâ"}, "note": "Klingt endgültig. สวัสดี (ssà-wàt-die) geht auch zum Abschied und ist üblicher"},
   "please": {"say": "gà-ru-naa", "note": "Förmlich, steht auf Schildern. Im Gespräch bittet man um etwas mit ขอ (kǒ) und um Hilfe mit ช่วย (tschûai) vor dem Verb"},
   "thank-you": {"say": "kòp-kun kráp", "female": {"say": "kòp-kun kâ"}, "note": "Unter Freunden ขอบใจ (kòp-dschai)"},
+  "youre-welcome": {"say": "mâi ben rai kráp", "female": {"say": "mâi ben rai kâ"}, "note": "Wörtlich das ist nichts; auch macht nichts, das hört man überall"},
   "yes": {"say": "kráp", "female": {"say": "kâ"}, "note": "Die Höflichkeitspartikel allein heißt ja. ใช่ (tschâi) heißt stimmt"},
   "no": {"say": "mâi kráp", "female": {"say": "mâi kâ"}, "note": "ไม่ใช่ (mâi tschâi) heißt stimmt nicht"},
   "excuse-me": {"say": "kǒ-tôot kráp", "female": {"say": "kǒ-tôot kâ"}, "note": "Heißt Entschuldigung und Verzeihung"},
   "my-name": {"say": "pǒm tschûe", "female": {"say": "tschǎn tschûe"}, "note": "Männer sagen ผม (pǒm) für ich, Frauen ฉัน (tschǎn)"},
+  "your-name": {"say": "kun tschûe à-rai kráp", "female": {"say": "kun tschûe à-rai ká"}},
+  "where-from": {"say": "kun maa dschàak nǎi kráp", "female": {"say": "kun maa dschàak nǎi ká"}, "note": "Die Antwort: มาจาก... (maa dschàak), ich komme aus ..."},
+  "its-beautiful": {"say": "ssǔai mâak kráp", "female": {"say": "ssǔai mâak kâ"}, "note": "สวย (ssǔai) heißt schön, für Orte, Dinge und Menschen"},
   "dont-understand": {"say": "pǒm mâi kâo-dschai kráp", "female": {"say": "tschǎn mâi kâo-dschai kâ"}},
   "speak-slowly": {"say": "pûut tscháa tscháa nòi kráp", "female": {"say": "pûut tscháa tscháa nòi kâ"}, "note": "ๆ wiederholt das Wort davor: ช้าๆ heißt langsam"},
   "repeat": {"say": "pûut ìek tie dâi mái kráp", "female": {"say": "pûut ìek tie dâi mái ká"}, "note": "ไหม (mái) am Ende macht eine Ja/Nein-Frage, und eine Frau sagt dann คะ (ká), mit hohem Ton"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "náam-daan", "note": "ไม่ใส่น้ำตาล heißt ohne Zucker"},
   "cheers": {"say": "tschon gâeo", "note": "Wörtlich Gläser anstoßen"},
   "help": {"say": "tschûai dûai"},
+  "need-doctor": {"say": "pǒm dông-gaan mǒ kráp", "female": {"say": "tschǎn dông-gaan mǒ kâ"}, "note": "Den Krankenwagen ruft man unter 1669"},
   "pharmacy": {"say": "ráan kǎai jaa jùu tîe nǎi kráp", "female": {"say": "ráan kǎai jaa jùu tîe nǎi ká"}, "note": "Auf Schildern steht ร้านขายยา oder Pharmacy"}
 }

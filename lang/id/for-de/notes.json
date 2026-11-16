@@ -1,14 +1,20 @@
 {
   "hello": {"say": "HA-lo", "note": "Locker und überall passend. Selamat pagi, siang, sore und malam wechseln mit der Tageszeit"},
+  "how-are-you": {"say": "A-pa KA-bar", "note": "Wörtlich welche Neuigkeiten? Die Antwort ist baik, gut"},
+  "im-well": {"say": "ba-I, te-RI-ma KA-ssi"},
   "good-morning": {"say": "sse-LA-mat PA-gi", "note": "Bis etwa 11 Uhr vormittags"},
   "good-night": {"say": "sse-LA-mat TI-dur", "note": "Vor dem Schlafen, wörtlich „sicherer Schlaf“. Selamat malam heißt guten Abend und ist auch ein Abschied am Abend"},
   "goodbye": {"say": "SSAM-pai DSCHUM-pa", "note": "Wörtlich „bis wir uns treffen“. Dah ist ein lockeres Tschüss"},
   "please": {"say": "TO-long", "note": "Um jemanden um etwas zu bitten: tolong ... Silakan heißt „bitte sehr“, wenn man etwas anbietet"},
   "thank-you": {"say": "te-RI-ma KA-ssi", "note": "Die Antwort ist sama-sama"},
+  "youre-welcome": {"say": "SSA-ma SSA-ma", "note": "Wörtlich gleichfalls"},
   "yes": {"say": "ja"},
   "no": {"say": "TI-da", "note": "Das k am Ende ist nur ein kurzer Stopp im Hals. Im Alltag sagt man oft nggak"},
   "excuse-me": {"say": "per-MI-ssi", "note": "Um vorbeizukommen oder auf sich aufmerksam zu machen. Zum Entschuldigen sagt man maaf"},
   "my-name": {"say": "NA-ma SSA-ja", "note": "Saya (ich) und Anda (Sie) sind höflich und sicher für Besucher"},
+  "your-name": {"say": "ssi-A-pa NA-ma AN-da"},
+  "where-from": {"say": "AN-da DA-ri MA-na", "note": "Die Antwort: Saya dari ..., ich komme aus ..."},
+  "its-beautiful": {"say": "IN-da sse-KA-li", "note": "Für Aussichten und Orte. Cantik heißt hübsch, für Menschen und Dinge"},
   "dont-understand": {"say": "SSA-ja TI-da me-NGER-ti"},
   "speak-slowly": {"say": "TO-long bi-TSCHA-ra pe-LAN pe-LAN", "note": "Pelan-pelan, langsam: Indonesisch verdoppelt oft Wörter"},
   "repeat": {"say": "BI-ssa di-u-LA-ngi"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "GU-la", "note": "Tanpa gula heißt ohne Zucker; nützlich, denn Getränke kommen gesüßt"},
   "cheers": {"say": "ber-SSU-lang", "note": "Der übliche Trinkspruch, oft hebt man aber einfach das Glas"},
   "help": {"say": "TO-long", "note": "Dasselbe Wort wie bitte, wenn man um etwas bittet"},
+  "need-doctor": {"say": "SSA-ja per-LU DOK-ter", "note": "Den Krankenwagen ruft man unter 119"},
   "pharmacy": {"say": "a-po-TEK di MA-na", "note": "Schilder sagen Apotek oder Apotik"}
 }

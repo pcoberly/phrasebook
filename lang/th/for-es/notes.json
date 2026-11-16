@@ -1,14 +1,20 @@
 {
   "hello": {"say": "sà-uàt-dii khráp", "female": {"say": "sà-uàt-dii khâ"}, "note": "Hola y adiós, a cualquier hora. Los hombres terminan las frases corteses con ครับ (khráp) y las mujeres con ค่ะ (khâ)"},
+  "how-are-you": {"say": "sà-baai-dii mái khráp", "female": {"say": "sà-baai-dii mái khá"}, "note": "Se responde สบายดี (sà-baai-dii), estoy bien"},
+  "im-well": {"say": "sà-baai-dii khòp-khun khráp", "female": {"say": "sà-baai-dii khòp-khun khâ"}},
   "good-morning": {"say": "à-run sà-uàt khráp", "female": {"say": "à-run sà-uàt khâ"}, "note": "Bastante formal; la mayoría dice สวัสดี (sà-uàt-dii) todo el día"},
   "good-night": {"say": "raa-trii sà-uàt khráp", "female": {"say": "raa-trii sà-uàt khâ"}, "note": "Formal y poco usado. Entre amigos, ฝันดี (fǎn dii), dulces sueños"},
   "goodbye": {"say": "laa kòn khráp", "female": {"say": "laa kòn khâ"}, "note": "Suena definitivo. สวัสดี (sà-uàt-dii) también sirve para despedirse y es más común"},
   "please": {"say": "kà-ru-naa", "note": "Formal, aparece en letreros. Al hablar se pide algo con ขอ (khǒ) y ayuda con ช่วย (chûai) delante del verbo"},
   "thank-you": {"say": "khòp-khun khráp", "female": {"say": "khòp-khun khâ"}, "note": "Entre amigos, ขอบใจ (khòp-chai)"},
+  "youre-welcome": {"say": "mâi pen rai khráp", "female": {"say": "mâi pen rai khâ"}, "note": "Literalmente no es nada; también no importa, se oye en todas partes"},
   "yes": {"say": "khráp", "female": {"say": "khâ"}, "note": "La partícula de cortesía sola significa sí. ใช่ (châi) significa así es"},
   "no": {"say": "mâi khráp", "female": {"say": "mâi khâ"}, "note": "ไม่ใช่ (mâi châi) significa no es así"},
   "excuse-me": {"say": "khǒ-thôot khráp", "female": {"say": "khǒ-thôot khâ"}, "note": "Sirve para perdón y para disculpe"},
   "my-name": {"say": "phǒm chêu", "female": {"say": "chǎn chêu"}, "note": "Los hombres dicen ผม (phǒm) para yo, las mujeres ฉัน (chǎn)"},
+  "your-name": {"say": "khun chêu à-rai khráp", "female": {"say": "khun chêu à-rai khá"}},
+  "where-from": {"say": "khun maa chàak nǎi khráp", "female": {"say": "khun maa chàak nǎi khá"}, "note": "La respuesta: มาจาก... (maa chàak), vengo de ..."},
+  "its-beautiful": {"say": "sǔai mâak khráp", "female": {"say": "sǔai mâak khâ"}, "note": "สวย (sǔai) significa hermoso, para lugares, cosas y personas"},
   "dont-understand": {"say": "phǒm mâi khâo-chai khráp", "female": {"say": "chǎn mâi khâo-chai khâ"}},
   "speak-slowly": {"say": "phûut cháa cháa nòi khráp", "female": {"say": "phûut cháa cháa nòi khâ"}, "note": "ๆ repite la palabra anterior: ช้าๆ significa despacio"},
   "repeat": {"say": "phûut ìik thii dâi mái khráp", "female": {"say": "phûut ìik thii dâi mái khá"}, "note": "ไหม (mái) al final hace una pregunta de sí o no, y una mujer dice entonces คะ (khá), con tono alto"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "náam-taan", "note": "ไม่ใส่น้ำตาล significa sin azúcar"},
   "cheers": {"say": "chon kêo", "note": "Literalmente chocar los vasos"},
   "help": {"say": "chûai dûai"},
+  "need-doctor": {"say": "phǒm tông-kaan mǒ khráp", "female": {"say": "chǎn tông-kaan mǒ khâ"}, "note": "Para una ambulancia, llama al 1669"},
   "pharmacy": {"say": "ráan khǎai yaa yùu thîi nǎi khráp", "female": {"say": "ráan khǎai yaa yùu thîi nǎi khá"}, "note": "Los letreros dicen ร้านขายยา o Pharmacy"}
 }

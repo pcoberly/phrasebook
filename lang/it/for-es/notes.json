@@ -1,14 +1,20 @@
 {
   "hello": {"say": "SAL-ve", "note": "Un hola cortés a cualquier hora. Ciao (chao) es informal, para amigos y conocidos"},
+  "how-are-you": {"say": "KO-me STA", "note": "Entre amigos: come stai?"},
+  "im-well": {"say": "BE-ne, GRA-tsie"},
   "good-morning": {"say": "buon-YOR-no", "note": "Se usa hasta la tarde; después, buonasera (buo-na-SE-ra). Saluda con él al entrar en las tiendas"},
   "good-night": {"say": "buo-na-NOT-te", "note": "Solo al irse a dormir o al despedirse tarde. Para saludar por la noche se usa buonasera"},
   "goodbye": {"say": "a-rri-ve-DER-chi", "note": "Buona giornata (BUO-na yor-NA-ta) significa que tengas buen día"},
   "please": {"say": "per fa-VO-re", "note": "Per piacere (pia-CHE-re) significa lo mismo"},
   "thank-you": {"say": "GRA-tsie", "note": "Grazie mille (MIL-le) es muchas gracias. La respuesta es prego (PRE-go)"},
+  "youre-welcome": {"say": "PRE-go", "note": "También significa adelante, al ofrecer algo"},
   "yes": {"say": "si", "note": "El acento lo distingue de si, el pronombre «se»"},
   "no": {"say": "no"},
   "excuse-me": {"say": "mi SKU-zi", "note": "También sirve para llamar al mesero. Permesso (per-MES-so) es para pasar entre la gente"},
   "my-name": {"say": "mi KIA-mo ...", "note": "Literalmente «me llamo», como en español. El audio usa Peter como nombre de ejemplo"},
+  "your-name": {"say": "KO-me si KIA-ma"},
+  "where-from": {"say": "di do-VE"},
+  "its-beautiful": {"say": "e bel-LIS-si-mo"},
   "dont-understand": {"say": "non ka-PIS-ko"},
   "speak-slowly": {"say": "PAR-li piu len-ta-MEN-te per fa-VO-re", "note": "Parli es la forma de usted (Lei) de «hablar»"},
   "repeat": {"say": "puo ri-PE-te-re", "note": "Può es «puede», en la forma de usted"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "DSUK-ke-ro"},
   "cheers": {"say": "sa-LU-te", "note": "También se dice mucho cin cin (chin chin)"},
   "help": {"say": "a-YU-to", "note": "Grítalo. La policía es la polizia (la po-li-TSI-a)"},
+  "need-doctor": {"say": "o bi-SO-ño di un ME-di-ko", "note": "Para una ambulancia, llama al 118"},
   "pharmacy": {"say": "do-VE la far-ma-CHI-a", "note": "Busca una cruz verde"}
 }

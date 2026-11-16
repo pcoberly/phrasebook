@@ -1,14 +1,19 @@
 {
   "hello": {"note": "Se dit ní hǎo : quand deux troisièmes tons se suivent, le premier monte. 您好 (nín hǎo) est la forme polie"},
+  "how-are-you": {"note": "Un peu scolaire ; entre amis, on demande 最近怎么样 (zuìjìn zěnmeyàng), quoi de neuf ?"},
+  "im-well": {"note": "Trois troisièmes tons de suite : on dit wó hén hǎo"},
   "good-morning": {"note": "Souvent abrégé en 早 (zǎo)"},
   "good-night": {"note": "Se dit au coucher ou en partant tard le soir. Bonsoir se dit 晚上好 (wǎnshang hǎo)"},
   "goodbye": {"note": "Littéralement « au revoir »"},
   "please": {"note": "Se place devant la demande : 请给我… (qǐng gěi wǒ) veut dire donnez-moi…, s'il vous plaît"},
   "thank-you": {"note": "La deuxième syllabe est légère et brève. La réponse est 不客气 (bú kèqi), de rien"},
+  "youre-welcome": {"note": "不 (bù) devient bú devant un quatrième ton"},
   "yes": {"note": "En chinois, on répète souvent le verbe au lieu de dire oui. 对 (duì) veut dire c'est ça"},
   "no": {"note": "不 (bù) veut dire ne… pas, et devient bú devant un quatrième ton. 没有 (méiyǒu) veut dire je n'ai pas"},
   "excuse-me": {"note": "Sert à attirer l'attention et à s'excuser. 对不起 (duìbuqǐ) est une excuse plus forte"},
   "my-name": {"note": "L'audio prend Peter (彼得, Bǐdé) comme exemple"},
+  "your-name": {"note": "您 (nín) est le vous poli"},
+  "where-from": {"note": "Littéralement de quel pays êtes-vous ? Réponse : 我是…人 (wǒ shì … rén)"},
   "dont-understand": {"note": "Littéralement « j'écoute mais je ne comprends pas »"},
   "repeat": {"note": "一 (yī) devient yí devant un quatrième ton"},
   "speak-english": {"note": "吗 (ma) à la fin transforme une affirmation en question fermée. 您 (nín) est le vous de politesse"},
@@ -44,5 +49,6 @@
   "beer": {"note": "瓶 (píng) compte les bouteilles"},
   "water": {"note": "Beaucoup boivent de l'eau chaude. Demandez 冰水 (bīng shuǐ) pour de l'eau froide, et 矿泉水 (kuàngquánshuǐ) pour de l'eau en bouteille"},
   "cheers": {"note": "Littéralement « vide le verre »"},
-  "help": {"note": "Criez-le. La police se dit 警察 (jǐngchá)"}
+  "help": {"note": "Criez-le. La police se dit 警察 (jǐngchá)"},
+  "need-doctor": {"note": "Littéralement j'ai besoin de voir un médecin. Pour une ambulance, appelez le 120"}
 }

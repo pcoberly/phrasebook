@@ -1,14 +1,20 @@
 {
   "hello": {"text": "Merhaba", "say": "MER-hah-bah", "note": "Works any time of day, with anyone. Selam is a casual hi"},
+  "how-are-you": {"text": "Nasılsınız?", "say": "NAH-suhl-suh-nuhz", "note": "With friends: Nasılsın? (NAH-suhl-suhn)"},
+  "im-well": {"text": "İyiyim, teşekkürler!", "say": "ee-YEE-yim, teh-shek-kür-LER"},
   "good-morning": {"text": "Günaydın", "say": "gün-ay-DUHN"},
   "good-night": {"text": "İyi geceler", "say": "ee-YEE geh-jeh-LER", "note": "Also a goodbye in the evening. Good evening is İyi akşamlar (ee-YEE ak-sham-LAR)"},
   "goodbye": {"text": "Hoşça kalın", "say": "HOSH-chah KAH-luhn", "note": "Said by the one leaving. The one staying says Güle güle (gü-LEH gü-LEH), go smiling"},
   "please": {"text": "Lütfen", "say": "LÜT-fen"},
   "thank-you": {"text": "Teşekkür ederim", "say": "teh-shek-KÜR eh-deh-RIM", "note": "Shorter: teşekkürler, or sağ olun. The reply is rica ederim"},
+  "youre-welcome": {"text": "Rica ederim", "say": "ree-JAH eh-deh-RIM"},
   "yes": {"text": "Evet", "say": "eh-VET"},
   "no": {"text": "Hayır", "say": "HAH-yuhr", "note": "Often said with a quick upward nod and a click of the tongue"},
   "excuse-me": {"text": "Afedersiniz", "say": "ah-FEH-der-see-niz", "note": "Both sorry and excuse me. Pardon also works"},
   "my-name": {"text": "Benim adım...", "say": "beh-NIM ah-DUHM", "spoken": "Benim adım Peter", "filled": "Benim adım ⟦Peter⟧"},
+  "your-name": {"text": "Adınız ne?", "say": "ah-duh-NUHZ NEH"},
+  "where-from": {"text": "Nerelisiniz?", "say": "neh-REH-lee-see-niz", "note": "One word: literally where-from-are-you?"},
+  "its-beautiful": {"text": "Çok güzel!", "say": "CHOK gü-ZEL", "note": "Güzel is beautiful and also good: çok güzel, very nice"},
   "dont-understand": {"text": "Anlamıyorum", "say": "an-LAH-muh-yoh-room", "note": "One word: Turkish builds sentences by adding endings"},
   "speak-slowly": {"text": "Lütfen daha yavaş konuşun", "say": "LÜT-fen dah-HAH yah-VASH koh-NOO-shoon"},
   "repeat": {"text": "Tekrar eder misiniz?", "say": "tek-RAR eh-DER mee-see-niz"},
@@ -69,5 +75,6 @@
   "sugar": {"text": "Şeker", "say": "sheh-KER"},
   "cheers": {"text": "Şerefe!", "say": "sheh-reh-FEH", "note": "Literally to honour"},
   "help": {"text": "İmdat!", "say": "im-DAT"},
+  "need-doctor": {"text": "Doktora ihtiyacım var", "say": "dok-toh-RAH ih-tee-yah-JUHM VAR", "note": "For an ambulance, call 112"},
   "pharmacy": {"text": "Eczane nerede?", "say": "ej-zah-NEH NEH-reh-deh", "note": "Look for the red E sign. A nöbetçi eczane is the pharmacy on night duty"}
 }

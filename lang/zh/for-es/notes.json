@@ -1,14 +1,19 @@
 {
   "hello": {"note": "Se dice ní hǎo: cuando se juntan dos terceros tonos, el primero sube. 您好 (nín hǎo) es la forma cortés"},
+  "how-are-you": {"note": "Algo de libro; entre amigos se dice 最近怎么样 (zuìjìn zěnmeyàng), ¿qué tal todo?"},
+  "im-well": {"note": "Tres terceros tonos seguidos: se dice wó hén hǎo"},
   "good-morning": {"note": "A menudo se abrevia a 早 (zǎo)"},
   "good-night": {"note": "Se dice antes de dormir o al despedirse tarde por la noche. Para saludar por la noche: 晚上好 (wǎnshang hǎo)"},
   "goodbye": {"note": "Literalmente «hasta volver a vernos»"},
   "please": {"note": "Va delante de la petición: 请给我… (qǐng gěi wǒ) significa por favor, deme…"},
   "thank-you": {"note": "La segunda sílaba es ligera y corta. La respuesta es 不客气 (bú kèqi), de nada"},
+  "youre-welcome": {"note": "不 (bù) se vuelve bú antes de un cuarto tono"},
   "yes": {"note": "En chino se suele repetir el verbo en vez de decir sí. 对 (duì) significa eso es"},
   "no": {"note": "不 (bù) significa no, y pasa a bú ante un cuarto tono. 没有 (méiyǒu) significa no tengo"},
   "excuse-me": {"note": "Sirve para llamar la atención y pedir perdón. 对不起 (duìbuqǐ) es una disculpa más fuerte"},
   "my-name": {"note": "El audio usa Peter (彼得, Bǐdé) como nombre de ejemplo"},
+  "your-name": {"note": "您 (nín) es el usted"},
+  "where-from": {"note": "Literalmente ¿de qué país es? La respuesta: 我是…人 (wǒ shì … rén)"},
   "dont-understand": {"note": "Literalmente «escucho pero no entiendo»"},
   "repeat": {"note": "一 (yī) pasa a yí ante un cuarto tono"},
   "speak-english": {"note": "吗 (ma) al final convierte una afirmación en pregunta de sí o no. 您 (nín) es usted"},
@@ -44,5 +49,6 @@
   "beer": {"note": "瓶 (píng) cuenta botellas"},
   "water": {"note": "Mucha gente bebe agua caliente. Pide 冰水 (bīng shuǐ) si la quieres fría, y 矿泉水 (kuàngquánshuǐ) si la quieres embotellada"},
   "cheers": {"note": "Literalmente «seca el vaso»"},
-  "help": {"note": "Grítalo. La policía es 警察 (jǐngchá)"}
+  "help": {"note": "Grítalo. La policía es 警察 (jǐngchá)"},
+  "need-doctor": {"note": "Literalmente necesito ver a un médico. Para una ambulancia, llama al 120"}
 }

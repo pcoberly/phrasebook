@@ -1,14 +1,20 @@
 {
   "hello": {"text": "Здравствуйте", "say": "ZDRAST-vooy-tye", "note": "The polite hello; the first в is silent. Привет (pree-VYET) is hi, for friends"},
+  "how-are-you": {"text": "Как дела?", "say": "kak dee-LA", "note": "Casual. With someone you don't know: Как у вас дела? (kak oo vas dee-LA)"},
+  "im-well": {"text": "Хорошо, спасибо!", "say": "kha-ra-SHO, spa-SEE-ba"},
   "good-morning": {"text": "Доброе утро", "say": "DOB-ra-ye OO-tra"},
   "good-night": {"text": "Спокойной ночи", "say": "spa-KOY-nay NO-chee", "note": "At bedtime. Good evening is Добрый вечер (DOB-rihy VYE-chir)"},
   "goodbye": {"text": "До свидания", "say": "da svee-DA-nee-ya", "note": "Пока (pa-KA) is bye, for friends"},
   "please": {"text": "Пожалуйста", "say": "pa-ZHA-loos-ta", "note": "Also you're welcome, and here you are when handing something over"},
   "thank-you": {"text": "Спасибо", "say": "spa-SEE-ba", "note": "Большое спасибо (bal-SHO-ye spa-SEE-ba) is thank you very much"},
+  "youre-welcome": {"text": "Пожалуйста", "say": "pa-ZHA-loos-ta", "note": "The same word as please. Не за что (NYE za-shta), it's nothing, also works"},
   "yes": {"text": "Да", "say": "da"},
   "no": {"text": "Нет", "say": "nyet"},
   "excuse-me": {"text": "Извините", "say": "iz-vee-NEE-tye", "note": "Sorry, and excuse me to get attention. To get past someone, say Разрешите (raz-ree-SHIH-tye)"},
   "my-name": {"text": "Меня зовут...", "say": "mee-NYA za-VOOT", "note": "Literally they call me..."},
+  "your-name": {"text": "Как вас зовут?", "say": "kak vas za-VOOT"},
+  "where-from": {"text": "Откуда вы?", "say": "at-KOO-da vih"},
+  "its-beautiful": {"text": "Очень красиво!", "say": "O-chin kra-SEE-va"},
   "dont-understand": {"text": "Я не понимаю", "say": "ya nee pa-nee-MA-yoo"},
   "speak-slowly": {"text": "Говорите, пожалуйста, медленнее", "say": "ga-va-REE-tye, pa-ZHA-loos-ta, MYED-lee-nye-ye"},
   "repeat": {"text": "Повторите, пожалуйста", "say": "paf-ta-REE-tye, pa-ZHA-loos-ta"},
@@ -69,5 +75,6 @@
   "sugar": {"text": "Сахар", "say": "SA-khar"},
   "cheers": {"text": "За здоровье!", "say": "za zda-RO-vye", "note": "To health. A short toast before drinking is the custom"},
   "help": {"text": "Помогите!", "say": "pa-ma-GEE-tye"},
+  "need-doctor": {"text": "Мне нужен врач", "say": "mnye NOO-zhihn vrach", "note": "For an ambulance, call 103, or 112 from a mobile"},
   "pharmacy": {"text": "Где аптека?", "say": "gdye ap-TYE-ka"}
 }

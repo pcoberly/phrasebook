@@ -1,14 +1,20 @@
 {
   "hello": {"text": "สวัสดีครับ", "say": "sà-wàt-dee kráp", "note": "Hello and goodbye, any time of day. Men end polite sentences with ครับ (kráp), women with ค่ะ (kâ)", "female": {"text": "สวัสดีค่ะ", "say": "sà-wàt-dee kâ"}},
+  "how-are-you": {"text": "สบายดีไหมครับ", "say": "sà-baai-dee mái kráp", "note": "The reply is สบายดี (sà-baai-dee), I'm well", "female": {"text": "สบายดีไหมคะ", "say": "sà-baai-dee mái ká"}},
+  "im-well": {"text": "สบายดี ขอบคุณครับ", "say": "sà-baai-dee kàwp-kun kráp", "female": {"text": "สบายดี ขอบคุณค่ะ", "say": "sà-baai-dee kàwp-kun kâ"}},
   "good-morning": {"text": "อรุณสวัสดิ์ครับ", "say": "à-run sà-wàt kráp", "note": "Rather formal; most people just say สวัสดี (sà-wàt-dee) all day", "female": {"text": "อรุณสวัสดิ์ค่ะ", "say": "à-run sà-wàt kâ"}},
   "good-night": {"text": "ราตรีสวัสดิ์ครับ", "say": "raa-dtree sà-wàt kráp", "note": "Formal and rarely said. Friends say ฝันดี (fǎn dee), sweet dreams", "female": {"text": "ราตรีสวัสดิ์ค่ะ", "say": "raa-dtree sà-wàt kâ"}},
   "goodbye": {"text": "ลาก่อนครับ", "say": "laa gàwn kráp", "note": "Sounds final. สวัสดี (sà-wàt-dee) works for goodbye too and is more common", "female": {"text": "ลาก่อนค่ะ", "say": "laa gàwn kâ"}},
   "please": {"text": "กรุณา", "say": "gà-ru-naa", "note": "Formal, seen on signs. In speech, ask for things with ขอ (kǎw) and for help with ช่วย (chûai) before the verb"},
   "thank-you": {"text": "ขอบคุณครับ", "say": "kàwp-kun kráp", "note": "With friends, ขอบใจ (kàwp-jai)", "female": {"text": "ขอบคุณค่ะ", "say": "kàwp-kun kâ"}},
+  "youre-welcome": {"text": "ไม่เป็นไรครับ", "say": "mâi bpen rai kráp", "note": "Literally it's nothing; also never mind, a phrase you'll hear everywhere", "female": {"text": "ไม่เป็นไรค่ะ", "say": "mâi bpen rai kâ"}},
   "yes": {"text": "ครับ", "say": "kráp", "note": "The polite particle on its own means yes. ใช่ (châi) means that's right", "female": {"text": "ค่ะ", "say": "kâ"}},
   "no": {"text": "ไม่ครับ", "say": "mâi kráp", "note": "ไม่ใช่ (mâi châi) means that's not right", "female": {"text": "ไม่ค่ะ", "say": "mâi kâ"}},
   "excuse-me": {"text": "ขอโทษครับ", "say": "kǎw-tôht kráp", "note": "Both sorry and excuse me", "female": {"text": "ขอโทษค่ะ", "say": "kǎw-tôht kâ"}},
   "my-name": {"text": "ผมชื่อ...", "say": "pǒm chêu", "note": "Men say ผม (pǒm) for I, women ฉัน (chǎn)", "female": {"text": "ฉันชื่อ...", "say": "chǎn chêu"}},
+  "your-name": {"text": "คุณชื่ออะไรครับ", "say": "kun chêu à-rai kráp", "female": {"text": "คุณชื่ออะไรคะ", "say": "kun chêu à-rai ká"}},
+  "where-from": {"text": "คุณมาจากไหนครับ", "say": "kun maa jàak nǎi kráp", "note": "The reply: มาจาก... (maa jàak), I come from ...", "female": {"text": "คุณมาจากไหนคะ", "say": "kun maa jàak nǎi ká"}},
+  "its-beautiful": {"text": "สวยมากครับ", "say": "sǔai mâak kráp", "note": "สวย (sǔai) is beautiful, for places, things and people", "female": {"text": "สวยมากค่ะ", "say": "sǔai mâak kâ"}},
   "dont-understand": {"text": "ผมไม่เข้าใจครับ", "say": "pǒm mâi kâo-jai kráp", "female": {"text": "ฉันไม่เข้าใจค่ะ", "say": "chǎn mâi kâo-jai kâ"}},
   "speak-slowly": {"text": "พูดช้าๆ หน่อยครับ", "say": "pôot cháa cháa nòy kráp", "note": "ๆ repeats the word before it: ช้าๆ is chaa chaa, slowly", "female": {"text": "พูดช้าๆ หน่อยค่ะ", "say": "pôot cháa cháa nòy kâ"}},
   "repeat": {"text": "พูดอีกทีได้ไหมครับ", "say": "pôot èek tee dâi mái kráp", "note": "ไหม (mái) at the end makes a yes/no question, and a woman then says คะ (ká), with a high tone", "female": {"text": "พูดอีกทีได้ไหมคะ", "say": "pôot èek tee dâi mái ká"}},
@@ -69,5 +75,6 @@
   "sugar": {"text": "น้ำตาล", "say": "náam-dtaan", "note": "ไม่ใส่น้ำตาล means no sugar"},
   "cheers": {"text": "ชนแก้ว", "say": "chon gâeo", "note": "Literally clink glasses"},
   "help": {"text": "ช่วยด้วย", "say": "chûai dûai"},
+  "need-doctor": {"text": "ผมต้องการหมอครับ", "say": "pǒm dtâwng-gaan mǎw kráp", "note": "For an ambulance, call 1669", "female": {"text": "ฉันต้องการหมอค่ะ", "say": "chǎn dtâwng-gaan mǎw kâ"}},
   "pharmacy": {"text": "ร้านขายยาอยู่ที่ไหนครับ", "say": "ráan kǎai yaa yòo têe nǎi kráp", "note": "Signs say ร้านขายยา or Pharmacy", "female": {"text": "ร้านขายยาอยู่ที่ไหนคะ", "say": "ráan kǎai yaa yòo têe nǎi ká"}}
 }

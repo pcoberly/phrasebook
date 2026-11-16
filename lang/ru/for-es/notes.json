@@ -1,14 +1,20 @@
 {
   "hello": {"say": "ZDRAST-vuy-tye", "note": "El hola cortés; la primera в no se pronuncia. Привет (pri-VYET) es hola entre amigos"},
+  "how-are-you": {"say": "kak di-LA", "note": "Informal. Con desconocidos: Как у вас дела? (kak u vas di-LA)"},
+  "im-well": {"say": "ja-ra-SHO, spa-SI-ba"},
   "good-morning": {"say": "DOB-ra-ye U-tra"},
   "good-night": {"say": "spa-KOY-nay NO-chi", "note": "Al irse a dormir. Para saludar por la noche: Добрый вечер (DOB-ryy VYE-chir)"},
   "goodbye": {"say": "da svi-DA-ni-ya", "note": "Пока (pa-KA) es chao, entre amigos"},
   "please": {"say": "pa-ZHA-lus-ta", "note": "También significa de nada, y aquí tiene al dar algo"},
   "thank-you": {"say": "spa-SI-ba", "note": "Большое спасибо (bal-SHO-ye spa-SI-ba) es muchas gracias"},
+  "youre-welcome": {"say": "pa-ZHA-lus-ta", "note": "La misma palabra que por favor. También se dice Не за что (NYE za-shta), no hay de qué"},
   "yes": {"say": "da"},
   "no": {"say": "nyet"},
   "excuse-me": {"say": "iz-vi-NI-tye", "note": "Perdón, y disculpe para llamar la atención. Para pasar se dice Разрешите (raz-ri-SHY-tye)"},
   "my-name": {"say": "mi-NYA za-VUT", "note": "Literalmente me llaman..."},
+  "your-name": {"say": "kak vas za-VUT"},
+  "where-from": {"say": "at-KU-da vy"},
+  "its-beautiful": {"say": "O-chin kra-SI-va"},
   "dont-understand": {"say": "ya ni pa-ni-MA-yu"},
   "speak-slowly": {"say": "ga-va-RI-tye, pa-ZHA-lus-ta, MYED-li-nye-ye"},
   "repeat": {"say": "paf-ta-RI-tye, pa-ZHA-lus-ta"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "SA-jar"},
   "cheers": {"say": "za zda-RO-vye", "note": "A la salud. Lo habitual es un breve brindis antes de beber"},
   "help": {"say": "pa-ma-GUI-tye"},
+  "need-doctor": {"say": "mnye NU-zhyn vrach", "note": "Para una ambulancia, llama al 103, o al 112 desde un celular"},
   "pharmacy": {"say": "gdye ap-TYE-ka"}
 }

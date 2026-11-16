@@ -1,14 +1,20 @@
 {
   "hello": {"say": "an-nyeong-ja-se-yo", "note": "Sirve a cualquier hora del día y con cualquier persona"},
+  "how-are-you": {"say": "chal chi-ne-se-yo", "note": "Para alguien conocido. Con desconocidos basta 안녕하세요"},
+  "im-well": {"say": "ne, chal chi-ne-yo. kam-sa-jam-ni-da"},
   "good-morning": {"say": "cho-eun a-chim-i-e-yo", "note": "La mayoría dice 안녕하세요 (an-nyeong-ja-se-yo) todo el día"},
   "good-night": {"say": "an-nyeong-ji chu-mu-se-yo", "note": "Cortés, literalmente «duerma en paz». Entre amigos, 잘 자 (chal cha)"},
   "goodbye": {"say": "an-nyeong-ji kie-se-yo", "note": "Se dice cuando te vas y la otra persona se queda. Si es ella la que se va, di 안녕히 가세요 (an-nyeong-ji ka-se-yo)"},
   "please": {"say": "chu-se-yo", "note": "Significa «deme, por favor» y va detrás de lo que quieres: 물 주세요 (mul chu-se-yo), agua, por favor"},
   "thank-you": {"say": "kam-sa-jam-ni-da", "note": "고마워요 (ko-ma-uo-yo) es algo menos formal"},
+  "youre-welcome": {"say": "cheon-man-e-yo", "note": "A menudo solo 아니에요 (a-ni-e-yo), no es nada"},
   "yes": {"say": "ne", "note": "예 (ye) es un sí más formal"},
   "no": {"say": "a-ni-yo"},
   "excuse-me": {"say": "chue-song-jam-ni-da", "note": "Para pedir perdón. Para llamar la atención, por ejemplo de un mesero, di 저기요 (cheo-gui-yo)"},
   "my-name": {"say": "che i-reum-eun ... im-ni-da", "note": "El audio usa 피터 (pi-teo), Peter, como nombre de ejemplo"},
+  "your-name": {"say": "i-reum-i muo-ye-yo"},
+  "where-from": {"say": "eo-di-e-seo o-syeo-sseo-yo", "note": "La respuesta: …에서 왔어요 (…e-seo ua-sseo-yo), vengo de …"},
+  "its-beautiful": {"say": "a-reum-da-uo-yo", "note": "Para paisajes y lugares. Para cosas o personas, 예뻐요 (ye-ppeo-yo), bonito"},
   "dont-understand": {"say": "i-je-ga an due-yo"},
   "speak-slowly": {"say": "cheon-cheon-ji mal-je chu-se-yo"},
   "repeat": {"say": "ta-shi jan-beon mal-je chu-se-yo", "note": "Literalmente «por favor, dígalo otra vez»"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "seol-tang"},
   "cheers": {"say": "keon-be", "note": "Si bebes con personas mayores, gira un poco la cabeza al beber"},
   "help": {"say": "to-ua-chu-se-yo", "note": "Grítalo. La policía está en el 112"},
+  "need-doctor": {"say": "ui-sa-ga pi-rio-je-yo", "note": "Para una ambulancia, llama al 119"},
   "pharmacy": {"say": "yak-kuk eo-di-ye-yo"}
 }

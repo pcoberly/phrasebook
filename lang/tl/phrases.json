@@ -1,14 +1,20 @@
 {
   "hello": {"text": "Kumusta", "say": "koo-moos-TAH", "note": "Literally \"how are you?\", from Spanish ¿cómo está? Add po to be polite: Kumusta po"},
+  "how-are-you": {"text": "Kumusta po kayo?", "say": "koo-moos-TAH poh kah-YOH", "note": "Po and kayo make it polite; to a friend, Kumusta ka? (koo-moos-TAH kah)"},
+  "im-well": {"text": "Mabuti po, salamat!", "say": "mah-BOO-tee poh, sah-LAH-maht"},
   "good-morning": {"text": "Magandang umaga", "say": "mah-gahn-DAHNG oo-MAH-gah", "note": "Add po for elders and strangers: Magandang umaga po"},
   "good-night": {"text": "Magandang gabi", "say": "mah-gahn-DAHNG gah-BEE", "note": "Both good evening and good night. At bedtime family and friends also say Tulog na (too-LOG nah), time to sleep"},
   "goodbye": {"text": "Paalam", "say": "pah-AH-lahm", "note": "Sounds final. People more often say Sige (SEE-geh), okay then, or Ingat (EE-ngaht), take care"},
   "please": {"text": "Pakiusap", "say": "pah-kee-OO-sahp", "note": "Literally \"I ask a favour\". In everyday requests paki- goes on the verb (pakiulit, please repeat), and po makes it polite"},
   "thank-you": {"text": "Salamat po", "say": "sah-LAH-maht poh", "note": "Po makes it polite; to friends just salamat. The reply is walang anuman (wah-LAHNG ah-noo-MAHN)"},
+  "youre-welcome": {"text": "Walang anuman", "say": "wah-LAHNG ah-noo-MAHN", "note": "Literally it's nothing"},
   "yes": {"text": "Opo", "say": "OH-poh", "note": "The polite yes, for elders and strangers. Oo (oh-OH) is the plain yes"},
   "no": {"text": "Hindi po", "say": "hin-DEE poh", "note": "Hindi is no and po makes it polite. It ends in a catch in the throat"},
   "excuse-me": {"text": "Pasensya na po", "say": "pah-SEN-syah nah poh", "note": "Sorry. To get past someone or get attention, Filipinos often just say excuse me po"},
   "my-name": {"text": "Ako si...", "say": "ah-KOH see", "note": "Ako is I, and si goes before a person's name. Ikaw is you; kayo (kah-YOH) is politer"},
+  "your-name": {"text": "Ano po ang pangalan ninyo?", "say": "ah-NOH poh ahng pah-NGAH-lahn nin-YOH"},
+  "where-from": {"text": "Taga-saan po kayo?", "say": "tah-gah-sah-AHN poh kah-YOH", "note": "Taga- means from: taga-Maynila, from Manila"},
+  "its-beautiful": {"text": "Ang ganda!", "say": "ahng gahn-DAH"},
   "dont-understand": {"text": "Hindi ko po naiintindihan", "say": "hin-DEE koh poh nah-ee-in-tin-DEE-hahn"},
   "speak-slowly": {"text": "Dahan-dahan lang po", "say": "dah-HAHN dah-HAHN lahng poh", "note": "Literally \"just slowly\""},
   "repeat": {"text": "Pakiulit po", "say": "pah-kee-OO-lit poh"},
@@ -69,5 +75,6 @@
   "sugar": {"text": "Asukal", "say": "ah-SOO-kahl", "note": "From Spanish azúcar"},
   "cheers": {"text": "Tagay!", "say": "TAH-gye", "note": "Mabuhay! (mah-BOO-hye), long live, is the formal toast"},
   "help": {"text": "Tulong!", "say": "TOO-long", "note": "Saklolo! (sahk-LOH-loh) is a more desperate cry for help"},
+  "need-doctor": {"text": "Kailangan ko ng doktor", "say": "kye-LAH-ngahn koh nahng dok-TOR", "note": "For an ambulance, call 911"},
   "pharmacy": {"text": "Nasaan po ang botika?", "say": "nah-sah-AHN poh ahng boh-TEE-kah", "note": "Botika comes from Spanish botica. Signs also say pharmacy or drugstore"}
 }

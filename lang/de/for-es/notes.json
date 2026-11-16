@@ -1,14 +1,20 @@
 {
   "hello": {"say": "JA-lo", "note": "Guten Tag (GU-ten TAK) es el saludo cortés de día. En el sur también se oye Grüß Gott (grüs GOT)"},
+  "how-are-you": {"say": "vi GUET es I-nen", "note": "Entre amigos: Wie geht's?"},
+  "im-well": {"say": "GUT, DAN-ke"},
   "good-morning": {"say": "GU-ten MOR-guen", "note": "Se usa hasta las 10 o las 11 de la mañana"},
   "good-night": {"say": "GU-te NAJT", "note": "Solo al irse a dormir o al despedirse tarde. Para saludar por la noche se dice guten Abend (GU-ten A-bent)"},
   "goodbye": {"say": "chüs", "note": "La despedida de todos los días. Bis später (bis SHPE-ter) es hasta luego, bis bald (bis BALT) hasta pronto. Auf Wiedersehen es la formal, para tiendas y desconocidos"},
   "please": {"say": "BI-te", "note": "Bitte también significa de nada y aquí tiene"},
   "thank-you": {"say": "DAN-ke", "note": "Danke schön (shön) y vielen Dank (FI-len dank) significan muchas gracias"},
+  "youre-welcome": {"say": "BI-te SHÖN", "note": "También se dice Gern geschehen (guern gue-SHE-en)"},
   "yes": {"say": "ya"},
   "no": {"say": "nain", "note": ""},
   "excuse-me": {"say": "ent-SHUL-di-gung", "note": "También significa perdón. Verzeihung (fer-TSAI-ung) es más formal"},
   "my-name": {"say": "ij JAI-se ...", "note": "Mein Name ist... también sirve. El audio usa Peter como nombre de ejemplo"},
+  "your-name": {"say": "vi JAI-sen si"},
+  "where-from": {"say": "vo-JER KO-men si"},
+  "its-beautiful": {"say": "VUN-der-shön"},
   "dont-understand": {"say": "ij fer-SHTE-e nijt", "note": "Esta ch es un soplo suave en la parte de delante de la boca, como una j muy suave"},
   "speak-slowly": {"say": "SHPRE-jen zi BI-te LANG-za-mer"},
   "repeat": {"say": "KÖ-nen zi das vi-der-JO-len"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "TSU-ker"},
   "cheers": {"say": "prost", "note": "Mira a los ojos al chocar las copas"},
   "help": {"say": "JIL-fe", "note": "Grítalo. La policía es die Polizei (di po-li-TSAI)"},
+  "need-doctor": {"say": "ij BRAU-je AI-nen ARTST", "note": "Para una ambulancia, llama al 112"},
   "pharmacy": {"say": "vo ist di a-po-TE-ke"}
 }

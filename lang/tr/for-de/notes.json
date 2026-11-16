@@ -1,14 +1,20 @@
 {
   "hello": {"say": "MER-ha-ba", "note": "Passt zu jeder Tageszeit und für jeden. Selam ist ein lockeres Hallo"},
+  "how-are-you": {"say": "NA-ssıl-ssı-nıs", "note": "Unter Freunden: Nasılsın? (NA-ssıl-ssın)"},
+  "im-well": {"say": "i-JI-jim, te-schek-kür-LER"},
   "good-morning": {"say": "gün-aj-DıN"},
   "good-night": {"say": "i-JI ge-dsche-LER", "note": "Auch ein Abschied am Abend. Guten Abend heißt İyi akşamlar (i-JI ak-scham-LAR)"},
   "goodbye": {"say": "HOSCH-tscha KA-lın", "note": "Sagt, wer geht. Wer bleibt, sagt Güle güle (gü-LE gü-LE), geh lächelnd"},
   "please": {"say": "LÜT-fen"},
   "thank-you": {"say": "te-schek-KÜR e-de-RIM", "note": "Kürzer: teşekkürler oder sağ olun. Die Antwort ist rica ederim"},
+  "youre-welcome": {"say": "ri-DSCHA e-de-RIM"},
   "yes": {"say": "e-WET"},
   "no": {"say": "HA-jır", "note": "Oft mit einem kurzen Nicken nach oben und einem Zungenschnalzen"},
   "excuse-me": {"say": "a-FE-der-ssi-nis", "note": "Heißt Entschuldigung und Verzeihung. Pardon geht auch"},
   "my-name": {"say": "be-NIM a-DıM"},
+  "your-name": {"say": "a-dı-NıS NE"},
+  "where-from": {"say": "ne-RE-li-ssi-nis", "note": "Ein Wort: wörtlich woher-sind-Sie?"},
+  "its-beautiful": {"say": "TSCHOK gü-SEL", "note": "Güzel heißt schön und auch gut: çok güzel, sehr schön"},
   "dont-understand": {"say": "an-LA-mı-jo-rum", "note": "Ein Wort: Türkisch baut Sätze aus angehängten Endungen"},
   "speak-slowly": {"say": "LÜT-fen da-HA ja-WASCH ko-NU-schun"},
   "repeat": {"say": "tek-RAR e-DER mi-ssi-nis"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "sche-KER"},
   "cheers": {"say": "sche-re-FE", "note": "Wörtlich auf die Ehre"},
   "help": {"say": "im-DAT"},
+  "need-doctor": {"say": "dok-to-RA ih-ti-ja-DSCHıM WAR", "note": "Den Krankenwagen ruft man unter 112"},
   "pharmacy": {"say": "edsch-sa-NE NE-re-de", "note": "Achte auf das rote E. Eine nöbetçi eczane ist die Apotheke mit Nachtdienst"}
 }

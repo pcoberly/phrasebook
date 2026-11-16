@@ -1,14 +1,20 @@
 {
   "hello": {"text": "שלום", "say": "sha-LOM", "note": "Also means goodbye and peace. Friends often just say hi (hai)"},
+  "how-are-you": {"text": "מה נשמע?", "say": "ma nish-MA", "note": "Casual and very common. Politer is מה שלומך, said ma shlom-KHA to a man and ma shlo-MEKH to a woman"},
+  "im-well": {"text": "אני בסדר, תודה!", "say": "a-NI be-SE-der, to-DA"},
   "good-morning": {"text": "בוקר טוב", "say": "BO-ker TOV", "note": "The usual reply is בוקר אור (BO-ker OR), morning of light"},
   "good-night": {"text": "לילה טוב", "say": "LAI-la TOV", "note": "Said when parting in the evening and at bedtime. Good evening is ערב טוב (E-rev TOV)"},
   "goodbye": {"text": "להתראות", "say": "le-hit-ra-OT", "note": "Bye (bai) is very common, and shalom works too"},
   "please": {"text": "בבקשה", "say": "be-va-ka-SHA", "note": "Also means you're welcome and here you are"},
   "thank-you": {"text": "תודה", "say": "to-DA", "note": "תודה רבה (to-DA ra-BA) means thank you very much"},
+  "youre-welcome": {"text": "בבקשה", "say": "be-va-ka-SHA", "note": "Also means please, and here you are"},
   "yes": {"text": "כן", "say": "ken"},
   "no": {"text": "לא", "say": "lo"},
   "excuse-me": {"text": "סליחה", "say": "sli-KHA", "note": "Also means sorry, and gets a waiter's attention"},
   "my-name": {"text": "קוראים לי...", "say": "kor-IM li ...", "note": "Literally \"they call me\", and the same for a man or a woman. The audio uses Peter as the example name", "spoken": "קוראים לי פיטר", "filled": "קוראים לי ⟦פיטר⟧"},
+  "your-name": {"text": "איך קוראים לך?", "say": "eikh kor-IM le-KHA", "note": "Said to a man. To a woman, the last word is said LAKH"},
+  "where-from": {"text": "מאיפה אתה?", "say": "me-EI-fo a-TA", "note": "Said to a man. To a woman, את (AT)"},
+  "its-beautiful": {"text": "יפה מאוד!", "say": "ya-FE me-OD"},
   "dont-understand": {"text": "אני לא מבין", "say": "a-NI lo me-VIN", "female": {"text": "אני לא מבינה", "say": "a-NI lo me-vi-NA"}},
   "speak-slowly": {"text": "אפשר לדבר לאט יותר?", "say": "ef-SHAR le-da-BER le-AT yo-TER", "note": "Literally \"is it possible to speak slower?\" אפשר (ef-SHAR) and a verb is a polite way to ask for anything, and it is the same whoever you ask"},
   "repeat": {"text": "אפשר לחזור על זה?", "say": "ef-SHAR lakh-ZOR al ZE"},
@@ -75,5 +81,6 @@
   "cheers": {"text": "לחיים!", "say": "le-KHA-yim", "note": "Literally \"to life\""},
 
   "help": {"text": "הצילו!", "say": "ha-TSI-lu", "note": "Shout it. The police are משטרה (mish-ta-RA), on 100"},
+  "need-doctor": {"text": "אני צריך רופא", "say": "a-NI tsa-RIKH ro-FE", "female": {"text": "אני צריכה רופא", "say": "a-NI tsri-KHA ro-FE"}, "note": "For an ambulance (Magen David Adom), call 101"},
   "pharmacy": {"text": "איפה בית המרקחת?", "say": "ey-FO beit ha-mir-KA-khat", "note": "Many people just name the big chain, סופר-פארם (SU-per farm)"}
 }

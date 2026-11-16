@@ -1,14 +1,20 @@
 {
   "hello": {"say": "ssu-sdej", "note": "Passt zu jeder Tageszeit. Die förmliche Form ist ជំរាបសួរ (tschum-rijep-ssuor), mit aneinandergelegten Handflächen"},
+  "how-are-you": {"say": "ssok ssa-bai te", "note": "Die Antwort ohne ទេ: សុខសប្បាយ (ssok ssa-bai), mir geht's gut"},
+  "im-well": {"say": "k'njom ssok ssa-bai, o-kun"},
   "good-morning": {"say": "a-run ssu-sdej", "note": "Ziemlich förmlich; ssu-sdej allein geht den ganzen Tag"},
   "good-night": {"say": "rea-trej ssu-sdej", "note": "Förmlich. Vor dem Schlafen sagt man oft គេងលក់ស្រួល (keng luk ssruol), schlaf gut"},
   "goodbye": {"say": "lia ssen haöi", "note": "Wörtlich „auf Wiedersehen für jetzt“"},
   "please": {"say": "ssom", "note": "Steht vor der Bitte: ssom + was du willst"},
   "thank-you": {"say": "o-kun", "note": "អរគុណច្រើន (o-kun tschraön) heißt vielen Dank"},
+  "youre-welcome": {"say": "min ej te", "note": "Wörtlich das ist nichts; auch macht nichts"},
   "yes": {"say": "bat", "note": "Sagen Männer. Frauen sagen ចាស (tschas)"},
   "no": {"say": "te", "note": "Beendet auch die meisten verneinten Sätze"},
   "excuse-me": {"say": "ssom-to", "note": "Entschuldigung und Verzeihung"},
   "my-name": {"say": "k'njom tsch'muoh …", "note": "ខ្ញុំ (k'njom) heißt ich"},
+  "your-name": {"say": "tö neak tsch'muoh a-wej"},
+  "where-from": {"say": "tö neak mok pi pro-te na", "note": "Wörtlich aus welchem Land kommen Sie?"},
+  "its-beautiful": {"say": "ss'at na"},
   "dont-understand": {"say": "k'njom min jul te"},
   "speak-slowly": {"say": "ssom ni-jiej jöt jöt", "note": "Ein Wort zu wiederholen, wie in jöt jöt, macht es sanfter"},
   "repeat": {"say": "ssom ni-jiej m'dong tijet"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "sko", "note": "មិនដាក់ស្ករ (min dak sko) heißt ohne Zucker"},
   "cheers": {"say": "tschol mu-ej", "note": "Wörtlich „stoß eins an“. Der übliche Trinkspruch, wenn die Gläser klingen"},
   "help": {"say": "tschu-ej k'njom pong"},
+  "need-doctor": {"say": "k'njom trow ka kru-pet", "note": "Den Krankenwagen ruft man unter 119"},
   "pharmacy": {"say": "ao-ssot-sthan nou ae na"}
 }

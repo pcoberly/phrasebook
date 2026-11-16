@@ -1,14 +1,19 @@
 {
   "hello": {"note": "Gesprochen ní hǎo: Treffen zwei dritte Töne aufeinander, steigt der erste. 您好 (nín hǎo) ist die höfliche Form"},
+  "how-are-you": {"note": "Etwas lehrbuchhaft; Freunde fragen 最近怎么样 (zuìjìn zěnmeyàng), wie geht's so?"},
+  "im-well": {"note": "Drei dritte Töne hintereinander: gesprochen wó hén hǎo"},
   "good-morning": {"note": "Oft verkürzt zu 早 (zǎo)"},
   "good-night": {"note": "Sagt man vor dem Schlafen oder wenn man spät abends geht. Guten Abend heißt 晚上好 (wǎnshang hǎo)"},
   "goodbye": {"note": "Wörtlich „auf Wiedersehen“"},
   "please": {"note": "Steht vor der Bitte: 请给我… (qǐng gěi wǒ) heißt bitte geben Sie mir…"},
   "thank-you": {"note": "Die zweite Silbe ist leicht und kurz. Die Antwort ist 不客气 (bú kèqi), gern geschehen"},
+  "youre-welcome": {"note": "不 (bù) wird vor einem vierten Ton zu bú"},
   "yes": {"note": "Auf Chinesisch wiederholt man oft das Verb, statt ja zu sagen. 对 (duì) heißt stimmt"},
   "no": {"note": "不 (bù) heißt nicht und wird vor einem vierten Ton zu bú. 没有 (méiyǒu) heißt habe nicht"},
   "excuse-me": {"note": "Ruft jemanden und entschuldigt sich. 对不起 (duìbuqǐ) ist eine stärkere Entschuldigung"},
   "my-name": {"note": "Das Audio nimmt Peter (彼得, Bǐdé) als Beispielnamen"},
+  "your-name": {"note": "您 (nín) ist das höfliche Sie"},
+  "where-from": {"note": "Wörtlich aus welchem Land sind Sie? Die Antwort: 我是…人 (wǒ shì … rén)"},
   "dont-understand": {"note": "Wörtlich „ich höre, verstehe aber nicht“"},
   "repeat": {"note": "一 (yī) wird vor einem vierten Ton zu yí"},
   "speak-english": {"note": "吗 (ma) am Ende macht eine Aussage zur Ja-Nein-Frage. 您 (nín) ist das höfliche Sie"},
@@ -44,5 +49,6 @@
   "beer": {"note": "瓶 (píng) zählt Flaschen"},
   "water": {"note": "Viele trinken heißes Wasser. Frag nach 冰水 (bīng shuǐ), wenn du es kalt willst, und nach 矿泉水 (kuàngquánshuǐ) für Wasser aus der Flasche"},
   "cheers": {"note": "Wörtlich „trockne das Glas“"},
-  "help": {"note": "Ruf es laut. Die Polizei ist 警察 (jǐngchá)"}
+  "help": {"note": "Ruf es laut. Die Polizei ist 警察 (jǐngchá)"},
+  "need-doctor": {"note": "Wörtlich ich muss zum Arzt. Den Krankenwagen ruft man unter 120"}
 }

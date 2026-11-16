@@ -1,14 +1,20 @@
 {
   "hello": {"say": "MÈR-ha-ba", "note": "Convient à toute heure et avec tout le monde. Selam est un salut familier"},
+  "how-are-you": {"say": "NA-ssıl-sı-nız", "note": "Entre amis : Nasılsın ? (NA-ssıl-sınn)"},
+  "im-well": {"say": "i-YI-yimm, té-chèk-kur-LÈR"},
   "good-morning": {"say": "gunn-ay-DıNN"},
   "good-night": {"say": "i-YI gué-djé-LÈR", "note": "Sert aussi d'au revoir le soir. Bonsoir se dit İyi akşamlar (i-YI ak-chamm-LAR)"},
   "goodbye": {"say": "HOCH-tcha KA-lınn", "note": "Se dit par celui qui part. Celui qui reste dit Güle güle (gu-LÉ gu-LÉ), va en souriant"},
   "please": {"say": "LUT-fènn"},
   "thank-you": {"say": "té-chèk-KUR é-dé-RIMM", "note": "Plus court : teşekkürler, ou sağ olun. On répond rica ederim"},
+  "youre-welcome": {"say": "ri-DJA é-dé-RIMM"},
   "yes": {"say": "é-VÈTT"},
   "no": {"say": "HA-yır", "note": "Souvent avec un petit mouvement de tête vers le haut et un claquement de langue"},
   "excuse-me": {"say": "a-FÉ-dèr-si-niz", "note": "Veut dire pardon et excusez-moi. Pardon marche aussi"},
   "my-name": {"say": "bé-NIMM a-DıMM"},
+  "your-name": {"say": "a-dı-NıZ NÉ"},
+  "where-from": {"say": "né-RÉ-li-ssi-niz", "note": "Un seul mot : littéralement d'où-êtes-vous ?"},
+  "its-beautiful": {"say": "TCHOK gu-ZÈL", "note": "Güzel veut dire beau et aussi bien : çok güzel, très bien"},
   "dont-understand": {"say": "ann-LA-mı-yo-roumm", "note": "Un seul mot : le turc construit ses phrases en ajoutant des terminaisons"},
   "speak-slowly": {"say": "LUT-fènn da-HA ya-VACH ko-NOU-chounn"},
   "repeat": {"say": "tèk-RAR é-DÈR mi-ssi-niz"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "ché-KÈR"},
   "cheers": {"say": "ché-ré-FÉ", "note": "Littéralement à l'honneur"},
   "help": {"say": "imm-DATT"},
+  "need-doctor": {"say": "dok-to-RA ih-ti-ya-DJıMM VAR", "note": "Pour une ambulance, appelez le 112"},
   "pharmacy": {"say": "èdj-za-NÉ NÉ-ré-dé", "note": "Cherchez le E rouge. Une nöbetçi eczane est la pharmacie de garde"}
 }

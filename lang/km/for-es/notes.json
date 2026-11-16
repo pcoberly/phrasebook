@@ -1,14 +1,20 @@
 {
   "hello": {"say": "su-sdei", "note": "Sirve a cualquier hora del día. La forma formal es ជំរាបសួរ (chum-riep-suor), con las palmas juntas"},
+  "how-are-you": {"say": "sok sa-bai te", "note": "La respuesta, sin ទេ: សុខសប្បាយ (sok sa-bai), estoy bien"},
+  "im-well": {"say": "k'ñom sok sa-bai, o-kun"},
   "good-morning": {"say": "a-run su-sdei", "note": "Bastante formal; su-sdei solo sirve todo el día"},
   "good-night": {"say": "rea-trei su-sdei", "note": "Formal. Antes de dormir se suele decir គេងលក់ស្រួល (keng luk sruol), que duermas bien"},
   "goodbye": {"say": "lia sen jaëi", "note": "Literalmente «adiós por ahora»"},
   "please": {"say": "som", "note": "Va delante de la petición: som + lo que quieres"},
   "thank-you": {"say": "o-kun", "note": "អរគុណច្រើន (o-kun chraën) es muchas gracias"},
+  "youre-welcome": {"say": "min ei te", "note": "Literalmente no es nada; también no importa"},
   "yes": {"say": "bat", "note": "Lo dicen los hombres. Las mujeres dicen ចាស (chas)"},
   "no": {"say": "te", "note": "También cierra la mayoría de las frases negativas"},
   "excuse-me": {"say": "som-to", "note": "Perdón y disculpe"},
   "my-name": {"say": "k'ñom ch'muoh …", "note": "ខ្ញុំ (k'ñom) significa yo"},
+  "your-name": {"say": "toe neak ch'muoh a-vei"},
+  "where-from": {"say": "toe neak mok pi pro-te na", "note": "Literalmente ¿de qué país viene?"},
+  "its-beautiful": {"say": "s'at na"},
   "dont-understand": {"say": "k'ñom min yul te"},
   "speak-slowly": {"say": "som ni-yiei yët yët", "note": "Repetir una palabra, como en yët yët, la suaviza"},
   "repeat": {"say": "som ni-yiei m'dong tiet"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "sko", "note": "មិនដាក់ស្ករ (min dak sko) significa sin azúcar"},
   "cheers": {"say": "chol mu-ei", "note": "Literalmente «choca uno». El brindis habitual al chocar los vasos"},
   "help": {"say": "chu-ei k'ñom pong"},
+  "need-doctor": {"say": "k'ñom trov ka kru-pet", "note": "Para una ambulancia, llama al 119"},
   "pharmacy": {"say": "ao-sot-sthan nou ae na"}
 }

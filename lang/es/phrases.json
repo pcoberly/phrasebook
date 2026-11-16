@@ -1,14 +1,20 @@
 {
   "hello": {"text": "Hola", "say": "OH-lah", "note": "The h is silent. Buenos días, buenas tardes and buenas noches change with the time of day"},
+  "how-are-you": {"text": "¿Cómo está?", "say": "KOH-moh ehs-TAH", "note": "The polite form; with friends, ¿Cómo estás?"},
+  "im-well": {"text": "¡Bien, gracias!", "say": "BYEHN, GRAH-syahs"},
   "good-morning": {"text": "Buenos días", "say": "BWEH-nohs DEE-ahs", "note": "Used until about noon"},
   "good-night": {"text": "Buenas noches", "say": "BWEH-nahs NOH-chehs", "note": "Both good evening and good night: a greeting after dark and a goodbye at bedtime"},
   "goodbye": {"text": "Adiós", "say": "ah-DYOHS", "note": "Hasta luego (AH-stah LWEH-goh) means see you later"},
   "please": {"text": "Por favor", "say": "por fah-BOR"},
   "thank-you": {"text": "Gracias", "say": "GRAH-syahs", "note": "Muchas gracias (MOO-chahs) means thank you very much"},
+  "youre-welcome": {"text": "De nada", "say": "deh NAH-dah"},
   "yes": {"text": "Sí", "say": "see", "note": "The accent mark tells it apart from si, meaning if"},
   "no": {"text": "No", "say": "noh"},
   "excuse-me": {"text": "Perdón", "say": "pair-DOHN", "note": "Con permiso (kohn pair-MEE-soh) when you need to get past someone. Disculpe (dees-KOOL-peh) gets a waiter's attention"},
   "my-name": {"text": "Me llamo...", "say": "meh YAH-moh ...", "note": "Literally \"I call myself\". The audio uses Peter as the example name", "spoken": "Me llamo Peter", "filled": "Me llamo ⟦Peter⟧"},
+  "your-name": {"text": "¿Cómo se llama?", "say": "KOH-moh seh YAH-mah", "note": "Literally how do you call yourself?"},
+  "where-from": {"text": "¿De dónde es?", "say": "deh DOHN-deh ehs", "note": "With friends, ¿De dónde eres?"},
+  "its-beautiful": {"text": "¡Qué bonito!", "say": "keh boh-NEE-toh", "note": "Hermoso (ehr-MOH-soh) is stronger, for a view"},
   "dont-understand": {"text": "No entiendo", "say": "noh ehn-TYEHN-doh"},
   "speak-slowly": {"text": "Hable más despacio, por favor", "say": "AH-bleh mahs dehs-PAH-syoh por fah-BOR", "note": "Hable is the polite (usted) form of speak"},
   "repeat": {"text": "¿Puede repetirlo?", "say": "PWEH-deh reh-peh-TEER-loh", "note": "Puede means can you, in the polite form"},
@@ -75,5 +81,6 @@
   "cheers": {"text": "¡Salud!", "say": "sah-LOOD", "note": "Literally \"health\""},
 
   "help": {"text": "¡Ayúdeme!", "say": "ah-YOO-deh-meh", "note": "¡Socorro! (soh-KOH-rroh) is the shout for help"},
+  "need-doctor": {"text": "Necesito un médico", "say": "neh-seh-SEE-toh oon MEH-dee-koh"},
   "pharmacy": {"text": "¿Dónde está la farmacia?", "say": "DOHN-deh eh-STAH lah far-MAH-syah"}
 }

@@ -1,14 +1,20 @@
 {
   "hello": {"text": "Xin chào", "say": "sin chow", "tones": "flat, falling", "note": "Works any time of day"},
+  "how-are-you": {"text": "Bạn có khỏe không?", "say": "bahn gaw kweh khohm", "tones": "heavy, rising, dipping, flat", "note": "Literally are you healthy? With someone older, use anh or chị instead of bạn"},
+  "im-well": {"text": "Tôi khỏe, cảm ơn!", "say": "toy kweh, gahm uhn", "tones": "flat, dipping, dipping, flat"},
   "good-morning": {"text": "Chào buổi sáng", "say": "chow boo-ee sahng", "tones": "falling, dipping, rising"},
   "good-night": {"text": "Chúc ngủ ngon", "say": "chook ngoo ngon", "tones": "rising, dipping, flat", "note": "Said when someone goes to bed. To greet someone in the evening, xin chào is enough"},
   "goodbye": {"text": "Tạm biệt", "say": "tahm bee-et", "tones": "heavy, heavy", "note": "Slightly formal; \"bye bye\" is also common"},
   "please": {"text": "Làm ơn", "say": "lahm uhn", "tones": "falling, flat", "note": "Goes at the start of a request"},
   "thank-you": {"text": "Cảm ơn", "say": "gahm uhn", "tones": "dipping, flat", "note": "In the South it is often Cám ơn, with a rising tone"},
+  "youre-welcome": {"text": "Không có gì", "say": "khohm gaw zee", "tones": "flat, rising, falling", "note": "Literally it's nothing"},
   "yes": {"text": "Vâng", "say": "vuhng", "tones": "flat", "note": "Polite yes in the North; Dạ in the South"},
   "no": {"text": "Không", "say": "khohm", "tones": "flat", "note": "Lips close at the end, so it sounds like an m"},
   "excuse-me": {"text": "Xin lỗi", "say": "sin loy", "tones": "flat, broken", "note": "To call a waiter, say Em ơi (em uh-ee) instead"},
   "my-name": {"text": "Tôi tên là...", "say": "toy tayn lah", "tones": "flat, flat, falling", "note": "Tôi (I) and bạn (you) are neutral and safe for a visitor"},
+  "your-name": {"text": "Bạn tên là gì?", "say": "bahn tayn lah zee", "tones": "heavy, flat, falling, falling"},
+  "where-from": {"text": "Bạn từ đâu đến?", "say": "bahn tuh dow dayn", "tones": "heavy, falling, flat, rising", "note": "The reply: Tôi đến từ ... (toy dayn tuh), I'm from ..."},
+  "its-beautiful": {"text": "Đẹp quá!", "say": "dep gwah", "tones": "heavy, rising", "note": "For a view or a thing; quá adds so"},
   "dont-understand": {"text": "Tôi không hiểu", "say": "toy khohm hee-oo", "tones": "flat, flat, dipping"},
   "speak-slowly": {"text": "Làm ơn nói chậm thôi", "say": "lahm uhn noy chuhm toy", "tones": "falling, flat, rising, heavy, flat"},
   "repeat": {"text": "Bạn nhắc lại được không?", "say": "bahn nyahk lie doo-uhk khohm", "tones": "heavy, rising, heavy, heavy, flat"},
@@ -69,5 +75,6 @@
   "sugar": {"text": "Đường", "say": "doo-uhng", "tones": "falling", "note": "Ít đường (eet doo-uhng) is a little sugar; không đường (khohm doo-uhng) is none"},
   "cheers": {"text": "Một, hai, ba, dô!", "say": "moht, hi, bah, zoh", "tones": "heavy, flat, flat, flat", "note": "The usual toast: count one, two, three, then dô, often shouted. Chúc sức khỏe means good health"},
   "help": {"text": "Giúp tôi với!", "say": "zoop toy vuh-ee", "tones": "rising, flat, rising"},
+  "need-doctor": {"text": "Tôi cần bác sĩ", "say": "toy guhn bahk see", "tones": "flat, falling, rising, broken", "note": "For an ambulance, call 115"},
   "pharmacy": {"text": "Nhà thuốc ở đâu?", "say": "nyah twohk uh dow", "tones": "falling, rising, dipping, flat"}
 }

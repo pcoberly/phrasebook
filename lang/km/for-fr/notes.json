@@ -1,14 +1,20 @@
 {
   "hello": {"say": "sou-sdeï", "note": "Convient à toute heure. La forme formelle est ជំរាបសួរ (tchoumm-riep-souor), les paumes jointes"},
+  "how-are-you": {"say": "sok sa-baï té", "note": "La réponse, sans ទេ : សុខសប្បាយ (sok sa-baï), ça va bien"},
+  "im-well": {"say": "k'gnomm sok sa-baï, o-kounn"},
   "good-morning": {"say": "a-rounn sou-sdeï", "note": "Assez formel ; sou-sdeï tout seul convient toute la journée"},
   "good-night": {"say": "réa-treï sou-sdeï", "note": "Formel. Au coucher, on dit souvent គេងលក់ស្រួល (kéng louk srouol), dors bien"},
   "goodbye": {"say": "lia sènn haeuï", "note": "Littéralement « au revoir pour l'instant »"},
   "please": {"say": "somm", "note": "Se place devant la demande : somm + ce que vous voulez"},
   "thank-you": {"say": "o-kounn", "note": "អរគុណច្រើន (o-kounn tchraeunn) veut dire merci beaucoup"},
+  "youre-welcome": {"say": "minn eï té", "note": "Littéralement ce n'est rien ; aussi pas grave"},
   "yes": {"say": "bat", "note": "Ce que disent les hommes. Les femmes disent ចាស (tchass)"},
   "no": {"say": "té", "note": "Termine aussi la plupart des phrases négatives"},
   "excuse-me": {"say": "somm-to", "note": "Pardon et excusez-moi"},
   "my-name": {"say": "k'gnomm tch'mouoh …", "note": "ខ្ញុំ (k'gnomm) veut dire je"},
+  "your-name": {"say": "teu néak tch'mouoh a-veï"},
+  "where-from": {"say": "teu néak mok pi pro-té na", "note": "Littéralement de quel pays venez-vous ?"},
+  "its-beautiful": {"say": "s'at na"},
   "dont-understand": {"say": "k'gnomm minn youl té"},
   "speak-slowly": {"say": "somm ni-yièï yeut yeut", "note": "Répéter un mot, comme dans yeut yeut, l'adoucit"},
   "repeat": {"say": "somm ni-yièï m'dong tièt"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "sko", "note": "មិនដាក់ស្ករ (minn dak sko) veut dire sans sucre"},
   "cheers": {"say": "tchol mou-eï", "note": "Littéralement « trinque un ». Le toast habituel quand les verres se touchent"},
   "help": {"say": "tchou-eï k'gnomm pong"},
+  "need-doctor": {"say": "k'gnomm trov ka krou-pèt", "note": "Pour une ambulance, appelez le 119"},
   "pharmacy": {"say": "ao-sot-sthann nou ae na"}
 }

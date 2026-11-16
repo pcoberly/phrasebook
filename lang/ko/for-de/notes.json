@@ -1,14 +1,20 @@
 {
   "hello": {"say": "an-njŏng-ha-se-jo", "note": "Passt zu jeder Tageszeit und zu jedem Menschen"},
+  "how-are-you": {"say": "tschal tschi-ne-se-jo", "note": "Für Bekannte. Bei Fremden reicht 안녕하세요"},
+  "im-well": {"say": "ne, tschal tschi-ne-jo. kam-sa-ham-ni-da"},
   "good-morning": {"say": "tscho-ŭn a-tschim-i-e-jo", "note": "Die meisten sagen den ganzen Tag 안녕하세요 (an-njŏng-ha-se-jo)"},
   "good-night": {"say": "an-njŏng-hi tschu-mu-se-jo", "note": "Höflich, wörtlich „schlafen Sie in Frieden“. Unter Freunden 잘 자 (tschal tscha)"},
   "goodbye": {"say": "an-njŏng-hi kje-se-jo", "note": "Sagt man, wenn du gehst und der andere bleibt. Geht der andere, sag 안녕히 가세요 (an-njŏng-hi ka-se-jo)"},
   "please": {"say": "tschu-se-jo", "note": "Heißt „bitte geben Sie mir“ und steht nach dem, was du willst: 물 주세요 (mul tschu-se-jo), Wasser bitte"},
   "thank-you": {"say": "kam-sa-ham-ni-da", "note": "고마워요 (ko-ma-uo-jo) ist etwas weniger förmlich"},
+  "youre-welcome": {"say": "tschŏn-man-e-jo", "note": "Oft nur 아니에요 (a-ni-e-jo), keine Ursache"},
   "yes": {"say": "ne", "note": "예 (je) ist ein förmlicheres Ja"},
   "no": {"say": "a-ni-jo"},
   "excuse-me": {"say": "tschue-ssong-ham-ni-da", "note": "Zum Entschuldigen. Um jemanden zu rufen, etwa den Kellner, sag 저기요 (tschŏ-gi-jo)"},
   "my-name": {"say": "tsche i-rŭm-ŭn ... im-ni-da", "note": "Das Audio nimmt 피터 (pi-tŏ), Peter, als Beispielnamen"},
+  "your-name": {"say": "i-rŭm-i muo-je-jo"},
+  "where-from": {"say": "ŏ-di-e-ssŏ o-schjŏ-ssŏ-jo", "note": "Die Antwort: …에서 왔어요 (…e-ssŏ wa-ssŏ-jo), ich komme aus …"},
+  "its-beautiful": {"say": "a-rŭm-da-wo-jo", "note": "Für Aussichten und Orte. Für Dinge oder Menschen 예뻐요 (je-ppŏ-jo), hübsch"},
   "dont-understand": {"say": "i-he-ga an due-jo"},
   "speak-slowly": {"say": "tschŏn-tschŏn-hi mal-he tschu-se-jo"},
   "repeat": {"say": "ta-schi han-bŏn mal-he tschu-se-jo", "note": "Wörtlich „bitte sagen Sie es noch einmal“"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "ssŏl-tang"},
   "cheers": {"say": "kŏn-be", "note": "Trinkst du mit Älteren, dreh beim Trinken den Kopf leicht zur Seite"},
   "help": {"say": "to-ua-dschu-se-jo", "note": "Ruf es laut. Die Polizei hat die 112"},
+  "need-doctor": {"say": "ŭi-ssa-ga pi-rjo-he-jo", "note": "Den Krankenwagen ruft man unter 119"},
   "pharmacy": {"say": "jak-kuk ŏ-di-je-jo"}
 }

@@ -1,14 +1,20 @@
 {
   "hello": {"text": "こんにちは", "say": "konnichiwa", "note": "Daytime greeting. Ohayō gozaimasu in the morning, konbanwa in the evening"},
+  "how-are-you": {"text": "お元気ですか", "say": "ogenki desu ka", "note": "For someone you haven't seen for a while, not an everyday greeting"},
+  "im-well": {"text": "はい、元気です。ありがとうございます", "say": "hai, genki desu. arigatō gozaimasu"},
   "good-morning": {"text": "おはようございます", "say": "ohayō gozaimasu", "note": "The polite form; with friends it is just ohayō"},
   "good-night": {"text": "おやすみなさい", "say": "oyasuminasai", "note": "Only when someone goes to bed. Good evening is konbanwa; with friends, just oyasumi"},
   "goodbye": {"text": "さようなら", "say": "sayōnara", "note": "Sounds final, so it is used less than you'd think. Shopkeepers say arigatō gozaimashita as you leave"},
   "please": {"text": "お願いします", "say": "onegai shimasu", "note": "When asking for something, or handing something over. After an item, kudasai also works"},
   "thank-you": {"text": "ありがとうございます", "say": "arigatō gozaimasu", "note": "Use arigatō gozaimashita for something that has just finished, such as a meal"},
+  "youre-welcome": {"text": "どういたしまして", "say": "dō itashimashite", "note": "Often just いいえ (iie), not at all"},
   "yes": {"text": "はい", "say": "hai", "note": "Often just means \"I'm listening\", not always agreement"},
   "no": {"text": "いいえ", "say": "iie", "note": "Often softened: chotto… (\"that's a bit…\") is a polite refusal"},
   "excuse-me": {"text": "すみません", "say": "sumimasen", "note": "Gets attention, says sorry, and says thanks for the trouble"},
   "my-name": {"text": "私の名前は…です", "say": "watashi no namae wa … desu", "note": "Add -san to other people's names, never to your own. The audio uses the name Pītā as the example", "spoken": "私の名前はピーターです", "filled": "私の名前は⟦ピーター⟧です"},
+  "your-name": {"text": "お名前は何ですか", "say": "onamae wa nan desu ka"},
+  "where-from": {"text": "どちらから来ましたか", "say": "dochira kara kimashita ka", "note": "The reply: …から来ました (… kara kimashita), I came from …"},
+  "its-beautiful": {"text": "きれいですね", "say": "kirei desu ne", "note": "ね (ne) asks for agreement, like isn't it?"},
   "dont-understand": {"text": "わかりません", "say": "wakarimasen"},
   "speak-slowly": {"text": "ゆっくり話してください", "say": "yukkuri hanashite kudasai"},
   "repeat": {"text": "もう一度お願いします", "say": "mō ichido onegai shimasu"},
@@ -75,5 +81,6 @@
   "cheers": {"text": "乾杯！", "say": "kanpai", "note": "Wait until everyone has a glass, then say it together"},
 
   "help": {"text": "助けて！", "say": "tasukete", "note": "Shout it. Police are keisatsu"},
+  "need-doctor": {"text": "医者が必要です", "say": "isha ga hitsuyō desu", "note": "For an ambulance, call 119"},
   "pharmacy": {"text": "薬局はどこですか", "say": "yakkyoku wa doko desu ka", "note": "Drugstores (doraggusutoa) sell everyday medicine; a yakkyoku fills prescriptions"}
 }

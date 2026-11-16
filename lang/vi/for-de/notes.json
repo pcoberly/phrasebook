@@ -1,14 +1,20 @@
 {
   "hello": {"say": "ssin tschao", "tones": "eben, fallend", "note": "Passt zu jeder Tageszeit"},
+  "how-are-you": {"say": "ban go kwe chom", "tones": "schwer, steigend, fallend-steigend, eben", "note": "Wörtlich bist du gesund? Bei Älteren nimmt man anh oder chị statt bạn"},
+  "im-well": {"say": "toi kwe, gam ön", "tones": "eben, fallend-steigend, fallend-steigend, eben"},
   "good-morning": {"say": "tschao buoi ssang", "tones": "fallend, fallend-steigend, steigend"},
   "good-night": {"say": "tschuk ngu ngon", "tones": "steigend, fallend-steigend, eben", "note": "Sagt man, wenn jemand schlafen geht. Zur Begrüßung am Abend reicht xin chào"},
   "goodbye": {"say": "tam bijet", "tones": "schwer, schwer", "note": "Etwas förmlich; „bye bye“ hört man auch oft"},
   "please": {"say": "lam ön", "tones": "fallend, eben", "note": "Steht am Anfang der Bitte"},
   "thank-you": {"say": "gam ön", "tones": "fallend-steigend, eben", "note": "Im Süden sagt man oft Cám ơn, mit steigendem Ton"},
+  "youre-welcome": {"say": "chom go si", "tones": "eben, steigend, fallend", "note": "Wörtlich das ist nichts"},
   "yes": {"say": "wöng", "tones": "eben", "note": "Höfliches Ja im Norden; im Süden sagt man Dạ"},
   "no": {"say": "chom", "tones": "eben", "note": "Die Lippen schließen sich am Ende, darum klingt es fast wie ein m"},
   "excuse-me": {"say": "ssin loi", "tones": "eben, gebrochen", "note": "Um den Kellner zu rufen, sag stattdessen Em ơi (em ö-i)"},
   "my-name": {"say": "toi ten la", "tones": "eben, eben, fallend", "note": "Tôi (ich) und bạn (du) sind neutral und für Besucher sicher"},
+  "your-name": {"say": "ban ten la si", "tones": "schwer, eben, fallend, fallend"},
+  "where-from": {"say": "ban tü dau den", "tones": "schwer, fallend, eben, steigend", "note": "Die Antwort: Tôi đến từ ... (toi den tü), ich komme aus ..."},
+  "its-beautiful": {"say": "dep gua", "tones": "schwer, steigend", "note": "Für eine Aussicht oder eine Sache; quá heißt so sehr"},
   "dont-understand": {"say": "toi chom hijeu", "tones": "eben, eben, fallend-steigend"},
   "speak-slowly": {"say": "lam ön noi tschöm toi", "tones": "fallend, eben, steigend, schwer, eben"},
   "repeat": {"say": "ban njak lai düök chom", "tones": "schwer, steigend, schwer, schwer, eben"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "düöng", "tones": "fallend", "note": "Ít đường (it düöng) ist wenig Zucker; không đường (chom düöng) ohne Zucker"},
   "cheers": {"say": "mot, hai, ba, so", "tones": "schwer, eben, eben, eben", "note": "Der übliche Trinkspruch: eins, zwei, drei zählen, dann dô, oft gerufen. Chúc sức khỏe heißt Gesundheit"},
   "help": {"say": "sup toi wöi", "tones": "steigend, eben, steigend"},
+  "need-doctor": {"say": "toi gön bak ssi", "tones": "eben, fallend, steigend, gebrochen", "note": "Den Krankenwagen ruft man unter 115"},
   "pharmacy": {"say": "nja tuok ö dau", "tones": "fallend, steigend, fallend-steigend, eben"}
 }

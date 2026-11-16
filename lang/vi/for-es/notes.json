@@ -1,14 +1,20 @@
 {
   "hello": {"say": "sin chao", "tones": "llano, descendente", "note": "Sirve a cualquier hora del día"},
+  "how-are-you": {"say": "ban go kue jom", "tones": "pesado, ascendente, ondulado, llano", "note": "Literalmente ¿está sano? Con alguien mayor, usa anh o chị en lugar de bạn"},
+  "im-well": {"say": "toi kue, gam ën", "tones": "llano, ondulado, ondulado, llano"},
   "good-morning": {"say": "chao buoi sang", "tones": "descendente, ondulado, ascendente"},
   "good-night": {"say": "chuk ngu ngon", "tones": "ascendente, ondulado, llano", "note": "Se dice cuando alguien se va a dormir. Para saludar por la noche basta con xin chào"},
   "goodbye": {"say": "tam biet", "tones": "pesado, pesado", "note": "Algo formal; también se oye mucho «bye bye»"},
   "please": {"say": "lam ën", "tones": "descendente, llano", "note": "Va al principio de la petición"},
   "thank-you": {"say": "gam ën", "tones": "ondulado, llano", "note": "En el sur se dice a menudo Cám ơn, con tono ascendente"},
+  "youre-welcome": {"say": "jom go zi", "tones": "llano, ascendente, descendente", "note": "Literalmente no es nada"},
   "yes": {"say": "vëng", "tones": "llano", "note": "Sí cortés en el norte; en el sur se dice Dạ"},
   "no": {"say": "jom", "tones": "llano", "note": "Los labios se cierran al final, así que suena casi como una m"},
   "excuse-me": {"say": "sin loi", "tones": "llano, quebrado", "note": "Para llamar al mesero, di Em ơi (em ë-i)"},
   "my-name": {"say": "toi ten la", "tones": "llano, llano, descendente", "note": "Tôi (yo) y bạn (tú) son neutros y seguros para un visitante"},
+  "your-name": {"say": "ban ten la zi", "tones": "pesado, llano, descendente, descendente"},
+  "where-from": {"say": "ban tu dau den", "tones": "pesado, descendente, llano, ascendente", "note": "La respuesta: Tôi đến từ ... (toi den tu), soy de ..."},
+  "its-beautiful": {"say": "dep gua", "tones": "pesado, ascendente", "note": "Para un paisaje o una cosa; quá añade «tan»"},
   "dont-understand": {"say": "toi jom jieu", "tones": "llano, llano, ondulado"},
   "speak-slowly": {"say": "lam ën noi chëm toi", "tones": "descendente, llano, ascendente, pesado, llano"},
   "repeat": {"say": "ban ñac lai duëc jom", "tones": "pesado, ascendente, pesado, pesado, llano"},
@@ -69,5 +75,6 @@
   "sugar": {"say": "duëng", "tones": "descendente", "note": "Ít đường (it duëng) es poco azúcar; không đường (jom duëng), sin azúcar"},
   "cheers": {"say": "mot, jai, ba, zo", "tones": "pesado, llano, llano, llano", "note": "El brindis habitual: se cuenta uno, dos, tres y luego dô, a menudo gritando. Chúc sức khỏe significa salud"},
   "help": {"say": "zup toi vëi", "tones": "ascendente, llano, ascendente"},
+  "need-doctor": {"say": "toi gën bak si", "tones": "llano, descendente, ascendente, quebrado", "note": "Para una ambulancia, llama al 115"},
   "pharmacy": {"say": "ña tuoc ë dau", "tones": "descendente, ascendente, ondulado, llano"}
 }

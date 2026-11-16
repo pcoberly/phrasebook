@@ -1,14 +1,20 @@
 {
   "hello": {"text": "Hallo", "say": "HAH-loh", "note": "Guten Tag (GOO-ten TAHK) is the polite daytime greeting. In the South you also hear Grüß Gott (grews GOT)"},
+  "how-are-you": {"text": "Wie geht es Ihnen?", "say": "vee GAYT es EE-nen", "note": "With friends: Wie geht's?"},
+  "im-well": {"text": "Gut, danke!", "say": "GOOT, DAHN-kuh"},
   "good-morning": {"text": "Guten Morgen", "say": "GOO-ten MOR-gen", "note": "Used until about 10 or 11 in the morning"},
   "good-night": {"text": "Gute Nacht", "say": "GOO-teh NAHKHT", "note": "Only at bedtime or when parting late. To greet someone in the evening, say guten Abend (GOO-ten AH-bent)"},
   "goodbye": {"text": "Tschüss", "say": "chews", "note": "The everyday goodbye. Bis später (biss SHPAY-ter) is see you later, bis bald (biss BAHLT) see you soon. Auf Wiedersehen is the formal one, for shops and strangers"},
   "please": {"text": "Bitte", "say": "BIT-uh", "note": "Bitte also means you're welcome and here you are"},
   "thank-you": {"text": "Danke", "say": "DAHN-kuh", "note": "Danke schön (shurn) and vielen Dank (FEE-len dahnk) mean thank you very much"},
+  "youre-welcome": {"text": "Bitte schön", "say": "BIT-tuh SHURN", "note": "Gern geschehen (gern guh-SHAY-en) also works"},
   "yes": {"text": "Ja", "say": "yah"},
   "no": {"text": "Nein", "say": "nine", "note": "Rhymes with fine"},
   "excuse-me": {"text": "Entschuldigung", "say": "ent-SHOOL-di-goong", "note": "Also means sorry. Verzeihung (fair-TSY-oong) is more formal"},
   "my-name": {"text": "Ich heiße...", "say": "ikh HY-suh ...", "note": "Mein Name ist... also works. The audio uses Peter as the example name", "spoken": "Ich heiße Peter", "filled": "Ich heiße ⟦Peter⟧"},
+  "your-name": {"text": "Wie heißen Sie?", "say": "vee HY-sen zee"},
+  "where-from": {"text": "Woher kommen Sie?", "say": "voh-HAIR KOM-men zee"},
+  "its-beautiful": {"text": "Wunderschön!", "say": "VOON-der-shurn"},
   "dont-understand": {"text": "Ich verstehe nicht", "say": "ikh fair-SHTAY-uh nikht", "note": "The ch is a soft hiss made at the front of the mouth"},
   "speak-slowly": {"text": "Sprechen Sie bitte langsamer", "say": "SHPREKH-en zee BIT-uh LAHNG-zah-mer"},
   "repeat": {"text": "Können Sie das wiederholen?", "say": "KUR-nen zee dahs vee-der-HOH-len"},
@@ -75,5 +81,6 @@
   "cheers": {"text": "Prost!", "say": "prohst", "note": "Look people in the eye as you clink glasses"},
 
   "help": {"text": "Hilfe!", "say": "HIL-fuh", "note": "Shout it. The police are die Polizei (dee po-lee-TSY)"},
+  "need-doctor": {"text": "Ich brauche einen Arzt", "say": "ikh BROW-khuh EYE-nen ARTST", "note": "For an ambulance, call 112"},
   "pharmacy": {"text": "Wo ist die Apotheke?", "say": "voh ist dee ah-poh-TAY-kuh"}
 }
