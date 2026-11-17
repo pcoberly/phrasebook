@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v65";
+const VERSION = "phrasebook-v66";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -968,14 +968,15 @@ const backToMore = () => `<button class="mini ghost backbtn" id="back">‹ ${t("
 const wireBack = () => { $("#back").onclick = () => goTo("more"); };
 
 // ---------- first run: choose a language ----------
+// one language to choose: its name, its own name, and a › — the whole row is the button. While it downloads, the
+// row shows the progress bar (or the error) and the others step back.
 function pickerRow(l) {
-  const note = state.busy[l.code] ? dlStatus(l.code) : `<span class="lstate">${esc(`${(l.bytes / 1e6).toFixed(1)} MB${l.draft ? " · " + t("Draft translations") : ""}`)}</span>`;
+  const busy = state.busy[l.code];
   return `
-    <div class="lang tap" data-lang="${l.code}">
-      <div class="linfo"><div class="lname">${esc(langName(l))} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
-        <div class="note">${note}</div></div>
-      <div class="lbtn">${state.choosing ? "" : `<button class="mini" data-pick="${l.code}">${t("Start")}</button>`}</div>
-    </div>`;
+    <button class="pick${state.choosing && state.choosing !== l.code ? " dim" : ""}" data-lang="${l.code}"${state.choosing ? " disabled" : ""}>
+      <span class="pt"><span class="pn">${esc(langName(l))}</span><span class="pnat" lang="${l.code}">${esc(l.native)}</span>${busy ? `<span class="note">${dlStatus(l.code)}</span>` : ""}</span>
+      ${busy ? "" : `<span class="mc" aria-hidden="true">›</span>`}
+    </button>`;
 }
 // the "I speak" choices, each in its own language (English, Deutsch, Español), whatever language the app is in,
 // so anyone can find theirs
@@ -985,11 +986,15 @@ function renderWelcome() {
   const choices = [...state.languages].sort((a, b) => langName(a).localeCompare(langName(b)));
   main.innerHTML = `
     <div class="welcome">
-      <h1>${t("Welcome to PhraseBook")}</h1>
-      <div class="setting"><label for="wknown">${t("I speak")}</label><select id="wknown">${knownSelect()}</select></div>
+      <div class="whead">
+        <img src="icon-v3-180.png" alt="" width="64" height="64">
+        <h1>${t("Welcome to PhraseBook")}</h1>
+        <p class="tagline">${t("A free phrase book for travel: flashcards, quizzes and audio, and it works offline.")}</p>
+      </div>
+      <div class="wknown"><label for="wknown">${t("I speak")}</label><select id="wknown">${knownSelect()}</select></div>
       <p class="lead">${t("Which language would you like to learn?")}</p>
-      <p class="note">${t("Tap one to download it. That needs a connection once, and afterwards the app works without one. You can add more languages later in Settings.")}</p>
-      <div id="welcomelangs">${choices.map(pickerRow).join("")}</div>
+      <div id="welcomelangs" class="wlist">${choices.map(pickerRow).join("")}</div>
+      <p class="note wnote">${t("About 2 MB each, downloaded once. You can add more languages later.")}</p>
     </div>`;
   // the welcome screen changes to the language chosen (its interface text comes straight from the server)
   $("#wknown").onchange = async () => {
@@ -1024,6 +1029,7 @@ async function chooseFirstLanguage(code) {
     state.choosing = null;
     state.firstRun = false;
     document.body.classList.remove("firstrun");
+    $("#cat").textContent = topicLabel(); // drawn before the language you speak was chosen on the welcome page
     render();
   } catch {
     state.choosing = null;

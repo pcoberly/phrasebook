@@ -134,8 +134,25 @@ button.mini.ghost { padding: 9px 11px; background: transparent; color: var(--mut
 /* the welcome screen shown once, before a language has been chosen: no tabs or footer */
 body.firstrun header, body.firstrun footer { display: none; }
 body.firstrun { --tab-h: 0px; padding-bottom: env(safe-area-inset-bottom, 0px); }
-.welcome h1 { margin: 28px 0 4px; font-size: 28px; }
-.welcome .lead { margin: 4px 0 6px; font-size: 19px; font-weight: 600; }
+/* the welcome page: who we are, the language you speak, then one clean list to choose from */
+.whead { text-align: center; margin: 22px 0 16px; }
+.whead img { border-radius: 15px; }
+.welcome h1 { margin: 10px 0 4px; font-size: 26px; }
+.welcome .tagline { margin: 0 auto; max-width: 30em; color: var(--muted); font-size: 15px; }
+.wknown { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px 10px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); font-size: 17px; }
+.wknown select { font-size: 16px; padding: 6px 8px; }
+.welcome .lead { margin: 22px 0 8px; font-size: 19px; font-weight: 700; }
+.wlist { border: 1px solid var(--line); border-radius: 16px; background: var(--card); overflow: hidden; }
+.pick { width: 100%; display: flex; align-items: center; gap: 12px; padding: 13px 16px; border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--fg); text-align: left; font-size: 17px; }
+.wlist > .pick:last-child { border-bottom: 0; }
+.pick:active { background: color-mix(in srgb, var(--accent) 8%, var(--card)); }
+.pick.dim { opacity: .45; }
+.pick .pt { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; }
+.pick .pn { font-weight: 600; }
+.pick .pnat { color: var(--muted); font-size: 15px; }
+.pick .note { flex-basis: 100%; }
+.pick .mc { flex: none; font-size: 24px; color: var(--muted); }
+.welcome .wnote { text-align: center; margin: 12px 0 24px; }
 .draft { margin: 12px 0 0; padding: 10px 12px; font-size: 14px; color: var(--muted); border-left: 4px solid var(--accent); background: var(--card); border-radius: 0 10px 10px 0; }
 footer { text-align: center; color: var(--muted); font-size: 13px; padding: 18px 0 24px; }
 footer.ready { color: var(--accent); font-weight: 600; text-decoration: underline; cursor: pointer; }
