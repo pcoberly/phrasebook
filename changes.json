@@ -1,4 +1,6 @@
 [
+ {"v": 62, "date": "2026-11-17", "items": [
+  {"en": "A More tab replaces Settings: a menu with Settings, What's new, Install, Share, Send feedback and About, all working offline", "de": "Ein Reiter Mehr ersetzt die Einstellungen: ein Menü mit Einstellungen, Neuigkeiten, Installieren, Teilen, Feedback senden und Über die App, alles auch offline", "fr": "Un onglet Plus remplace les Réglages : un menu avec Réglages, Nouveautés, Installer, Partager, Envoyer un avis et À propos, le tout hors ligne aussi", "es": "Una pestaña Más reemplaza a Configuración: un menú con Configuración, Novedades, Instalar, Compartir, Enviar comentarios y Acerca de, todo también sin conexión"}]},
  {"v": 60, "date": "2026-11-16", "items": [
   {"en": "Settings is easier to scan: each section is a card with an icon and a clear title", "de": "Die Einstellungen sind übersichtlicher: Jeder Abschnitt ist eine Karte mit Symbol und deutlicher Überschrift", "fr": "Les Réglages se parcourent plus facilement : chaque section est une carte avec une icône et un titre clair", "es": "Configuración se recorre más fácil: cada sección es una tarjeta con un ícono y un título claro"}]},
  {"v": 59, "date": "2026-11-16", "items": [

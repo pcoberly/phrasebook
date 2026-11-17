@@ -212,3 +212,20 @@ mark.hit { color: inherit; background: color-mix(in srgb, #f5c400 45%, transpare
 .sect .lang, .sect .panel, .sect button.act:not(.good) { background: var(--bg); }
 .sect .setting:last-child { border-bottom: 0; }
 .sect > :last-child { margin-bottom: 0; }
+/* More: a menu of large rows in cards, like a phone's own settings */
+.menu { margin: 12px 0; border: 1px solid var(--line); border-radius: 18px; background: var(--card); overflow: hidden; }
+.menurow { width: 100%; display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--fg); text-align: left; font-size: 17px; }
+.menu > .menurow:last-child { border-bottom: 0; }
+.menurow:active { background: color-mix(in srgb, var(--accent) 8%, var(--card)); }
+.menurow .mi { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+.menurow .mi svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.menurow .mi .dot { fill: currentColor; stroke: none; }
+.menurow .mt { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.menurow .ml { font-weight: 600; }
+.menurow .ms { font-size: 14px; color: var(--muted); }
+.menurow .mc { flex: none; font-size: 24px; color: var(--muted); }
+.menu #feedbackbox { margin: 0 16px 14px; }
+.backbtn { margin: 4px 0 6px; }
+.aboutcard { text-align: center; margin: 12px 0 18px; }
+.aboutcard img { border-radius: 16px; }
+.aboutcard h2 { margin: 8px 0 2px; }

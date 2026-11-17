@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v61";
+const VERSION = "phrasebook-v62";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -879,14 +879,14 @@ async function renderChanges() {
   };
   const when = (d) => new Date(d + "T12:00:00").toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
   main.innerHTML = `
-    <button class="mini ghost" id="back">‹ ${t("Settings")}</button>
+    ${backToMore()}
     <h2 class="group">${t("What's new")}</h2>
     ${state.changes.map((c) => `
       <div class="change">
         <div class="ver">${t("version {v}", { v: "v" + c.v })} · ${when(c.date)}${c.v === current ? ` · <b>${t("This version")}</b>` : ""}</div>
         <ul>${c.items.map((it) => `<li>${item(it)}</li>`).join("")}</ul>
       </div>`).join("")}`;
-  $("#back").onclick = () => { state.mode = "settings"; render(); scrollTo(0, 0); };
+  wireBack();
 }
 async function renderGuide() {
   const code = state.lang.code;
@@ -950,15 +950,21 @@ function readyDialog(lang, downloaded) {
   d.showModal();
   d.querySelector("[data-go]").focus();
 }
+// The pages reached from the More tab, which stays lit on them
+const MORE_PAGES = ["more", "settings", "changes", "about", "install"];
+const tabFor = (mode) => (MORE_PAGES.includes(mode) ? "more" : mode);
 // go to a page as if its tab had been tapped
 function goTo(mode) {
   state.mode = mode;
   if (mode !== "list") closeSearch(false);
-  document.querySelectorAll(".tab").forEach((b) => b.classList.toggle("active", b.dataset.mode === mode));
-  $(".opts").hidden = mode === "guide" || mode === "settings" || mode === "changes";
+  document.querySelectorAll(".tab").forEach((b) => b.classList.toggle("active", b.dataset.mode === tabFor(mode)));
+  // topic, direction and listening-only belong to the practice pages
+  $(".opts").hidden = !["list", "cards", "quiz"].includes(mode);
   render();
   scrollTo(0, 0);
 }
+const backToMore = () => `<button class="mini ghost backbtn" id="back">‹ ${t("More")}</button>`;
+const wireBack = () => { $("#back").onclick = () => goTo("more"); };
 
 // ---------- first run: choose a language ----------
 function pickerRow(l) {
@@ -1035,6 +1041,9 @@ function render() {
   else if (state.mode === "list") renderList();
   else if (state.mode === "guide") renderGuide();
   else if (state.mode === "changes") renderChanges();
+  else if (state.mode === "more") renderMore();
+  else if (state.mode === "about") renderAbout();
+  else if (state.mode === "install") renderInstall();
   else renderSettings();
 }
 
@@ -1434,30 +1443,80 @@ function installInfo() {
   else steps = ["In Chrome or Edge, click the install icon at the right end of the address bar, or open the menu and choose <b>Install PhraseBook</b>.", "In Safari on a Mac, choose <b>File → Add to Dock</b>.", "It then opens in its own window and works without a connection."];
   return { installed, steps: steps.map((s) => t(s)) };
 }
-function installPanel() {
+// ---------- More: a menu of the app's other pages and actions ----------
+// Everything here works offline: the pages are drawn from the app itself, What's new comes from changes.json
+// (stored with the app), and Share and Send feedback hand over to the phone's own share sheet and mail app.
+const MENU_ICONS = {
+  settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+  changes: '<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z"/>',
+  install: '<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 7v7M9 11.5l3 3 3-3"/>',
+  share: '<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/>',
+  feedback: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/>',
+  about: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r="1.1" class="dot"/>',
+};
+const menuRow = (id, label, sub, chevron = true) => `
+    <button class="menurow" id="${id}">
+      <span class="mi" aria-hidden="true"><svg viewBox="0 0 24 24">${MENU_ICONS[id]}</svg></span>
+      <span class="mt"><span class="ml">${label}</span>${sub ? `<span class="ms">${sub}</span>` : ""}</span>
+      ${chevron ? `<span class="mc" aria-hidden="true">›</span>` : ""}
+    </button>`;
+const versionLabel = () => (state.version ? t("version {v}", { v: esc(state.version.replace("phrasebook-", "")) }) : "");
+function renderMore() {
+  const { installed } = installInfo();
+  main.innerHTML = `
+    <h2 class="group">${t("More")}</h2>
+    <div class="menu">
+      ${menuRow("settings", t("Settings"), t("Languages, audio, quiz and Play all"))}
+      ${menuRow("changes", t("What's new"), versionLabel())}
+      ${installed ? "" : menuRow("install", t("Install on this device"), t("Add PhraseBook to your Home Screen"))}
+    </div>
+    <div class="menu">
+      ${menuRow("share", t("Share this app"), t("Send PhraseBook to a friend"), false)}
+      ${menuRow("feedback", t("Send feedback"), t("Tell us what to fix or add"), false)}
+      <div class="draft" id="feedbackbox" hidden></div>
+      ${menuRow("about", t("About"), t("Version, offline use and privacy"))}
+    </div>`;
+  for (const page of ["settings", "changes", "install", "about"]) {
+    const b = document.getElementById(page);
+    if (b) b.onclick = () => { track("more/" + page); goTo(page); };
+  }
+  $("#share").onclick = shareApp;
+  $("#feedback").onclick = sendFeedback;
+  updateStatus(); // the footer shows progress here, not the List's hint
+}
+function renderAbout() {
+  main.innerHTML = `
+    ${backToMore()}
+    <div class="aboutcard">
+      <img src="icon-v3-180.png" alt="" width="72" height="72">
+      <h2>PhraseBook</h2>
+      <p class="note">${versionLabel()}</p>
+    </div>
+    <p>${t("PhraseBook is free. Once a language is downloaded, everything works without a connection: the phrases, the audio, the cards, the quiz and the guide.")}</p>
+    <p class="note">${t("Your progress and settings stay on this device.")}${analyticsOn ? " " + t("The app counts anonymous visits and which features are used, with no cookies and no personal data.") : ""}</p>`;
+  wireBack();
+}
+function renderInstall() {
   const { installed, steps } = installInfo();
-  const open = store.get("phrasebook-install-open", !installed);
-  return `
-    <details class="panel" id="installpanel"${open ? " open" : ""}>
-      <summary><span class="ptitle">${t("Install on this device")}</span><span class="pval">${installed ? t("Installed ✓") : ""}</span><span class="chev" aria-hidden="true"></span></summary>
-      <div class="pbody">
-        ${installed
-          ? `<p class="note">${t("PhraseBook is installed on this device, and keeps itself up to date.")}</p>`
-          : `<ol class="steps">${steps.map((s) => `<li>${s}</li>`).join("")}</ol>
-        <p class="note">${t("Once installed it updates itself, so there is no need to remove it and add it again.")}</p>`}
-      </div>
-    </details>`;
+  main.innerHTML = `
+    ${backToMore()}
+    <h2 class="group">${t("Install on this device")}</h2>
+    ${installed
+      ? `<p class="note">${t("PhraseBook is installed on this device, and keeps itself up to date.")}</p>`
+      : `<ol class="steps">${steps.map((s) => `<li>${s}</li>`).join("")}</ol>
+    <p class="note">${t("Once installed it updates itself, so there is no need to remove it and add it again.")}</p>`}`;
+  wireBack();
 }
 async function shareApp() {
   track("share/click");
   const url = new URL("./", location.href).href;
   const data = { title: "PhraseBook", text: t("A free phrase book for travel: flashcards, quizzes and audio, and it works offline."), url };
-  const btn = $("#share");
+  const label = $("#share .ml") || $("#share");
   try {
     if (navigator.share) { await navigator.share(data); return; }
     await navigator.clipboard.writeText(url);
-    btn.textContent = t("Link copied ✓");
-    setTimeout(() => { if (btn.isConnected) btn.textContent = t("Share this app"); }, 2500);
+    label.textContent = t("Link copied ✓");
+    setTimeout(() => { if (label.isConnected) label.textContent = t("Share this app"); }, 2500);
   } catch (err) {
     if (err && err.name === "AbortError") return; // the person closed the share sheet
     prompt(t("Copy this link to share PhraseBook:"), url);
@@ -1517,7 +1576,6 @@ const SECTION_ICONS = {
   "Quiz": '<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .8-1 1.5v.5"/><circle cx="12" cy="17" r="1.1" class="dot"/>',
   "Left out of practice": '<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
   "Play all": '<circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l5.5-3.5z" class="dot"/>',
-  "About": '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r="1.1" class="dot"/>',
 };
 const sectionTitle = (key) => `<h2 class="group sh"><span class="si" aria-hidden="true"><svg viewBox="0 0 24 24">${SECTION_ICONS[key]}</svg></span>${t(key)}</h2>`;
 // wrap each title and what follows it, up to the next title, in a <section class="sect">
@@ -1585,21 +1643,12 @@ function renderSettings() {
         ${opt("yes", t("Yes"), state.settings.twice)}
       </select>
     </div>
-    ${sectionTitle("About")}
-    ${installPanel()}
-    <div class="row">
-      <button class="act" id="share">${t("Share this app")}</button>
-      <button class="act" id="feedback">${t("Send feedback")}</button>
-    </div>
-    <div class="row"><button class="act" id="whatsnew">${t("What's new")}</button></div>
-    <div class="draft" id="feedbackbox" hidden></div>
-    <p class="note about">PhraseBook${state.version ? " · " + t("version {v}", { v: esc(state.version.replace("phrasebook-", "")) }) : ""}. ${t("Your progress and settings stay on this device.")}${analyticsOn ? " " + t("The app counts anonymous visits and which features are used, with no cookies and no personal data.") : ""}</p>`;
+`;
   sectionize(main);
+  main.insertAdjacentHTML("afterbegin", backToMore());
+  wireBack();
   if ($("#unskip")) $("#unskip").onclick = () => { state.skipped.clear(); store.set(skipKey(state.lang.code), []); state.last = null; renderSettings(); };
   $("#known").onchange = async () => { await setKnown($("#known").value); if (state.mode === "settings") renderSettings(); };
-  $("#share").onclick = shareApp;
-  $("#feedback").onclick = sendFeedback;
-  $("#whatsnew").onclick = () => { state.mode = "changes"; track("changes"); render(); scrollTo(0, 0); };
   $("#round").onchange = () => {
     state.settings.round = $("#round").value;
     store.set("phrasebook-round", state.settings.round);
@@ -1625,12 +1674,6 @@ function renderSettings() {
     $("#addlang").setAttribute("aria-expanded", open);
     store.set("phrasebook-add-open", open);
   };
-  for (const [id, key] of [["installpanel", "phrasebook-install-open"]]) {
-    const el = document.getElementById(id);
-    if (!el) continue;
-    let last = el.open;
-    el.addEventListener("toggle", () => { if (el.open !== last) { last = el.open; store.set(key, last); } });
-  }
   $("#langs").onclick = async (e) => {
     const row = e.target.closest("[data-lang]");
     if (!row || e.target.closest(".mv")) return;
@@ -1768,13 +1811,9 @@ async function boot() {
     if (e.key === "Enter") $("#q").blur(); // put the keyboard away to see the results
   };
   document.querySelectorAll(".tab").forEach((b) => b.onclick = () => {
-    state.mode = b.dataset.mode;
-    if (state.mode !== "list") { pausePlayAll(); closeSearch(false); } // Play all belongs to the List; it keeps its place for when you return
-    track("tab/" + state.mode);
-    document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t === b));
-    // topic/direction/listening-only mean nothing on the guide and settings pages
-    $(".opts").hidden = state.mode === "guide" || state.mode === "settings";
-    render();
+    if (b.dataset.mode !== "list") pausePlayAll(); // Play all belongs to the List; it keeps its place for when you return
+    track("tab/" + b.dataset.mode);
+    goTo(b.dataset.mode);
   });
   render();
   hideSplash();
