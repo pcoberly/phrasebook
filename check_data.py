@@ -141,6 +141,11 @@ def main() -> int:
                 if not gap or filled.count("⟦") != 1 or filled.count("⟧") != 1 or not re.search(r"⟦[^⟦⟧]+⟧", filled):
                     problems.append(f"lang/{lang['code']}/phrases.json: {pid} \"filled\" must mark one example, ⟦like this⟧, in a phrase with a gap")
 
+    # Help: English with the app, and one in each other language you can speak, beside its interface text
+    for path in ["help.html"] + [f"lang/{l['code']}/for-{l['code']}/help.html" for l in languages if l.get("base")]:
+        if not (ROOT / path).exists():
+            problems.append(f"{path} is missing (the Help page in that language)")
+
     # What's new (changes.json): newest first, no version later than this one, every line in every language you can speak
     try:
         changes = json.loads((ROOT / "changes.json").read_text(encoding="utf-8"))

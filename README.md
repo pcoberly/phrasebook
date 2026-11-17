@@ -17,6 +17,7 @@ GitHub Pages, so it needs no App Store account. Live at https://pcoberly.github.
 | `audio/<code>/f/`, `audio/<code>/m/` | Generated: female and male MP3 for each phrase |
 | `audio/en/`, `lang/en/pack.json` | Generated: English audio for Play all, one small pack shared by every language and downloaded with the first one |
 | `app.js`, `index.html`, `style.css`, `sw.js`, `manifest.webmanifest`, `icon-v3-*.png` | The app itself |
+| `help.html`, `lang/<code>/for-<code>/help.html` | Help (More → Help): English with the app, and each other language you can speak in its own pack, so it works offline. Each `<h2 data-icon>` becomes a section card |
 | `changes.json` | What's new (Settings → What's new): each version that brought a new language or feature, newest first, in English, German, French and Spanish |
 
 A device downloads the app plus only the languages chosen in Settings. Each language is a "pack"

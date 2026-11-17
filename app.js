@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v64";
+const VERSION = "phrasebook-v65";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -952,7 +952,7 @@ function readyDialog(lang, downloaded) {
   d.querySelector("[data-go]").focus();
 }
 // The pages reached from the More tab, which stays lit on them
-const MORE_PAGES = ["more", "languages", "settings", "changes", "about", "install"];
+const MORE_PAGES = ["more", "languages", "settings", "help", "changes", "about", "install"];
 const tabFor = (mode) => (MORE_PAGES.includes(mode) ? "more" : mode);
 // go to a page as if its tab had been tapped
 function goTo(mode) {
@@ -1036,6 +1036,7 @@ async function chooseFirstLanguage(code) {
 
 function render() {
   document.body.dataset.mode = state.mode; // search is only on the List
+  main.classList.remove("help");
   if (state.firstRun) { renderWelcome(); return; }
   if (state.mode === "cards") renderCard();
   else if (state.mode === "quiz") renderQuiz();
@@ -1044,6 +1045,7 @@ function render() {
   else if (state.mode === "changes") renderChanges();
   else if (state.mode === "more") renderMore();
   else if (state.mode === "languages") renderLanguages();
+  else if (state.mode === "help") renderHelp();
   else if (state.mode === "about") renderAbout();
   else if (state.mode === "install") renderInstall();
   else renderSettings();
@@ -1472,6 +1474,7 @@ const MENU_ICONS = {
   share: '<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/>',
   feedback: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/>',
   about: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r="1.1" class="dot"/>',
+  help: '<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .8-1 1.5v.5"/><circle cx="12" cy="17" r="1.1" class="dot"/>',
 };
 const menuRow = (id, label, sub, chevron = true) => `
     <button class="menurow" id="${id}">
@@ -1487,6 +1490,7 @@ function renderMore() {
     <div class="menu">
       ${menuRow("languages", t("Languages"), t("Learning {name} · you speak {known}", { name: esc(langName(state.lang)), known: esc(state.known.native) }))}
       ${menuRow("settings", t("Settings"), t("Audio, quiz and Play all"))}
+      ${menuRow("help", t("Help"), t("How to use PhraseBook"))}
       ${menuRow("changes", t("What's new"), versionLabel())}
       ${installed ? "" : menuRow("install", t("Install on this device"), t("Add PhraseBook to your Home Screen"))}
     </div>
@@ -1496,13 +1500,46 @@ function renderMore() {
       <div class="draft" id="feedbackbox" hidden></div>
       ${menuRow("about", t("About"), t("Version, offline use and privacy"))}
     </div>`;
-  for (const page of ["languages", "settings", "changes", "install", "about"]) {
+  for (const page of ["languages", "settings", "help", "changes", "install", "about"]) {
     const b = document.getElementById(page);
     if (b) b.onclick = () => { track("more/" + page); goTo(page); };
   }
   $("#share").onclick = shareApp;
   $("#feedback").onclick = sendFeedback;
   hint(""); // progress and practice hints belong to the practice pages
+}
+// Help: how to use the app, in the language you speak. English is stored with the app; the others come in the pack of
+// the language you speak (lang/<code>/for-<code>/help.html, beside its interface text), so it works offline. Each
+// <h2 data-icon> becomes a section card with that icon.
+async function renderHelp() {
+  const code = state.known.code;
+  let html = null;
+  for (const path of code === "en" ? ["help.html"] : [`lang/${code}/for-${code}/help.html`, "help.html"]) {
+    try { const res = await fetch(path); if (res.ok) { html = await res.text(); break; } } catch { /* offline and not stored: try the next */ }
+  }
+  if (state.mode !== "help") return;
+  main.innerHTML = backToMore() + (html ?? `<p class="note">${t("Help isn't available offline yet. Open it once while online.")}</p>`);
+  const icon = {
+    start: '<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+    list: document.querySelector('.tab[data-mode="list"] svg')?.innerHTML,
+    cards: document.querySelector('.tab[data-mode="cards"] svg')?.innerHTML,
+    quiz: document.querySelector('.tab[data-mode="quiz"] svg')?.innerHTML,
+    guide: document.querySelector('.tab[data-mode="guide"] svg')?.innerHTML,
+    search: document.querySelector(".searchbtn svg")?.innerHTML,
+    playall: SECTION_ICONS["Play all"],
+    circle: SECTION_ICONS["Left out of practice"],
+    languages: MENU_ICONS.languages,
+    offline: MENU_ICONS.install,
+    privacy: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  };
+  main.querySelectorAll(":scope > h2[data-icon]").forEach((h) => {
+    h.className = "group sh";
+    h.insertAdjacentHTML("afterbegin", `<span class="si" aria-hidden="true"><svg viewBox="0 0 24 24">${icon[h.dataset.icon] || ""}</svg></span>`);
+  });
+  sectionize(main);
+  main.classList.add("help");
+  wireBack();
+  hint("");
 }
 function renderAbout() {
   main.innerHTML = `

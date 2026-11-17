@@ -1,4 +1,7 @@
 {
+ "Help": "Ayuda",
+ "How to use PhraseBook": "Cómo usar PhraseBook",
+ "Help isn't available offline yet. Open it once while online.": "La ayuda aún no está disponible sin conexión. Ábrela una vez con conexión.",
  "Languages": "Idiomas",
  "Learning {name} · you speak {known}": "Aprendes {name} · hablas {known}",
  "Audio, quiz and Play all": "Audio, prueba y Reproducir todo",

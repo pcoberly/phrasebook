@@ -162,7 +162,8 @@
  },
  "forBase": {
   "de": {
-   "lang/de/for-de/ui.json": "ac355719c247"
+   "lang/de/for-de/help.html": "0382eaa4fcae",
+   "lang/de/for-de/ui.json": "3b65aad814f5"
   },
   "es": {
    "lang/de/for-es/guide.html": "75e6bd7812fe",
