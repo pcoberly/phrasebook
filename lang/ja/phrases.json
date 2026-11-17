@@ -37,7 +37,7 @@
 
   "how-much": {"text": "いくらですか", "say": "ikura desu ka", "note": "Point at the item and say kore wa ikura desu ka (how much is this?)"},
   "would-like": {"text": "…をお願いします", "say": "… o onegai shimasu", "note": "The polite way to order or ask for something, in a restaurant, café or shop: literally \"… please\". …をください (… o kudasai), give me …, also works but is more direct. The audio uses コーヒー (kōhī), coffee, as the example", "spoken": "コーヒーをお願いします", "filled": "⟦コーヒー⟧をお願いします"},
-  "i-want": {"text": "…が欲しいです", "say": "… ga hoshii desu", "note": "Direct; fine with friends, a little blunt to a shopkeeper", "spoken": "これが欲しいです", "filled": "⟦これ⟧が欲しいです"},
+  "i-want": {"text": "…をください", "say": "… o kudasai", "note": "Saying \"I want\" outright (hoshii desu) sounds childish or pushy, so in shops people ask for the thing instead: literally \"please give me …\". Point and say kore o kudasai, this one please. The audio uses これ (kore), this one, as the example", "spoken": "これをください", "filled": "⟦これ⟧をください"},
   "do-you-have": {"text": "…はありますか", "say": "… wa arimasu ka", "note": "Put the item in the gap. The audio uses water (mizu) as the example", "spoken": "水はありますか", "filled": "⟦水⟧はありますか"},
   "just-looking": {"text": "見ているだけです", "say": "mite iru dake desu", "note": "A polite way to decline help"},
   "ill-take-it": {"text": "これにします", "say": "kore ni shimasu", "note": "Literally \"I'll go with this\""},
