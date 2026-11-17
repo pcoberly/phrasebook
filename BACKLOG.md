@@ -41,6 +41,14 @@ About an hour.
 ## Help page
 A short page on how to use the app: the List, Cards, Quiz, Play all, search, the ✓ circle that leaves a phrase out, the guide, and that it works offline once a language is downloaded. Small pictures or icons beside each part. Written in English, German, French and Spanish. It fits in the More menu, but could also be linked from Settings or the welcome screen before that. An hour or two, mostly the writing.
 
+## Donations
+A voluntary "☕ Support PhraseBook" link, which keeps the app in the free, non-commercial categories (GitHub Pages, GoatCounter) as long as it stays a gift: everyone gets the same app, and a donation never unlocks anything.
+
+- **Where to take them:** GitHub Sponsors (0% for personal accounts, one-off or monthly) or Ko-fi (0% on one-off donations; only the card or PayPal fee). Liberapay (non-profit, 0%) and Buy Me a Coffee (5%) are the alternatives.
+- **In the app:** a small row in About, later in the More menu, opening the donation page, with one quiet line such as "PhraseBook is free. If it helped on your trip, you can support it." No pop-ups or reminders.
+- **Before it goes in:** set up the donation page and send the link. Donations to a person count as income, not a charitable gift; check how small amounts are taxed.
+- About 15 minutes once the link exists.
+
 # Long term
 
 Bigger ideas, mostly content. Each needs a design decision before building.
