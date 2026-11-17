@@ -26,3 +26,15 @@ Practise saying a phrase, in two steps.
 2. **"Did it understand you?" (optional, later).** Run the phone's speech recognition (Chrome uses Google's, Safari Apple's) and compare what it heard with the phrase: a match, a near miss, or "it heard something else", showing what it heard. It needs a connection, since the recording goes to Google or Apple. Khmer, Lao and probably Tagalog may not be supported, and one-syllable words like the numbers are unreliable, so match generously. Test it in the iPhone Home Screen app first, where support has been patchy. A few hours.
 
 Not planned: sound-by-sound scoring like Duolingo's needs a paid cloud service and a server, which would end PhraseBook being free, offline and private.
+
+## A "More" menu instead of Settings
+Settings now mixes real settings with things that aren't (install steps, Share, Send feedback, What's new). Turn the ⚙ tab into **More** (☰) that opens a short menu of large rows:
+
+- **Settings:** only the real settings (your language, learning, audio, quiz, left out of practice, Play all).
+- **Help:** a new page on how to use the app: the List, Cards, Quiz, Play all, search, the ✓ circle, the guide, offline use.
+- **What's new**, **Send feedback**, **Share this app**.
+- **Install on this device:** shown only while the app isn't installed.
+- **About:** version and privacy.
+
+The menu and moving things into it is about an hour. The help page is another hour or two, mostly writing it in English, German, French and Spanish.
+
