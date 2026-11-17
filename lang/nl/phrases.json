@@ -37,7 +37,7 @@
 
   "how-much": {"text": "Hoeveel kost het?", "say": "hoo-VAYL kost uht", "note": "Wat kost dit? (vaht kost dit) means what does this cost"},
   "would-like": {"text": "Ik wil graag...", "say": "ik vil KHRAKH ...", "note": "Graag makes it polite. The audio uses een koffie as the example", "spoken": "Ik wil graag een koffie", "filled": "Ik wil graag ⟦een koffie⟧"},
-  "i-want": {"text": "Ik wil...", "say": "ik VIL ...", "note": "Blunt on its own; add graag to be polite. The audio uses dit (this) as the example", "spoken": "Ik wil dit", "filled": "Ik wil ⟦dit⟧"},
+  "i-want": {"text": "Ik neem...", "say": "ik NAYM ...", "note": "I'll take ..., the natural way to order or buy. Ik wil (I want) sounds blunt on its own. The audio uses dit (this) as the example", "spoken": "Ik neem dit", "filled": "Ik neem ⟦dit⟧"},
   "do-you-have": {"text": "Heeft u...?", "say": "hayft ew ...", "note": "Put the item in the gap. The audio uses water as the example", "spoken": "Heeft u water?", "filled": "Heeft u ⟦water⟧?"},
   "just-looking": {"text": "Ik kijk alleen even rond", "say": "ik kyk AH-lun AY-ven ront"},
   "ill-take-it": {"text": "Ik neem het", "say": "ik naym uht"},

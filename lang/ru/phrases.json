@@ -35,7 +35,7 @@
   "million": {"text": "Миллион", "say": "mee-lee-ON"},
   "how-much": {"text": "Сколько стоит?", "say": "SKOL-ka STO-it", "note": "Point and say Сколько это стоит? (SKOL-ka E-ta STO-it), how much does this cost?"},
   "would-like": {"text": "Я бы хотел...", "say": "ya bih kha-TYEL", "note": "The polite way to order. A man says хотел, a woman хотела. The audio uses кофе (KO-fye), coffee, as the example", "spoken": "Я бы хотел кофе", "female": {"text": "Я бы хотела...", "say": "ya bih kha-TYE-la", "spoken": "Я бы хотела кофе", "filled": "Я бы хотела ⟦кофе⟧"}, "filled": "Я бы хотел ⟦кофе⟧"},
-  "i-want": {"text": "Я хочу...", "say": "ya kha-CHOO", "note": "Direct, and fine in shops. The audio uses вот это (vot E-ta), this one, as the example", "spoken": "Я хочу вот это", "filled": "Я хочу ⟦вот это⟧"},
+  "i-want": {"text": "Дайте, пожалуйста, ...", "say": "DAY-tye, pa-ZHA-loos-ta", "note": "Literally give me, please: the usual way to ask in a shop or at a counter. Я хочу (ya kha-CHOO), I want, is more direct. The audio uses вот это (vot E-ta), this one, as the example", "spoken": "Дайте, пожалуйста, вот это", "filled": "Дайте, пожалуйста, ⟦вот это⟧"},
   "do-you-have": {"text": "У вас есть...?", "say": "oo vas YEST", "note": "Literally is there ... at yours? У вас есть вода? = do you have water?", "spoken": "У вас есть вода?", "filled": "У вас есть ⟦вода⟧?"},
   "just-looking": {"text": "Я просто смотрю", "say": "ya PROS-ta smat-RYOO"},
   "ill-take-it": {"text": "Я возьму это", "say": "ya vaz-MOO E-ta"},

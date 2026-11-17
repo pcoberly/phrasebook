@@ -37,7 +37,7 @@
 
   "how-much": {"text": "Combien ça coûte ?", "say": "kohm-BYAN sah KOOT", "note": "C'est combien ? (seh kohm-BYAN) is the casual version"},
   "would-like": {"text": "Je voudrais...", "say": "zhuh voo-DREH ...", "note": "The polite way to order. Je voudrais un café = I'd like a coffee. The audio uses un café as the example", "spoken": "Je voudrais un café", "filled": "Je voudrais ⟦un café⟧"},
-  "i-want": {"text": "Je veux...", "say": "zhuh VUH ...", "note": "Blunt in French; je voudrais is politer. The audio uses ça (this) as the example", "spoken": "Je veux ça", "filled": "Je veux ⟦ça⟧"},
+  "i-want": {"text": "Je prends...", "say": "zhuh PRAHN ...", "note": "I'll have ..., the natural way to order or buy. Je veux (I want) sounds rude to a shopkeeper or waiter. The audio uses celui-ci (this one) as the example", "spoken": "Je prends celui-ci", "filled": "Je prends ⟦celui-ci⟧"},
   "do-you-have": {"text": "Avez-vous... ?", "say": "ah-vay-VOO ...", "note": "Put the item in the gap. The audio uses de l'eau (water) as the example", "spoken": "Avez-vous de l'eau ?", "filled": "Avez-vous ⟦de l'eau⟧ ?"},
   "just-looking": {"text": "Je regarde seulement", "say": "zhuh ruh-GARD suhl-MAHN", "note": "Staff may ask Je peux vous aider ? (can I help you?)"},
   "ill-take-it": {"text": "Je le prends", "say": "zhuh luh PRAHN", "note": "For a feminine item say je la prends"},

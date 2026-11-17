@@ -35,7 +35,7 @@
   "million": {"say": "mi-li-ON"},
   "how-much": {"say": "SSKOL-ka SSTO-it", "note": "Zeig darauf und sag Сколько это стоит? (SSKOL-ka E-ta SSTO-it), was kostet das?"},
   "would-like": {"say": "ja by cha-TJEL", "female": {"say": "ja by cha-TJE-la"}, "note": "So bestellt man höflich. Ein Mann sagt хотел, eine Frau хотела. Das Audio nimmt кофе (KO-fje), Kaffee, als Beispiel"},
-  "i-want": {"say": "ja cha-TSCHU", "note": "Direkt und in Läden in Ordnung. Das Audio nimmt вот это (wot E-ta), das hier, als Beispiel"},
+  "i-want": {"say": "DAJ-tje, pa-SCHA-lus-ta", "note": "Wörtlich geben Sie mir bitte: so bittet man im Laden oder am Schalter. Я хочу (ja cha-TSCHU), ich will, ist direkter. Das Audio nimmt вот это (wot E-ta), das hier, als Beispiel"},
   "do-you-have": {"say": "u was JEST", "note": "Wörtlich gibt es ... bei Ihnen? У вас есть вода? = haben Sie Wasser?"},
   "just-looking": {"say": "ja PROS-ta ssmat-RJU"},
   "ill-take-it": {"say": "ja was-MU E-ta"},

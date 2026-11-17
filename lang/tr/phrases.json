@@ -16,7 +16,7 @@
   "where-from": {"text": "Nerelisiniz?", "say": "neh-REH-lee-see-niz", "note": "One word: literally where-from-are-you?"},
   "its-beautiful": {"text": "Çok güzel!", "say": "CHOK gü-ZEL", "note": "Güzel is beautiful and also good: çok güzel, very nice"},
   "dont-understand": {"text": "Anlamıyorum", "say": "an-LAH-muh-yoh-room", "note": "One word: Turkish builds sentences by adding endings"},
-  "speak-slowly": {"text": "Lütfen daha yavaş konuşun", "say": "LÜT-fen dah-HAH yah-VASH koh-NOO-shoon"},
+  "speak-slowly": {"text": "Daha yavaş konuşur musunuz?", "say": "dah-HAH yah-VASH koh-noo-SHOOR moo-soo-nooz"},
   "repeat": {"text": "Tekrar eder misiniz?", "say": "tek-RAR eh-DER mee-see-niz"},
   "speak-english": {"text": "İngilizce biliyor musunuz?", "say": "in-gee-LIZ-jeh bee-LEE-yor moo-soo-nooz", "note": "Mu and its forms (mı, mi, mü) turn a sentence into a yes/no question"},
   "one": {"text": "Bir", "say": "bir", "spoken": "Bir!"},

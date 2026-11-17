@@ -37,7 +37,7 @@
 
   "how-much": {"text": "Quanto costa?", "say": "KWAHN-toh KOS-tah", "note": "For more than one item say Quanto costano? (KOS-tah-noh)"},
   "would-like": {"text": "Vorrei...", "say": "vor-RAY ...", "note": "The polite way to order. The audio uses un caffè as the example", "spoken": "Vorrei un caffè", "filled": "Vorrei ⟦un caffè⟧"},
-  "i-want": {"text": "Voglio...", "say": "VOH-lyoh ...", "note": "Blunt in Italian; vorrei is politer. The audio uses questo (this) as the example", "spoken": "Voglio questo", "filled": "Voglio ⟦questo⟧"},
+  "i-want": {"text": "Prendo...", "say": "PREN-doh ...", "note": "I'll have ..., the natural way to order at a bar or buy in a shop. Voglio (I want) sounds demanding. The audio uses questo (this one) as the example", "spoken": "Prendo questo", "filled": "Prendo ⟦questo⟧"},
   "do-you-have": {"text": "Avete...?", "say": "ah-VEH-teh ...", "note": "Said to the shop as a whole. To one person use Ha...? (ah). The audio uses dell'acqua (water) as the example", "spoken": "Avete dell'acqua?", "filled": "Avete ⟦dell'acqua⟧?"},
   "just-looking": {"text": "Sto solo guardando", "say": "stoh SOH-loh gwar-DAHN-doh"},
   "ill-take-it": {"text": "Lo prendo", "say": "loh PREN-doh", "note": "For a feminine item say la prendo"},

@@ -35,7 +35,7 @@
   "million": {"say": "i-SSANG mil-YONN"},
   "how-much": {"say": "mag-KA-no po", "note": "Montrez l'objet et dites Magkano po ito ?, combien ça coûte ?"},
   "would-like": {"say": "pa-hi-NGUI po nang", "note": "Je peux avoir ..., pour demander quelque chose. Ng se dit nang. L'audio prend tubig (de l'eau) comme exemple"},
-  "i-want": {"say": "GOUS-to ko nang", "note": "Gusto veut dire vouloir ou aimer. L'audio prend ito (ceci) comme exemple"},
+  "i-want": {"say": "GOUS-to ko po nang", "note": "Gusto veut dire vouloir ou aimer, et po le garde poli. L'audio prend ito (ceci) comme exemple"},
   "do-you-have": {"say": "maï ... po ba", "note": "L'objet se met après may. May tubig po ba ? = Vous avez de l'eau ?"},
   "just-looking": {"say": "tou-mi-TI-nguinn lang po a-KO"},
   "ill-take-it": {"say": "kou-KOU-ninn ko po i-TO"},

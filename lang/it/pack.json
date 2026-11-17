@@ -1,7 +1,7 @@
 {
- "bytes": 2155335,
+ "bytes": 2153099,
  "files": {
-  "lang/it/phrases.json": "877801c7ca69",
+  "lang/it/phrases.json": "2227189cbdc4",
   "lang/it/guide.html": "6c5beaf38695",
   "audio/it/f/hello.mp3": "3da0c440b165",
   "audio/it/f/how-are-you.mp3": "49a7ccc4aa07",
@@ -39,7 +39,7 @@
   "audio/it/f/million.mp3": "1cec7fdb6eb6",
   "audio/it/f/how-much.mp3": "8fbc32eeabac",
   "audio/it/f/would-like.mp3": "babed2136da5",
-  "audio/it/f/i-want.mp3": "45885749740e",
+  "audio/it/f/i-want.mp3": "7aac7188f836",
   "audio/it/f/do-you-have.mp3": "322fa7e12025",
   "audio/it/f/just-looking.mp3": "2b844f67cd28",
   "audio/it/f/ill-take-it.mp3": "8771a7479e00",
@@ -117,7 +117,7 @@
   "audio/it/m/million.mp3": "aba2c1079427",
   "audio/it/m/how-much.mp3": "c57aa61b92be",
   "audio/it/m/would-like.mp3": "25a32f54b270",
-  "audio/it/m/i-want.mp3": "a67adc2e5156",
+  "audio/it/m/i-want.mp3": "e4a8bd7071c1",
   "audio/it/m/do-you-have.mp3": "547878c31422",
   "audio/it/m/just-looking.mp3": "f2b7d8420a17",
   "audio/it/m/ill-take-it.mp3": "2889d82eba90",
@@ -163,15 +163,15 @@
  "forBase": {
   "de": {
    "lang/it/for-de/guide.html": "aada4bb132d0",
-   "lang/it/for-de/notes.json": "27a00711a7f4"
+   "lang/it/for-de/notes.json": "ef17515102c3"
   },
   "es": {
    "lang/it/for-es/guide.html": "428497edb8db",
-   "lang/it/for-es/notes.json": "f1d47fca8403"
+   "lang/it/for-es/notes.json": "5502be46e3a3"
   },
   "fr": {
    "lang/it/for-fr/guide.html": "70ce3c2e69ce",
-   "lang/it/for-fr/notes.json": "b96e59cdfd2f"
+   "lang/it/for-fr/notes.json": "614238d03833"
   }
  }
 }

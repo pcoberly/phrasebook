@@ -37,7 +37,7 @@
 
   "how-much": {"text": "¿Cuánto cuesta?", "say": "KWAHN-toh KWEHS-tah", "note": "For more than one item say ¿Cuánto cuestan? (KWEHS-tahn)"},
   "would-like": {"text": "Quisiera...", "say": "kee-SYEH-rah ...", "note": "The polite way to say I would like. Quisiera un café = I'd like a coffee. The audio uses un café as the example", "spoken": "Quisiera un café", "filled": "Quisiera ⟦un café⟧"},
-  "i-want": {"text": "Quiero...", "say": "KYEH-roh ...", "note": "More direct than quisiera. The audio uses esto (this) as the example", "spoken": "Quiero esto", "filled": "Quiero ⟦esto⟧"},
+  "i-want": {"text": "¿Me da..., por favor?", "say": "meh DAH ... por fah-BOR", "note": "Literally will you give me ...?, the usual way to ask in a shop. Quiero (I want) is fine among friends but abrupt to a shopkeeper. The audio uses esto (this) as the example", "spoken": "¿Me da esto, por favor?", "filled": "¿Me da ⟦esto⟧, por favor?"},
   "do-you-have": {"text": "¿Tiene...?", "say": "TYEH-neh ...", "note": "Put the item in the gap. The audio uses agua (water) as the example", "spoken": "¿Tiene agua?", "filled": "¿Tiene ⟦agua⟧?"},
   "just-looking": {"text": "Solo estoy mirando", "say": "SOH-loh eh-STOY mee-RAHN-doh"},
   "ill-take-it": {"text": "Me lo llevo", "say": "meh loh YEH-voh", "note": "Literally \"I take it away\""},

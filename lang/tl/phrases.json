@@ -35,7 +35,7 @@
   "million": {"text": "Isang milyon", "say": "ee-SAHNG mil-YON"},
   "how-much": {"text": "Magkano po?", "say": "mahg-KAH-noh poh", "note": "Point and say Magkano po ito? (mahg-KAH-noh poh ee-TOH), how much is this?"},
   "would-like": {"text": "Pahingi po ng...", "say": "pah-hee-NGEE poh nahng", "note": "May I have..., for asking for something. Ng is said nang. The audio uses tubig (water) as the example", "spoken": "Pahingi po ng tubig", "filled": "Pahingi po ng ⟦tubig⟧"},
-  "i-want": {"text": "Gusto ko ng...", "say": "GOOS-toh koh nahng", "note": "Gusto means want or like. The audio uses ito (this one) as the example", "spoken": "Gusto ko ito", "filled": "Gusto ko ⟦ito⟧"},
+  "i-want": {"text": "Gusto ko po ng...", "say": "GOOS-toh koh poh nahng", "note": "Gusto means want or like, and po keeps it polite. The audio uses ito (this one) as the example", "spoken": "Gusto ko po ito", "filled": "Gusto ko po ⟦ito⟧"},
   "do-you-have": {"text": "May ... po ba?", "say": "mye ... poh bah", "note": "Put the item after may. May tubig po ba? = Do you have water?", "spoken": "May tubig po ba?", "filled": "May ⟦tubig⟧ po ba?"},
   "just-looking": {"text": "Tumitingin lang po ako", "say": "too-mee-TEE-ngin lahng poh ah-KOH"},
   "ill-take-it": {"text": "Kukunin ko po ito", "say": "koo-KOO-nin koh poh ee-TOH"},

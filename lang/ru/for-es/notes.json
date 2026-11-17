@@ -35,7 +35,7 @@
   "million": {"say": "mi-li-ON"},
   "how-much": {"say": "SKOL-ka STO-it", "note": "Señala y di Сколько это стоит? (SKOL-ka E-ta STO-it), ¿cuánto cuesta esto?"},
   "would-like": {"say": "ya by ja-TYEL", "female": {"say": "ya by ja-TYE-la"}, "note": "La forma cortés de pedir. Un hombre dice хотел y una mujer хотела. El audio usa кофе (KO-fye), café, como ejemplo"},
-  "i-want": {"say": "ya ja-CHU", "note": "Directo, y está bien en las tiendas. El audio usa вот это (vot E-ta), este, como ejemplo"},
+  "i-want": {"say": "DAY-tye, pa-ZHA-lus-ta", "note": "Literalmente deme, por favor: la forma habitual de pedir en una tienda o un mostrador. Я хочу (ya ja-CHU), quiero, es más directo. El audio usa вот это (vot E-ta), este, como ejemplo"},
   "do-you-have": {"say": "u vas YEST", "note": "Literalmente ¿hay ... en lo suyo? У вас есть вода? = ¿tiene agua?"},
   "just-looking": {"say": "ya PROS-ta smat-RYU"},
   "ill-take-it": {"say": "ya vaz-MU E-ta"},

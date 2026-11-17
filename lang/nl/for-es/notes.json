@@ -35,7 +35,7 @@
   "million": {"say": "en mil-YUN"},
   "how-much": {"say": "ju-VEL kost et", "note": "Wat kost dit? (vat kost dit) es ¿cuánto cuesta esto?"},
   "would-like": {"say": "ik vil JRAJ ...", "note": "Graag lo hace cortés. El audio usa een koffie como ejemplo"},
-  "i-want": {"say": "ik VIL ...", "note": "Solo, suena brusco; agrega graag para ser cortés. El audio usa dit (esto) como ejemplo"},
+  "i-want": {"say": "ik NEIM ...", "note": "Tomo ... o me llevo ..., la forma natural de pedir o comprar. Ik wil (quiero) solo suena brusco. El audio usa dit (esto) como ejemplo"},
   "do-you-have": {"say": "JEFT ü ...", "note": "Pon la cosa en el hueco. El audio usa water (agua) como ejemplo"},
   "just-looking": {"say": "ik keik A-len E-ven ront"},
   "ill-take-it": {"say": "ik nem et"},

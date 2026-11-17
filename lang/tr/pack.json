@@ -1,7 +1,7 @@
 {
- "bytes": 2423669,
+ "bytes": 2422954,
  "files": {
-  "lang/tr/phrases.json": "a699569a143e",
+  "lang/tr/phrases.json": "bef8b15e2486",
   "lang/tr/guide.html": "cdf63da255cd",
   "audio/tr/f/hello.mp3": "353f991a8858",
   "audio/tr/f/how-are-you.mp3": "99f5c8c88ece",
@@ -20,7 +20,7 @@
   "audio/tr/f/where-from.mp3": "7962ee243536",
   "audio/tr/f/its-beautiful.mp3": "2b31c1cc38b3",
   "audio/tr/f/dont-understand.mp3": "1917fab87ffd",
-  "audio/tr/f/speak-slowly.mp3": "8261188f0f29",
+  "audio/tr/f/speak-slowly.mp3": "4f5467af038c",
   "audio/tr/f/repeat.mp3": "a66d58464242",
   "audio/tr/f/speak-english.mp3": "57c3c7af5082",
   "audio/tr/f/one.mp3": "4e0dd2debf8b",
@@ -98,7 +98,7 @@
   "audio/tr/m/where-from.mp3": "2df25dc19aa1",
   "audio/tr/m/its-beautiful.mp3": "58bccc8a899b",
   "audio/tr/m/dont-understand.mp3": "47f3acc86de9",
-  "audio/tr/m/speak-slowly.mp3": "9082efb28920",
+  "audio/tr/m/speak-slowly.mp3": "9b4c106d4bd3",
   "audio/tr/m/repeat.mp3": "cc3247d9e36e",
   "audio/tr/m/speak-english.mp3": "5111fb5eb800",
   "audio/tr/m/one.mp3": "b4f6bf73433c",
@@ -163,15 +163,15 @@
  "forBase": {
   "de": {
    "lang/tr/for-de/guide.html": "02dcd56cb419",
-   "lang/tr/for-de/notes.json": "402ca440ef69"
+   "lang/tr/for-de/notes.json": "70c559e02570"
   },
   "es": {
    "lang/tr/for-es/guide.html": "91e0d807de9b",
-   "lang/tr/for-es/notes.json": "1010a35da621"
+   "lang/tr/for-es/notes.json": "eccb0486911f"
   },
   "fr": {
    "lang/tr/for-fr/guide.html": "14f8f418dd99",
-   "lang/tr/for-fr/notes.json": "4be7f2613278"
+   "lang/tr/for-fr/notes.json": "78cce2f48def"
   }
  }
 }
