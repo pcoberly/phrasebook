@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v63";
+const VERSION = "phrasebook-v64";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1380,6 +1380,21 @@ function moveLanguage(code, delta) {
   [codes[i], codes[j]] = [codes[j], codes[i]];
   store.set(langOrderKey, codes);
 }
+// how far you've got in a language: cards learned out of the cards you practise (two per phrase not left out).
+// Progress is kept per language, also after its download is removed.
+function learnedFor(code) {
+  const mine = code === state.lang.code;
+  const progress = mine ? state.progress : store.get(progressKey(code), {});
+  const skipped = mine ? state.skipped : new Set(store.get(skipKey(code), []));
+  const active = new Set(state.shared.map((p) => p.id).filter((id) => !skipped.has(id)));
+  const known = Object.entries(progress).filter(([k, v]) => v.box >= 3 && active.has(k.split(":")[0])).length;
+  return { known, all: active.size * 2 };
+}
+function progressLine(code) {
+  const { known, all } = learnedFor(code);
+  const p = all ? Math.round((known / all) * 100) : 0;
+  return `<div class="lprog"><span class="bar"><span style="width:${p}%"></span></span><span>${t("{known} of {all} cards learned", { known, all })}</span></div>`;
+}
 function languageRow(l, position, count) {
   const ps = packState(l.code);
   const active = l.code === state.lang.code;
@@ -1400,7 +1415,8 @@ function languageRow(l, position, count) {
   return `
       <div class="lang${active ? " current" : state.busy[l.code] ? "" : " tap"}" data-lang="${l.code}">${arrows}
         <div class="linfo"><div class="lname">${active ? "✓ " : ""}${name} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
-          <div class="note">${line}</div></div>
+          <div class="note">${line}</div>
+          ${state.busy[l.code] ? "" : position >= 0 || learnedFor(l.code).known ? progressLine(l.code) : ""}</div>
         <div class="lbtn">${buttons}</div>
       </div>`;
 }
