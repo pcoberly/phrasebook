@@ -40,3 +40,30 @@ About an hour.
 
 ## Help page
 A short page on how to use the app: the List, Cards, Quiz, Play all, search, the ✓ circle that leaves a phrase out, the guide, and that it works offline once a language is downloaded. Small pictures or icons beside each part. Written in English, German, French and Spanish. It fits in the More menu, but could also be linked from Settings or the welcome screen before that. An hour or two, mostly the writing.
+
+# Long term
+
+Bigger ideas, mostly content. Each needs a design decision before building.
+
+## Custom phrases
+Add your own phrases, such as your hotel's address, a dietary need, or something you say often.
+
+- **The hard part is the translation and the audio.** A translation service costs money and needs a connection, so the free, offline answer is: you type the phrase in your language and its translation (from a friend, a guide or a translation app), and the phone's own voice reads it aloud. Device voices vary by phone and language, and some (Khmer, Lao) may have none, so show the text large to point at instead.
+- Stored on the device, with your progress like any other phrase, in a "My phrases" topic. Export and import so they survive a new phone.
+- Later, perhaps: "suggest this phrase for everyone" sends it to you as feedback to add properly.
+
+## Add-on packs
+Optional topic packs, downloaded like languages and only when wanted: business, conversation and small talk, medical and pharmacy, dietary needs, hiking and outdoors, family travel.
+
+- Each pack is a set of phrases with text, sounds-like spellings, notes and audio in every language, so the work is mostly writing and checking content (17 languages × the pack).
+- Start with one pack in a few languages to settle the format, then grow.
+- Packs show up as topics, so the List, Cards, Quiz, search and Play all work on them unchanged.
+
+## Conversation mode
+Practise common exchanges as a back-and-forth: ordering a coffee, checking in, taking a taxi, buying at a market, small talk ("Where are you from?" "I'm from …").
+
+- A short scripted dialogue per situation, with two roles. The app speaks the other person's lines; you say yours, then hear the right answer. Swap roles to practise understanding the replies too.
+- Builds on the existing phrases and audio, plus new reply lines (the shopkeeper's answers, the prices, "anything else?").
+- Pairs well with record and compare (Speaking practice): record your line, then hear yours and the native one.
+- Mostly content: a handful of dialogues × 17 languages, with audio for both roles.
+
