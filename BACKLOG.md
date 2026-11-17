@@ -67,3 +67,12 @@ Practise common exchanges as a back-and-forth: ordering a coffee, checking in, t
 - Pairs well with record and compare (Speaking practice): record your line, then hear yours and the native one.
 - Mostly content: a handful of dialogues × 17 languages, with audio for both roles.
 
+## Paid options
+Keep the core free; offer the bigger extras (add-on packs, conversation mode, perhaps custom phrases) as small one-off purchases. Before the first sale:
+
+- **Hosting:** GitHub Pages and GoatCounter's free plan are for non-commercial use. Move the site to a host that allows commercial use, such as Cloudflare Pages (free), and count visits with Cloudflare alone or a paid GoatCounter plan (about $5 a month).
+- **Payment:** as a web app there is no App Store cut. A merchant of record such as Lemon Squeezy or Paddle takes the card payment and handles sales tax and VAT in every country, for about 5% plus a small fee per sale.
+- **Unlocking:** the purchase gives a licence code that the app checks offline with a digital signature only the seller can make, so it keeps working without a connection or an account.
+- **Paid content:** the repository is public, so paid files there could be found. Either accept that (most people won't look, and the price is small) or serve paid packs from a small private download service, such as Cloudflare's free tier.
+- **Quality first:** have native speakers check the content before charging for it (see Native-speaker review).
+
