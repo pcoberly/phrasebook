@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v60";
+const VERSION = "phrasebook-v61";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1143,7 +1143,8 @@ async function loadLanguageData() {
   state.phrases = state.shared.filter((p) => texts[p.id]).map((p) => {
     const mine = notes[p.id] || {};
     const female = texts[p.id].female && { ...texts[p.id].female, ...mine.female };
-    return { ...p, ...texts[p.id], ...mine, ...(female ? { female } : {}), known: theirs?.[p.id]?.text || p.en };
+    // as a prompt, a phrase can read differently from how a learner should say it ("prompt": Quiero... for I want, while learners of Spanish say ¿Me da...?)
+    return { ...p, ...texts[p.id], ...mine, ...(female ? { female } : {}), known: theirs?.[p.id]?.prompt || theirs?.[p.id]?.text || p.en };
   });
   translatePage();
 }
