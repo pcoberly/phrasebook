@@ -1,6 +1,8 @@
 {
+ "Languages": "Langues",
+ "Learning {name} · you speak {known}": "Vous apprenez : {name} · vous parlez {known}",
+ "Audio, quiz and Play all": "Audio, quiz et Tout écouter",
  "More": "Plus",
- "Languages, audio, quiz and Play all": "Langues, audio, quiz et Tout écouter",
  "Add PhraseBook to your Home Screen": "Ajouter PhraseBook à l'écran d'accueil",
  "Send PhraseBook to a friend": "Envoyer PhraseBook à un ami",
  "Tell us what to fix or add": "Dites-nous quoi corriger ou ajouter",

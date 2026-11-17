@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v62";
+const VERSION = "phrasebook-v63";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -887,6 +887,7 @@ async function renderChanges() {
         <ul>${c.items.map((it) => `<li>${item(it)}</li>`).join("")}</ul>
       </div>`).join("")}`;
   wireBack();
+  hint("");
 }
 async function renderGuide() {
   const code = state.lang.code;
@@ -951,7 +952,7 @@ function readyDialog(lang, downloaded) {
   d.querySelector("[data-go]").focus();
 }
 // The pages reached from the More tab, which stays lit on them
-const MORE_PAGES = ["more", "settings", "changes", "about", "install"];
+const MORE_PAGES = ["more", "languages", "settings", "changes", "about", "install"];
 const tabFor = (mode) => (MORE_PAGES.includes(mode) ? "more" : mode);
 // go to a page as if its tab had been tapped
 function goTo(mode) {
@@ -1042,6 +1043,7 @@ function render() {
   else if (state.mode === "guide") renderGuide();
   else if (state.mode === "changes") renderChanges();
   else if (state.mode === "more") renderMore();
+  else if (state.mode === "languages") renderLanguages();
   else if (state.mode === "about") renderAbout();
   else if (state.mode === "install") renderInstall();
   else renderSettings();
@@ -1354,7 +1356,7 @@ async function runUpdateCheck() {
     const filesChanged = await syncInstalled();
     if (listChanged || filesChanged) {
       await loadLanguageData();
-      if (state.mode === "list" || state.mode === "guide" || state.mode === "settings") render();
+      if (state.mode === "list" || state.mode === "guide" || state.mode === "languages") render();
     }
   } catch { /* offline or a hiccup: keep showing what is stored */ }
 }
@@ -1447,6 +1449,7 @@ function installInfo() {
 // Everything here works offline: the pages are drawn from the app itself, What's new comes from changes.json
 // (stored with the app), and Share and Send feedback hand over to the phone's own share sheet and mail app.
 const MENU_ICONS = {
+  languages: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>',
   settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
   changes: '<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z"/>',
   install: '<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 7v7M9 11.5l3 3 3-3"/>',
@@ -1466,7 +1469,8 @@ function renderMore() {
   main.innerHTML = `
     <h2 class="group">${t("More")}</h2>
     <div class="menu">
-      ${menuRow("settings", t("Settings"), t("Languages, audio, quiz and Play all"))}
+      ${menuRow("languages", t("Languages"), t("Learning {name} · you speak {known}", { name: esc(langName(state.lang)), known: esc(state.known.native) }))}
+      ${menuRow("settings", t("Settings"), t("Audio, quiz and Play all"))}
       ${menuRow("changes", t("What's new"), versionLabel())}
       ${installed ? "" : menuRow("install", t("Install on this device"), t("Add PhraseBook to your Home Screen"))}
     </div>
@@ -1476,13 +1480,13 @@ function renderMore() {
       <div class="draft" id="feedbackbox" hidden></div>
       ${menuRow("about", t("About"), t("Version, offline use and privacy"))}
     </div>`;
-  for (const page of ["settings", "changes", "install", "about"]) {
+  for (const page of ["languages", "settings", "changes", "install", "about"]) {
     const b = document.getElementById(page);
     if (b) b.onclick = () => { track("more/" + page); goTo(page); };
   }
   $("#share").onclick = shareApp;
   $("#feedback").onclick = sendFeedback;
-  updateStatus(); // the footer shows progress here, not the List's hint
+  hint(""); // progress and practice hints belong to the practice pages
 }
 function renderAbout() {
   main.innerHTML = `
@@ -1495,6 +1499,7 @@ function renderAbout() {
     <p>${t("PhraseBook is free. Once a language is downloaded, everything works without a connection: the phrases, the audio, the cards, the quiz and the guide.")}</p>
     <p class="note">${t("Your progress and settings stay on this device.")}${analyticsOn ? " " + t("The app counts anonymous visits and which features are used, with no cookies and no personal data.") : ""}</p>`;
   wireBack();
+  hint("");
 }
 function renderInstall() {
   const { installed, steps } = installInfo();
@@ -1506,6 +1511,7 @@ function renderInstall() {
       : `<ol class="steps">${steps.map((s) => `<li>${s}</li>`).join("")}</ol>
     <p class="note">${t("Once installed it updates itself, so there is no need to remove it and add it again.")}</p>`}`;
   wireBack();
+  hint("");
 }
 async function shareApp() {
   track("share/click");
@@ -1588,9 +1594,8 @@ function sectionize(root) {
     while (el && !(el !== h && el.matches?.("h2.sh"))) { const next = el.nextElementSibling; sect.appendChild(el); el = next; }
   }
 }
-function renderSettings() {
-  const skippedCount = state.phrases.filter(isSkipped).length;
-  const opt = (v, label, cur) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
+// ---------- Languages: the language you speak and the ones you learn, a page of its own in More ----------
+function renderLanguages() {
   main.innerHTML = `
     ${sectionTitle("Your language")}
     <div class="setting">
@@ -1599,6 +1604,68 @@ function renderSettings() {
     </div>
     <p class="note">${t("Prompts, answers, notes, the guide and Play all use the language you speak. Anything not yet written for it shows in English.")}${state.base === state.lang.code ? " " + t("While you learn {name}, English is used.", { name: esc(langName(state.lang)) }) : ""}</p>
     ${languagePanel()}
+`;
+  sectionize(main);
+  main.insertAdjacentHTML("afterbegin", backToMore());
+  wireBack();
+  $("#known").onchange = async () => { await setKnown($("#known").value); if (state.mode === "languages") renderLanguages(); };
+  if ($("#addlang")) $("#addlang").onclick = () => {
+    const open = $("#availlist").hidden;
+    $("#availlist").hidden = !open;
+    $("#addlang").setAttribute("aria-expanded", open);
+    store.set("phrasebook-add-open", open);
+  };
+  $("#langs").onclick = async (e) => {
+    const row = e.target.closest("[data-lang]");
+    if (!row || e.target.closest(".mv")) return;
+    const code = row.dataset.lang;
+    const lang = state.languages.find((l) => l.code === code);
+    // a tap anywhere on the row uses the language, or downloads it first; the buttons do the same, plus remove
+    let act = e.target.closest("button[data-act]")?.dataset.act;
+    if (!act) {
+      if (state.busy[code] || code === state.lang.code) return;
+      act = packState(code) === "installed" || !canCache ? "use" : "download";
+    }
+    const btn = { dataset: { act } };
+    if (btn.dataset.act === "up" || btn.dataset.act === "down") {
+      moveLanguage(code, btn.dataset.act === "up" ? -1 : 1);
+      renderLanguages();
+      return;
+    }
+    if (btn.dataset.act === "remove") {
+      if (confirm(t("Remove {name} from this device? Your progress is kept.", { name: langName(lang) }))) { await removePack(code); renderLanguages(); }
+      return;
+    }
+    try {
+      const downloading = btn.dataset.act === "download" && canCache;
+      if (downloading) {
+        state.busy[code] = t("Starting…");
+        const p = progress(code);
+        renderLanguages();
+        await syncPack(code, p);
+        track("download/" + code);
+      }
+      await useLanguage(code);
+      if (canCache) syncKnownPack().catch(() => {});
+      delete state.busy[code];
+      delete state.dl[code];
+      track("language/" + code);
+      // say so wherever the person is now, and offer the way to the phrases
+      readyDialog(lang, downloading);
+      if (state.mode !== "languages" && state.mode !== "quiz") render();
+    } catch {
+      delete state.dl[code];
+      state.busy[code] = t("Couldn't download. Check you're online and try again.");
+      setTimeout(() => { delete state.busy[code]; if (state.mode === "languages") renderLanguages(); }, 5000);
+    }
+    if (state.mode === "languages") renderLanguages();
+  };
+  hint("");
+}
+function renderSettings() {
+  const skippedCount = state.phrases.filter(isSkipped).length;
+  const opt = (v, label, cur) => `<option value="${v}"${v === cur ? " selected" : ""}>${label}</option>`;
+  main.innerHTML = `
     ${sectionTitle("Audio")}
     <div class="setting">
       <label for="voice">${t("Voice")}</label>
@@ -1648,7 +1715,6 @@ function renderSettings() {
   main.insertAdjacentHTML("afterbegin", backToMore());
   wireBack();
   if ($("#unskip")) $("#unskip").onclick = () => { state.skipped.clear(); store.set(skipKey(state.lang.code), []); state.last = null; renderSettings(); };
-  $("#known").onchange = async () => { await setKnown($("#known").value); if (state.mode === "settings") renderSettings(); };
   $("#round").onchange = () => {
     state.settings.round = $("#round").value;
     store.set("phrasebook-round", state.settings.round);
@@ -1666,59 +1732,6 @@ function renderSettings() {
     $("#" + id).onchange = () => { state.settings[id] = $("#" + id).value; store.set("phrasebook-" + id, state.settings[id]); };
   }
   $("#sample").onclick = sample;
-  // remember whether the panels are open, but only when the person opens or closes one
-  // (browsers also fire "toggle" when a panel that starts open is drawn)
-  if ($("#addlang")) $("#addlang").onclick = () => {
-    const open = $("#availlist").hidden;
-    $("#availlist").hidden = !open;
-    $("#addlang").setAttribute("aria-expanded", open);
-    store.set("phrasebook-add-open", open);
-  };
-  $("#langs").onclick = async (e) => {
-    const row = e.target.closest("[data-lang]");
-    if (!row || e.target.closest(".mv")) return;
-    const code = row.dataset.lang;
-    const lang = state.languages.find((l) => l.code === code);
-    // a tap anywhere on the row uses the language, or downloads it first; the buttons do the same, plus remove
-    let act = e.target.closest("button[data-act]")?.dataset.act;
-    if (!act) {
-      if (state.busy[code] || code === state.lang.code) return;
-      act = packState(code) === "installed" || !canCache ? "use" : "download";
-    }
-    const btn = { dataset: { act } };
-    if (btn.dataset.act === "up" || btn.dataset.act === "down") {
-      moveLanguage(code, btn.dataset.act === "up" ? -1 : 1);
-      renderSettings();
-      return;
-    }
-    if (btn.dataset.act === "remove") {
-      if (confirm(t("Remove {name} from this device? Your progress is kept.", { name: langName(lang) }))) { await removePack(code); renderSettings(); }
-      return;
-    }
-    try {
-      const downloading = btn.dataset.act === "download" && canCache;
-      if (downloading) {
-        state.busy[code] = t("Starting…");
-        const p = progress(code);
-        renderSettings();
-        await syncPack(code, p);
-        track("download/" + code);
-      }
-      await useLanguage(code);
-      if (canCache) syncKnownPack().catch(() => {});
-      delete state.busy[code];
-      delete state.dl[code];
-      track("language/" + code);
-      // say so wherever the person is now, and offer the way to the phrases
-      readyDialog(lang, downloading);
-      if (state.mode !== "settings" && state.mode !== "quiz") render();
-    } catch {
-      delete state.dl[code];
-      state.busy[code] = t("Couldn't download. Check you're online and try again.");
-      setTimeout(() => { delete state.busy[code]; if (state.mode === "settings") renderSettings(); }, 5000);
-    }
-    if (state.mode === "settings") renderSettings();
-  };
   hint(t("Settings are saved on this device"));
 }
 
