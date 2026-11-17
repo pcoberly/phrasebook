@@ -31,10 +31,12 @@ Not planned: sound-by-sound scoring like Duolingo's needs a paid cloud service a
 Settings now mixes real settings with things that aren't (install steps, Share, Send feedback, What's new). Turn the ⚙ tab into **More** (☰) that opens a short menu of large rows:
 
 - **Settings:** only the real settings (your language, learning, audio, quiz, left out of practice, Play all).
-- **Help:** a new page on how to use the app: the List, Cards, Quiz, Play all, search, the ✓ circle, the guide, offline use.
 - **What's new**, **Send feedback**, **Share this app**.
 - **Install on this device:** shown only while the app isn't installed.
 - **About:** version and privacy.
+- **Help:** once the help page below exists.
 
-The menu and moving things into it is about an hour. The help page is another hour or two, mostly writing it in English, German, French and Spanish.
+About an hour.
 
+## Help page
+A short page on how to use the app: the List, Cards, Quiz, Play all, search, the ✓ circle that leaves a phrase out, the guide, and that it works offline once a language is downloaded. Small pictures or icons beside each part. Written in English, German, French and Spanish. It fits in the More menu, but could also be linked from Settings or the welcome screen before that. An hour or two, mostly the writing.
