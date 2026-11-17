@@ -41,7 +41,7 @@
   "do-you-have": {"text": "…はありますか", "say": "… wa arimasu ka", "note": "Put the item in the gap. The audio uses water (mizu) as the example", "spoken": "水はありますか", "filled": "⟦水⟧はありますか"},
   "just-looking": {"text": "見ているだけです", "say": "mite iru dake desu", "note": "A polite way to decline help"},
   "ill-take-it": {"text": "これにします", "say": "kore ni shimasu", "note": "Literally \"I'll go with this\""},
-  "too-expensive": {"text": "高すぎます", "say": "takasugimasu", "note": "Say it gently; bargaining is not normal in most Japanese shops"},
+  "too-expensive": {"text": "ちょっと高いですね", "say": "chotto takai desu ne", "note": "Literally \"it's a little expensive, isn't it\": chotto (a little) and ne soften it, and it's also a polite way to say no thanks. Takasugimasu, too expensive, is blunt. Bargaining is not normal in most Japanese shops"},
   "discount": {"text": "もう少し安くなりますか", "say": "mō sukoshi yasuku narimasu ka", "note": "Only really works at markets and flea shops"},
   "card": {"text": "クレジットカードは使えますか", "say": "kurejitto kādo wa tsukaemasu ka"},
   "bill": {"text": "お会計をお願いします", "say": "okaikei o onegai shimasu", "note": "Usually you pay at the till, not at the table"},

@@ -1,7 +1,7 @@
 {
- "bytes": 2407058,
+ "bytes": 2411984,
  "files": {
-  "lang/ja/phrases.json": "1410d08bf7bc",
+  "lang/ja/phrases.json": "97ba95c63e5e",
   "lang/ja/guide.html": "9237f8debeb9",
   "audio/ja/f/hello.mp3": "2c878ac374d7",
   "audio/ja/f/how-are-you.mp3": "0410ace943d6",
@@ -43,7 +43,7 @@
   "audio/ja/f/do-you-have.mp3": "04770850a673",
   "audio/ja/f/just-looking.mp3": "fa918c941bbd",
   "audio/ja/f/ill-take-it.mp3": "ff72c95955f2",
-  "audio/ja/f/too-expensive.mp3": "8c4a0d6e4aa8",
+  "audio/ja/f/too-expensive.mp3": "041c3602d64b",
   "audio/ja/f/discount.mp3": "127aeb581b08",
   "audio/ja/f/card.mp3": "56181f55b0d0",
   "audio/ja/f/reservation.mp3": "a57ea6f6a512",
@@ -121,7 +121,7 @@
   "audio/ja/m/do-you-have.mp3": "e7f27d0159b1",
   "audio/ja/m/just-looking.mp3": "5d5ee7d4d1e0",
   "audio/ja/m/ill-take-it.mp3": "2cc3235abdea",
-  "audio/ja/m/too-expensive.mp3": "29eaa0bb9abd",
+  "audio/ja/m/too-expensive.mp3": "e1e39fec2729",
   "audio/ja/m/discount.mp3": "d6f1b609729b",
   "audio/ja/m/card.mp3": "66959bb5b19c",
   "audio/ja/m/reservation.mp3": "eb85530ba1e6",
@@ -163,15 +163,15 @@
  "forBase": {
   "de": {
    "lang/ja/for-de/guide.html": "aba782ce8d42",
-   "lang/ja/for-de/notes.json": "8a671984ad43"
+   "lang/ja/for-de/notes.json": "4ce6347be28b"
   },
   "es": {
    "lang/ja/for-es/guide.html": "4eeec003c505",
-   "lang/ja/for-es/notes.json": "fff857c3e8fc"
+   "lang/ja/for-es/notes.json": "77460b82c27e"
   },
   "fr": {
    "lang/ja/for-fr/guide.html": "5dd73512c833",
-   "lang/ja/for-fr/notes.json": "2e5de74a952a"
+   "lang/ja/for-fr/notes.json": "c87627099aa3"
   }
  }
 }
