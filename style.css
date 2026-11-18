@@ -289,3 +289,6 @@ button.mini.ghost .trash { display: block; width: 18px; height: 18px; fill: none
 .updated .uclose { border: 0; background: none; color: var(--muted); font-size: 17px; padding: 4px 6px; }
 .updated.gone { opacity: 0; }
 @keyframes drop { from { opacity: 0; transform: translateY(-12px); } }
+/* the quiz's Next: a solid action button, not another answer (and not green or red, which mean right and wrong) */
+button.act.next { background: var(--fg); color: var(--bg); border-color: var(--fg); font-weight: 600; }
+#nextrow { margin-top: 18px; }

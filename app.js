@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v78";
+const VERSION = "phrasebook-v79";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -494,7 +494,7 @@ function renderQuiz() {
     </div>
     <div id="choices"></div>
     <div class="reveal" id="reveal"></div>
-    <div class="row sticky hidden" id="nextrow"><button class="act" id="next">${number === total ? t("See score") : t("Next")}</button></div>`;
+    <div class="row sticky hidden" id="nextrow"><button class="act next" id="next">${number === total ? t("See score") : t("Next")} →</button></div>`;
   if (!toLang) { $("#say").onclick = () => speak(p); autoSpeak(p); }
   wirePractise(main, (_, on) => say(on ? t("Back in practice.") : t("Left out of later rounds. Tap the circle again to keep it."), 4000));
   const box = $("#choices");
