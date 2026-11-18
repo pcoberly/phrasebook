@@ -35,6 +35,14 @@ A voluntary "☕ Support PhraseBook" link, which keeps the app in the free, non-
 - **Before it goes in:** set up the donation page and send the link. Donations to a person count as income, not a charitable gift; check how small amounts are taxed.
 - About 15 minutes once the link exists.
 
+## LinkedIn post
+A post introducing PhraseBook.
+
+- **The story:** why you built it (the About page's words: the smile when a local hears you try), and what makes it different: free, ad-free, owl-free and streak-free, works offline, polite phrases, 17 languages with audio.
+- **Show it:** two or three phone screenshots (the List with audio and sounds-like spellings, a card, the welcome page) or a short screen recording.
+- **The link,** and an ask: try it before your next trip, share it, and if you're a native speaker of a draft language, help check it (see Native-speaker review).
+- Best after the app has settled for a while; I can draft the post and make the screenshots when you're ready.
+
 # Long term
 
 Bigger ideas, mostly content. Each needs a design decision before building.
