@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v77";
+const VERSION = "phrasebook-v78";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1348,14 +1348,16 @@ function setTopics(picked) {
   stopPlayAll();
   render();
 }
-// A newer app version is reloaded at once unless a quiz round is under way, in which case the footer offers it.
+// A newer app version is reloaded at once unless a quiz round or Play all is under way, in which case the footer
+// offers it.
 // It reloads by itself only once for any one version: if the server is still part-way through a release and
 // hands back the old files, reloading again would go round in circles, so after that the footer offers it.
 function installUpdate(version) {
   navigator.serviceWorker?.getRegistration().then((reg) => reg && reg.update()).catch(() => {});
   const r = state.round;
   const midRound = state.mode === "quiz" && r && r.index > 0 && r.index < r.items.length;
-  if (!midRound && store.get("phrasebook-reloaded-for", null) !== version) {
+  const busy = midRound || (playAll && playAll.playing); // don't cut off a round or the audio
+  if (!busy && store.get("phrasebook-reloaded-for", null) !== version) {
     store.set("phrasebook-reloaded-for", version);
     location.reload();
     return;
@@ -1363,6 +1365,24 @@ function installUpdate(version) {
   state.updateReady = true;
   state.note = t("A new version is ready. Tap here to reload.");
   updateStatus();
+}
+// After the app has updated itself (usually by reloading as it opens, before anything shows), say so once: a short
+// notice at the top with the way to What's new, which closes by itself. Not on a first visit.
+function updatedNotice() {
+  const seen = store.get("phrasebook-seen-version", null);
+  store.set("phrasebook-seen-version", VERSION);
+  const num = (v) => Number(/(\d+)$/.exec(v || "")?.[1] || 0);
+  if (!seen || num(VERSION) <= num(seen) || state.firstRun) return;
+  const el = document.createElement("div");
+  el.className = "updated";
+  el.setAttribute("role", "status");
+  el.innerHTML = `<span>✓ ${t("PhraseBook was updated to {v}", { v: esc(VERSION.replace("phrasebook-", "")) })}</span>
+    <button class="ulink">${t("What's new")}</button><button class="uclose" aria-label="${t("Close")}">✕</button>`;
+  document.body.appendChild(el);
+  const close = () => { el.classList.add("gone"); setTimeout(() => el.remove(), 300); };
+  el.querySelector(".ulink").onclick = () => { close(); goTo("changes"); };
+  el.querySelector(".uclose").onclick = close;
+  setTimeout(close, 10000);
 }
 let lastCheck = 0;
 let checking = null; // the check under way, so a second one waits for it instead of downloading the same files again
@@ -1926,6 +1946,7 @@ async function boot() {
   });
   render();
   hideSplash();
+  updatedNotice();
   // how the app was opened: in its language, and from the Home Screen or from a browser tab
   track(state.firstRun ? "welcome/shown" : "open/" + state.lang.code);
   track(matchMedia("(display-mode: standalone)").matches || navigator.standalone === true ? "mode/installed" : "mode/browser");

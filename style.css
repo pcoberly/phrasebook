@@ -280,3 +280,12 @@ mark.hit { color: inherit; background: color-mix(in srgb, #f5c400 45%, transpare
 }
 /* the remove button on a downloaded language: a trash can */
 button.mini.ghost .trash { display: block; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+/* "PhraseBook was updated": a slim notice at the top, once, after an update */
+.updated { position: fixed; top: calc(10px + env(safe-area-inset-top, 0px)); left: 16px; right: 16px; max-width: 528px; margin: 0 auto; z-index: 55;
+  display: flex; align-items: center; gap: 10px; padding: 10px 8px 10px 14px; border-radius: 14px; background: var(--card); color: var(--fg);
+  border: 1px solid var(--good); box-shadow: 0 6px 20px rgb(0 0 0 / .16); font-size: 15px; animation: drop .3s ease-out; transition: opacity .3s; }
+.updated > span { flex: 1; font-weight: 600; }
+.updated .ulink { border: 0; background: none; color: var(--accent); font-weight: 600; font-size: 15px; padding: 4px 6px; }
+.updated .uclose { border: 0; background: none; color: var(--muted); font-size: 17px; padding: 4px 6px; }
+.updated.gone { opacity: 0; }
+@keyframes drop { from { opacity: 0; transform: translateY(-12px); } }
