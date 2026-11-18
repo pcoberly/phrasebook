@@ -223,5 +223,17 @@
       "m": "pt-BR-AntonioNeural"
     },
     "bytes": 2339641
+  },
+  {
+    "code": "pt-pt",
+    "name": "Portuguese (Portugal)",
+    "native": "Português (Portugal)",
+    "ttsLang": "pt-PT",
+    "draft": true,
+    "voices": {
+      "f": "pt-PT-RaquelNeural",
+      "m": "pt-PT-DuarteNeural"
+    },
+    "bytes": 2358171
   }
 ]
