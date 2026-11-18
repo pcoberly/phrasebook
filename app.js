@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v71";
+const VERSION = "phrasebook-v72";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1557,7 +1557,7 @@ function renderAbout() {
     </div>
     <section class="sect why">
       <p>${t("PhraseBook was born out of a love of travel and of connecting with people. There's nothing like the smile when a local hears you make the effort with a few phrases in their language.")}</p>
-      <p>${t("It gives you the basic phrases to get around, and the polite way to say them. It's ad-free, owl-free and streak-free, so you can learn at your own pace and talk with people all over the globe.")}</p>
+      <p>${t("It gives you the basic phrases to get around. It's ad-free, owl-free and streak-free, so you can learn at your own pace and talk with people all over the globe.")}</p>
       <p class="shareline">${t("If PhraseBook helps you, share it with your friends and fellow travelers.")}</p>
       <button class="act" id="share"><span class="ml">${t("Share this app")}</span></button>
     </section>
