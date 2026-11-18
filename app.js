@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v76";
+const VERSION = "phrasebook-v77";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -192,13 +192,13 @@ const keyOf = (p, dir) => p.id + ":" + dir;
 const LEARNED = 3;
 // A small celebration for "✓ Knew it": a green ✓ that pops over the card and floats away, or, when a card has just
 // become learned, a bigger "Learned!". It sits on top of the page, so the next card is there at once.
-function cheer(learned) {
+function cheer(learned, over = "#flip") {
   const el = document.createElement("div");
   el.className = "cheer" + (learned ? " big" : "");
   el.setAttribute("aria-hidden", "true");
   el.innerHTML = learned ? `<span class="cmark">✓</span><span class="ctext">${t("Learned!")} ✨</span>` : `<span class="cmark">✓</span>`;
   // centred on the card, wherever it sits on this screen
-  const card = $("#flip")?.getBoundingClientRect();
+  const card = $(over)?.getBoundingClientRect();
   if (card && card.height) { el.style.left = card.left + card.width / 2 + "px"; el.style.top = card.top + card.height / 2 + "px"; }
   document.body.appendChild(el);
   el.addEventListener("animationend", () => el.remove());
@@ -510,7 +510,9 @@ function renderQuiz() {
       if (answered) return;
       answered = true;
       const ok = o.id === p.id;
+      const wasLearned = (state.progress[key]?.box || 0) >= LEARNED;
       grade(key, ok);
+      if (ok) cheer(!wasLearned && state.progress[key].box >= LEARNED, ".card.q"); // as on the cards: a ✓, or "Learned!"
       // record the answer and move on at once, so leaving this tab and coming back never asks (or scores) it twice
       if (ok) round.correct++; else round.missed.push(round.items[round.index]);
       round.index++;
