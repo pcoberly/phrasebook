@@ -260,5 +260,17 @@
       "m": "sw-TZ-DaudiNeural"
     },
     "bytes": 2516018
+  },
+  {
+    "code": "zu",
+    "name": "Zulu",
+    "native": "isiZulu",
+    "ttsLang": "zu-ZA",
+    "draft": true,
+    "voices": {
+      "f": "zu-ZA-ThandoNeural",
+      "m": "zu-ZA-ThembaNeural"
+    },
+    "bytes": 2461103
   }
 ]

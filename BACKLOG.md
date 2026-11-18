@@ -11,18 +11,32 @@ A banner for news such as a new language, a language checked by a native speaker
 - Keep it rare so it stays worth reading.
 
 ## New languages
-In priority order. All are learn-only, have a female and a male voice in edge-tts, and add about 2.5 MB each to the site (nothing to anyone's download unless they pick it). Each starts as a draft and joins the native-speaker review list.
+Ranked by how much of the world each would add (`python3 coverage.py`), weighed against travel value. With the 23 languages, PhraseBook covers 59% of the world's people. All of these are learn-only, have a female and a male voice in edge-tts, and add about 2.5 MB each to the site (nothing to anyone's download unless they pick it). Each starts as a draft and joins the native-speaker review list. No edge-tts voice exists for Hausa or Yoruba, so Nigeria stays English.
 
-6. **Zulu.** South Africa's most spoken home language. English works there, but a Zulu greeting earns the smile; the click sounds make the audio valuable. Voices: zu-ZA.
-7. **Hindi.** English is common in cities and with educated people, less so elsewhere. Some phrases change with the speaker's gender. Voices: hi-IN.
-8. **Afrikaans.** English covers most travel in South Africa. Voices: af-ZA.
-9. **Swedish, Norwegian (Bokmål) and Danish.** Nearly everyone speaks excellent English, so travellers need them least, but they are the quickest to build (close relatives, no gendered forms): do all three in one go. Voices: sv-SE, nb-NO, da-DK.
+**The big four: they take PhraseBook from 6 in 10 people to 8 in 10.**
+1. **Hindi** (+18 points, to 77%). The single biggest step by far: India's 1.45 billion people count today only because English is official, but most Indians don't speak it day to day. Spoken Hindi is also understood across Pakistan (Urdu sounds nearly the same, in a different script). Devanagari script; some phrases change with the speaker's gender. Voices: hi-IN.
+2. **Bengali** (+2 points). Bangladesh, 174 million, plus about 100 million in West Bengal. Little tourism, so lower travel value. Voices: bn-BD.
+3. **Persian** (+2 points). Iran, the Middle East's last gap, and Dari in Afghanistan; Tajiks understand it. Right-to-left. Visiting Iran is hard for some passports. Voices: fa-IR.
+4. **Amharic** (+1.6 points). Ethiopia, Africa's last big gap, with fast-growing tourism and little English outside Addis Ababa. Its own Ge'ez script. Voices: am-ET.
+
+**Traveller favourites: few people, many visitors, patchier English than Scandinavia.**
+5. **Greek** (Greece, Cyprus). 30 million visitors a year. Voices: el-GR.
+6. **Croatian / Serbian / Bosnian** (one language, four countries). Voices: hr-HR, sr-RS, bs-BA.
+7. **Polish** (+38 million; Kraków). Voices: pl-PL.
+8. **Czech** (Prague; Slovaks understand it) and **Hungarian** (Budapest). Voices: cs-CZ, hu-HU.
+9. **Nepali** (trekking) and **Sinhala** (Sri Lanka). Voices: ne-NP, si-LK.
+
+**Low value now.**
+10. **Swedish, Norwegian (Bokmål) and Danish** (+22 million together). Nearly everyone speaks excellent English. Quick to build in one go (close relatives, no gendered forms). Voices: sv-SE, nb-NO, da-DK.
+11. **Afrikaans** (+3 million, Namibia only). South Africa is already covered by Zulu and English. Probably drop. Voices: af-ZA.
+
+Also possible later: Ukrainian (+38 million, today counted through Russian, which many Ukrainians would rather not use; little travel for now), Burmese (54 million, little travel for now), Romanian.
 
 ## Favourites
 Use the star, kept free when skipping got the check circle, to mark favourite phrases, with a way to practise only those.
 
 ## Native-speaker review
-Every language marked `draft` needs checking by a native speaker: Korean, Hebrew, Indonesian, Tagalog, Thai, Russian, Turkish, Arabic, Moroccan Arabic, both Portugueses and Swahili, plus the German and French notes and guides. For Moroccan Arabic, first listen to whether the ar-MA voices sound like Darija or like Standard Arabic read aloud. Check first the ambulance numbers in the "I need a doctor" notes, then the Thai tone marks and the Khmer and Lao spellings.
+Every language marked `draft` needs checking by a native speaker: Korean, Hebrew, Indonesian, Tagalog, Thai, Russian, Turkish, Arabic, Moroccan Arabic, both Portugueses, Swahili and Zulu, plus the German and French notes and guides. For Moroccan Arabic, first listen to whether the ar-MA voices sound like Darija or like Standard Arabic read aloud. Check first the ambulance numbers in the "I need a doctor" notes, then the Thai tone marks and the Khmer and Lao spellings.
 
 ## Speaking practice
 Practise saying a phrase, in two steps.
