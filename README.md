@@ -82,6 +82,11 @@ each reader's language automatically), or a line in `en`, `de`, `fr` and `es` fo
 alone also needs a version bump, since the app caches it.
 Then run the checks below, commit and push to `main`; GitHub Pages rebuilds in a minute or two.
 
+**Sizes.** `check_data.py` prints the download sizes on every run (the app, the largest language, a new user's
+first download, the site and, with full history, the repository) and warns, without failing, when one passes its limit
+in `SIZE_LIMITS`; on GitHub the warning shows on the check's summary. Today: app 0.22 MB, a language about 2.4 MB, a
+first download about 4.4 MB, the site 43 MB. Audio is nearly all of it: each phrase is about 30 KB per language.
+
 **Check before a release.** `python check_data.py` finds missing or mistyped phrase ids, empty text, missing audio
 or guides, and a version mismatch between `app.js` and `sw.js`. `node tests/sw-test.js` runs the service worker
 against a fake network and cache (online, offline, slow connection, audio byte ranges). GitHub runs both on every

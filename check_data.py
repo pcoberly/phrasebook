@@ -4,15 +4,63 @@ It checks that every language has an entry with text for every shared phrase (an
 not exist, which is usually a mistyped id), that each language has its guide and its two voices, that every
 phrase has audio, and that the version in app.js matches the one in sw.js.
 
+It also reports download sizes and warns (without failing) when one passes its limit in SIZE_LIMITS. On GitHub the
+warning shows on the check's summary, so a size problem gets noticed whoever made the change.
+
 Usage:  python check_data.py
 """
 import collections
 import json
+import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent
+
+# Where a size starts to matter, about half way to where it would hurt (MB). Raise one only on purpose.
+SIZE_LIMITS = {
+    "app": (0.5, "The app itself", "everyone downloads it, and it slows opening on a weak signal"),
+    "pack": (5, "The largest language", "each language is a download, often on hotel Wi-Fi"),
+    "first": (8, "A new user's first download", "the app, English audio and one language, the first impression"),
+    "site": (500, "The published site", "GitHub Pages allows 1 GB"),
+    "repo": (500, "The repository with its history", "GitHub recommends staying under about 1 GB"),
+}
+
+
+def sizes():
+    """Download sizes in MB, and a warning for each one over its limit."""
+    def tree(path):
+        return sum(f.stat().st_size for f in (ROOT / path).rglob("*") if f.is_file())
+    shell = re.search(r"const SHELL = \[(.*?)\];", (ROOT / "sw.js").read_text(encoding="utf-8")).group(1)
+    shell_files = [f.strip().strip('"') for f in shell.split(",") if f.strip()]
+    app = sum((ROOT / ("index.html" if f == "./" else f)).stat().st_size for f in shell_files
+              if (ROOT / ("index.html" if f == "./" else f)).exists()) / 1e6
+    languages = json.loads((ROOT / "languages.json").read_text(encoding="utf-8"))
+    packs = {l["code"]: l.get("bytes", 0) / 1e6 for l in languages}
+    english = json.loads((ROOT / "lang/en/pack.json").read_text(encoding="utf-8"))["bytes"] / 1e6
+    biggest = max(packs, key=packs.get)
+    site = app + (tree("audio") + tree("lang")) / 1e6
+    repo = None  # only measurable with the full history (a CI checkout is shallow)
+    try:
+        shallow = subprocess.run(["git", "rev-parse", "--is-shallow-repository"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+        if shallow == "false":
+            out = subprocess.run(["git", "count-objects", "-v"], cwd=ROOT, capture_output=True, text=True).stdout
+            kb = {k: int(v) for k, v in (line.split(": ") for line in out.splitlines() if ": " in line and line.split(": ")[1].isdigit())}
+            repo = (kb.get("size", 0) + kb.get("size-pack", 0)) / 1e3
+    except OSError:
+        pass
+    measured = {"app": app, "pack": packs[biggest], "first": app + english + packs[biggest], "site": site, "repo": repo}
+    line = (f"Sizes: app {app:.2f} MB, languages {min(packs.values()):.1f}–{packs[biggest]:.1f} MB (largest {biggest}), "
+            f"first download {measured['first']:.1f} MB, site {site:.0f} MB" + (f", repository {repo:.0f} MB" if repo is not None else ""))
+    warnings = []
+    for key, value in measured.items():
+        limit, what, why = SIZE_LIMITS[key]
+        if value is not None and value > limit:
+            name = f"{what} ({biggest})" if key == "pack" else what
+            warnings.append(f"{name} is {value:.1f} MB, over the {limit} MB limit: {why}")
+    return line, warnings
 
 
 def t_calls(text: str):
@@ -169,6 +217,13 @@ def main() -> int:
                     problems.append(f"changes.json: v{c.get('v')} names a language that isn't in languages.json: {code}")
             elif not isinstance(item, dict) or any(not item.get(b) for b in bases):
                 problems.append(f"changes.json: v{c.get('v')} has a line missing one of {', '.join(bases)}")
+
+    size_line, size_warnings = sizes()
+    print(size_line)
+    for w in size_warnings:
+        print(f"warning: size: {w}")
+        if os.environ.get("GITHUB_ACTIONS"):
+            print(f"::warning title=Download size::{w}")
 
     for p in problems:
         print(p)
