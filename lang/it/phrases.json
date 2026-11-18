@@ -78,6 +78,8 @@
   "water": {"text": "Acqua", "say": "AHK-kwah", "note": "Naturale (nah-too-RAH-leh) is still, and frizzante (free-DZAHN-teh) is sparkling"},
   "milk": {"text": "Latte", "say": "LAHT-teh"},
   "sugar": {"text": "Zucchero", "say": "DZOOK-keh-roh"},
+  "hot": {"text": "Caldo", "say": "KAHL-doh", "note": "Careful: caldo means hot, not cold. Spicy is piccante"},
+  "cold": {"text": "Freddo", "say": "FRED-doh"},
   "cheers": {"text": "Salute!", "say": "sah-LOO-teh", "note": "Cin cin (cheen cheen) is also common"},
 
   "help": {"text": "Aiuto!", "say": "ah-YOO-toh", "note": "Shout it. The police are la polizia (lah poh-lee-TSEE-ah)"},

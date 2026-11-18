@@ -78,6 +78,8 @@
   "water": {"text": "מים", "say": "MA-yim", "spoken": "מַיִם"},
   "milk": {"text": "חלב", "say": "kha-LAV", "spoken": "חָלָב"},
   "sugar": {"text": "סוכר", "say": "SU-kar", "spoken": "סוּכָּר"},
+  "hot": {"text": "חם", "say": "KHAM", "note": "Hot, and hot weather. Spicy is חריף (kha-RIF)"},
+  "cold": {"text": "קר", "say": "KAR", "note": "Cold, and cold weather"},
   "cheers": {"text": "לחיים!", "say": "le-KHA-yim", "note": "Literally \"to life\""},
 
   "help": {"text": "הצילו!", "say": "ha-TSI-lu", "note": "Shout it. The police are משטרה (mish-ta-RA), on 100"},

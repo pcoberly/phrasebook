@@ -73,6 +73,8 @@
   "water": {"say": "TU-big", "note": "Für Wasser in Flaschen nach mineral water fragen"},
   "milk": {"say": "GA-tas"},
   "sugar": {"say": "a-SSU-kal", "note": "Vom spanischen azúcar"},
+  "hot": {"say": "ma-I-nit", "note": "Heiß, auch heißes Wetter. Scharf heißt maanghang"},
+  "cold": {"say": "ma-LA-mig", "note": "Kalt, für Getränke und das Wetter"},
   "cheers": {"say": "TA-gai", "note": "Mabuhay! (es lebe hoch) ist der förmliche Trinkspruch"},
   "help": {"say": "TU-long", "note": "Saklolo! ist ein verzweifelterer Hilferuf"},
   "need-doctor": {"say": "kai-LA-ngan ko nang dok-TOR", "note": "Den Krankenwagen ruft man unter 911"},

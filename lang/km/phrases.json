@@ -78,6 +78,8 @@
   "water": {"text": "ទឹក", "say": "tuk", "note": "Ask for ទឹកសុទ្ធ (tuk sot), bottled drinking water"},
   "milk": {"text": "ទឹកដោះគោ", "say": "tuk doh ko"},
   "sugar": {"text": "ស្ករ", "say": "skaw", "note": "មិនដាក់ស្ករ (min dak skaw) means without sugar"},
+  "hot": {"text": "ក្តៅ", "say": "k'dow", "note": "Hot, and hot weather. Spicy is ហឹរ (heur)"},
+  "cold": {"text": "ត្រជាក់", "say": "tro-cheak", "note": "Cold, like a drink or the air-conditioning"},
   "cheers": {"text": "ជល់មួយ", "say": "chol moo-ey", "note": "Literally \"clink one\". The usual toast as the glasses touch"},
 
   "help": {"text": "ជួយខ្ញុំផង", "say": "joo-ey k'nyom pong"},

@@ -73,6 +73,8 @@
   "water": {"say": "touk", "note": "Demandez ទឹកសុទ្ធ (touk sot), de l'eau potable en bouteille"},
   "milk": {"say": "touk do ko"},
   "sugar": {"say": "sko", "note": "មិនដាក់ស្ករ (minn dak sko) veut dire sans sucre"},
+  "hot": {"say": "k'daou", "note": "Chaud, et aussi pour la météo. Épicé se dit ហឹរ (heur)"},
+  "cold": {"say": "tro-tchéak", "note": "Froid, comme une boisson ou la climatisation"},
   "cheers": {"say": "tchol mou-eï", "note": "Littéralement « trinque un ». Le toast habituel quand les verres se touchent"},
   "help": {"say": "tchou-eï k'gnomm pong"},
   "need-doctor": {"say": "k'gnomm trov ka krou-pèt", "note": "Pour une ambulance, appelez le 119"},

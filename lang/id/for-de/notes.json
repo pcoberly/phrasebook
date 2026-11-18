@@ -73,6 +73,8 @@
   "water": {"say": "A-ir PU-ti", "note": "Air allein heißt Wasser; air putih (weißes Wasser) ist Trinkwasser. Wasser in Flaschen heißt air mineral"},
   "milk": {"say": "SSU-ssu"},
   "sugar": {"say": "GU-la", "note": "Tanpa gula heißt ohne Zucker; nützlich, denn Getränke kommen gesüßt"},
+  "hot": {"say": "PA-nas", "note": "Heiß, auch heißes Wetter. Scharf heißt pedas"},
+  "cold": {"say": "DI-ngin", "note": "Kalt. Ein Eisgetränk bekommt es, Eis: es teh"},
   "cheers": {"say": "ber-SSU-lang", "note": "Der übliche Trinkspruch, oft hebt man aber einfach das Glas"},
   "help": {"say": "TO-long", "note": "Dasselbe Wort wie bitte, wenn man um etwas bittet"},
   "need-doctor": {"say": "SSA-ja per-LU DOK-ter", "note": "Den Krankenwagen ruft man unter 119"},

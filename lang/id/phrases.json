@@ -73,6 +73,8 @@
   "water": {"text": "Air putih", "say": "AH-eer POO-tee", "note": "Air alone means water; air putih (white water) is plain drinking water. Bottled water is air mineral"},
   "milk": {"text": "Susu", "say": "SOO-soo"},
   "sugar": {"text": "Gula", "say": "GOO-lah", "note": "Tanpa gula (TAHN-pah GOO-lah) means no sugar, worth knowing since drinks come sweet"},
+  "hot": {"text": "Panas", "say": "PAH-nahs", "note": "Hot, and hot weather. Spicy is pedas (puh-DAHS)"},
+  "cold": {"text": "Dingin", "say": "DEE-ngin", "note": "Cold. An iced drink takes es, ice: es teh"},
   "cheers": {"text": "Bersulang!", "say": "bur-SOO-lahng", "note": "The standard toast, though often people just raise a glass"},
   "help": {"text": "Tolong!", "say": "TOH-long", "note": "The same word as please when asking a favour"},
   "need-doctor": {"text": "Saya perlu dokter", "say": "SAH-yah pur-LOO DOK-tur", "note": "For an ambulance, call 119"},

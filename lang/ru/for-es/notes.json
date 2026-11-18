@@ -73,6 +73,8 @@
   "water": {"say": "va-DA", "note": "Sin gas es без газа (biz GA-za), con gas с газом (z GA-zam)"},
   "milk": {"say": "ma-la-KO"},
   "sugar": {"say": "SA-jar"},
+  "hot": {"say": "ga-RYA-chiy", "note": "Caliente al tacto. Calor del clima: жарко (ZHAR-ka); picante: острый (OS-tryy)"},
+  "cold": {"say": "ja-LOD-nyy", "note": "Frío al tacto. Frío del clima: холодно (JO-lad-na)"},
   "cheers": {"say": "za zda-RO-vye", "note": "A la salud. Lo habitual es un breve brindis antes de beber"},
   "help": {"say": "pa-ma-GUI-tye"},
   "need-doctor": {"say": "mnye NU-zhyn vrach", "note": "Para una ambulancia, llama al 103, o al 112 desde un celular"},

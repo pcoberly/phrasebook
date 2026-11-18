@@ -73,6 +73,8 @@
   "water": {"say": "nam dëm", "note": "Agua para beber, la embotellada"},
   "milk": {"say": "nom"},
   "sugar": {"say": "nam tan"},
+  "hot": {"say": "jon", "note": "Caliente, también para el clima. Picante es ເຜັດ (pet)"},
+  "cold": {"say": "yen", "note": "Frío o fresco, para bebidas y el clima"},
   "cheers": {"say": "son keo", "note": "Literalmente «choca los vasos». También se dice ໄຊໂຍ (sai yo)"},
   "help": {"say": "suai dae"},
   "need-doctor": {"say": "koi tong kan mo"},

@@ -73,6 +73,8 @@
   "water": {"text": "Tubig", "say": "TOO-big", "note": "Ask for mineral water if you want bottled"},
   "milk": {"text": "Gatas", "say": "GAH-tahs"},
   "sugar": {"text": "Asukal", "say": "ah-SOO-kahl", "note": "From Spanish azúcar"},
+  "hot": {"text": "Mainit", "say": "mah-EE-nit", "note": "Hot, and hot weather. Spicy is maanghang (mah-AHNG-hahng)"},
+  "cold": {"text": "Malamig", "say": "mah-LAH-mig", "note": "Cold, for drinks and the weather"},
   "cheers": {"text": "Tagay!", "say": "TAH-gye", "note": "Mabuhay! (mah-BOO-hye), long live, is the formal toast"},
   "help": {"text": "Tulong!", "say": "TOO-long", "note": "Saklolo! (sahk-LOH-loh) is a more desperate cry for help"},
   "need-doctor": {"text": "Kailangan ko ng doktor", "say": "kye-LAH-ngahn koh nahng dok-TOR", "note": "For an ambulance, call 911"},

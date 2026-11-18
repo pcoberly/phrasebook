@@ -78,6 +78,8 @@
   "water": {"text": "물", "say": "mool", "note": "Water is usually free in restaurants, often self-service"},
   "milk": {"text": "우유", "say": "u-yu"},
   "sugar": {"text": "설탕", "say": "suhl-tang"},
+  "hot": {"text": "뜨거워요", "say": "tteu-guh-wuh-yo", "note": "Hot to the touch. Hot weather is 더워요 (duh-wuh-yo); spicy is 매워요 (mae-wuh-yo)"},
+  "cold": {"text": "차가워요", "say": "cha-ga-wuh-yo", "note": "Cold to the touch, like a drink. Cold weather is 추워요 (chu-wuh-yo)"},
   "cheers": {"text": "건배!", "say": "guhn-bae", "note": "When drinking with older people, turn your head slightly away as you drink"},
 
   "help": {"text": "도와주세요!", "say": "do-wa-ju-se-yo", "note": "Shout it. The police are on 112"},

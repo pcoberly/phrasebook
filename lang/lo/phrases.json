@@ -78,6 +78,8 @@
   "water": {"text": "ນ້ຳດື່ມ", "say": "nahm deum", "note": "Drinking water, the bottled kind"},
   "milk": {"text": "ນົມ", "say": "nom"},
   "sugar": {"text": "ນ້ຳຕານ", "say": "nahm tan"},
+  "hot": {"text": "ຮ້ອນ", "say": "hawn", "note": "Hot, and hot weather. Spicy is ເຜັດ (pet)"},
+  "cold": {"text": "ເຢັນ", "say": "yen", "note": "Cold or cool, for drinks and the weather"},
   "cheers": {"text": "ຊົນແກ້ວ", "say": "son keo", "note": "Literally \"clink glasses\". ໄຊໂຍ (sai yo) is also used"},
 
   "help": {"text": "ຊ່ວຍແດ່", "say": "soo-ay dae"},

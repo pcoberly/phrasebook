@@ -73,6 +73,8 @@
   "water": {"say": "de LO", "note": "Une carafe d'eau (ün ka-RAF DO) es agua de la llave gratis, y puedes pedirla en los restaurantes"},
   "milk": {"say": "dü LE"},
   "sugar": {"say": "dü SÜ-kre"},
+  "hot": {"say": "SHO", "note": "Caliente, también para el clima: il fait chaud. Picante es épicé o piquant"},
+  "cold": {"say": "FRUA", "note": "Frío, también para el clima: il fait froid"},
   "cheers": {"say": "san-TE", "note": "Literalmente «salud», como en español. À votre santé (a VO-tre) es la forma cortés"},
   "help": {"say": "o se-KUR", "note": "Grítalo. La policía es la police (la po-LIS)"},
   "need-doctor": {"say": "zhe be-SUAN dan med-SAN"},

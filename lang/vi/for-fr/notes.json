@@ -73,6 +73,8 @@
   "water": {"say": "nueuk", "tones": "montant", "note": "Dites nước lọc (nueuk lok) pour de l'eau potable ordinaire"},
   "milk": {"say": "sua", "tones": "brisé", "note": "Sữa tươi est du lait frais"},
   "sugar": {"say": "dueung", "tones": "descendant", "note": "Ít đường (it dueung) veut dire peu de sucre ; không đường (khom dueung), sans sucre"},
+  "hot": {"say": "nomm", "tones": "montant", "note": "Chaud au toucher, et aussi pour la météo. Épicé se dit cay (gaï)"},
+  "cold": {"say": "laïnn", "tones": "lourd", "note": "Froid, et aussi pour la météo. Une boisson glacée prend đá (da), glace : cà phê đá"},
   "cheers": {"say": "môt, haï, ba, zô", "tones": "lourd, plat, plat, plat", "note": "Le toast habituel : on compte un, deux, trois, puis dô, souvent crié. Chúc sức khỏe veut dire santé"},
   "help": {"say": "zoup toï veuï", "tones": "montant, plat, montant"},
   "need-doctor": {"say": "toï gueunn bak si", "tones": "plat, descendant, montant, brisé", "note": "Pour une ambulance, appelez le 115"},

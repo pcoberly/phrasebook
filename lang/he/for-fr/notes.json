@@ -73,6 +73,8 @@
   "water": {"say": "MA-yimm"},
   "milk": {"say": "kha-LAV"},
   "sugar": {"say": "SOU-kar"},
+  "hot": {"say": "KHAMM", "note": "Chaud, et aussi pour la météo. Épicé se dit חריף (kha-RIF)"},
+  "cold": {"say": "KAR", "note": "Froid, et aussi pour la météo"},
   "cheers": {"say": "lé-KHA-yimm", "note": "Littéralement « à la vie »"},
   "help": {"say": "ha-TSI-lou", "note": "Criez-le. La police se dit משטרה (mich-ta-RA), au 100"},
   "need-doctor": {"say": "a-NI tsa-RIKH ro-FÉ", "female": {"say": "a-NI tsri-KHA ro-FÉ"}, "note": "Pour une ambulance (Magen David Adom), appelez le 101"},

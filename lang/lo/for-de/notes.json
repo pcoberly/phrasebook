@@ -73,6 +73,8 @@
   "water": {"say": "nam döm", "note": "Trinkwasser, das aus der Flasche"},
   "milk": {"say": "nom"},
   "sugar": {"say": "nam tan"},
+  "hot": {"say": "hon", "note": "Heiß, auch heißes Wetter. Scharf ist ເຜັດ (pet)"},
+  "cold": {"say": "jen", "note": "Kalt oder kühl, für Getränke und das Wetter"},
   "cheers": {"say": "sson keo", "note": "Wörtlich „stoßt an“. ໄຊໂຍ (ssai jo) hört man auch"},
   "help": {"say": "ssuai dae"},
   "need-doctor": {"say": "koi tong kan mo"},

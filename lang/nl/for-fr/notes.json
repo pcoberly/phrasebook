@@ -73,6 +73,8 @@
   "water": {"say": "WA-ter", "note": "Kraanwater (KRAN-wa-ter) est l'eau du robinet, et elle est potable"},
   "milk": {"say": "mèlk"},
   "sugar": {"say": "SEUI-ker"},
+  "hot": {"say": "HÉT", "note": "Pour la météo, on dit warm. Épicé se dit pittig"},
+  "cold": {"say": "KAOUT"},
   "cheers": {"say": "prost"},
   "help": {"say": "hèlp", "note": "Criez-le. La police se dit de politie (de po-LI-tsi)"},
   "need-doctor": {"say": "ik hèp eunn DOK-teur NO-dekh", "note": "Pour une ambulance, appelez le 112"},

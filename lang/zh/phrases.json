@@ -78,6 +78,8 @@
   "water": {"text": "水", "say": "shuǐ", "note": "Many people drink hot water. Ask for 冰水 (bīng shuǐ) if you want it cold, and 矿泉水 (kuàngquánshuǐ) for bottled"},
   "milk": {"text": "牛奶", "say": "niúnǎi"},
   "sugar": {"text": "糖", "say": "táng"},
+  "hot": {"text": "热", "say": "rè", "note": "Hot, and hot weather too. Spicy is 辣 (là). A hot drink: 热的 (rè de)"},
+  "cold": {"text": "冷", "say": "lěng", "note": "Cold, and cold weather. For a drink, ask for 冰的 (bīng de), iced"},
   "cheers": {"text": "干杯", "say": "gānbēi", "note": "Literally \"dry the glass\""},
 
   "help": {"text": "救命", "say": "jiùmìng", "note": "Shout it. The police are 警察 (jǐngchá)"},

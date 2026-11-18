@@ -73,6 +73,8 @@
   "water": {"say": "de LO", "note": "Une carafe d'eau (ün ka-RAF DO) ist kostenloses Leitungswasser, das du im Restaurant bestellen kannst"},
   "milk": {"say": "dü LÄ"},
   "sugar": {"say": "dü SSÜ-kre"},
+  "hot": {"say": "SCHO", "note": "Heiß, auch fürs Wetter: il fait chaud. Scharf heißt épicé oder piquant"},
+  "cold": {"say": "FRUA", "note": "Kalt, auch fürs Wetter: il fait froid"},
   "cheers": {"say": "ssã-TE", "note": "Wörtlich „Gesundheit“. À votre santé (a WO-tre) ist die höfliche Form"},
   "help": {"say": "o ssö-KUR", "note": "Ruf es laut. Die Polizei ist la police (la po-LISS)"},
   "need-doctor": {"say": "sche be-SUẼ dẽ med-SSẼ"},

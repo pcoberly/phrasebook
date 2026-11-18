@@ -73,6 +73,8 @@
   "water": {"say": "AK-kua", "note": "Naturale (na-tu-RA-le) es sin gas, y frizzante (fri-DSAN-te) es con gas"},
   "milk": {"say": "LAT-te"},
   "sugar": {"say": "DSUK-ke-ro"},
+  "hot": {"say": "KAL-do", "note": "Ojo: caldo significa caliente. Picante es piccante"},
+  "cold": {"say": "FRED-do"},
   "cheers": {"say": "sa-LU-te", "note": "También se dice mucho cin cin (chin chin)"},
   "help": {"say": "a-YU-to", "note": "Grítalo. La policía es la polizia (la po-li-TSI-a)"},
   "need-doctor": {"say": "o bi-SO-ño di un ME-di-ko", "note": "Para una ambulancia, llama al 118"},

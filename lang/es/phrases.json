@@ -78,6 +78,8 @@
   "water": {"text": "Agua", "say": "AH-gwah", "note": "Agua sin gas is still water, and con gas is sparkling"},
   "milk": {"text": "Leche", "say": "LEH-cheh"},
   "sugar": {"text": "Azúcar", "say": "ah-SOO-kar"},
+  "hot": {"text": "Caliente", "say": "kah-LYEHN-teh", "note": "Hot to the touch. For the weather, hace calor (AH-seh kah-LOR); spicy is picante"},
+  "cold": {"text": "Frío", "say": "FREE-oh", "note": "For the weather, hace frío (AH-seh FREE-oh)"},
   "cheers": {"text": "¡Salud!", "say": "sah-LOOD", "note": "Literally \"health\""},
 
   "help": {"text": "¡Ayúdeme!", "say": "ah-YOO-deh-meh", "note": "¡Socorro! (soh-KOH-rroh) is the shout for help"},

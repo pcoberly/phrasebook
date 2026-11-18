@@ -73,6 +73,8 @@
   "water": {"say": "VA-ser", "note": "Pide stilles Wasser (SHTI-les) sin gas, o mit Kohlensäure (ko-len-ZOI-re) con gas"},
   "milk": {"say": "milj", "note": "La ch es un soplo suave, como una j muy suave"},
   "sugar": {"say": "TSU-ker"},
+  "hot": {"say": "JAIS", "note": "Picante es scharf"},
+  "cold": {"say": "KALT"},
   "cheers": {"say": "prost", "note": "Mira a los ojos al chocar las copas"},
   "help": {"say": "JIL-fe", "note": "Grítalo. La policía es die Polizei (di po-li-TSAI)"},
   "need-doctor": {"say": "ij BRAU-je AI-nen ARTST", "note": "Para una ambulancia, llama al 112"},

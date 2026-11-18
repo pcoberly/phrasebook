@@ -73,6 +73,8 @@
   "water": {"say": "mul", "note": "El agua suele ser gratis en los restaurantes, y muchas veces te la sirves tú"},
   "milk": {"say": "u-yu"},
   "sugar": {"say": "seol-tang"},
+  "hot": {"say": "tteu-geo-uo-yo", "note": "Caliente al tacto. Calor del clima: 더워요 (deo-uo-yo); picante: 매워요 (me-uo-yo)"},
+  "cold": {"say": "cha-ga-uo-yo", "note": "Frío al tacto, como una bebida. Frío del clima: 추워요 (chu-uo-yo)"},
   "cheers": {"say": "keon-be", "note": "Si bebes con personas mayores, gira un poco la cabeza al beber"},
   "help": {"say": "to-ua-chu-se-yo", "note": "Grítalo. La policía está en el 112"},
   "need-doctor": {"say": "ui-sa-ga pi-rio-je-yo", "note": "Para una ambulancia, llama al 119"},

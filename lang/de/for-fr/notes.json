@@ -73,6 +73,8 @@
   "water": {"say": "VA-sseu", "note": "Demandez stilles Wasser (CHTI-lèss) pour de l'eau plate, ou mit Kohlensäure (ko-lenn-ZOÏ-re) pour de l'eau gazeuse"},
   "milk": {"say": "milkh", "note": "Le ch est un souffle léger"},
   "sugar": {"say": "TSOU-keu"},
+  "hot": {"say": "HAÏSS", "note": "Épicé se dit scharf"},
+  "cold": {"say": "KALT"},
   "cheers": {"say": "prosst", "note": "Regardez les gens dans les yeux en trinquant"},
   "help": {"say": "HIL-fe", "note": "Criez-le. La police se dit die Polizei (di po-li-TSAÏ)"},
   "need-doctor": {"say": "ikh BRAOU-khe AÏ-nenn ARTST", "note": "Pour une ambulance, appelez le 112"},

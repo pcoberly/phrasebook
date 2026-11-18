@@ -73,6 +73,8 @@
   "water": {"text": "Nước", "say": "noo-uhk", "tones": "rising", "note": "Say nước lọc (noo-uhk lawk) for plain drinking water"},
   "milk": {"text": "Sữa", "say": "suh-ah", "tones": "broken", "note": "Sữa tươi is fresh milk"},
   "sugar": {"text": "Đường", "say": "doo-uhng", "tones": "falling", "note": "Ít đường (eet doo-uhng) is a little sugar; không đường (khohm doo-uhng) is none"},
+  "hot": {"text": "Nóng", "say": "nohm", "tones": "rising", "note": "Hot to the touch, and hot weather too. Spicy is cay (guy)"},
+  "cold": {"text": "Lạnh", "say": "laing", "tones": "heavy", "note": "Cold, and cold weather. An iced drink takes đá (dah), ice: cà phê đá"},
   "cheers": {"text": "Một, hai, ba, dô!", "say": "moht, hi, bah, zoh", "tones": "heavy, flat, flat, flat", "note": "The usual toast: count one, two, three, then dô, often shouted. Chúc sức khỏe means good health"},
   "help": {"text": "Giúp tôi với!", "say": "zoop toy vuh-ee", "tones": "rising, flat, rising"},
   "need-doctor": {"text": "Tôi cần bác sĩ", "say": "toy guhn bahk see", "tones": "flat, falling, rising, broken", "note": "For an ambulance, call 115"},

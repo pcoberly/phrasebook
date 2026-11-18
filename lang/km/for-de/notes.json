@@ -73,6 +73,8 @@
   "water": {"say": "tuk", "note": "Frag nach ទឹកសុទ្ធ (tuk ssot), Trinkwasser aus der Flasche"},
   "milk": {"say": "tuk do ko"},
   "sugar": {"say": "sko", "note": "មិនដាក់ស្ករ (min dak sko) heißt ohne Zucker"},
+  "hot": {"say": "k'dau", "note": "Heiß, auch heißes Wetter. Scharf ist ហឹរ (hör)"},
+  "cold": {"say": "tro-tschiak", "note": "Kalt, etwa ein Getränk oder die Klimaanlage"},
   "cheers": {"say": "tschol mu-ej", "note": "Wörtlich „stoß eins an“. Der übliche Trinkspruch, wenn die Gläser klingen"},
   "help": {"say": "tschu-ej k'njom pong"},
   "need-doctor": {"say": "k'njom trow ka kru-pet", "note": "Den Krankenwagen ruft man unter 119"},

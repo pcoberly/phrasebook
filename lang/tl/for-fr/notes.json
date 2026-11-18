@@ -73,6 +73,8 @@
   "water": {"say": "TOU-big", "note": "Demandez mineral water pour de l'eau en bouteille"},
   "milk": {"say": "GA-tass"},
   "sugar": {"say": "a-SSOU-kal", "note": "De l'espagnol azúcar"},
+  "hot": {"say": "ma-I-nitt", "note": "Chaud, et aussi pour la météo. Épicé se dit maanghang"},
+  "cold": {"say": "ma-LA-mig", "note": "Froid, pour les boissons et la météo"},
   "cheers": {"say": "TA-gaï", "note": "Mabuhay ! (vive ...) est le toast formel"},
   "help": {"say": "TOU-long", "note": "Saklolo ! est un appel au secours plus désespéré"},
   "need-doctor": {"say": "kaï-LA-ngann ko nang dok-TOR", "note": "Pour une ambulance, appelez le 911"},

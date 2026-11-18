@@ -47,6 +47,8 @@
   "water": {"note": "Die meisten Restaurants bringen ungefragt kostenloses Wasser"},
   "milk": {"note": "Für Kaffee oder Tee frag nach ミルク (miruku)"},
   "sugar": {"note": "Im Café geht auch シュガー (shugā)"},
+  "hot": {"note": "Heiß zum Anfassen. Heißes Wetter ist 暑い, ebenfalls atsui; scharf ist 辛い (karai). Beim Bestellen eines Getränks sagt man ホット (hotto)"},
+  "cold": {"note": "Kalt zum Anfassen, etwa ein Getränk. Kaltes Wetter ist 寒い (samui). Beim Bestellen heißt ein Eisgetränk アイス (aisu)"},
   "cheers": {"note": "Warte, bis alle ein Glas haben, und sagt es dann gemeinsam"},
   "help": {"note": "Ruf es laut. Die Polizei ist keisatsu"},
   "need-doctor": {"note": "Den Krankenwagen ruft man unter 119"},

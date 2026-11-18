@@ -73,6 +73,8 @@
   "water": {"say": "náamm plào", "note": "น้ำ tout seul veut dire eau ou n'importe quelle boisson ; น้ำเปล่า, c'est l'eau plate"},
   "milk": {"say": "nômm"},
   "sugar": {"say": "náamm-taann", "note": "ไม่ใส่น้ำตาล veut dire sans sucre"},
+  "hot": {"say": "rónn", "note": "Chaud, et aussi pour la météo. Épicé se dit เผ็ด (phèt)"},
+  "cold": {"say": "yénn", "note": "Froid ou frais, pour les boissons et la météo ; une boisson glacée se dit aussi เย็น"},
   "cheers": {"say": "tchônn kêo", "note": "Littéralement trinquer les verres"},
   "help": {"say": "tchôuai dôuai"},
   "need-doctor": {"say": "phǒmm tông-kaann mǒ khráp", "female": {"say": "tchǎnn tông-kaann mǒ khâ"}, "note": "Pour une ambulance, appelez le 1669"},

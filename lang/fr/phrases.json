@@ -78,6 +78,8 @@
   "water": {"text": "De l'eau", "say": "duh LOH", "note": "Une carafe d'eau (ewn kah-RAF DOH) is free tap water, and you can ask for it in restaurants"},
   "milk": {"text": "Du lait", "say": "dew LEH"},
   "sugar": {"text": "Du sucre", "say": "dew SEWK-ruh"},
+  "hot": {"text": "Chaud", "say": "SHOH", "note": "Hot, and hot weather: il fait chaud. Spicy is épicé or piquant"},
+  "cold": {"text": "Froid", "say": "FRWAH", "note": "Cold, and cold weather: il fait froid"},
   "cheers": {"text": "Santé !", "say": "sahn-TAY", "note": "Literally \"health\". À votre santé (ah VOH-truh) is the polite version"},
 
   "help": {"text": "Au secours !", "say": "oh suh-KOOR", "note": "Shout it. The police are la police (lah poh-LEES)"},

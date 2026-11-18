@@ -73,6 +73,8 @@
   "water": {"say": "TU-big", "note": "Pide mineral water si la quieres embotellada"},
   "milk": {"say": "GA-tas"},
   "sugar": {"say": "a-SU-kal", "note": "Viene de azúcar"},
+  "hot": {"say": "ma-I-nit", "note": "Caliente, también para el clima. Picante es maanghang"},
+  "cold": {"say": "ma-LA-mig", "note": "Frío, para bebidas y el clima"},
   "cheers": {"say": "TA-gai", "note": "¡Mabuhay! (¡viva!) es el brindis formal"},
   "help": {"say": "TU-long", "note": "¡Saklolo! es un grito de auxilio más desesperado"},
   "need-doctor": {"say": "kai-LA-ngan ko nang dok-TOR", "note": "Para una ambulancia, llama al 911"},

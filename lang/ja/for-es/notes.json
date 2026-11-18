@@ -47,6 +47,8 @@
   "water": {"note": "La mayoría de los restaurantes te traen agua gratis sin pedirla"},
   "milk": {"note": "Para el café o el té, pide ミルク (miruku)"},
   "sugar": {"note": "En una cafetería también sirve シュガー (shugā)"},
+  "hot": {"note": "Caliente al tacto. El calor del clima es 暑い, también atsui; picante es 辛い (karai). Al pedir una bebida se dice ホット (hotto)"},
+  "cold": {"note": "Frío al tacto, como una bebida. El frío del clima es 寒い (samui). Al pedir, una bebida helada es アイス (aisu)"},
   "cheers": {"note": "Espera a que todos tengan su vaso y díganlo todos a la vez"},
   "help": {"note": "Grítalo. La policía es keisatsu"},
   "need-doctor": {"note": "Para una ambulancia, llama al 119"},

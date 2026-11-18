@@ -73,6 +73,8 @@
   "water": {"say": "namm deumm", "note": "De l'eau potable, en bouteille"},
   "milk": {"say": "nomm"},
   "sugar": {"say": "namm tann"},
+  "hot": {"say": "honn", "note": "Chaud, et aussi pour la météo. Épicé se dit ເຜັດ (pèt)"},
+  "cold": {"say": "yènn", "note": "Froid ou frais, pour les boissons et la météo"},
   "cheers": {"say": "sonn kéo", "note": "Littéralement « trinquez ». On dit aussi ໄຊໂຍ (saï yo)"},
   "help": {"say": "souaï dè"},
   "need-doctor": {"say": "koï tong kann mo"},

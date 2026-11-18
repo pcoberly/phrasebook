@@ -50,5 +50,7 @@
   "water": {"note": "Mucha gente bebe agua caliente. Pide 冰水 (bīng shuǐ) si la quieres fría, y 矿泉水 (kuàngquánshuǐ) si la quieres embotellada"},
   "cheers": {"note": "Literalmente «seca el vaso»"},
   "help": {"note": "Grítalo. La policía es 警察 (jǐngchá)"},
-  "need-doctor": {"note": "Literalmente necesito ver a un médico. Para una ambulancia, llama al 120"}
+  "need-doctor": {"note": "Literalmente necesito ver a un médico. Para una ambulancia, llama al 120"},
+  "hot": {"note": "Caliente, también para el clima. Picante es 辣 (là). Una bebida caliente: 热的 (rè de)"},
+  "cold": {"note": "Frío, también para el clima. Para una bebida, pide 冰的 (bīng de), helado"}
 }

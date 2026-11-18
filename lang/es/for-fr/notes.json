@@ -73,6 +73,8 @@
   "water": {"say": "A-goua", "note": "Agua sin gas est de l'eau plate, con gas de l'eau gazeuse"},
   "milk": {"say": "LÉ-tché"},
   "sugar": {"say": "a-SSOU-kar"},
+  "hot": {"say": "ka-LIÈNN-té", "note": "Chaud au toucher. Pour la météo, hace calor (A-sé ka-LOR) ; épicé se dit picante"},
+  "cold": {"say": "FRI-o", "note": "Pour la météo, hace frío (A-sé FRI-o)"},
   "cheers": {"say": "sa-LOUD", "note": "Littéralement « santé »"},
   "help": {"say": "a-YOU-dé-mé", "note": "¡Socorro! (so-KO-rro) est l'appel au secours"},
   "need-doctor": {"say": "né-ssé-SI-to oun MÉ-di-ko"},

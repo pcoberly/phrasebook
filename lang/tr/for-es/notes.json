@@ -73,6 +73,8 @@
   "water": {"say": "su"},
   "milk": {"say": "süt"},
   "sugar": {"say": "she-KER"},
+  "hot": {"say": "sı-YAK", "note": "Caliente, también para el clima. Picante es acı (a-Yı)"},
+  "cold": {"say": "so-UK", "note": "Frío, para bebidas y el clima"},
   "cheers": {"say": "she-re-FE", "note": "Literalmente al honor"},
   "help": {"say": "im-DAT"},
   "need-doctor": {"say": "dok-to-RA ij-ti-ya-YıM VAR", "note": "Para una ambulancia, llama al 112"},

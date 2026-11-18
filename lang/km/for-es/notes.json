@@ -73,6 +73,8 @@
   "water": {"say": "tuk", "note": "Pide ទឹកសុទ្ធ (tuk sot), agua embotellada para beber"},
   "milk": {"say": "tuk do ko"},
   "sugar": {"say": "sko", "note": "មិនដាក់ស្ករ (min dak sko) significa sin azúcar"},
+  "hot": {"say": "k'dau", "note": "Caliente, también para el clima. Picante es ហឹរ (jeur)"},
+  "cold": {"say": "tro-cheak", "note": "Frío, como una bebida o el aire acondicionado"},
   "cheers": {"say": "chol mu-ei", "note": "Literalmente «choca uno». El brindis habitual al chocar los vasos"},
   "help": {"say": "chu-ei k'ñom pong"},
   "need-doctor": {"say": "k'ñom trov ka kru-pet", "note": "Para una ambulancia, llama al 119"},

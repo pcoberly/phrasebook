@@ -1,5 +1,5 @@
 {
- "bytes": 1547280,
+ "bytes": 1579104,
  "files": {
   "audio/en/f/hello.mp3": "422d929d82c4",
   "audio/en/f/how-are-you.mp3": "447734eae293",
@@ -74,6 +74,8 @@
   "audio/en/f/water.mp3": "7df80a82756d",
   "audio/en/f/milk.mp3": "bdf1b06b1e77",
   "audio/en/f/sugar.mp3": "8d3e60aa1b05",
+  "audio/en/f/hot.mp3": "04e5c8bed125",
+  "audio/en/f/cold.mp3": "a12a3dc3de99",
   "audio/en/f/cheers.mp3": "67f3af85190f",
   "audio/en/f/bill.mp3": "e8450f57a9d6",
   "audio/en/f/help.mp3": "e81a9b2d3d88",
@@ -152,6 +154,8 @@
   "audio/en/m/water.mp3": "220696f700bd",
   "audio/en/m/milk.mp3": "6a88876e2586",
   "audio/en/m/sugar.mp3": "c51bd032d37a",
+  "audio/en/m/hot.mp3": "80476ae3682b",
+  "audio/en/m/cold.mp3": "ae67ec8eefe9",
   "audio/en/m/cheers.mp3": "6367863c63ca",
   "audio/en/m/bill.mp3": "d0f7921852a4",
   "audio/en/m/help.mp3": "f1755a2ada27",

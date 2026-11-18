@@ -73,6 +73,8 @@
   "water": {"say": "nüök", "tones": "steigend", "note": "Sag nước lọc (nüök lok) für normales Trinkwasser"},
   "milk": {"say": "ssüa", "tones": "gebrochen", "note": "Sữa tươi ist frische Milch"},
   "sugar": {"say": "düöng", "tones": "fallend", "note": "Ít đường (it düöng) ist wenig Zucker; không đường (chom düöng) ohne Zucker"},
+  "hot": {"say": "nom", "tones": "steigend", "note": "Heiß zum Anfassen, auch heißes Wetter. Scharf heißt cay (gai)"},
+  "cold": {"say": "lain", "tones": "schwer", "note": "Kalt, auch kaltes Wetter. Ein Getränk mit Eis bekommt đá (da), Eis: cà phê đá"},
   "cheers": {"say": "mot, hai, ba, so", "tones": "schwer, eben, eben, eben", "note": "Der übliche Trinkspruch: eins, zwei, drei zählen, dann dô, oft gerufen. Chúc sức khỏe heißt Gesundheit"},
   "help": {"say": "sup toi wöi", "tones": "steigend, eben, steigend"},
   "need-doctor": {"say": "toi gön bak ssi", "tones": "eben, fallend, steigend, gebrochen", "note": "Den Krankenwagen ruft man unter 115"},

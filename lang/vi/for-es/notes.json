@@ -73,6 +73,8 @@
   "water": {"say": "nuëc", "tones": "ascendente", "note": "Di nước lọc (nuëc loc) para pedir agua normal para beber"},
   "milk": {"say": "sïa", "tones": "quebrado", "note": "Sữa tươi es leche fresca"},
   "sugar": {"say": "duëng", "tones": "descendente", "note": "Ít đường (it duëng) es poco azúcar; không đường (jom duëng), sin azúcar"},
+  "hot": {"say": "nom", "tones": "ascendente", "note": "Caliente al tacto, y también para el clima. Picante es cay (gai)"},
+  "cold": {"say": "lain", "tones": "pesado", "note": "Frío, también para el clima. Una bebida con hielo lleva đá (da): cà phê đá"},
   "cheers": {"say": "mot, jai, ba, zo", "tones": "pesado, llano, llano, llano", "note": "El brindis habitual: se cuenta uno, dos, tres y luego dô, a menudo gritando. Chúc sức khỏe significa salud"},
   "help": {"say": "zup toi vëi", "tones": "ascendente, llano, ascendente"},
   "need-doctor": {"say": "toi gën bak si", "tones": "llano, descendente, ascendente, quebrado", "note": "Para una ambulancia, llama al 115"},

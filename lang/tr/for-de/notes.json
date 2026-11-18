@@ -73,6 +73,8 @@
   "water": {"say": "ssu"},
   "milk": {"say": "ssüt"},
   "sugar": {"say": "sche-KER"},
+  "hot": {"say": "ssı-DSCHAK", "note": "Heiß, auch heißes Wetter. Scharf ist acı (a-DSCHı)"},
+  "cold": {"say": "sso-UK", "note": "Kalt, für Getränke und das Wetter"},
   "cheers": {"say": "sche-re-FE", "note": "Wörtlich auf die Ehre"},
   "help": {"say": "im-DAT"},
   "need-doctor": {"say": "dok-to-RA ih-ti-ja-DSCHıM WAR", "note": "Den Krankenwagen ruft man unter 112"},

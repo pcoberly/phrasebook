@@ -73,6 +73,8 @@
   "water": {"say": "wa-DA", "note": "Still ist без газа (bis GA-sa), mit Kohlensäure с газом (s GA-sam)"},
   "milk": {"say": "ma-la-KO"},
   "sugar": {"say": "SSA-char"},
+  "hot": {"say": "ga-RJA-tschij", "note": "Heiß zum Anfassen. Heißes Wetter: жарко (SCHAR-ka); scharf: острый (OS-tryj)"},
+  "cold": {"say": "cha-LOD-nyj", "note": "Kalt zum Anfassen. Kaltes Wetter: холодно (CHO-lad-na)"},
   "cheers": {"say": "sa sda-RO-wje", "note": "Auf die Gesundheit. Vor dem Trinken ist ein kurzer Trinkspruch üblich"},
   "help": {"say": "pa-ma-GI-tje"},
   "need-doctor": {"say": "mnje NU-schyn wratsch", "note": "Den Krankenwagen ruft man unter 103, vom Handy auch 112"},

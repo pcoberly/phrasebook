@@ -78,6 +78,8 @@
   "water": {"text": "Wasser", "say": "VAH-ser", "note": "Ask for stilles Wasser (SHTIL-es) for still, or mit Kohlensäure (koh-len-ZOY-ruh) for sparkling"},
   "milk": {"text": "Milch", "say": "milkh", "note": "The ch is a soft hiss"},
   "sugar": {"text": "Zucker", "say": "TSOOK-er"},
+  "hot": {"text": "Heiß", "say": "HYSS", "note": "Spicy is scharf"},
+  "cold": {"text": "Kalt", "say": "KAHLT"},
   "cheers": {"text": "Prost!", "say": "prohst", "note": "Look people in the eye as you clink glasses"},
 
   "help": {"text": "Hilfe!", "say": "HIL-fuh", "note": "Shout it. The police are die Polizei (dee po-lee-TSY)"},

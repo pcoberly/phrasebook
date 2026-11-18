@@ -1,7 +1,7 @@
 {
- "bytes": 2406145,
+ "bytes": 2454276,
  "files": {
-  "lang/he/phrases.json": "85aa6c4e004b",
+  "lang/he/phrases.json": "dad9218bc6d8",
   "lang/he/guide.html": "34a524eb4368",
   "audio/he/f/hello.mp3": "ec26f622b2d5",
   "audio/he/f/how-are-you.mp3": "4ea14c1c2a15",
@@ -76,6 +76,8 @@
   "audio/he/f/water.mp3": "f06acfd11684",
   "audio/he/f/milk.mp3": "0b9f74103ea4",
   "audio/he/f/sugar.mp3": "2d50aa909e4e",
+  "audio/he/f/hot.mp3": "90bf862d454c",
+  "audio/he/f/cold.mp3": "bfaf22e70e51",
   "audio/he/f/cheers.mp3": "eecbf4c78484",
   "audio/he/f/bill.mp3": "45b69a09cb31",
   "audio/he/f/help.mp3": "a042751db8bc",
@@ -154,6 +156,8 @@
   "audio/he/m/water.mp3": "d5f80d34985e",
   "audio/he/m/milk.mp3": "32dc9fc283a5",
   "audio/he/m/sugar.mp3": "0511b96e6bb7",
+  "audio/he/m/hot.mp3": "392dadb031ef",
+  "audio/he/m/cold.mp3": "2d5b61e030af",
   "audio/he/m/cheers.mp3": "f4ff76c48d09",
   "audio/he/m/bill.mp3": "201ecb036a9c",
   "audio/he/m/help.mp3": "189cc97504d0",
@@ -163,15 +167,15 @@
  "forBase": {
   "de": {
    "lang/he/for-de/guide.html": "6f8a3fc435e6",
-   "lang/he/for-de/notes.json": "17af1d7b5987"
+   "lang/he/for-de/notes.json": "cfaa9cc72e9c"
   },
   "es": {
    "lang/he/for-es/guide.html": "8379232b23f9",
-   "lang/he/for-es/notes.json": "6bca5b27c0af"
+   "lang/he/for-es/notes.json": "8140e3d26280"
   },
   "fr": {
    "lang/he/for-fr/guide.html": "1b81f12f8f45",
-   "lang/he/for-fr/notes.json": "2efae805ff35"
+   "lang/he/for-fr/notes.json": "9cf4dcfb44a9"
   }
  }
 }

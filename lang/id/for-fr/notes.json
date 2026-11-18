@@ -73,6 +73,8 @@
   "water": {"say": "A-ir POU-ti", "note": "Air tout seul veut dire eau ; air putih (eau blanche), c'est l'eau plate à boire. L'eau en bouteille se dit air mineral"},
   "milk": {"say": "SOU-ssou"},
   "sugar": {"say": "GOU-la", "note": "Tanpa gula veut dire sans sucre ; utile, car les boissons arrivent sucrées"},
+  "hot": {"say": "PA-nass", "note": "Chaud, et aussi pour la météo. Épicé se dit pedas"},
+  "cold": {"say": "DI-nguinn", "note": "Froid. Une boisson glacée prend es, glace : es teh"},
   "cheers": {"say": "ber-SOU-lang", "note": "Le toast habituel, même si souvent on lève simplement son verre"},
   "help": {"say": "TO-long", "note": "Le même mot que s'il vous plaît pour demander un service"},
   "need-doctor": {"say": "SA-ya per-LOU DOK-ter", "note": "Pour une ambulance, appelez le 119"},

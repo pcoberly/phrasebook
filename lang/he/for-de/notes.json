@@ -73,6 +73,8 @@
   "water": {"say": "MA-jim"},
   "milk": {"say": "cha-LAW"},
   "sugar": {"say": "SSU-kar"},
+  "hot": {"say": "CHAM", "note": "Heiß, auch heißes Wetter. Scharf ist חריף (cha-RIF)"},
+  "cold": {"say": "KAR", "note": "Kalt, auch kaltes Wetter"},
   "cheers": {"say": "le-CHA-jim", "note": "Wörtlich „aufs Leben“"},
   "help": {"say": "ha-ZI-lu", "note": "Ruf es laut. Die Polizei ist משטרה (misch-ta-RA), unter 100"},
   "need-doctor": {"say": "a-NI za-RICH ro-FE", "female": {"say": "a-NI zri-CHA ro-FE"}, "note": "Den Krankenwagen (Magen David Adom) ruft man unter 101"},

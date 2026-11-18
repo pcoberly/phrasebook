@@ -73,6 +73,8 @@
   "water": {"say": "VA-ter", "note": "Kraanwater (KRAN-va-ter) es agua de la llave, y se puede beber"},
   "milk": {"say": "melk"},
   "sugar": {"say": "SÖI-ker"},
+  "hot": {"say": "JEIT", "note": "Para el clima se dice warm. Picante es pittig"},
+  "cold": {"say": "KAUT"},
   "cheers": {"say": "prost"},
   "help": {"say": "jelp", "note": "Grítalo. La policía es de politie (de po-LI-tsi)"},
   "need-doctor": {"say": "ik jep en DOK-ter NO-dej", "note": "Para una ambulancia, llama al 112"},

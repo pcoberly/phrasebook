@@ -73,6 +73,8 @@
   "water": {"say": "va-DA", "note": "Plate se dit без газа (biz GA-za), gazeuse с газом (z GA-zamm)"},
   "milk": {"say": "ma-la-KO"},
   "sugar": {"say": "SA-khar"},
+  "hot": {"say": "ga-RYA-tchiï", "note": "Chaud au toucher. Il fait chaud : жарко (JAR-ka) ; épicé : острый (OS-tryï)"},
+  "cold": {"say": "kha-LOD-nyï", "note": "Froid au toucher. Il fait froid : холодно (KHO-lad-na)"},
   "cheers": {"say": "za zda-RO-vyé", "note": "À la santé. Un petit toast avant de boire est de coutume"},
   "help": {"say": "pa-ma-GUI-tyé"},
   "need-doctor": {"say": "mnyé NOU-jynn vratch", "note": "Pour une ambulance, appelez le 103, ou le 112 depuis un portable"},

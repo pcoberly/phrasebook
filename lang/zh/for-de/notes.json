@@ -50,5 +50,7 @@
   "water": {"note": "Viele trinken heißes Wasser. Frag nach 冰水 (bīng shuǐ), wenn du es kalt willst, und nach 矿泉水 (kuàngquánshuǐ) für Wasser aus der Flasche"},
   "cheers": {"note": "Wörtlich „trockne das Glas“"},
   "help": {"note": "Ruf es laut. Die Polizei ist 警察 (jǐngchá)"},
-  "need-doctor": {"note": "Wörtlich ich muss zum Arzt. Den Krankenwagen ruft man unter 120"}
+  "need-doctor": {"note": "Wörtlich ich muss zum Arzt. Den Krankenwagen ruft man unter 120"},
+  "hot": {"note": "Heiß, auch heißes Wetter. Scharf ist 辣 (là). Ein heißes Getränk: 热的 (rè de)"},
+  "cold": {"note": "Kalt, auch kaltes Wetter. Für ein Getränk bestellt man 冰的 (bīng de), mit Eis"}
 }

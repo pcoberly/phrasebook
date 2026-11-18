@@ -73,6 +73,8 @@
   "water": {"say": "moul", "note": "L'eau est en général gratuite au restaurant, souvent en libre-service"},
   "milk": {"say": "ou-you"},
   "sugar": {"say": "sŏl-tang"},
+  "hot": {"say": "tteu-gŏ-ouŏ-yo", "note": "Chaud au toucher. Il fait chaud : 더워요 (dŏ-ouŏ-yo) ; épicé : 매워요 (mè-ouŏ-yo)"},
+  "cold": {"say": "tcha-ga-ouŏ-yo", "note": "Froid au toucher, comme une boisson. Il fait froid : 추워요 (tchou-ouŏ-yo)"},
   "cheers": {"say": "kŏnn-bè", "note": "Si vous buvez avec des aînés, tournez légèrement la tête en buvant"},
   "help": {"say": "to-oua-djou-sé-yo", "note": "Criez-le. La police est au 112"},
   "need-doctor": {"say": "eui-sa-ga pi-ryo-hè-yo", "note": "Pour une ambulance, appelez le 119"},

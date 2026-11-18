@@ -78,6 +78,8 @@
   "water": {"text": "Water", "say": "VAH-ter", "note": "Kraanwater (KRAHN-vah-ter) is tap water, and is safe to drink"},
   "milk": {"text": "Melk", "say": "melk"},
   "sugar": {"text": "Suiker", "say": "SOW-ker"},
+  "hot": {"text": "Heet", "say": "HAYT", "note": "For the weather, people say warm. Spicy is pittig"},
+  "cold": {"text": "Koud", "say": "KOWT"},
   "cheers": {"text": "Proost!", "say": "prohst"},
 
   "help": {"text": "Help!", "say": "help", "note": "Shout it. The police are de politie (duh poh-LEE-tsee)"},

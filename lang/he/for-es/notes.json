@@ -73,6 +73,8 @@
   "water": {"say": "MA-yim"},
   "milk": {"say": "ja-LAV"},
   "sugar": {"say": "SU-kar"},
+  "hot": {"say": "JAM", "note": "Caliente, también para el clima. Picante es חריף (ja-RIF)"},
+  "cold": {"say": "KAR", "note": "Frío, también para el clima"},
   "cheers": {"say": "le-JA-yim", "note": "Literalmente «por la vida»"},
   "help": {"say": "ha-TSI-lu", "note": "Grítalo. La policía es משטרה (mish-ta-RA), en el 100"},
   "need-doctor": {"say": "a-NI tsa-RIJ ro-FE", "female": {"say": "a-NI tsri-JA ro-FE"}, "note": "Para una ambulancia (Magen David Adom), llama al 101"},

@@ -73,6 +73,8 @@
   "water": {"say": "AK-koua", "note": "Naturale (na-tou-RA-lé) est plate, frizzante (fri-DZANN-té) gazeuse"},
   "milk": {"say": "LAT-té"},
   "sugar": {"say": "DZOUK-ké-ro"},
+  "hot": {"say": "KAL-do", "note": "Attention : caldo veut dire chaud. Épicé se dit piccante"},
+  "cold": {"say": "FRÈD-do"},
   "cheers": {"say": "sa-LOU-té", "note": "On entend aussi souvent cin cin (tchinn tchinn)"},
   "help": {"say": "a-YOU-to", "note": "Criez-le. La police se dit la polizia (la po-li-TSI-a)"},
   "need-doctor": {"say": "o bi-ZO-gno di oun MÈ-di-ko", "note": "Pour une ambulance, appelez le 118"},

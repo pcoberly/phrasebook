@@ -73,6 +73,8 @@
   "water": {"text": "น้ำเปล่า", "say": "náam bplào", "note": "น้ำ alone means water or any drink; น้ำเปล่า is plain water"},
   "milk": {"text": "นม", "say": "nom"},
   "sugar": {"text": "น้ำตาล", "say": "náam-dtaan", "note": "ไม่ใส่น้ำตาล means no sugar"},
+  "hot": {"text": "ร้อน", "say": "ráwn", "note": "Hot, and hot weather. Spicy is เผ็ด (pèt)"},
+  "cold": {"text": "เย็น", "say": "yen", "note": "Cold or cool, for drinks and the weather; an iced drink is เย็น too"},
   "cheers": {"text": "ชนแก้ว", "say": "chon gâeo", "note": "Literally clink glasses"},
   "help": {"text": "ช่วยด้วย", "say": "chûai dûai"},
   "need-doctor": {"text": "ผมต้องการหมอครับ", "say": "pǒm dtâwng-gaan mǎw kráp", "note": "For an ambulance, call 1669", "female": {"text": "ฉันต้องการหมอค่ะ", "say": "chǎn dtâwng-gaan mǎw kâ"}},

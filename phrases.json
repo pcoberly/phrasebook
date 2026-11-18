@@ -72,6 +72,8 @@
   {"id": "water", "en": "Water", "cat": "food"},
   {"id": "milk", "en": "Milk", "cat": "food"},
   {"id": "sugar", "en": "Sugar", "cat": "food"},
+  {"id": "hot", "en": "Hot", "cat": "food"},
+  {"id": "cold", "en": "Cold", "cat": "food"},
   {"id": "cheers", "en": "Cheers!", "cat": "food"},
   {"id": "bill", "en": "The bill, please", "cat": "food"},
   {"id": "help", "en": "Help me!", "cat": "emergency"},

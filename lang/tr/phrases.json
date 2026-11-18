@@ -73,6 +73,8 @@
   "water": {"text": "Su", "say": "soo"},
   "milk": {"text": "Süt", "say": "süt"},
   "sugar": {"text": "Şeker", "say": "sheh-KER"},
+  "hot": {"text": "Sıcak", "say": "suh-JAK", "note": "Hot, and hot weather. Spicy is acı (ah-JUH)"},
+  "cold": {"text": "Soğuk", "say": "soh-OOK", "note": "Cold, for drinks and the weather"},
   "cheers": {"text": "Şerefe!", "say": "sheh-reh-FEH", "note": "Literally to honour"},
   "help": {"text": "İmdat!", "say": "im-DAT"},
   "need-doctor": {"text": "Doktora ihtiyacım var", "say": "dok-toh-RAH ih-tee-yah-JUHM VAR", "note": "For an ambulance, call 112"},

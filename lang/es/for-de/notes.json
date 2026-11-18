@@ -73,6 +73,8 @@
   "water": {"say": "A-gua", "note": "Agua sin gas ist stilles Wasser, con gas mit Kohlensäure"},
   "milk": {"say": "LE-tsche"},
   "sugar": {"say": "a-SSU-kar"},
+  "hot": {"say": "ka-LJEN-te", "note": "Heiß zum Anfassen. Für das Wetter hace calor (A-sse ka-LOR); scharf ist picante"},
+  "cold": {"say": "FRI-o", "note": "Für das Wetter hace frío (A-sse FRI-o)"},
   "cheers": {"say": "ssa-LUD", "note": "Wörtlich „Gesundheit“"},
   "help": {"say": "a-JU-de-me", "note": "¡Socorro! (sso-KO-rro) ist der Hilferuf"},
   "need-doctor": {"say": "ne-sse-SSI-to un ME-di-ko"},

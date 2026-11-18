@@ -73,6 +73,8 @@
   "water": {"say": "sou"},
   "milk": {"say": "sutt"},
   "sugar": {"say": "ché-KÈR"},
+  "hot": {"say": "sı-DJAK", "note": "Chaud, et aussi pour la météo. Épicé se dit acı (a-DJı)"},
+  "cold": {"say": "so-OUK", "note": "Froid, pour les boissons et la météo"},
   "cheers": {"say": "ché-ré-FÉ", "note": "Littéralement à l'honneur"},
   "help": {"say": "imm-DATT"},
   "need-doctor": {"say": "dok-to-RA ih-ti-ya-DJıMM VAR", "note": "Pour une ambulance, appelez le 112"},

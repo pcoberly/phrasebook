@@ -73,6 +73,8 @@
   "water": {"say": "náam blào", "note": "น้ำ allein heißt Wasser oder jedes Getränk; น้ำเปล่า ist stilles Wasser"},
   "milk": {"say": "nom"},
   "sugar": {"say": "náam-daan", "note": "ไม่ใส่น้ำตาล heißt ohne Zucker"},
+  "hot": {"say": "rón", "note": "Heiß, auch heißes Wetter. Scharf ist เผ็ด (pèt)"},
+  "cold": {"say": "jen", "note": "Kalt oder kühl, für Getränke und Wetter; ein Eisgetränk heißt ebenfalls เย็น"},
   "cheers": {"say": "tschon gâeo", "note": "Wörtlich Gläser anstoßen"},
   "help": {"say": "tschûai dûai"},
   "need-doctor": {"say": "pǒm dông-gaan mǒ kráp", "female": {"say": "tschǎn dông-gaan mǒ kâ"}, "note": "Den Krankenwagen ruft man unter 1669"},

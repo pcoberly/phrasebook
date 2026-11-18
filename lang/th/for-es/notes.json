@@ -73,6 +73,8 @@
   "water": {"say": "náam plào", "note": "น้ำ solo significa agua o cualquier bebida; น้ำเปล่า es agua sola"},
   "milk": {"say": "nom"},
   "sugar": {"say": "náam-taan", "note": "ไม่ใส่น้ำตาล significa sin azúcar"},
+  "hot": {"say": "rón", "note": "Caliente, también para el clima. Picante es เผ็ด (phèt)"},
+  "cold": {"say": "yen", "note": "Frío o fresco, para bebidas y el clima; una bebida helada también es เย็น"},
   "cheers": {"say": "chon kêo", "note": "Literalmente chocar los vasos"},
   "help": {"say": "chûai dûai"},
   "need-doctor": {"say": "phǒm tông-kaan mǒ khráp", "female": {"say": "chǎn tông-kaan mǒ khâ"}, "note": "Para una ambulancia, llama al 1669"},

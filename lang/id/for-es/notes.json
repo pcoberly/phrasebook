@@ -73,6 +73,8 @@
   "water": {"say": "A-ir PU-ti", "note": "Air solo significa agua; air putih (agua blanca) es agua para tomar. La embotellada es air mineral"},
   "milk": {"say": "SU-su"},
   "sugar": {"say": "GU-la", "note": "Tanpa gula significa sin azúcar; útil, porque las bebidas vienen dulces"},
+  "hot": {"say": "PA-nas", "note": "Caliente, también para el clima. Picante es pedas"},
+  "cold": {"say": "DI-nguin", "note": "Frío. Una bebida con hielo lleva es: es teh"},
   "cheers": {"say": "ber-SU-lang", "note": "El brindis de siempre, aunque muchas veces solo se levanta la copa"},
   "help": {"say": "TO-long", "note": "La misma palabra que por favor al pedir algo"},
   "need-doctor": {"say": "SA-ya per-LU DOK-ter", "note": "Para una ambulancia, llama al 119"},

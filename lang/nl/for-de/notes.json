@@ -73,6 +73,8 @@
   "water": {"say": "WAA-ter", "note": "Kraanwater (KRAAN-waa-ter) ist Leitungswasser und trinkbar"},
   "milk": {"say": "melk"},
   "sugar": {"say": "SÖI-ker"},
+  "hot": {"say": "HEET", "note": "Fürs Wetter sagt man warm. Scharf heißt pittig"},
+  "cold": {"say": "KAUT"},
   "cheers": {"say": "proost"},
   "help": {"say": "help", "note": "Ruf es laut. Die Polizei ist de politie (de po-LIE-tsie)"},
   "need-doctor": {"say": "ik hep en DOK-ter NOO-dech", "note": "Den Krankenwagen ruft man unter 112"},

@@ -73,6 +73,8 @@
   "water": {"text": "Вода", "say": "va-DA", "note": "Without gas is без газа (biz GA-za), sparkling с газом (z GA-zam)"},
   "milk": {"text": "Молоко", "say": "ma-la-KO"},
   "sugar": {"text": "Сахар", "say": "SA-khar"},
+  "hot": {"text": "Горячий", "say": "ga-RYA-chiy", "note": "Hot to the touch. Hot weather is жарко (ZHAR-ka); spicy is острый (OS-trihy)"},
+  "cold": {"text": "Холодный", "say": "kha-LOD-nihy", "note": "Cold to the touch. Cold weather is холодно (KHO-lad-na)"},
   "cheers": {"text": "За здоровье!", "say": "za zda-RO-vye", "note": "To health. A short toast before drinking is the custom"},
   "help": {"text": "Помогите!", "say": "pa-ma-GEE-tye"},
   "need-doctor": {"text": "Мне нужен врач", "say": "mnye NOO-zhihn vrach", "note": "For an ambulance, call 103, or 112 from a mobile"},

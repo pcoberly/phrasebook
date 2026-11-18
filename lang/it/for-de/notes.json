@@ -73,6 +73,8 @@
   "water": {"say": "AK-kua", "note": "Naturale (na-tu-RA-le) ist still, frizzante (fri-DSAN-te) mit Kohlensäure"},
   "milk": {"say": "LAT-te"},
   "sugar": {"say": "DSUK-ke-ro"},
+  "hot": {"say": "KAL-do", "note": "Vorsicht: caldo heißt heiß, nicht kalt. Scharf ist piccante"},
+  "cold": {"say": "FRED-do"},
   "cheers": {"say": "ssa-LU-te", "note": "Cin cin (tschin tschin) hört man auch oft"},
   "help": {"say": "a-JU-to", "note": "Ruf es laut. Die Polizei ist la polizia (la po-li-TSI-a)"},
   "need-doctor": {"say": "o bi-SO-njo di un ME-di-ko", "note": "Den Krankenwagen ruft man unter 118"},

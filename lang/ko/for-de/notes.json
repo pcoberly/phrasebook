@@ -73,6 +73,8 @@
   "water": {"say": "mul", "note": "Wasser ist im Restaurant meist kostenlos, oft zur Selbstbedienung"},
   "milk": {"say": "u-ju"},
   "sugar": {"say": "ssŏl-tang"},
+  "hot": {"say": "ttŭ-gŏ-wŏ-jo", "note": "Heiß zum Anfassen. Heißes Wetter: 더워요 (dŏ-wŏ-jo); scharf: 매워요 (me-wŏ-jo)"},
+  "cold": {"say": "tscha-ga-wŏ-jo", "note": "Kalt zum Anfassen, etwa ein Getränk. Kaltes Wetter: 추워요 (tschu-wŏ-jo)"},
   "cheers": {"say": "kŏn-be", "note": "Trinkst du mit Älteren, dreh beim Trinken den Kopf leicht zur Seite"},
   "help": {"say": "to-ua-dschu-se-jo", "note": "Ruf es laut. Die Polizei hat die 112"},
   "need-doctor": {"say": "ŭi-ssa-ga pi-rjo-he-jo", "note": "Den Krankenwagen ruft man unter 119"},
