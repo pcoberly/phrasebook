@@ -1,4 +1,6 @@
 {
+ "Move {name}: drag it, or use the arrow keys": "Déplacer {name} : faites-le glisser, ou utilisez les flèches du clavier",
+ "A language is stored on this device only once you download it. Removing one frees its space and keeps your progress. Drag ⠿ to put your languages in the order you want.": "Une langue n'est stockée sur cet appareil qu'une fois téléchargée. En retirer une libère sa place et conserve votre progression. Faites glisser ⠿ pour ranger vos langues dans l'ordre voulu.",
  "PhraseBook was updated to {v}": "PhraseBook est passé à la {v}",
  "Close": "Fermer",
  "Download": "Télécharger",
@@ -41,7 +43,6 @@
  "The list of changes isn't available offline yet. Open the app once while online.": "La liste des nouveautés n'est pas encore disponible hors ligne. Ouvrez l'app une fois en étant connecté.",
  "1 second": "1 seconde",
  "A free phrase book for travel: flashcards, quizzes and audio, and it works offline.": "Un guide de conversation gratuit pour voyager : fiches, quiz et audio, et il fonctionne hors ligne.",
- "A language is stored on this device only once you download it. Removing one frees its space and keeps your progress. Use the arrows to put your languages in the order you want.": "Une langue n'est enregistrée sur cet appareil que lorsque vous la téléchargez. La retirer libère de la place et conserve votre progression. Utilisez les flèches pour ranger vos langues dans l'ordre voulu.",
  "A new version is ready. Tap here to reload.": "Une nouvelle version est prête. Touchez ici pour recharger.",
  "A perfect round!": "Une manche parfaite !",
  "A woman says:": "Une femme dit :",
@@ -113,8 +114,6 @@
  "Male": "Masculine",
  "Mandarin Chinese": "chinois mandarin",
  "Mixed (random each time)": "Mélange (au hasard)",
- "Move {name} down": "Descendre « {name} »",
- "Move {name} up": "Monter « {name} »",
  "Need at least 4 phrases.": "Il faut au moins 4 phrases.",
  "New round": "Nouvelle manche",
  "Next": "Suivant",

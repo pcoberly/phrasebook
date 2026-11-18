@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v82";
+const VERSION = "phrasebook-v83";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1445,6 +1445,67 @@ function languageGroups() {
   const available = state.languages.filter((l) => !onDevice(l)).sort((a, b) => langName(a).localeCompare(langName(b))); // alphabetical
   return { mine, available };
 }
+// Put your languages in order by dragging the handle (⠿) on a row: it follows the finger or mouse, and the others
+// slide out of the way. On the keyboard, the handle moves its language with ↑ and ↓.
+function wireReorder() {
+  const box = $("#langs");
+  if (!box) return;
+  for (const grip of box.querySelectorAll(".grip")) {
+    const row = grip.closest(".lang");
+    grip.onkeydown = (e) => {
+      if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+      e.preventDefault();
+      moveLanguage(row.dataset.lang, e.key === "ArrowUp" ? -1 : 1);
+      renderLanguages();
+      $(`[data-lang="${row.dataset.lang}"] .grip`)?.focus();
+    };
+    grip.onpointerdown = (e) => {
+      if (e.button > 0) return;
+      e.preventDefault();
+      const rows = [...box.querySelectorAll(".lang[data-pos]")];
+      const rects = rows.map((r) => r.getBoundingClientRect());
+      const from = rows.indexOf(row);
+      // how far a neighbour moves to make room: one row's height plus the space between rows
+      const step = rows.length > 1 ? (from < rows.length - 1 ? rects[from + 1].top - rects[from].top : rects[from].top - rects[from - 1].top) : 0;
+      const startY = e.clientY;
+      let to = from;
+      grip.setPointerCapture(e.pointerId);
+      row.classList.add("dragging");
+      const move = (ev) => {
+        const dy = ev.clientY - startY;
+        row.style.transform = `translateY(${dy}px)`;
+        const mid = rects[from].top + rects[from].height / 2 + dy;
+        to = from;
+        rects.forEach((r, i) => {
+          const centre = r.top + r.height / 2;
+          if (i < from && mid < centre) to = Math.min(to, i);
+          if (i > from && mid > centre) to = Math.max(to, i);
+        });
+        rows.forEach((r, i) => {
+          if (r === row) return;
+          const shift = from < to && i > from && i <= to ? -step : to < from && i >= to && i < from ? step : 0;
+          r.style.transform = shift ? `translateY(${shift}px)` : "";
+        });
+      };
+      const end = () => {
+        grip.removeEventListener("pointermove", move);
+        grip.removeEventListener("pointerup", end);
+        grip.removeEventListener("pointercancel", end);
+        rows.forEach((r) => { r.style.transform = ""; });
+        row.classList.remove("dragging");
+        if (to !== from) {
+          const codes = rows.map((r) => r.dataset.lang);
+          codes.splice(to, 0, codes.splice(from, 1)[0]);
+          store.set(langOrderKey, codes);
+          renderLanguages();
+        }
+      };
+      grip.addEventListener("pointermove", move);
+      grip.addEventListener("pointerup", end);
+      grip.addEventListener("pointercancel", end);
+    };
+  }
+}
 function moveLanguage(code, delta) {
   const codes = languageGroups().mine.map((l) => l.code);
   const i = codes.indexOf(code), j = i + delta;
@@ -1477,15 +1538,14 @@ function languageRow(l, position, count) {
   const buttons = state.busy[l.code] || active ? ""
     : ps === "installed" ? `<button class="mini" data-act="use">${t("Use")}</button><button class="mini ghost" data-act="remove" aria-label="${t("Remove {name} from this device", { name })}" title="${t("Remove from this device")}"><svg class="trash" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13M10 11v6M14 11v6"/></svg></button>`
     : `<button class="mini" data-act="download">${canCache ? t("Download") : t("Use")}</button>`;
-  // arrows only for languages on the device, where the order matters
-  const arrows = position < 0 ? "" : `
-        <div class="mv">
-          <button class="mvb" data-act="up" aria-label="${t("Move {name} up", { name })}"${position === 0 ? " disabled" : ""}>▲</button>
-          <button class="mvb" data-act="down" aria-label="${t("Move {name} down", { name })}"${position === count - 1 ? " disabled" : ""}>▼</button>
-        </div>`;
+  // a drag handle only for languages on the device, where the order matters (and only once there are two)
+  const arrows = position < 0 || count < 2 ? "" : `
+        <button class="grip" data-act="grip" aria-label="${t("Move {name}: drag it, or use the arrow keys", { name })}">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg>
+        </button>`;
   const line = state.busy[l.code] ? dlStatus(l.code) : `<span class="lstate">${esc(status)}</span> · ${mb}${l.draft ? " · " + t("Draft translations") : ""}`;
   return `
-      <div class="lang${active ? " current" : state.busy[l.code] ? "" : " tap"}" data-lang="${l.code}">${arrows}
+      <div class="lang${active ? " current" : state.busy[l.code] ? "" : " tap"}" data-lang="${l.code}"${position >= 0 ? ` data-pos="${position}"` : ""}>${arrows}
         <div class="linfo"><div class="lname">${active ? "✓ " : ""}${name} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
           <div class="note">${line}</div></div>
         <div class="lbtn">${buttons}</div>
@@ -1511,7 +1571,7 @@ function languagePanel() {
         <h3 class="sub">${t("Available to download ({n})", { n: available.length })}</h3>
         ${available.map((l) => languageRow(l, -1, 0)).join("")}
       </div>` : ""}
-      <p class="note">${t("Tap a language to switch to it, or to download it if it isn't on this device yet.")} ${t("A language is stored on this device only once you download it. Removing one frees its space and keeps your progress. Use the arrows to put your languages in the order you want.")}</p>
+      <p class="note">${t("Tap a language to switch to it, or to download it if it isn't on this device yet.")} ${t("A language is stored on this device only once you download it. Removing one frees its space and keeps your progress. Drag ⠿ to put your languages in the order you want.")}</p>
     </div>`;
 }
 // ---------- about: install steps, sharing and feedback ----------
@@ -1739,6 +1799,7 @@ function renderLanguages() {
   main.insertAdjacentHTML("afterbegin", backToMore());
   wireBack();
   $("#known").onchange = async () => { await setKnown($("#known").value); if (state.mode === "languages") renderLanguages(); };
+  wireReorder();
   if ($("#addlang")) $("#addlang").onclick = () => {
     const open = $("#availlist").hidden;
     $("#availlist").hidden = !open;
@@ -1747,7 +1808,7 @@ function renderLanguages() {
   };
   $("#langs").onclick = async (e) => {
     const row = e.target.closest("[data-lang]");
-    if (!row || e.target.closest(".mv")) return;
+    if (!row || e.target.closest(".grip")) return;
     const code = row.dataset.lang;
     const lang = state.languages.find((l) => l.code === code);
     // a tap anywhere on the row uses the language, or downloads it first; the buttons do the same, plus remove
@@ -1757,11 +1818,6 @@ function renderLanguages() {
       act = packState(code) === "installed" || !canCache ? "use" : "download";
     }
     const btn = { dataset: { act } };
-    if (btn.dataset.act === "up" || btn.dataset.act === "down") {
-      moveLanguage(code, btn.dataset.act === "up" ? -1 : 1);
-      renderLanguages();
-      return;
-    }
     if (btn.dataset.act === "remove") {
       if (confirm(t("Remove {name} from this device? Your progress is kept.", { name: langName(lang) }))) { await removePack(code); renderLanguages(); }
       return;
