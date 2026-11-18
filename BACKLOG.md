@@ -43,6 +43,14 @@ A post introducing PhraseBook.
 - **The link,** and an ask: try it before your next trip, share it, and if you're a native speaker of a draft language, help check it (see Native-speaker review).
 - Best after the app has settled for a while; I can draft the post and make the screenshots when you're ready.
 
+## Badges
+A little gamification with no pressure: badges that only ever reward, never punish.
+
+- **Ideas:** first phrase, 25, 50 and every phrase learned in a language ("learned" as on the Languages page); a whole topic learned (Food, Getting Around, Emergency); two, three or five languages practised; a perfect quiz round; a Play all to the end; all the numbers; the polite basics (hello, please, thank you, excuse me) in a language; the guide read.
+- **No pressure:** no streaks, no losing a badge, no countdowns, no notifications. A small, cheerful pop-up when one is earned, then it's done.
+- **Where:** a Badges row in More (or a strip on the Languages page) showing what's earned and, faded, what's possible.
+- On the device only, like progress, and offline. Names in English, German, French and Spanish.
+
 # Long term
 
 Bigger ideas, mostly content. Each needs a design decision before building.
