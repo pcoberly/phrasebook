@@ -51,6 +51,14 @@ A little gamification that only ever celebrates: badges mark milestones you reac
 - **Where:** a Badges row in More (or a strip on the Languages page) showing what's earned and, faded, what's possible.
 - On the device only, like progress, and offline. Names in English, German, French and Spanish.
 
+## Download size levers
+Not needed yet: `check_data.py` prints the sizes on every run and warns on GitHub when one passes its limit (a language 5 MB, a first download 8 MB). Audio is nearly all of it, about 30 KB per phrase per language, so a language reaches 5 MB at about 170 phrases. If a limit is hit, in rough order of effort:
+
+- **Lower audio bitrate:** re-encode at a lower bitrate (speech stays clear). Saves about a third. Regenerate everything, then re-apply the hand fixes in `audio/hashes.json` (Russian male "cold", Turkish male "three").
+- **A more compact format (Opus):** about half the size. Test on older iPhones first, since Safari's support came late.
+- **The second voice as an option:** download only one voice unless the user asks for both. Halves each language.
+- **Trim What's new:** keep only recent versions in `changes.json`.
+
 # Long term
 
 Bigger ideas, mostly content. Each needs a design decision before building.

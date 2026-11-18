@@ -17,12 +17,15 @@ nav { display: flex; gap: 8px; }
 .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 .opts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0; font-size: 14px; color: var(--muted); }
 .opts select { flex: 1 1 140px; min-width: 0; font-size: 16px; padding: 8px; } /* under 16px, an iPhone zooms in when it is tapped */
+/* on a phone Topics is as wide as its words (at most a little under half) and Direction, on the same line, gets the
+   rest, enough on most phones for its longest choice ("Indonesisch → Deutsch") */
+.opts #dir { flex: 1 1 0; min-width: calc(55% - 8px); }
 .opts .check { display: flex; align-items: center; gap: 6px; }
 /* Mute: the app stops speaking by itself (🔊 and Play all still play when tapped) */
 .opts .mute { margin-left: auto; font-size: 15px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
 .opts .mute[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
 /* the Topics button looks like the Direction box beside it, and opens a checklist */
-.opts .topics { flex: 1 1 140px; min-width: 0; font-size: 16px; padding: 8px 26px 8px 10px; text-align: left; border-radius: 8px;
+.opts .topics { flex: 0 1 auto; max-width: 45%; min-width: 0; font-size: 16px; padding: 8px 26px 8px 10px; text-align: left; border-radius: 8px;
   border: 1px solid var(--line); background: var(--card); color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: relative; }
 .opts .topics::after { content: "▾"; position: absolute; right: 9px; color: var(--muted); }
 #topicmenu { padding: 0; border: 1px solid var(--line); border-radius: 16px; background: var(--card); color: var(--fg); width: min(340px, calc(100vw - 32px)); }
@@ -171,6 +174,14 @@ footer.ready { color: var(--accent); font-weight: 600; text-decoration: underlin
   .tab .ti { width: 24px; height: 24px; padding: 3px 16px; border-radius: 15px; box-sizing: content-box; transition: background .2s; }
   .tab.active { background: transparent; color: var(--accent); }
   .tab.active .ti { background: color-mix(in srgb, var(--accent) 16%, transparent); }
+}
+/* On an iPad or a wider window the page uses more of the width, so the controls along the top fit on one line */
+@media (min-width: 768px) {
+  body { max-width: 760px; }
+  .updated { max-width: 728px; }
+  /* Direction is as wide as its longest choice ("Vietnamese → English") and Topics takes the rest */
+  .opts #dir { flex: 0 0 auto; min-width: 0; }
+  .opts .topics { flex: 1 1 140px; max-width: none; }
 }
 /* What's new */
 .change { margin: 0 0 14px; }
