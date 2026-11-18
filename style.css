@@ -259,3 +259,22 @@ mark.hit { color: inherit; background: color-mix(in srgb, #f5c400 45%, transpare
 .why p { line-height: 1.55; }
 .why .shareline { margin: 14px 0 10px; padding-top: 12px; border-top: 1px solid var(--line); }
 .why #share { width: 100%; }
+/* the little celebration for ✓ Knew it */
+.cheer { position: fixed; left: 50%; top: 42%; z-index: 60; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  transform: translate(-50%, -50%); animation: cheer .7s ease-out forwards; }
+.cheer .cmark { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: var(--good); color: var(--bg); font-size: 34px; font-weight: 700;
+  box-shadow: 0 6px 20px rgb(0 0 0 / .18); }
+.cheer.big { animation-duration: 1.3s; }
+.cheer.big .cmark { width: 84px; height: 84px; font-size: 46px; }
+.cheer .ctext { padding: 4px 12px; border-radius: 999px; background: var(--card); color: var(--good); font-weight: 700; font-size: 18px; box-shadow: 0 4px 14px rgb(0 0 0 / .14); }
+@keyframes cheer {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.5); }
+  25% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  45% { transform: translate(-50%, -50%) scale(1); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -90%) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cheer { animation-name: cheer-fade; }
+  @keyframes cheer-fade { 0%, 60% { opacity: 1; } 100% { opacity: 0; } }
+}

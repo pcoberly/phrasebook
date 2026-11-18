@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v72";
+const VERSION = "phrasebook-v73";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -188,6 +188,20 @@ function speakWithBrowserVoice(p) {
 // ---------- scheduling ----------
 const progressKey = (code) => "phrasebook-progress-" + code;
 const keyOf = (p, dir) => p.id + ":" + dir;
+// a card is "learned" once known this many times in a row (as counted in the footer and on the Languages page)
+const LEARNED = 3;
+// A small celebration for "✓ Knew it": a green ✓ that pops over the card and floats away, or, when a card has just
+// become learned, a bigger "Learned!". It sits on top of the page, so the next card is there at once.
+function cheer(learned) {
+  const el = document.createElement("div");
+  el.className = "cheer" + (learned ? " big" : "");
+  el.setAttribute("aria-hidden", "true");
+  el.innerHTML = learned ? `<span class="cmark">✓</span><span class="ctext">${t("Learned!")} ✨</span>` : `<span class="cmark">✓</span>`;
+  document.body.appendChild(el);
+  el.addEventListener("animationend", () => el.remove());
+  setTimeout(() => el.remove(), 2000); // in case the animation never runs
+  navigator.vibrate?.(learned ? [12, 60, 18] : 10);
+}
 function grade(key, ok) {
   const cur = state.progress[key] || { box: 0 };
   const box = ok ? Math.min(cur.box + 1, INTERVALS.length - 1) : 0;
@@ -383,7 +397,12 @@ function renderCard() {
   flip.onclick = toggle;
   flip.onkeydown = (e) => { if ((e.key === "Enter" || e.key === " ") && e.target === flip) { e.preventDefault(); toggle(); } };
   $("#again").onclick = () => { grade(key, false); render(); };
-  $("#got").onclick = () => { grade(key, true); render(); };
+  $("#got").onclick = () => {
+    const wasLearned = (state.progress[key]?.box || 0) >= LEARNED;
+    grade(key, true);
+    cheer(!wasLearned && state.progress[key].box >= LEARNED); // a bigger one the moment a card counts as learned
+    render();
+  };
   updateStatus();
 }
 
