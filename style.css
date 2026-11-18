@@ -257,3 +257,5 @@ mark.hit { color: inherit; background: color-mix(in srgb, #f5c400 45%, transpare
 /* About: the why, in the founder's words */
 .why { padding-top: 2px; }
 .why p { line-height: 1.55; }
+.why .shareline { margin: 14px 0 10px; padding-top: 12px; border-top: 1px solid var(--line); }
+.why #share { width: 100%; }
