@@ -1,4 +1,5 @@
 [
+ {"v": 85, "date": "2026-11-18", "items": [{"langs": ["ar"]}]},
  {"v": 80, "date": "2026-11-18", "items": [
   {"en": "After PhraseBook updates itself, a short note at the top says so, with a link here. Updates never interrupt a quiz or Play all: they wait until you leave the app, and bring you back to the same page", "de": "Nachdem sich PhraseBook aktualisiert hat, sagt es ein kurzer Hinweis oben, mit einem Link hierher. Updates unterbrechen nie ein Quiz oder Alle abspielen: Sie warten, bis du die App verlässt, und bringen dich auf dieselbe Seite zurück", "fr": "Après une mise à jour, un petit message en haut le signale, avec un lien ici. Les mises à jour n'interrompent jamais un quiz ni Tout écouter : elles attendent que vous quittiez l'app, et vous ramènent à la même page", "es": "Cuando PhraseBook se actualiza solo, un aviso breve arriba lo dice, con un enlace aquí. Las actualizaciones nunca interrumpen una prueba ni Reproducir todo: esperan a que salgas de la app y te devuelven a la misma página"}]},
  {"v": 73, "date": "2026-11-18", "items": [
