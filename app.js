@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v75";
+const VERSION = "phrasebook-v76";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -197,6 +197,9 @@ function cheer(learned) {
   el.className = "cheer" + (learned ? " big" : "");
   el.setAttribute("aria-hidden", "true");
   el.innerHTML = learned ? `<span class="cmark">✓</span><span class="ctext">${t("Learned!")} ✨</span>` : `<span class="cmark">✓</span>`;
+  // centred on the card, wherever it sits on this screen
+  const card = $("#flip")?.getBoundingClientRect();
+  if (card && card.height) { el.style.left = card.left + card.width / 2 + "px"; el.style.top = card.top + card.height / 2 + "px"; }
   document.body.appendChild(el);
   el.addEventListener("animationend", () => el.remove());
   setTimeout(() => el.remove(), 2000); // in case the animation never runs
