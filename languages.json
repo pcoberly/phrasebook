@@ -235,5 +235,18 @@
       "m": "pt-PT-DuarteNeural"
     },
     "bytes": 2358171
+  },
+  {
+    "code": "ary",
+    "name": "Moroccan Arabic",
+    "native": "الدارجة",
+    "ttsLang": "ar-MA",
+    "rtl": true,
+    "draft": true,
+    "voices": {
+      "f": "ar-MA-MounaNeural",
+      "m": "ar-MA-JamalNeural"
+    },
+    "bytes": 2553060
   }
 ]
