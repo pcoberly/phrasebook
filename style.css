@@ -157,8 +157,11 @@ body.firstrun { --tab-h: 0px; padding-bottom: env(safe-area-inset-bottom, 0px); 
 footer { text-align: center; color: var(--muted); font-size: 13px; padding: 18px 0 24px; }
 footer.ready { color: var(--accent); font-weight: 600; text-decoration: underline; cursor: pointer; }
 
-/* On a small screen the tabs move to a tray at the bottom, where the thumb is, and the top is left for the cards */
-@media (max-width: 600px) {
+/* On a phone or a tablet (any touch screen) the tabs sit in a tray at the bottom, where the thumbs are, and the top is
+   left for the cards. On a wide screen the tabs stay a thumb's width each, centred, rather than stretching across. */
+@media (max-width: 600px), (pointer: coarse) {
+  nav { justify-content: center; }
+  .tab { flex: 1 1 0; max-width: 132px; }
   :root { --tab-h: calc(64px + env(safe-area-inset-bottom, 0px)); }
   body { padding-bottom: var(--tab-h); }
   header { padding-top: 8px; }
@@ -292,3 +295,10 @@ button.mini.ghost .trash { display: block; width: 18px; height: 18px; fill: none
 /* the quiz's Next: a solid action button, not another answer (and not green or red, which mean right and wrong) */
 button.act.next { background: var(--fg); color: var(--bg); border-color: var(--fg); font-weight: 600; }
 #nextrow { margin-top: 18px; }
+/* On a computer (a mouse, and room) the tabs stay at the top, in a header band that stays in view and stands apart
+   from the page below it */
+@media (min-width: 601px) and (pointer: fine) {
+  header { position: sticky; top: 0; z-index: 20; margin: 0 -16px; padding: 12px 16px 2px; border-radius: 0 0 16px 16px;
+    background: color-mix(in srgb, var(--accent) 5%, var(--card)); border-bottom: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line));
+    box-shadow: 0 4px 14px rgb(0 0 0 / .06); }
+}
