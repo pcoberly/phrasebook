@@ -272,5 +272,17 @@
       "m": "zu-ZA-ThembaNeural"
     },
     "bytes": 2461103
+  },
+  {
+    "code": "en-us",
+    "name": "English",
+    "native": "English",
+    "ttsLang": "en-US",
+    "sameAs": "en",
+    "voices": {
+      "f": "en-US-AvaNeural",
+      "m": "en-US-GuyNeural"
+    },
+    "bytes": 2156358
   }
 ]

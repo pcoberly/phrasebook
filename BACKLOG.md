@@ -33,10 +33,10 @@ Ranked by how much of the world each would add (`python3 coverage.py`), weighed 
 Also possible later: Ukrainian (+38 million, today counted through Russian, which many Ukrainians would rather not use; little travel for now), Burmese (54 million, little travel for now), Romanian.
 
 ## More people who can use PhraseBook
-Today the app can be used in English, Spanish, French or German (about 2.4 billion speakers, roughly 3 in 10 people). A Vietnamese speaker, for example, can't use it in Vietnamese. Coverage also differs by the language you speak: 64% of the world for an English speaker, 59% for Spanish, French and German speakers, since English isn't one you can learn.
+Today the app can be used in English, Spanish, French or German (about 2.4 billion speakers, roughly 3 in 10 people). A Vietnamese speaker, for example, can't use it in Vietnamese. With English to learn (v91), coverage is the same 64% of the world whichever of the four you speak.
 
-- **English as a language to learn.** Gives Spanish, French and German speakers the same 64%, and English is what many travellers want most. Needs English sounds-like spellings and notes written for each of those speakers; the English audio already exists for Play all.
-- **More "I speak" languages.** The phrases exist in all 23 languages already. Each new one needs the app's menus and messages translated (`ui.json`), a help page, and notes written for its speakers. Biggest gains in people who could use the app: Chinese, Portuguese, Arabic, then Indonesian, Japanese, Vietnamese.
+- **More "I speak" languages.** The phrases exist in all 24 languages already. Each new one needs the app's menus and messages translated (`ui.json`), a help page, and notes written for its speakers. Biggest gains in people who could use the app: Chinese, Portuguese, Arabic, then Indonesian, Japanese, Vietnamese.
+- **British English to learn.** English to learn is American (en-us). A British version (en-gb) would mostly be a copy with the bill, the toilets, return tickets and British voices.
 
 ## Favourites
 Use the star, kept free when skipping got the check circle, to mark favourite phrases, with a way to practise only those.

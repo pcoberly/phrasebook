@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v90";
+const VERSION = "phrasebook-v91";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -253,6 +253,10 @@ function next() {
 // languages.json, whose own pack gives its text and audio. Notes, "sounds like" spellings, guides and the app's
 // buttons are written for English speakers, so they stay in English for now.
 const knownLanguages = () => [ENGLISH, ...state.languages.filter((l) => l.base)];
+// the languages you can learn: all of them, except one that is the language you speak under another code (English to
+// learn, "en-us", is "sameAs" English, the language you know; you can't learn English from English). The one being
+// studied always stays, so a link or an old setting never leaves the app without a language.
+const learnable = () => state.languages.filter((l) => !l.sameAs || l.sameAs !== state.base || l.code === state.lang?.code);
 // the one to use: the chosen one, unless it is the language being studied (French from French makes no sense)
 function wantedKnown() {
   const k = knownLanguages().find((l) => l.code === state.base);
@@ -1005,10 +1009,14 @@ function pickerRow(l) {
 }
 // the "I speak" choices, each in its own language (English, Deutsch, Español), whatever language the app is in,
 // so anyone can find theirs
-const knownSelect = () => knownLanguages().map((l) => `<option value="${l.code}"${l.code === state.base ? " selected" : ""} lang="${l.code}">${esc(l.native)}</option>`).join("");
+// While you learn English, English can't be the language you speak, so it is shown but not offered
+const knownSelect = () => knownLanguages().map((l) => {
+  const off = !state.firstRun && state.lang?.sameAs === l.code && l.code !== state.base;
+  return `<option value="${l.code}"${l.code === state.base ? " selected" : ""}${off ? " disabled" : ""} lang="${l.code}">${esc(l.native)}${off ? " – " + esc(t("you're learning it")) : ""}</option>`;
+}).join("");
 function renderWelcome() {
   document.body.classList.add("firstrun");
-  const choices = [...state.languages].sort((a, b) => langName(a).localeCompare(langName(b)));
+  const choices = learnable().filter((l) => !(l.sameAs && l.sameAs === state.base)).sort((a, b) => langName(a).localeCompare(langName(b)));
   main.innerHTML = `
     <div class="welcome">
       <div class="whead">
@@ -1194,7 +1202,8 @@ async function loadLanguageData() {
 }
 // Packs downloaded only because they were the language you know, not chosen to learn. Switching away removes them,
 // so only what you use stays on the device (and is kept up to date). English's own pack is always one of these, as
-// English is never a language to learn here; a language you choose to learn stops being one.
+// English as the language you know is never the one you learn (English to learn is its own pack, "en-us"); a language
+// you choose to learn stops being one.
 const KNOWN_ONLY = "phrasebook-known-only";
 const knownOnly = () => store.get(KNOWN_ONLY, []);
 function syncKnownPack(code = state.known.code, onProgress) {
@@ -1441,8 +1450,8 @@ function languageGroups() {
   const onDevice = (l) => l.code === state.lang.code || packState(l.code) !== "none";
   const order = store.get(langOrderKey, []);
   const rank = (code) => (order.includes(code) ? order.indexOf(code) : order.length); // new ones go to the end
-  const mine = state.languages.filter(onDevice).sort((a, b) => rank(a.code) - rank(b.code));
-  const available = state.languages.filter((l) => !onDevice(l)).sort((a, b) => langName(a).localeCompare(langName(b))); // alphabetical
+  const mine = learnable().filter(onDevice).sort((a, b) => rank(a.code) - rank(b.code));
+  const available = learnable().filter((l) => !onDevice(l)).sort((a, b) => langName(a).localeCompare(langName(b))); // alphabetical
   return { mine, available };
 }
 // Put your languages in order by dragging the handle (⠿) on a row: it follows the finger or mouse, and the others

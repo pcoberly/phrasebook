@@ -9,7 +9,7 @@ GitHub Pages, so it needs no App Store account. Live at https://pcoberly.github.
 | Path | What it is |
 | --- | --- |
 | `phrases.json` | The phrases every language shares: `id`, English, topic (`cat`) |
-| `languages.json` | The languages on offer: name, code, voices, size (size is filled in by the script), `rtl` for a right-to-left language such as Hebrew, and `base` for one that can be the language you know |
+| `languages.json` | The languages on offer: name, code, voices, size (size is filled in by the script), `rtl` for a right-to-left language such as Hebrew, `base` for one that can be the language you know, and `sameAs` for one that is a language you can know under another code (English to learn, `en-us`, is `sameAs` English, so it is hidden from English speakers) |
 | `lang/<code>/phrases.json` | That language's text for each phrase `id`: `text`, `say` (pronunciation), optional `tones`, `note`, `spoken`, and `female` (the woman's form, with its own `text`, `say` and `spoken`, where a woman says the phrase differently) |
 | `lang/<code>/guide.html` | That language's pronunciation guide |
 | `lang/<code>/for-<base>/` | Written for speakers of another language (`for-es`: Spanish speakers): `notes.json` (that speaker's `say`, `note`, `tones` and `female` for each phrase, over the English ones; `"note": ""` drops an English note) and `guide.html`. In the language's own folder, `ui.json` translates the app's buttons and messages (English text → its own). A device downloads these only while that is the language it speaks |
@@ -52,7 +52,7 @@ text and Play all's audio, so only that pack and the one being learned are downl
 language you know removes the old one's pack, unless it is a language you chose to learn. Notes, "sounds like" spellings,
 guides and the app's buttons come from the `for-<code>` files written for its speakers (Spanish so far, written for Latin America, see the
 table above), and fall back to English wherever one isn't written yet; those files download only while it is the
-language you speak, and switching away removes them. `check_data.py` warns about any button or message `ui.json` misses. Learning the language you know (French from
+language you speak, and switching away removes them. `check_data.py` warns about any button or message `ui.json` misses. English to learn (`en-us`, with its own slower audio, separate from the English Play all uses) is hidden while you speak English, and English can't be chosen as the language you speak while you learn it. Learning the language you know (French from
 French) uses English instead, and so does a language you know that can't load yet (offline before it has
 downloaded). A link can set it too: `?lang=vi&speak=de` opens Vietnamese for a German speaker.
 

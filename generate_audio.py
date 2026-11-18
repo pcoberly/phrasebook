@@ -67,15 +67,15 @@ async def make_audio(code: str, language: dict, texts: dict, shared_ids: list, h
             out = AUDIO / code / folder / f"{phrase_id}.mp3"
             hkey = f"{code}/{folder}/{phrase_id}"
             if force or not out.exists() or hashes.get(hkey) != digest:
-                for attempt in range(5):  # the service sometimes answers 503 under load
+                for attempt in range(8):  # the service sometimes answers 503 or nothing under load
                     try:
                         await edge_tts.Communicate(text, voice, rate=rate, volume=VOLUME).save(str(out))
                         break
                     except Exception as err:
-                        if attempt == 4:
+                        if attempt == 7:
                             raise
                         print(f"retrying {hkey} ({err.__class__.__name__})")
-                        await asyncio.sleep(2 * (attempt + 1))
+                        await asyncio.sleep(5 * (attempt + 1))
                 hashes[hkey] = digest
                 write_json(HASHES, hashes, indent=1)
                 made += 1
