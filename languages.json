@@ -198,5 +198,18 @@
       "m": "tr-TR-AhmetNeural"
     },
     "bytes": 2472253
+  },
+  {
+    "code": "ar",
+    "name": "Arabic",
+    "native": "العربية",
+    "ttsLang": "ar-EG",
+    "rtl": true,
+    "draft": true,
+    "voices": {
+      "f": "ar-EG-SalmaNeural",
+      "m": "ar-EG-ShakirNeural"
+    },
+    "bytes": 2610820
   }
 ]
