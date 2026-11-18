@@ -248,5 +248,17 @@
       "m": "ar-MA-JamalNeural"
     },
     "bytes": 2553060
+  },
+  {
+    "code": "sw",
+    "name": "Swahili",
+    "native": "Kiswahili",
+    "ttsLang": "sw-TZ",
+    "draft": true,
+    "voices": {
+      "f": "sw-TZ-RehemaNeural",
+      "m": "sw-TZ-DaudiNeural"
+    },
+    "bytes": 2516018
   }
 ]
