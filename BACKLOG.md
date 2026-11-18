@@ -73,3 +73,13 @@ Keep the core free; offer the bigger extras (add-on packs, conversation mode, pe
 - **Paid content:** the repository is public, so paid files there could be found. Either accept that (most people won't look, and the price is small) or serve paid packs from a small private download service, such as Cloudflare's free tier.
 - **Quality first:** have native speakers check the content before charging for it (see Native-speaker review).
 
+## Tab bar when the app grows
+The bottom bar holds five tabs comfortably, and it's full (List, Cards, Quiz, Guide, More). When something needs a sixth (likely conversation mode, or speaking practice if it becomes its own screen), regroup by what someone is trying to do:
+
+- **Phrases:** "I need to say something now": the List, search, 🔊 and Play all. Keep it one tap away; it's the moment that matters on a trip.
+- **Practice:** "I'm learning": Cards, Quiz, and later speaking practice and conversations, chosen from a row of options at the top. New ways to practise go here, never into a new tab.
+- **Guide:** as now.
+- **More:** as now.
+
+Four tabs leaves room for a fifth if something big ever earns it. The cost is one extra tap to reach the quiz, fine for practice you sit down to do.
+
