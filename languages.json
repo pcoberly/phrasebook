@@ -211,5 +211,17 @@
       "m": "ar-EG-ShakirNeural"
     },
     "bytes": 2610820
+  },
+  {
+    "code": "pt-br",
+    "name": "Portuguese (Brazil)",
+    "native": "Português (Brasil)",
+    "ttsLang": "pt-BR",
+    "draft": true,
+    "voices": {
+      "f": "pt-BR-FranciscaNeural",
+      "m": "pt-BR-AntonioNeural"
+    },
+    "bytes": 2339641
   }
 ]
