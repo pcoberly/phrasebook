@@ -13,16 +13,15 @@ A banner for news such as a new language, a language checked by a native speaker
 ## New languages
 In priority order. All are learn-only, have a female and a male voice in edge-tts, and add about 2.5 MB each to the site (nothing to anyone's download unless they pick it). Each starts as a draft and joins the native-speaker review list.
 
-6. **Zulu.** South Africa's most spoken home language. English works there, but a Zulu greeting earns the smile; the click sounds make the audio valuable. Voices: zu-ZA.
-7. **Hindi.** English is common in cities and with educated people, less so elsewhere. Some phrases change with the speaker's gender. Voices: hi-IN.
-8. **Afrikaans.** English covers most travel in South Africa. Voices: af-ZA.
-9. **Swedish, Norwegian (Bokmål) and Danish.** Nearly everyone speaks excellent English, so travellers need them least, but they are the quickest to build (close relatives, no gendered forms): do all three in one go. Voices: sv-SE, nb-NO, da-DK.
+1. **Hindi.** English is common in cities and with educated people, less so elsewhere. Some phrases change with the speaker's gender. Voices: hi-IN.
+2. **Afrikaans.** English covers most travel in South Africa. Voices: af-ZA.
+3. **Swedish, Norwegian (Bokmål) and Danish.** Nearly everyone speaks excellent English, so travellers need them least, but they are the quickest to build (close relatives, no gendered forms): do all three in one go. Voices: sv-SE, nb-NO, da-DK.
 
 ## Favourites
 Use the star, kept free when skipping got the check circle, to mark favourite phrases, with a way to practise only those.
 
 ## Native-speaker review
-Every language marked `draft` needs checking by a native speaker: Korean, Hebrew, Indonesian, Tagalog, Thai, Russian, Turkish, Arabic, Moroccan Arabic, both Portugueses and Swahili, plus the German and French notes and guides. For Moroccan Arabic, first listen to whether the ar-MA voices sound like Darija or like Standard Arabic read aloud. Check first the ambulance numbers in the "I need a doctor" notes, then the Thai tone marks and the Khmer and Lao spellings.
+Every language marked `draft` needs checking by a native speaker: Korean, Hebrew, Indonesian, Tagalog, Thai, Russian, Turkish, Arabic, Moroccan Arabic, both Portugueses, Swahili and Zulu, plus the German and French notes and guides. For Moroccan Arabic, first listen to whether the ar-MA voices sound like Darija or like Standard Arabic read aloud. Check first the ambulance numbers in the "I need a doctor" notes, then the Thai tone marks and the Khmer and Lao spellings.
 
 ## Speaking practice
 Practise saying a phrase, in two steps.
