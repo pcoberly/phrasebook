@@ -36,6 +36,7 @@ Also possible later: Ukrainian (+38 million, today counted through Russian, whic
 Today the app can be used in English, Spanish, French or German (about 2.4 billion speakers, roughly 3 in 10 people). A Vietnamese speaker, for example, can't use it in Vietnamese. With English to learn (v91), coverage is the same 64% of the world whichever of the four you speak.
 
 - **More "I speak" languages.** The phrases exist in all 24 languages already. Each new one needs the app's menus and messages translated (`ui.json`), a help page, and notes written for its speakers. Biggest gains in people who could use the app: Chinese, Portuguese, Arabic, then Indonesian, Japanese, Vietnamese.
+- **Smaller "I speak" languages (next up).** Let speakers of other languages, such as Vietnamese, use the app in their own language but learn only a few key languages: English first, then a couple of big tourist languages for them (for Vietnamese, perhaps Chinese, Korean, Japanese or Thai). Each one needs the menus and messages (`ui.json`), a help page, and notes and sounds-like spellings only for its chosen languages (`lang/<code>/for-<base>/`). The app would offer only the languages written for that speaker. The phrases and audio already exist, including Play all audio in every language.
 - **British English to learn.** English to learn is American (en-us). A British version (en-gb) would mostly be a copy with the bill, the toilets, return tickets and British voices.
 
 ## Favourites
