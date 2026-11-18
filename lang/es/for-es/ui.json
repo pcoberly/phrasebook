@@ -1,4 +1,5 @@
 {
+ "Download": "Descargar",
  "Learned!": "¡Aprendida!",
  "If PhraseBook helps you, share it with your friends and fellow travelers.": "Si PhraseBook te ayuda, compártelo con tus amigos y otros viajeros.",
  "PhraseBook was born out of a love of travel and of connecting with people. There's nothing like the smile when a local hears you make the effort with a few phrases in their language.": "PhraseBook nació del amor por viajar y por conectar con la gente. No hay nada como la sonrisa de alguien del lugar cuando oye que haces el esfuerzo de decir unas frases en su idioma.",
@@ -58,7 +59,6 @@
  "Couldn't download. Check you're online and try again.": "No se pudo descargar. Comprueba que tienes conexión y vuelve a intentarlo.",
  "Direction": "Sentido",
  "Done": "Listo",
- "Download &amp; use": "Descargar y usar",
  "Downloaded": "Descargado",
  "Downloading {done} of {total}": "Descargando {done} de {total}",
  "Downloading {name}: {done} of {total}": "Descargando {name}: {done} de {total}",

@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v73";
+const VERSION = "phrasebook-v74";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -948,7 +948,7 @@ function progress(code) {
 }
 // a language is ready to learn: a pop-up in the middle of the screen, over a dimmed page, that leads to its phrases.
 // It stays until the person chooses.
-function readyDialog(lang, downloaded) {
+function readyDialog(lang, downloaded, start) {
   document.querySelector("dialog.ready")?.remove();
   const d = document.createElement("dialog");
   d.className = "ready";
@@ -963,7 +963,8 @@ function readyDialog(lang, downloaded) {
     <button class="later" data-later>${t("Not now")}</button>`;
   document.body.appendChild(d);
   const close = () => { d.close(); d.remove(); };
-  d.querySelector("[data-go]").onclick = () => { close(); goTo("list"); };
+  // "start" switches to a language that was only downloaded; one already switched to just opens its List
+  d.querySelector("[data-go]").onclick = async () => { close(); if (start) await start(); goTo("list"); };
   d.querySelector("[data-later]").onclick = close;
   d.addEventListener("click", (e) => { if (e.target === d) close(); }); // a tap on the dimmed page around it
   d.addEventListener("cancel", (e) => { e.preventDefault(); close(); }); // Escape
@@ -1431,7 +1432,7 @@ function languageRow(l, position, count) {
   const name = esc(langName(l));
   const buttons = state.busy[l.code] || active ? ""
     : ps === "installed" ? `<button class="mini" data-act="use">${t("Use")}</button><button class="mini ghost" data-act="remove" aria-label="${t("Remove {name} from this device", { name })}" title="${t("Remove from this device")}">✕</button>`
-    : `<button class="mini" data-act="download">${canCache ? t("Download &amp; use") : t("Use")}</button>`;
+    : `<button class="mini" data-act="download">${canCache ? t("Download") : t("Use")}</button>`;
   // arrows only for languages on the device, where the order matters
   const arrows = position < 0 ? "" : `
         <div class="mv">
@@ -1721,23 +1722,28 @@ function renderLanguages() {
       if (confirm(t("Remove {name} from this device? Your progress is kept.", { name: langName(lang) }))) { await removePack(code); renderLanguages(); }
       return;
     }
+    // switch to a language on the device
+    const switchTo = async () => {
+      await useLanguage(code);
+      if (canCache) syncKnownPack().catch(() => {});
+      track("language/" + code);
+      if (state.mode !== "languages" && state.mode !== "quiz") render();
+    };
     try {
-      const downloading = btn.dataset.act === "download" && canCache;
-      if (downloading) {
+      if (btn.dataset.act === "download" && canCache) {
+        // Download only downloads; the pop-up then offers to start it now, or it waits in the list with a Use button
         state.busy[code] = t("Starting…");
         const p = progress(code);
         renderLanguages();
         await syncPack(code, p);
         track("download/" + code);
+        delete state.busy[code];
+        delete state.dl[code];
+        readyDialog(lang, true, switchTo);
+      } else {
+        await switchTo();
+        readyDialog(lang, false);
       }
-      await useLanguage(code);
-      if (canCache) syncKnownPack().catch(() => {});
-      delete state.busy[code];
-      delete state.dl[code];
-      track("language/" + code);
-      // say so wherever the person is now, and offer the way to the phrases
-      readyDialog(lang, downloading);
-      if (state.mode !== "languages" && state.mode !== "quiz") render();
     } catch {
       delete state.dl[code];
       state.busy[code] = t("Couldn't download. Check you're online and try again.");
