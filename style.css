@@ -255,5 +255,5 @@ mark.hit { color: inherit; background: color-mix(in srgb, #f5c400 45%, transpare
 .help .sect ul { padding-left: 20px; margin: 8px 0; }
 .help .sect li { margin: 6px 0; }
 /* About: the why, in the founder's words */
-.why > h2.sh { margin-top: 14px; }
+.why { padding-top: 2px; }
 .why p { line-height: 1.55; }
