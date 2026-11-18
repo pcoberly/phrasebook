@@ -93,10 +93,13 @@ A failed check does not stop the site updating, so fix it promptly.
 - Nobody should ever need to delete and re-save the bookmark. Whenever the app opens or returns to the foreground
   with a connection it fetches the newest app files (the service worker asks the server every time, bypassing GitHub
   Pages' 10-minute cache), the newest phrase list, and only the language files that changed. A page that has been
-  open since before a release reloads itself, or shows "A new version is ready. Tap here to reload." mid-quiz.
+  open since before a release reloads itself, once the new version is stored on the device (its cache exists and the
+  service worker has finished installing), and comes back to the same page; the first start after an update shows a
+  short "PhraseBook was updated" note. It never interrupts: mid-quiz or during Play all the update waits and is applied
+  when the app is left (not while Play all plays with the screen locked) or at the next check.
   The app compares its own `VERSION` with `CACHE` in the server's `sw.js`, and only a higher number counts as an
-  update. It reloads by itself once per version, so a release that is still reaching GitHub's servers can't make it
-  reload over and over. Offline it just shows what is stored, and on a connection too slow to answer within 1 second
+  update. It reloads at most once per version every ten minutes, so a release that is still reaching GitHub's servers
+  can't make it reload over and over. Offline it just shows what is stored, and on a connection too slow to answer within 1 second
   it opens from what is stored and picks up the newer files in the background.
 - Downloading a language also asks the browser to keep it (`navigator.storage.persist()`); otherwise Safari may clear
   a website's storage after a week or so unused. A Home Screen app is not affected.

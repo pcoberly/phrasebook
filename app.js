@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v79";
+const VERSION = "phrasebook-v80";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1348,24 +1348,43 @@ function setTopics(picked) {
   stopPlayAll();
   render();
 }
-// A newer app version is reloaded at once unless a quiz round or Play all is under way, in which case the footer
-// offers it.
-// It reloads by itself only once for any one version: if the server is still part-way through a release and
-// hands back the old files, reloading again would go round in circles, so after that the footer offers it.
-function installUpdate(version) {
-  navigator.serviceWorker?.getRegistration().then((reg) => reg && reg.update()).catch(() => {});
+// A newer version on the server is applied by reloading, but only once the phone has it stored (the service worker
+// has installed it into its own cache): a reload before then could bring back the old version and ask again.
+// It never interrupts: in the middle of a quiz round or Play all it waits, and is applied when you leave the app
+// (except while Play all plays, which goes on with the screen locked) or at the next check after you're done.
+// After the reload you are back on the same page. If the server is still part-way through a release and hands back
+// the old files, it doesn't reload again for that version for ten minutes, so it can't go round in circles.
+const busyNow = () => {
   const r = state.round;
   const midRound = state.mode === "quiz" && r && r.index > 0 && r.index < r.items.length;
-  const busy = midRound || (playAll && playAll.playing); // don't cut off a round or the audio
-  if (!busy && store.get("phrasebook-reloaded-for", null) !== version) {
-    store.set("phrasebook-reloaded-for", version);
-    location.reload();
-    return;
+  return midRound || (playAll && playAll.playing);
+};
+async function newVersionStored(version) {
+  const reg = await navigator.serviceWorker?.getRegistration().catch(() => null);
+  if (!reg || !("caches" in window)) return true; // no offline copy to wait for: a reload fetches the new files
+  await reg.update().catch(() => {});
+  for (let i = 0; i < 30; i++) {
+    if ((await caches.has(version)) && !reg.installing && !reg.waiting) return true;
+    await sleep(1000);
   }
-  state.updateReady = true;
-  state.note = t("A new version is ready. Tap here to reload.");
-  updateStatus();
+  return false; // not there yet: the next check tries again
 }
+function applyUpdate(version) {
+  const last = store.get("phrasebook-reloaded-for", null);
+  if (last && last.v === version && Date.now() - last.at < 10 * 60000) return; // just tried this one
+  store.set("phrasebook-reloaded-for", { v: version, at: Date.now() });
+  store.set("phrasebook-resume", { mode: state.mode, at: Date.now() });
+  location.reload();
+}
+async function installUpdate(version) {
+  if (!(await newVersionStored(version))) return;
+  if (busyNow()) { state.pendingUpdate = version; return; }
+  applyUpdate(version);
+}
+document.addEventListener("visibilitychange", () => {
+  // leaving the app is a good moment for a waiting update, unless Play all is playing with the screen locked
+  if (document.hidden && state.pendingUpdate && !(playAll && playAll.playing)) applyUpdate(state.pendingUpdate);
+});
 // After the app has updated itself (usually by reloading as it opens, before anything shows), say so once: a short
 // notice at the top with the way to What's new, which closes by itself. Not on a first visit.
 function updatedNotice() {
@@ -1944,7 +1963,10 @@ async function boot() {
     track("tab/" + b.dataset.mode);
     goTo(b.dataset.mode);
   });
-  render();
+  const resume = store.get("phrasebook-resume", null);
+  store.remove("phrasebook-resume");
+  if (resume && Date.now() - resume.at < 60000 && !state.firstRun && resume.mode !== "list") goTo(resume.mode);
+  else render();
   hideSplash();
   updatedNotice();
   // how the app was opened: in its language, and from the Home Screen or from a browser tab
