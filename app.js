@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v81";
+const VERSION = "phrasebook-v82";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1487,9 +1487,9 @@ function languageRow(l, position, count) {
   return `
       <div class="lang${active ? " current" : state.busy[l.code] ? "" : " tap"}" data-lang="${l.code}">${arrows}
         <div class="linfo"><div class="lname">${active ? "✓ " : ""}${name} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
-          <div class="note">${line}</div>
-          ${state.busy[l.code] ? "" : position >= 0 || learnedFor(l.code).known ? progressLine(l.code) : ""}</div>
+          <div class="note">${line}</div></div>
         <div class="lbtn">${buttons}</div>
+        ${state.busy[l.code] ? "" : position >= 0 || learnedFor(l.code).known ? progressLine(l.code) : ""}
       </div>`;
 }
 // The languages: those on this device always in view, and below them a clear "Add a language" button that opens the

@@ -122,7 +122,7 @@ button.practise.on::before { content: "✓"; background: var(--good); border-col
 .mvb { width: 30px; height: 26px; padding: 0; font-size: 11px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--fg); }
 .mvb:disabled { opacity: .3; }
 .linfo { flex: 1; min-width: 0; }
-.lang { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 10px; margin: 8px 0; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+.lang { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 10px; margin: 8px 0; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
 .lang.current { border-color: var(--accent); }
 .lname { font-size: 18px; font-weight: 600; }
 .lbtn { display: flex; gap: 8px; flex: none; }
@@ -302,3 +302,8 @@ button.act.next { background: var(--fg); color: var(--bg); border-color: var(--f
     background: color-mix(in srgb, var(--accent) 5%, var(--card)); border-bottom: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line));
     box-shadow: 0 4px 14px rgb(0 0 0 / .06); }
 }
+/* the progress line has a line of its own at the bottom of a language row, under the name and the buttons, so the
+   buttons never squeeze it; it lines up with the name (after the arrows, where there are some) */
+.lang { row-gap: 2px; }
+.lang > .lprog { flex-basis: 100%; }
+.lang:has(> .mv) > .lprog { padding-left: 40px; }
