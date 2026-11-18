@@ -27,9 +27,6 @@ Practise saying a phrase, in two steps.
 
 Not planned: sound-by-sound scoring like Duolingo's needs a paid cloud service and a server, which would end PhraseBook being free, offline and private.
 
-## Why PhraseBook
-A section on why PhraseBook was made and the thinking behind it (free, offline, polite phrases, privacy), in your own words. Probably on the About page, translated into German, French and Spanish like the help.
-
 ## Donations
 A voluntary "☕ Support PhraseBook" link, which keeps the app in the free, non-commercial categories (GitHub Pages, GoatCounter) as long as it stays a gift: everyone gets the same app, and a donation never unlocks anything.
 
