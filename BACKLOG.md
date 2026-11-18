@@ -14,7 +14,6 @@ A banner for news such as a new language, a language checked by a native speaker
 In priority order. All are learn-only, have a female and a male voice in edge-tts, and add about 2.5 MB each to the site (nothing to anyone's download unless they pick it). Each starts as a draft and joins the native-speaker review list.
 
 2. **Moroccan Arabic (Darija).** We have plans for Morocco. Reuses the Arabic work, but Darija is quite different and has no standard spelling, so lean on the sounds-like spellings. Risk: the ar-MA voices were probably built to read Standard Arabic with a Moroccan accent, so listen to a few clips early and get a Moroccan to check. French, already in the app, is also widely used in Morocco.
-3. **Portuguese (Brazil).** The biggest reach on the list. Gendered thanks (obrigado/obrigada). Voices: pt-BR.
 4. **Portuguese (Portugal).** A separate language, since words (comboio/trem, casa de banho/banheiro, pequeno-almoço/café da manhã), forms of address and especially pronunciation differ. Quick once Brazilian exists: copy it and change what differs. Voices: pt-PT.
 5. **Swahili.** Kenya and Tanzania; English is patchy outside tourist areas. Spelled as it sounds, no tones, no gendered forms. Voices: sw-KE or sw-TZ.
 6. **Zulu.** South Africa's most spoken home language. English works there, but a Zulu greeting earns the smile; the click sounds make the audio valuable. Voices: zu-ZA.
@@ -26,7 +25,7 @@ In priority order. All are learn-only, have a female and a male voice in edge-tt
 Use the star, kept free when skipping got the check circle, to mark favourite phrases, with a way to practise only those.
 
 ## Native-speaker review
-Every language marked `draft` needs checking by a native speaker: Korean, Hebrew, Indonesian, Tagalog, Thai, Russian, Turkish and Arabic, plus the German and French notes and guides. Check first the ambulance numbers in the "I need a doctor" notes, then the Thai tone marks and the Khmer and Lao spellings.
+Every language marked `draft` needs checking by a native speaker: Korean, Hebrew, Indonesian, Tagalog, Thai, Russian, Turkish, Arabic and Portuguese (Brazil), plus the German and French notes and guides. Check first the ambulance numbers in the "I need a doctor" notes, then the Thai tone marks and the Khmer and Lao spellings.
 
 ## Speaking practice
 Practise saying a phrase, in two steps.
