@@ -278,3 +278,5 @@ mark.hit { color: inherit; background: color-mix(in srgb, #f5c400 45%, transpare
   .cheer { animation-name: cheer-fade; }
   @keyframes cheer-fade { 0%, 60% { opacity: 1; } 100% { opacity: 0; } }
 }
+/* the remove button on a downloaded language: a trash can */
+button.mini.ghost .trash { display: block; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }

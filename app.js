@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v74";
+const VERSION = "phrasebook-v75";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1431,7 +1431,7 @@ function languageRow(l, position, count) {
   const status = state.busy[l.code] || (active ? t("In use") : ps === "installed" ? t("Downloaded") + yours : ps === "partial" ? t("Partly downloaded") + yours : t("Not downloaded"));
   const name = esc(langName(l));
   const buttons = state.busy[l.code] || active ? ""
-    : ps === "installed" ? `<button class="mini" data-act="use">${t("Use")}</button><button class="mini ghost" data-act="remove" aria-label="${t("Remove {name} from this device", { name })}" title="${t("Remove from this device")}">✕</button>`
+    : ps === "installed" ? `<button class="mini" data-act="use">${t("Use")}</button><button class="mini ghost" data-act="remove" aria-label="${t("Remove {name} from this device", { name })}" title="${t("Remove from this device")}"><svg class="trash" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13M10 11v6M14 11v6"/></svg></button>`
     : `<button class="mini" data-act="download">${canCache ? t("Download") : t("Use")}</button>`;
   // arrows only for languages on the device, where the order matters
   const arrows = position < 0 ? "" : `
