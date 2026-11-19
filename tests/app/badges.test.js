@@ -52,6 +52,7 @@ test("Badges page: a collapsed section per language on the device; Languages sho
   assert.match(await page.locator("details.blang[data-code=ja] summary").innerText(), /🎯🙏/);
   await page.locator("details.blang[data-code=ja] summary").click();
   assert.strictEqual(await page.locator("details.blang[data-code=ja] .badge.on").count(), 2);
+  await page.waitForFunction(() => localStorage.getItem("phrasebook-badges-open")); // saved when the section opens
   assert.deepStrictEqual(await stored(page, "badges-open"), ["ja"]);
   await more(page, "languages");
   assert.match(await page.locator(".lang.current .lbadges").innerText(), /🙏/);

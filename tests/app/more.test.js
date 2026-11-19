@@ -24,6 +24,7 @@ test("Help is drawn as section cards", async () => {
 test("What's new lists the versions newest first, marking this one if it has an entry", async () => {
   const page = await open();
   await more(page, "changes");
+  await page.locator(".change").first().waitFor();
   const vs = (await page.locator(".change").evaluateAll((cs) => cs.map((c) => +c.dataset.v)));
   assert.deepStrictEqual(vs, [...vs].sort((a, b) => b - a));
   const current = await page.evaluate(() => +VERSION.replace("phrasebook-v", ""));
