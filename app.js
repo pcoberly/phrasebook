@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v99";
+const VERSION = "phrasebook-v100";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -106,7 +106,7 @@ const state = {
   mode: "list",
   topics: [],     // the topics chosen, as slugs ("food"); none means all of them
   progress: {},
-  skipped: new Set(), // ids of the phrases you chose not to practise in this language
+  skipped: new Set(), // ids of the phrases you chose not to practice in this language
   settings: {
     voice: store.get("phrasebook-voice", "f"), speed: store.get("phrasebook-speed", "1"), round: store.get("phrasebook-round", "20"),
     gap: store.get("phrasebook-gap", "2"), twice: store.get("phrasebook-twice", "no"), // Play all: seconds between, and say it twice
@@ -197,7 +197,7 @@ function cheer(learned, over = "#flip") {
   el.className = "cheer" + (learned ? " big" : "");
   el.setAttribute("aria-hidden", "true");
   el.innerHTML = learned ? `<span class="cmark">✓</span><span class="ctext">${t("Learned!")} ✨</span>` : `<span class="cmark">✓</span>`;
-  // centred on the card, wherever it sits on this screen
+  // centered on the card, wherever it sits on this screen
   const card = $(over)?.getBoundingClientRect();
   if (card && card.height) { el.style.left = card.left + card.width / 2 + "px"; el.style.top = card.top + card.height / 2 + "px"; }
   document.body.appendChild(el);
@@ -237,8 +237,8 @@ const LANG_BADGES = [ // earned again in each language
   badge("getting-around", "🚆", "Getting around", "The whole Getting Around topic"),
   badge("emergency", "🆘", "Emergency", "The whole Emergency topic"),
   badge("trip-ready", "✈️", "Trip-ready", "Polite basics, Counting and Emergency"),
-  badge("halfway", "🌗", "Halfway", "Half the cards you practise, learned"),
-  badge("whole-book", "🏅", "The whole book", "Every card you practise, learned"),
+  badge("halfway", "🌗", "Halfway", "Half the cards you practice, learned"),
+  badge("whole-book", "🏅", "The whole book", "Every card you practice, learned"),
 ];
 const POLITE = ["hello", "please", "thank-you", "excuse-me"];
 const OWN_ALPHABET = new Set(["ja", "km", "lo", "zh", "he", "ko", "th", "ru", "ar", "ary", "fa", "uk", "hi", "am", "el", "bg"]);
@@ -253,7 +253,7 @@ function progressOf(code) {
     skipped: mine ? state.skipped : new Set(store.get(skipKey(code), [])),
   };
 }
-// the language badges a language has reached now: a topic counts once each of its phrases you practise is learned,
+// the language badges a language has reached now: a topic counts once each of its phrases you practice is learned,
 // either way round (and at least half the topic is in practice); Polite basics needs both ways
 function langBadgesNow(code) {
   const { learned, skipped } = progressOf(code);
@@ -357,7 +357,7 @@ function renderBadges() {
   hint("");
 }
 
-// Phrases you don't want to practise (the beer phrase, if you don't drink), one list per language, shown as an empty
+// Phrases you don't want to practice (the beer phrase, if you don't drink), one list per language, shown as an empty
 // circle where the others have a filled ✓. Cards, new quiz rounds and Play all leave them out; the List still shows
 // them, faded. (Kept as "skipped" in storage, from when the control was a Skip link.)
 const skipKey = (code) => "phrasebook-skip-" + code;
@@ -476,14 +476,14 @@ function emptyTopic() {
   }
   return `<div class="card">${t(several ? "{name} has no phrases in these topics yet. Choose another topic." : "{name} has no phrases in this topic yet. Choose another topic.", { name: esc(langName(state.lang)) })}</div>`;
 }
-// The ✓ circle: practise this phrase, or (empty) leave it out
-function practiseButton(p) {
+// The ✓ circle: practice this phrase, or (empty) leave it out
+function practiceButton(p) {
   const on = !isSkipped(p);
-  return `<button class="practise${on ? " on" : ""}" data-skip="${p.id}" aria-pressed="${on}" aria-label="${t("Practise this phrase")}"></button>`;
+  return `<button class="practice${on ? " on" : ""}" data-skip="${p.id}" aria-pressed="${on}" aria-label="${t("Practice this phrase")}"></button>`;
 }
 // make every ✓ circle under root work; then(p, on) runs after each change
-function wirePractise(root, then = () => {}) {
-  root.querySelectorAll("button.practise").forEach((b) => b.onclick = (e) => {
+function wirePractice(root, then = () => {}) {
+  root.querySelectorAll("button.practice").forEach((b) => b.onclick = (e) => {
     e.stopPropagation();
     const p = state.phrases.find((x) => x.id === b.dataset.skip);
     const on = isSkipped(p); // tapping flips it
@@ -523,7 +523,7 @@ function renderCard() {
         </div>
       </div>
     </div>
-    ${practiseButton(p)}
+    ${practiceButton(p)}
     </div>
     <div class="detail" id="detail"></div>
     <div class="row sticky hidden" id="grades">
@@ -535,7 +535,7 @@ function renderCard() {
   if (fromLang) { $("#say").onclick = (e) => { e.stopPropagation(); speak(p); }; autoSpeak(p); }
   $("#say2").onclick = (e) => { e.stopPropagation(); speak(p); };
   // leaving it out keeps this card on screen (to grade, or to change your mind); it just won't come up again
-  wirePractise(main, (_, on) => say(on ? t("Back in practice.") : t("Left out of practice. Tap the circle again to keep it."), 4000));
+  wirePractice(main, (_, on) => say(on ? t("Back in practice.") : t("Left out of practice. Tap the circle again to keep it."), 4000));
   const toggle = () => {
     const flipped = flip.classList.toggle("flipped");
     flip.setAttribute("aria-pressed", flipped);
@@ -637,7 +637,7 @@ function renderQuiz() {
     <div class="roundbar"><span>${t("Question {n} of {total}", { n: number, total })}</span><span id="score">${t("{n} correct", { n: round.correct })}</span></div>
     <div class="bar"><i style="width:${Math.round(100 * round.index / total)}%"></i></div>
     <div class="card q">
-      ${practiseButton(p)}
+      ${practiceButton(p)}
       <div class="label">${t("Pick the {name}", { name: toLang ? name : esc(langName(state.known)) })}</div>
       <div class="big">${toLang ? own(p.known) : (listenOnly ? "🎧" : nat(p.text))}</div>
       ${toLang ? "" : `<button class="speak" id="say" aria-label="${t("Play")}">🔊</button>`}
@@ -646,7 +646,7 @@ function renderQuiz() {
     <div class="reveal" id="reveal"></div>
     <div class="row sticky hidden" id="nextrow"><button class="act next" id="next">${number === total ? t("See score") : t("Next")} →</button></div>`;
   if (!toLang) { $("#say").onclick = () => speak(p); autoSpeak(p); }
-  wirePractise(main, (_, on) => say(on ? t("Back in practice.") : t("Left out of later rounds. Tap the circle again to keep it."), 4000));
+  wirePractice(main, (_, on) => say(on ? t("Back in practice.") : t("Left out of later rounds. Tap the circle again to keep it."), 4000));
   const box = $("#choices");
   let answered = false;
   opts.forEach((o, i) => {
@@ -732,7 +732,7 @@ function entryHtml(p, fromFirst, withNote = true, withSkip = false) {
         </div>
         <div class="side">
           <button class="speak" data-id="${p.id}" aria-label="${t("Play")}">🔊</button>
-          ${withSkip ? practiseButton(p) : ""}
+          ${withSkip ? practiceButton(p) : ""}
         </div>
       </div>`;
 }
@@ -831,7 +831,7 @@ function renderList() {
     <div class="row sticky"><button class="act${playing ? "" : " good"}" id="playall">${playing ? t("⏸ Pause") : t("▶ Play all")}</button></div>`;
   wireSpeakButtons();
   // changed in place, so the List doesn't jump
-  wirePractise(main, (p, on) => main.querySelector(`[data-entry="${CSS.escape(p.id)}"]`).classList.toggle("skipped", !on));
+  wirePractice(main, (p, on) => main.querySelector(`[data-entry="${CSS.escape(p.id)}"]`).classList.toggle("skipped", !on));
   $("#playall").onclick = () => (playAll && playAll.playing ? pausePlayAll() : startPlayAll());
   if (playAll) markPlaying();
   else if (!state.query) hint(t("Tap 🔊 to hear a phrase, or ▶ to hear them all"));
@@ -1630,7 +1630,7 @@ function wireReorder() {
       const rows = [...box.querySelectorAll(".lang[data-pos]")];
       const rects = rows.map((r) => r.getBoundingClientRect());
       const from = rows.indexOf(row);
-      // how far a neighbour moves to make room: one row's height plus the space between rows
+      // how far a neighbor moves to make room: one row's height plus the space between rows
       const step = rows.length > 1 ? (from < rows.length - 1 ? rects[from + 1].top - rects[from].top : rects[from].top - rects[from - 1].top) : 0;
       const startY = e.clientY;
       let to = from;
@@ -1642,9 +1642,9 @@ function wireReorder() {
         const mid = rects[from].top + rects[from].height / 2 + dy;
         to = from;
         rects.forEach((r, i) => {
-          const centre = r.top + r.height / 2;
-          if (i < from && mid < centre) to = Math.min(to, i);
-          if (i > from && mid > centre) to = Math.max(to, i);
+          const center = r.top + r.height / 2;
+          if (i < from && mid < center) to = Math.min(to, i);
+          if (i > from && mid > center) to = Math.max(to, i);
         });
         rows.forEach((r, i) => {
           if (r === row) return;
@@ -1678,7 +1678,7 @@ function moveLanguage(code, delta) {
   [codes[i], codes[j]] = [codes[j], codes[i]];
   store.set(langOrderKey, codes);
 }
-// how far you've got in a language: cards learned out of the cards you practise (two per phrase not left out).
+// how far you've got in a language: cards learned out of the cards you practice (two per phrase not left out).
 // Progress is kept per language, also after its download is removed.
 function learnedFor(code) {
   const mine = code === state.lang.code;
@@ -2052,7 +2052,7 @@ function renderSettings() {
     ${sectionTitle("Left out of practice")}
     <div class="setting">
       <span>${skippedCount ? t(skippedCount === 1 ? "{n} phrase left out in {name}" : "{n} phrases left out in {name}", { n: skippedCount, name: esc(langName(state.lang)) }) : t("None. Tap a phrase's ✓ circle (in the List, on a card or in the quiz) to leave it out.")}</span>
-      ${skippedCount ? `<button class="act" id="unskip" style="flex:none">${t("Practise all")}</button>` : ""}
+      ${skippedCount ? `<button class="act" id="unskip" style="flex:none">${t("Practice all")}</button>` : ""}
     </div>
     ${sectionTitle("Play all")}
     <div class="setting">

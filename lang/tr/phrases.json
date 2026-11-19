@@ -52,7 +52,7 @@
   "train": {"text": "Tren", "say": "tren"},
   "bus": {"text": "Otobüs", "say": "oh-toh-BÜS", "note": "City buses and long-distance coaches alike"},
   "airport": {"text": "Havalimanı", "say": "hah-vah-lee-mah-NUH"},
-  "bus-station": {"text": "Otogar", "say": "oh-toh-GAR", "note": "The long-distance bus station, usually outside the city centre"},
+  "bus-station": {"text": "Otogar", "say": "oh-toh-GAR", "note": "The long-distance bus station, usually outside the city center"},
   "train-station": {"text": "Tren istasyonu", "say": "tren is-tas-yoh-NOO"},
   "where-train-station": {"text": "Tren istasyonu nerede?", "say": "tren is-tas-yoh-NOO NEH-reh-deh"},
   "where-bus-station": {"text": "Otogar nerede?", "say": "oh-toh-GAR NEH-reh-deh"},
@@ -75,7 +75,7 @@
   "sugar": {"text": "Şeker", "say": "sheh-KER"},
   "hot": {"text": "Sıcak", "say": "suh-JAK", "note": "Hot, and hot weather. Spicy is acı (ah-JUH)"},
   "cold": {"text": "Soğuk", "say": "soh-OOK", "note": "Cold, for drinks and the weather"},
-  "cheers": {"text": "Şerefe!", "say": "sheh-reh-FEH", "note": "Literally to honour"},
+  "cheers": {"text": "Şerefe!", "say": "sheh-reh-FEH", "note": "Literally to honor"},
   "help": {"text": "İmdat!", "say": "im-DAT"},
   "need-doctor": {"text": "Doktora ihtiyacım var", "say": "dok-toh-RAH ih-tee-yah-JUHM VAR", "note": "For an ambulance, call 112"},
   "pharmacy": {"text": "Eczane nerede?", "say": "ej-zah-NEH NEH-reh-deh", "note": "Look for the red E sign. A nöbetçi eczane is the pharmacy on night duty"}

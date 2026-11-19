@@ -10,7 +10,7 @@
   "youre-welcome": {"text": "Sama-sama", "say": "SAH-mah SAH-mah", "note": "Literally same-same"},
   "yes": {"text": "Ya", "say": "yah"},
   "no": {"text": "Tidak", "say": "TEE-dah", "note": "The final k is a catch in the throat, barely heard. In speech it is often nggak (ng-GAHK)"},
-  "excuse-me": {"text": "Permisi", "say": "pur-MEE-see", "note": "To get past someone or get attention. To apologise, say maaf (mah-AHF)"},
+  "excuse-me": {"text": "Permisi", "say": "pur-MEE-see", "note": "To get past someone or get attention. To apologize, say maaf (mah-AHF)"},
   "my-name": {"text": "Nama saya...", "say": "NAH-mah SAH-yah", "note": "Saya (I) and Anda (you) are polite and safe for a visitor"},
   "your-name": {"text": "Siapa nama Anda?", "say": "see-AH-pah NAH-mah AHN-dah"},
   "where-from": {"text": "Anda dari mana?", "say": "AHN-dah DAH-ree MAH-nah", "note": "The reply: Saya dari ... (SAH-yah DAH-ree), I'm from ..."},
@@ -76,7 +76,7 @@
   "hot": {"text": "Panas", "say": "PAH-nahs", "note": "Hot, and hot weather. Spicy is pedas (puh-DAHS)"},
   "cold": {"text": "Dingin", "say": "DEE-ngin", "note": "Cold. An iced drink takes es, ice: es teh"},
   "cheers": {"text": "Bersulang!", "say": "bur-SOO-lahng", "note": "The standard toast, though often people just raise a glass"},
-  "help": {"text": "Tolong!", "say": "TOH-long", "note": "The same word as please when asking a favour"},
+  "help": {"text": "Tolong!", "say": "TOH-long", "note": "The same word as please when asking a favor"},
   "need-doctor": {"text": "Saya perlu dokter", "say": "SAH-yah pur-LOO DOK-tur", "note": "For an ambulance, call 119"},
   "pharmacy": {"text": "Apotek di mana?", "say": "ah-poh-TEK dee MAH-nah", "note": "Signs say Apotek or Apotik"}
 }

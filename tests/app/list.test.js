@@ -33,7 +33,7 @@ test("search finds phrases in any topic, ignoring accents", async () => {
 test("leaving a phrase out fades it and is kept for that language", async () => {
   const page = await open();
   const row = page.locator(".entry[data-entry='beer']");
-  await row.locator("button.practise").click();
+  await row.locator("button.practice").click();
   assert.match(await row.getAttribute("class"), /skipped/);
   assert.deepStrictEqual(await stored(page, "skip-ja"), ["beer"]);
   await page.reload();

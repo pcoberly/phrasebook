@@ -62,7 +62,7 @@
   "where-bus-station": {"text": "Onde fica a rodoviária?", "say": "OHN-jee FEE-kah ah hoh-doh-vee-AH-ree-ah"},
   "which-train": {"text": "Qual trem vai para...?", "say": "kwah-OO trayn vy PAH-rah ...", "note": "Para (PAH-rah, often just prah) means to. The audio uses Campinas as the example", "spoken": "Qual trem vai para Campinas?", "filled": "Qual trem vai para ⟦Campinas⟧?"},
   "buy-ticket": {"text": "Onde compro a passagem?", "say": "OHN-jee KOHM-proo ah pah-SAH-zhayn", "note": "A passagem is a ticket for a journey. For the metro or a show it is a bilhete or ingresso"},
-  "two-tickets": {"text": "Duas passagens para..., por favor", "say": "DOO-ahs pah-SAH-zhayns PAH-rah ..., poor fah-VOR", "note": "The audio uses Paraty, a favourite coastal town, as the example", "spoken": "Duas passagens para Paraty, por favor", "filled": "Duas passagens para ⟦Paraty⟧, por favor"},
+  "two-tickets": {"text": "Duas passagens para..., por favor", "say": "DOO-ahs pah-SAH-zhayns PAH-rah ..., poor fah-VOR", "note": "The audio uses Paraty, a favorite coastal town, as the example", "spoken": "Duas passagens para Paraty, por favor", "filled": "Duas passagens para ⟦Paraty⟧, por favor"},
   "trip-length": {"text": "Quanto tempo leva a viagem até...?", "say": "KWAHN-too TEM-poo LEH-vah ah vee-AH-zhayn ah-TEH ...", "note": "The audio uses Paraty as the example", "spoken": "Quanto tempo leva a viagem até Paraty?", "filled": "Quanto tempo leva a viagem até ⟦Paraty⟧?"},
 
   "delicious": {"text": "Delicioso!", "say": "deh-lee-see-OH-zoo", "note": "Brazilians often say Que gostoso! (kee gohs-TOH-zoo) or Uma delícia!"},

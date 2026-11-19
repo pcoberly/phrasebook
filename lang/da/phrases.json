@@ -55,7 +55,7 @@
   "taxi": {"text": "Kan du ringe efter en taxa?", "say": "kan doo RING-e EF-ter een TAK-sa", "note": "Taxis are expensive. Cycling is how Danes get around: bikes are easy to rent"},
   "train": {"text": "Tog", "say": "toh"},
   "bus": {"text": "Bus", "say": "boos"},
-  "airport": {"text": "Lufthavn", "say": "LOFT-hown", "note": "Copenhagen Airport is Kastrup, 15 minutes from the centre by metro or train"},
+  "airport": {"text": "Lufthavn", "say": "LOFT-hown", "note": "Copenhagen Airport is Kastrup, 15 minutes from the center by metro or train"},
   "bus-station": {"text": "Busstation", "say": "BOOS-sta-shohn"},
   "train-station": {"text": "Banegården", "say": "BAA-ne-gor-en", "note": "The main station, such as Københavns Hovedbanegård in Copenhagen"},
   "where-train-station": {"text": "Hvor er banegården?", "say": "vor er BAA-ne-gor-en"},

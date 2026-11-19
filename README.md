@@ -61,7 +61,7 @@ downloaded). A link can set it too: `?lang=vi&speak=de` opens Vietnamese for a G
 The Topic button opens a checklist, so you can study several topics at once (Basics + Numbers before a market).
 Every phrase has a ✓ circle (in the List, in the corner of a card and of a quiz question). Tap it to empty it and
 leave that phrase out of practice, kept per language: cards, new quiz rounds and Play all skip it, and the List shows
-it faded. Tap again to bring it back, or use **Practise all** in Settings. (A star is kept free for favourites.)
+it faded. Tap again to bring it back, or use **Practice all** in Settings. (A star is kept free for favorites.)
 
 ## Common jobs
 
@@ -69,7 +69,7 @@ it faded. Tap again to bring it back, or use **Practise all** in Settings. (A st
 to every `lang/<code>/phrases.json`. Then run `python generate_audio.py` (needs `pip install edge-tts`).
 It makes only the missing or changed audio and rewrites each `pack.json`.
 
-**Add a language.** Add it to `languages.json` (copy a neighbour; pick `edge-tts` voices with
+**Add a language.** Add it to `languages.json` (copy a neighbor; pick `edge-tts` voices with
 `python -m edge_tts --list-voices`), create `lang/<code>/phrases.json` and `guide.html`, and run
 `python generate_audio.py`. For a right-to-left language add `"rtl": true`: the app then lines its phrases up on the
 right and keeps their punctuation on the correct side. Where a phrase changes with the speaker's gender, give it a

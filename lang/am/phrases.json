@@ -73,7 +73,7 @@
   "menu": {"text": "እባክዎ ሜኑ ይስጡኝ", "say": "i-BAK-wo ME-nu yis-TUGN"},
   "recommend": {"text": "ምን ይመክሩኛል?", "say": "min yi-mek-ru-GNAL", "note": "On Wednesdays, Fridays and during fasts, many dishes are vegan (ፆም, tsom)"},
   "beer": {"text": "አንድ ቢራ፣ እባክዎ", "say": "and BEE-ra, i-BAK-wo", "note": "Local beers include St. George and Habesha. Try ጠጅ (t'ej), honey wine"},
-  "coffee": {"text": "ቡና", "say": "BU-na", "note": "Ethiopia is coffee's homeland. Being invited to a coffee ceremony, three rounds roasted and brewed in front of you, is an honour"},
+  "coffee": {"text": "ቡና", "say": "BU-na", "note": "Ethiopia is coffee's homeland. Being invited to a coffee ceremony, three rounds roasted and brewed in front of you, is an honor"},
   "tea": {"text": "ሻይ", "say": "shay", "note": "Often spiced, with cinnamon or cloves"},
   "water": {"text": "ውሃ", "say": "wu-HA", "note": "Drink bottled water"},
   "milk": {"text": "ወተት", "say": "we-TET"},

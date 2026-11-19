@@ -73,7 +73,7 @@
   "menu": {"text": "Τον κατάλογο, παρακαλώ", "say": "ton ka-TA-lo-gho, pa-ra-ka-LO"},
   "recommend": {"text": "Τι προτείνετε;", "say": "tee pro-TEE-ne-te", "note": "Dishes are often shared: order a few mezédes for the table"},
   "beer": {"text": "Μια μπίρα, παρακαλώ", "say": "mya BEE-ra, pa-ra-ka-LO", "note": "Mythos and Fix are Greek beers. Ouzo is drunk with food, diluted with water"},
-  "coffee": {"text": "Καφές", "say": "ka-FES", "note": "Cold coffees, freddo espresso and frappé, are the summer favourites. Say how sweet: σκέτο (SKE-to) none, μέτριο (ME-tryo) medium, γλυκό (ghlee-KO) sweet"},
+  "coffee": {"text": "Καφές", "say": "ka-FES", "note": "Cold coffees, freddo espresso and frappé, are the summer favorites. Say how sweet: σκέτο (SKE-to) none, μέτριο (ME-tryo) medium, γλυκό (ghlee-KO) sweet"},
   "tea": {"text": "Τσάι", "say": "TSA-ee"},
   "water": {"text": "Νερό", "say": "ne-RO", "note": "Tap water is safe in most of Greece; on some islands, drink bottled"},
   "milk": {"text": "Γάλα", "say": "GHA-la"},

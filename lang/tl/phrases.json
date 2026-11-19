@@ -5,7 +5,7 @@
   "good-morning": {"text": "Magandang umaga", "say": "mah-gahn-DAHNG oo-MAH-gah", "note": "Add po for elders and strangers: Magandang umaga po"},
   "good-night": {"text": "Magandang gabi", "say": "mah-gahn-DAHNG gah-BEE", "note": "Both good evening and good night. At bedtime family and friends also say Tulog na (too-LOG nah), time to sleep"},
   "goodbye": {"text": "Paalam", "say": "pah-AH-lahm", "note": "Sounds final. People more often say Sige (SEE-geh), okay then, or Ingat (EE-ngaht), take care"},
-  "please": {"text": "Pakiusap", "say": "pah-kee-OO-sahp", "note": "Literally \"I ask a favour\". In everyday requests paki- goes on the verb (pakiulit, please repeat), and po makes it polite"},
+  "please": {"text": "Pakiusap", "say": "pah-kee-OO-sahp", "note": "Literally \"I ask a favor\". In everyday requests paki- goes on the verb (pakiulit, please repeat), and po makes it polite"},
   "thank-you": {"text": "Salamat po", "say": "sah-LAH-maht poh", "note": "Po makes it polite; to friends just salamat. The reply is walang anuman (wah-LAHNG ah-noo-MAHN)"},
   "youre-welcome": {"text": "Walang anuman", "say": "wah-LAHNG ah-noo-MAHN", "note": "Literally it's nothing"},
   "yes": {"text": "Opo", "say": "OH-poh", "note": "The polite yes, for elders and strangers. Oo (oh-OH) is the plain yes"},

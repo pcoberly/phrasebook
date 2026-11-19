@@ -72,7 +72,7 @@
   "table-for-two": {"text": "یک میز برای دو نفر، لطفاً", "say": "yek MEEZ ba-RAA-ye DO na-FAR, LOT-fan", "note": "For more people: سه نفر (SE na-FAR), 3, or چهار نفر (cha-HAAR na-FAR), 4"},
   "menu": {"text": "منو، لطفاً", "say": "me-NOO, LOT-fan"},
   "recommend": {"text": "چی پیشنهاد می‌کنید؟", "say": "CHEE peesh-na-HAAD mee-ko-NEED"},
-  "beer": {"text": "یک ماءالشعیر، لطفاً", "say": "yek maa-osh-SHA-eer, LOT-fan", "note": "Alcohol is illegal in Iran. Maa-osh-sha-eer is non-alcoholic malt beer, sold everywhere in many flavours"},
+  "beer": {"text": "یک ماءالشعیر، لطفاً", "say": "yek maa-osh-SHA-eer, LOT-fan", "note": "Alcohol is illegal in Iran. Maa-osh-sha-eer is non-alcoholic malt beer, sold everywhere in many flavors"},
   "coffee": {"text": "قهوه", "say": "GHAH-ve", "note": "Tea is far more common, but cafés with good coffee are everywhere in the cities"},
   "tea": {"text": "چای", "say": "chaai", "note": "Served all day, strong and without milk, often with a sugar cube, قند (ghand), held between the teeth"},
   "water": {"text": "آب", "say": "aab"},
