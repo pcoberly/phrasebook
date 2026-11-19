@@ -284,5 +284,30 @@
       "m": "en-US-GuyNeural"
     },
     "bytes": 2156358
+  },
+  {
+    "code": "fa",
+    "name": "Persian",
+    "native": "فارسی",
+    "ttsLang": "fa-IR",
+    "rtl": true,
+    "draft": true,
+    "voices": {
+      "f": "fa-IR-DilaraNeural",
+      "m": "fa-IR-FaridNeural"
+    },
+    "bytes": 2264180
+  },
+  {
+    "code": "uk",
+    "name": "Ukrainian",
+    "native": "Українська",
+    "ttsLang": "uk-UA",
+    "draft": true,
+    "voices": {
+      "f": "uk-UA-PolinaNeural",
+      "m": "uk-UA-OstapNeural"
+    },
+    "bytes": 2415062
   }
 ]
