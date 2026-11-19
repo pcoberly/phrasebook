@@ -1,16 +1,24 @@
 # Runs the release checks on every push and pull request, so a change made from a phone is checked too.
 # A failure shows a red ✗ beside the commit on GitHub and GitHub emails the person who pushed it.
+#
+# The app's browser tests: a push runs only the suites its changes need (tests/run.js decides, usually in seconds);
+# every night, and from the Actions tab ("Run workflow"), all of them run.
 name: Check
 
 on:
   push:
   pull_request:
+  schedule:
+    - cron: "23 7 * * *" # every night, all the browser tests
+  workflow_dispatch: # the "Run workflow" button: all the browser tests
 
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -21,3 +29,19 @@ jobs:
         run: python check_data.py
       - name: Service worker
         run: node tests/sw-test.js
+      - name: Browser tests
+        env:
+          PW_CHANNEL: chrome # the Chrome already on GitHub's machines, so no browser to download
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          npm install --no-save --no-package-lock --silent playwright-core@1.56.1
+          if [ "$EVENT" = schedule ] || [ "$EVENT" = workflow_dispatch ]; then
+            node tests/run.js --all
+          else
+            base="${PR_BASE:-$BEFORE}"
+            # the commit before this push, to compare with (a new branch has none: everything runs)
+            git fetch --quiet --depth=1 origin "$base" 2>/dev/null || true
+            node tests/run.js --base "$base"
+          fi

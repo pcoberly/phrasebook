@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v96";
+const VERSION = "phrasebook-v97";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1409,18 +1409,19 @@ function rebuildDirOptions() {
   sel.value = ["mixed", "to", "from"].includes(saved) ? saved : "mixed";
 }
 async function useLanguage(code) {
-  const previous = state.lang;
+  const previous = { lang: state.lang, progress: state.progress, skipped: state.skipped };
   const before = state.known.code;
+  // the language and its progress change together, so nothing in between counts (or saves) one language's progress as another's
   state.lang = state.languages.find((l) => l.code === code);
+  state.progress = store.get(progressKey(code), {});
+  loadSkipped();
   try {
     await loadLanguageData();
   } catch (err) {
-    state.lang = previous; // keep studying what we had
+    Object.assign(state, previous); // keep studying what we had
     throw err;
   }
   store.set("phrasebook-lang", code);
-  state.progress = store.get(progressKey(code), {});
-  loadSkipped();
   state.last = null;
   state.round = null;
   stopPlayAll();

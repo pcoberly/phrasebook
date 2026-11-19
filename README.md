@@ -93,6 +93,13 @@ against a fake network and cache (online, offline, slow connection, audio byte r
 push (`.github/workflows/check.yml`): a red ✗ beside the commit means something needs fixing, and GitHub emails you.
 A failed check does not stop the site updating, so fix it promptly.
 
+**Browser tests.** `tests/app/` holds the app's tests, one file per part of the app (cards, quiz, list, Play all,
+badges, languages, translations, layout, offline...), run in a real browser with the audio faked. `node tests/run.js`
+runs only the ones your changes need, in seconds: it picks them by file, and in `app.js` by the
+`// ---------- section ----------` headings (`--list` says which and why). `node tests/run.js --all` runs everything,
+in about half a minute; GitHub does that every night and from the Actions tab, and runs just the needed ones on each
+push. A new section in `app.js`, or a new kind of file, needs a line in `tests/run.js`; until then it runs everything.
+
 ## Things to know
 
 - Nobody should ever need to delete and re-save the bookmark. Whenever the app opens or returns to the foreground
