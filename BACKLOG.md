@@ -74,14 +74,6 @@ A post introducing PhraseBook.
 - **The link,** and an ask: try it before your next trip, share it, and if you're a native speaker of a draft language, help check it (see Native-speaker review).
 - Best after the app has settled for a while; I can draft the post and make the screenshots when you're ready.
 
-## Badges: celebrations and milestones, not pressure
-A little gamification that only ever celebrates: badges mark milestones you reach, and never punish or nag.
-
-- **Ideas:** first phrase, 25, 50 and every phrase learned in a language ("learned" as on the Languages page); a whole topic learned (Food, Getting Around, Emergency); two, three or five languages practised; a perfect quiz round; a Play all to the end; all the numbers; the polite basics (hello, please, thank you, excuse me) in a language; the guide read.
-- **No pressure:** no streaks, no losing a badge, no countdowns, no notifications. A small, cheerful pop-up when one is earned, then it's done.
-- **Where:** a Badges row in More (or a strip on the Languages page) showing what's earned and, faded, what's possible.
-- On the device only, like progress, and offline. Names in English, German, French and Spanish.
-
 ## Download size levers
 Not needed yet: `check_data.py` prints the sizes on every run and warns on GitHub when one passes its limit (a language 5 MB, a first download 8 MB). Audio is nearly all of it, about 30 KB per phrase per language, so a language reaches 5 MB at about 170 phrases. If a limit is hit, in rough order of effort:
 
