@@ -46,7 +46,7 @@ test("Good ear: a perfect round with Listening only on", async () => {
 });
 
 test("Badges page: a collapsed section per language on the device; Languages shows each language's", async () => {
-  const page = await open({ storage: { badges: { "first-quiz:ja": 1, "polite:ja": 1 }, "pack-fr": { complete: true } } });
+  const page = await open({ storage: { badges: { "first-quiz:ja": 1, "polite:ja": 1 }, "badges-fixed": true, "pack-fr": { complete: true } } });
   await more(page, "badges");
   assert.deepStrictEqual(await page.locator("details.blang").evaluateAll((ds) => ds.map((d) => [d.dataset.code, d.open])), [["ja", false], ["fr", false]]);
   assert.match(await page.locator("details.blang[data-code=ja] summary").innerText(), /🎯🙏/);
@@ -60,8 +60,21 @@ test("Badges page: a collapsed section per language on the device; Languages sho
 });
 
 test("badges earned once in all before move to the language in use", async () => {
-  const page = await open({ storage: { badges: { "first-quiz": 1, perfect: 1, "langs-2": 1 } } });
+  const quiz = { items: [], missed: [], index: 0, correct: 0, counted: false, cat: "all", dir: "mixed", size: "10" };
+  const page = await open({ storage: { badges: { "first-quiz": 1, perfect: 1, "langs-2": 1 }, "quiz-ja": quiz } });
   const got = await stored(page, "badges");
   assert.ok(got["first-quiz:ja"] && got["perfect:ja"] && got["langs-2"]);
   assert.ok(!got["first-quiz"] && !got.perfect);
+});
+
+test("quiz badges put on the wrong language are set right from each language's saved round", async () => {
+  const items = Array.from({ length: 10 }, (_, i) => ["hello", "to"]);
+  const page = await open({ storage: {
+    badges: { "perfect:ja": 1, "first-quiz:ja": 1, "polite:ja": 1 },
+    "quiz-es": { items, missed: [], index: 10, correct: 10, counted: true, cat: "all", dir: "mixed", size: "10", listen: false },
+  } });
+  const got = await stored(page, "badges");
+  assert.ok(!got["perfect:ja"] && !got["first-quiz:ja"], "no quiz was ever played in Japanese");
+  assert.ok(got["perfect:es"] && got["first-quiz:es"] && !got["good-ear:es"], "Spanish's saved perfect round");
+  assert.ok(got["polite:ja"], "other badges stay");
 });

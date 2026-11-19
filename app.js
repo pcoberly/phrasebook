@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v107";
+const VERSION = "phrasebook-v108";
 // The version people see: release.revision, such as 0.7.42. VERSION counts every release (it is what tells the app an
 // update is waiting); each release starts at its first VERSION number, and the revision counts on from there.
 // A new release (0.8, or 1.0) is one more line here, with the first VERSION number that belongs to it.
@@ -341,6 +341,23 @@ function firstBadges() {
     for (const id of moved) { if (id !== "first-words") old[id + ":" + state.lang.code] ||= old[id]; delete old[id]; }
     store.set(BADGE_KEY, old);
     checkBadges({ quiet: true });
+  }
+  // That move put them all on the language in use, which wasn't always the one they were earned in. Quiz badges are
+  // set right once: none in a language with no quiz played, and each language's saved round (its last) earns its own.
+  if (old !== null && !store.get("phrasebook-badges-fixed", false)) {
+    const got = store.get(BADGE_KEY, {});
+    for (const l of state.languages) {
+      const round = store.get(roundKey(l.code), null);
+      if (!round) for (const id of ["first-quiz", "perfect", "good-ear"]) delete got[id + ":" + l.code];
+      else if (round.counted) {
+        got["first-quiz:" + l.code] ||= Date.now();
+        const perfect = round.items.length >= 10 && round.correct === round.items.length;
+        if (perfect) got["perfect:" + l.code] ||= Date.now();
+        if (perfect && round.listen) got["good-ear:" + l.code] ||= Date.now();
+      }
+    }
+    store.set(BADGE_KEY, got);
+    store.set("phrasebook-badges-fixed", true);
   }
   if (old !== null) { checkBadges(); return; }
   const n = checkBadges({ quiet: true }).length;
