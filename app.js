@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v105";
+const VERSION = "phrasebook-v106";
 // The version people see: release.revision, such as 0.7.42. VERSION counts every release (it is what tells the app an
 // update is waiting); each release starts at its first VERSION number, and the revision counts on from there.
 // A new release (0.8, or 1.0) is one more line here, with the first VERSION number that belongs to it.

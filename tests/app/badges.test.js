@@ -16,7 +16,7 @@ test("someone with progress already gets one note for all their badges", async (
 
 test("a badge is earned the moment it is reached, and only once", async () => {
   const later = Date.now() + 86400000;
-  const page = await open({ storage: { badges: {}, topics: ["emergency"], dir: "to", "progress-ja": { "help:to": { box: 2, due: 0 }, "need-doctor:to": { box: 1, due: later }, "pharmacy:to": { box: 1, due: later } } } });
+  const page = await open({ storage: { badges: {}, topics: ["emergency"], dir: "to", "progress-ja": { "help:to": { box: 2, due: 0 }, "need-doctor:to": { box: 1, due: later }, "pharmacy:to": { box: 1, due: later }, "leave-me-alone:to": { box: 1, due: later } } } });
   await page.locator(".tab[data-mode='cards']").click();
   await page.locator("#flip").click({ position: { x: 12, y: 12 } });
   await page.locator("#got").click();

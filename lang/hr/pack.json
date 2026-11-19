@@ -1,7 +1,7 @@
 {
- "bytes": 2336093,
+ "bytes": 2614201,
  "files": {
-  "lang/hr/phrases.json": "4545d62ecc29",
+  "lang/hr/phrases.json": "7b04f71a5437",
   "lang/hr/guide.html": "e6315c11215e",
   "audio/hr/f/hello.mp3": "dc7d4625f5ac",
   "audio/hr/f/how-are-you.mp3": "9118cbdfb892",
@@ -19,6 +19,7 @@
   "audio/hr/f/your-name.mp3": "4eef7075a9d2",
   "audio/hr/f/where-from.mp3": "f9a17d2ff6e6",
   "audio/hr/f/its-beautiful.mp3": "d9bc9c069b48",
+  "audio/hr/f/lets-go.mp3": "766285f2757b",
   "audio/hr/f/dont-understand.mp3": "a8a316e5ec9b",
   "audio/hr/f/speak-slowly.mp3": "812388f7ba29",
   "audio/hr/f/repeat.mp3": "29c92064064b",
@@ -52,6 +53,8 @@
   "audio/hr/f/wifi.mp3": "9427f953b1a6",
   "audio/hr/f/toilet.mp3": "53b5dcffb224",
   "audio/hr/f/taxi.mp3": "d8bc6e4c5430",
+  "audio/hr/f/left.mp3": "de148cac4741",
+  "audio/hr/f/right.mp3": "e82a641c25e0",
   "audio/hr/f/train.mp3": "3c073e2aa490",
   "audio/hr/f/bus.mp3": "fa9ff244e0f1",
   "audio/hr/f/airport.mp3": "188eeee98afe",
@@ -65,6 +68,8 @@
   "audio/hr/f/trip-length.mp3": "0117849d501e",
   "audio/hr/f/delicious.mp3": "3ad24a93c978",
   "audio/hr/f/allergic.mp3": "f7c1d68cf7d9",
+  "audio/hr/f/vegetarian.mp3": "890b4586d2d0",
+  "audio/hr/f/vegan.mp3": "05bb9d3cc568",
   "audio/hr/f/love-dish.mp3": "5cb70be2a4d4",
   "audio/hr/f/what-called.mp3": "9c1fa9c56017",
   "audio/hr/f/table-for-two.mp3": "bce653c465ec",
@@ -76,11 +81,17 @@
   "audio/hr/f/water.mp3": "bb9bd37dc179",
   "audio/hr/f/milk.mp3": "d5898072ee9f",
   "audio/hr/f/sugar.mp3": "8f3d85cf34d0",
+  "audio/hr/f/rice.mp3": "d0a41ecf2ea4",
+  "audio/hr/f/chicken.mp3": "98bbc6e31292",
+  "audio/hr/f/beef.mp3": "a5303b4e8ec3",
+  "audio/hr/f/pork.mp3": "d9c8dc84e4ff",
+  "audio/hr/f/fish.mp3": "41c67ce691b1",
   "audio/hr/f/hot.mp3": "c15420aefbee",
   "audio/hr/f/cold.mp3": "3b9c1106a4f1",
   "audio/hr/f/cheers.mp3": "d0c606870893",
   "audio/hr/f/bill.mp3": "e782b4450abf",
   "audio/hr/f/help.mp3": "efff297d56a6",
+  "audio/hr/f/leave-me-alone.mp3": "092ce31b74f1",
   "audio/hr/f/need-doctor.mp3": "1d638ab1f424",
   "audio/hr/f/pharmacy.mp3": "64d16e868f7a",
   "audio/hr/m/hello.mp3": "1d67e1ed7fee",
@@ -99,6 +110,7 @@
   "audio/hr/m/your-name.mp3": "a2053404f45a",
   "audio/hr/m/where-from.mp3": "b1cdec64dfea",
   "audio/hr/m/its-beautiful.mp3": "4a9c395e4b8f",
+  "audio/hr/m/lets-go.mp3": "e17e2f260249",
   "audio/hr/m/dont-understand.mp3": "9e9ad68d3cee",
   "audio/hr/m/speak-slowly.mp3": "627629dce799",
   "audio/hr/m/repeat.mp3": "937e654ac291",
@@ -132,6 +144,8 @@
   "audio/hr/m/wifi.mp3": "dbcd670e57d6",
   "audio/hr/m/toilet.mp3": "edc9720299be",
   "audio/hr/m/taxi.mp3": "40acbf0d9943",
+  "audio/hr/m/left.mp3": "cb9669950523",
+  "audio/hr/m/right.mp3": "6254709ca4a7",
   "audio/hr/m/train.mp3": "2bed0a756f07",
   "audio/hr/m/bus.mp3": "9da8d6f0286a",
   "audio/hr/m/airport.mp3": "e439ca626dc8",
@@ -145,6 +159,8 @@
   "audio/hr/m/trip-length.mp3": "2ecc48cef581",
   "audio/hr/m/delicious.mp3": "42d9fff166ea",
   "audio/hr/m/allergic.mp3": "5043c0cb3f67",
+  "audio/hr/m/vegetarian.mp3": "2993b629ea37",
+  "audio/hr/m/vegan.mp3": "69334db9e39f",
   "audio/hr/m/love-dish.mp3": "fca4a19bfdf1",
   "audio/hr/m/what-called.mp3": "329ec3d528e7",
   "audio/hr/m/table-for-two.mp3": "d32d8078d7f0",
@@ -156,26 +172,32 @@
   "audio/hr/m/water.mp3": "26ce6e94fa79",
   "audio/hr/m/milk.mp3": "e2771c3b7cfe",
   "audio/hr/m/sugar.mp3": "e133aaa4df3e",
+  "audio/hr/m/rice.mp3": "b99649b354b3",
+  "audio/hr/m/chicken.mp3": "754e9b6bbe04",
+  "audio/hr/m/beef.mp3": "1088e213e8e3",
+  "audio/hr/m/pork.mp3": "28a66af2c99d",
+  "audio/hr/m/fish.mp3": "24f5c0b92acf",
   "audio/hr/m/hot.mp3": "4feb1a7805f1",
   "audio/hr/m/cold.mp3": "1c7f343b245b",
   "audio/hr/m/cheers.mp3": "a7383d2f1c24",
   "audio/hr/m/bill.mp3": "00045d2aec45",
   "audio/hr/m/help.mp3": "e518889ee9ac",
+  "audio/hr/m/leave-me-alone.mp3": "4b9cb97f087b",
   "audio/hr/m/need-doctor.mp3": "0cfaefdec359",
   "audio/hr/m/pharmacy.mp3": "6bb3d3c839d2"
  },
  "forBase": {
   "de": {
    "lang/hr/for-de/guide.html": "e5871a865207",
-   "lang/hr/for-de/notes.json": "60449bdb1f13"
+   "lang/hr/for-de/notes.json": "f117e16c821f"
   },
   "es": {
    "lang/hr/for-es/guide.html": "75a5cd3d2dff",
-   "lang/hr/for-es/notes.json": "4b4f8044ed24"
+   "lang/hr/for-es/notes.json": "fa4b0b7a1eb4"
   },
   "fr": {
    "lang/hr/for-fr/guide.html": "127e3ee4edd8",
-   "lang/hr/for-fr/notes.json": "d2c66cbcb81e"
+   "lang/hr/for-fr/notes.json": "4d93a68c6e91"
   }
  }
 }
