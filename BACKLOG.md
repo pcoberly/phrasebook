@@ -42,6 +42,15 @@ Today the app can be used in English, Spanish, French or German (about 2.4 billi
   - **Candidates after Vietnamese**, by outbound travel and weak English: Japanese (katakana suits sounds-like spellings well), Korean (hangul too), Brazilian Portuguese (cheap, close to the Spanish work), Chinese (most travellers, but characters fit sounds-like spellings badly; use pinyin), Russian, Arabic. Check outbound-travel numbers and top destinations before choosing each one's full targets.
 - **British English to learn.** English to learn is American (en-us). A British version (en-gb) would mostly be a copy with the bill, the toilets, return tickets and British voices.
 
+## Translate anything (online only)
+When search finds nothing ("No phrase matches 'where is the ferry'"), offer "Translate it with Google Translate ↗": a link carrying the two languages and the text, which opens Google Translate (its app, if installed) ready-translated, with its own audio.
+
+- **A link, not built in:** Google's and DeepL's APIs need a key, which would be public in the app (anyone could run up the bill) unless hidden behind a server, ending "free, no server". Chrome's built-in translator is desktop only; nothing on iPhone. A typed translation would also have no native audio, sounds-like spelling or politeness check.
+- **Offline:** hide the link, or say it needs a connection.
+- **Privacy:** the text goes to Google only when the person taps; say so on the About page.
+- **Language codes:** map the few that differ (Norwegian, the two Portugueses, Chinese; Moroccan Arabic probably falls back to Standard Arabic). Check each.
+- About 30 minutes, plus a test in the list suite. Later it pairs with Custom phrases: look it up, then save it to your own list.
+
 ## Favourites
 Use the star, kept free when skipping got the check circle, to mark favourite phrases, with a way to practise only those.
 
