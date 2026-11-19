@@ -55,7 +55,7 @@ C = [
  ("Philippines", "Asia", 116, "tl en", ""), ("Vietnam", "Asia", 101, "vi", ""), ("Thailand", "Asia", 72, "th", ""),
  ("Myanmar", "Asia", 54, "", ""), ("South Korea", "Asia", 52, "ko", ""), ("Afghanistan", "Asia", 43, "fa", ""),
  ("Uzbekistan", "Asia", 36, "", "ru"), ("Malaysia", "Asia", 35, "en zh", "id"), ("Nepal", "Asia", 31, "", "en hi"),
- ("North Korea", "Asia", 26, "ko", ""), ("Taiwan", "Asia", 23, "zh", ""), ("Sri Lanka", "Asia", 23, "", "en"),
+ ("North Korea", "Asia", 26, "ko", ""), ("Taiwan", "Asia", 23, "zh", ""), ("Sri Lanka", "Asia", 23, "si", "en"),
  ("Kazakhstan", "Asia", 20, "ru", ""), ("Cambodia", "Asia", 18, "km", ""), ("Tajikistan", "Asia", 10.6, "", "ru fa"),
  ("Hong Kong", "Asia", 7.4, "zh en", ""), ("Papua New Guinea", "Oceania", 10.6, "en", ""), ("Laos", "Asia", 7.8, "lo", "th"),
  ("Kyrgyzstan", "Asia", 7.2, "ru", ""), ("Turkmenistan", "Asia", 7.5, "", "ru"), ("Singapore", "Asia", 5.9, "en zh", "id"),

@@ -465,5 +465,17 @@
       "m": "bg-BG-BorislavNeural"
     },
     "bytes": 2376054
+  },
+  {
+    "code": "si",
+    "name": "Sinhala",
+    "native": "සිංහල",
+    "ttsLang": "si-LK",
+    "draft": true,
+    "voices": {
+      "f": "si-LK-ThiliniNeural",
+      "m": "si-LK-SameeraNeural"
+    },
+    "bytes": 2328109
   }
 ]

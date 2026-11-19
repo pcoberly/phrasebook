@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v100";
+const VERSION = "phrasebook-v101";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -241,7 +241,7 @@ const LANG_BADGES = [ // earned again in each language
   badge("whole-book", "🏅", "The whole book", "Every card you practice, learned"),
 ];
 const POLITE = ["hello", "please", "thank-you", "excuse-me"];
-const OWN_ALPHABET = new Set(["ja", "km", "lo", "zh", "he", "ko", "th", "ru", "ar", "ary", "fa", "uk", "hi", "am", "el", "bg"]);
+const OWN_ALPHABET = new Set(["ja", "km", "lo", "zh", "he", "ko", "th", "ru", "ar", "ary", "fa", "uk", "hi", "am", "el", "bg", "si"]);
 const TONAL = new Set(["vi", "th", "lo", "zh"]);
 const BOOK_MIN = 40; // Halfway and The whole book need at least this many phrases in practice, so leaving out most can't earn them
 const earnedBadges = () => store.get(BADGE_KEY, {});
