@@ -417,5 +417,53 @@
       "m": "ro-RO-EmilNeural"
     },
     "bytes": 2364692
+  },
+  {
+    "code": "sv",
+    "name": "Swedish",
+    "native": "Svenska",
+    "ttsLang": "sv-SE",
+    "draft": true,
+    "voices": {
+      "f": "sv-SE-SofieNeural",
+      "m": "sv-SE-MattiasNeural"
+    },
+    "bytes": 2637466
+  },
+  {
+    "code": "nb",
+    "name": "Norwegian",
+    "native": "Norsk",
+    "ttsLang": "nb-NO",
+    "draft": true,
+    "voices": {
+      "f": "nb-NO-PernilleNeural",
+      "m": "nb-NO-FinnNeural"
+    },
+    "bytes": 2401184
+  },
+  {
+    "code": "fi",
+    "name": "Finnish",
+    "native": "Suomi",
+    "ttsLang": "fi-FI",
+    "draft": true,
+    "voices": {
+      "f": "fi-FI-NooraNeural",
+      "m": "fi-FI-HarriNeural"
+    },
+    "bytes": 2463450
+  },
+  {
+    "code": "bg",
+    "name": "Bulgarian",
+    "native": "Български",
+    "ttsLang": "bg-BG",
+    "draft": true,
+    "voices": {
+      "f": "bg-BG-KalinaNeural",
+      "m": "bg-BG-BorislavNeural"
+    },
+    "bytes": 2376054
   }
 ]

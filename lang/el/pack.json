@@ -167,15 +167,15 @@
  "forBase": {
   "de": {
    "lang/el/for-de/guide.html": "95d054bb150f",
-   "lang/el/for-de/notes.json": "10f93fb2c94d"
+   "lang/el/for-de/notes.json": "861887ae116b"
   },
   "es": {
    "lang/el/for-es/guide.html": "a154f8613ef6",
-   "lang/el/for-es/notes.json": "a7ec0e6907c9"
+   "lang/el/for-es/notes.json": "d288348eabce"
   },
   "fr": {
    "lang/el/for-fr/guide.html": "27a75b099073",
-   "lang/el/for-fr/notes.json": "8a7022d9870e"
+   "lang/el/for-fr/notes.json": "976fdf8439ae"
   }
  }
 }
