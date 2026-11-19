@@ -1,7 +1,14 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v103";
+const VERSION = "phrasebook-v104";
+// The version people see: release.revision, such as 0.7.42. VERSION counts every release (it is what tells the app an
+// update is waiting); each release starts at its first VERSION number, and the revision counts on from there.
+// A new release (0.8, or 1.0) is one more line here, with the first VERSION number that belongs to it.
+const RELEASES = [[61, "0.7"], [34, "0.6"], [1, "0.5"]]; // 0.5 to October 22, 0.6 from October 29, 0.7 from November 17
+const releaseOf = (n) => RELEASES.find(([first]) => n >= first) || RELEASES[RELEASES.length - 1];
+const versionName = (n) => { const [first, name] = releaseOf(n); return `${name}.${n - first}`; };
+const versionNumber = (v) => Number(/(\d+)$/.exec(v || "")?.[1] || 0);
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1108,14 +1115,24 @@ async function renderChanges() {
     return esc(it[state.base] || it.en);
   };
   const when = (d) => new Date(d + "T12:00:00").toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
+  const releases = [];
+  for (const c of state.changes) {
+    const [, name] = releaseOf(c.v);
+    if (!releases.length || releases[releases.length - 1].name !== name) releases.push({ name, changes: [] });
+    releases[releases.length - 1].changes.push(c);
+  }
   main.innerHTML = `
     ${backToMore()}
     <h2 class="group">${t("What's new")}</h2>
-    ${state.changes.map((c) => `
-      <div class="change">
-        <div class="ver">${t("version {v}", { v: "v" + c.v })} · ${when(c.date)}${c.v === current ? ` · <b>${t("This version")}</b>` : ""}</div>
-        <ul>${c.items.map((it) => `<li>${item(it)}</li>`).join("")}</ul>
-      </div>`).join("")}`;
+    ${releases.map((r, i) => `
+      <details class="release"${i === 0 ? " open" : ""}>
+        <summary><b>${r.name}</b> <span class="note">${when(r.changes[r.changes.length - 1].date)} – ${when(r.changes[0].date)}</span></summary>
+        ${r.changes.map((c) => `
+        <div class="change" data-v="${c.v}">
+          <div class="ver">${t("version {v}", { v: versionName(c.v) })} · ${when(c.date)}${c.v === current ? ` · <b>${t("This version")}</b>` : ""}</div>
+          <ul>${c.items.map((it) => `<li>${item(it)}</li>`).join("")}</ul>
+        </div>`).join("")}
+      </details>`).join("")}`;
   wireBack();
   hint("");
 }
@@ -1608,7 +1625,7 @@ function updatedNotice() {
   const el = document.createElement("div");
   el.className = "updated";
   el.setAttribute("role", "status");
-  el.innerHTML = `<span>✓ ${t("PhraseBook was updated to {v}", { v: esc(VERSION.replace("phrasebook-", "")) })}</span>
+  el.innerHTML = `<span>✓ ${t("PhraseBook was updated to {v}", { v: versionName(versionNumber(VERSION)) })}</span>
     <button class="ulink">${t("What's new")}</button><button class="uclose" aria-label="${t("Close")}">✕</button>`;
   document.body.appendChild(el);
   const close = () => { el.classList.add("gone"); setTimeout(() => el.remove(), 300); };
@@ -1826,7 +1843,7 @@ const menuRow = (id, label, sub, chevron = true) => `
       <span class="mt"><span class="ml">${label}</span>${sub ? `<span class="ms">${sub}</span>` : ""}</span>
       ${chevron ? `<span class="mc" aria-hidden="true">›</span>` : ""}
     </button>`;
-const versionLabel = () => (state.version ? t("version {v}", { v: esc(state.version.replace("phrasebook-", "")) }) : "");
+const versionLabel = () => (state.version ? t("version {v}", { v: versionName(versionNumber(state.version)) }) : "");
 function renderMore() {
   const { installed } = installInfo();
   main.innerHTML = `
@@ -1966,7 +1983,7 @@ async function sendLink(button) {
 function feedbackParts() {
   const to = ["pcob47-pb", "yahoo.com"].join("@");
   const subject = "PhraseBook feedback";
-  const body = `Hi! My feedback about PhraseBook:\n\n\n\n(To report a wrong or missing phrase, tell me the language and the phrase.)\n---\nLanguage: ${state.lang.name}\nVersion: ${state.version || "unknown"}`;
+  const body = `Hi! My feedback about PhraseBook:\n\n\n\n(To report a wrong or missing phrase, tell me the language and the phrase.)\n---\nLanguage: ${state.lang.name}\nVersion: ${state.version ? versionName(versionNumber(state.version)) + " (" + state.version + ")" : "unknown"}`;
   const q = (o) => Object.entries(o).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join("&");
   return {
     to,

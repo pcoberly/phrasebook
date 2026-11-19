@@ -24,7 +24,7 @@ test("Help is drawn as section cards", async () => {
 test("What's new lists the versions newest first, marking this one if it has an entry", async () => {
   const page = await open();
   await more(page, "changes");
-  const vs = (await page.locator(".change .ver").allInnerTexts()).map((t) => +/v(\d+)/.exec(t)[1]);
+  const vs = (await page.locator(".change").evaluateAll((cs) => cs.map((c) => +c.dataset.v)));
   assert.deepStrictEqual(vs, [...vs].sort((a, b) => b - a));
   const current = await page.evaluate(() => +VERSION.replace("phrasebook-v", ""));
   const marked = await page.locator(".change", { hasText: "This version" }).count();
@@ -47,4 +47,15 @@ test("Share shows a QR code that works offline, and Send the link", async () => 
   assert.match(await page.locator("dialog.share .qrurl").innerText(), /pcoberly\.github\.io\/phrasebook/);
   await page.locator("dialog.share [data-close]").click();
   assert.strictEqual(await page.locator("dialog.share").count(), 0);
+});
+
+test("versions read as release.revision, and What's new folds each release, the newest open", async () => {
+  const page = await open();
+  assert.strictEqual(await page.evaluate(() => [versionName(1), versionName(33), versionName(34), versionName(60), versionName(61), versionName(103)].join(" ")),
+    "0.5.0 0.5.32 0.6.0 0.6.26 0.7.0 0.7.42");
+  await more(page, "changes");
+  await page.locator("details.release").first().waitFor();
+  const rel = await page.locator("details.release").evaluateAll((ds) => ds.map((d) => [d.querySelector("summary b").textContent, d.open]));
+  assert.deepStrictEqual(rel, [["0.7", true], ["0.6", false], ["0.5", false]]);
+  assert.match(await page.locator(".change .ver").first().innerText(), /version 0\.7\.\d+/);
 });

@@ -356,3 +356,10 @@ details.blang .bln { flex: 1; min-width: 0; font-weight: 600; }
 details.blang .blc { flex: none; text-align: right; letter-spacing: 1px; }
 details.blang .badges { margin: 0 12px 12px; }
 details.blang .badge { background: var(--bg); }
+/* What's new: one folded section per release (0.7, 0.6...), the newest open */
+details.release { margin: 10px 0; border: 1px solid var(--line); border-radius: 16px; background: var(--card); padding: 0 14px; }
+details.release > summary { display: flex; align-items: baseline; gap: 10px; padding: 12px 0; cursor: pointer; list-style: none; font-size: 18px; }
+details.release > summary::-webkit-details-marker { display: none; }
+details.release > summary::after { content: "›"; margin-left: auto; color: var(--muted); font-size: 22px; transition: transform .2s; }
+details.release[open] > summary::after { transform: rotate(90deg); }
+details.release .change:last-child { padding-bottom: 12px; }
