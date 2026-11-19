@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v108";
+const VERSION = "phrasebook-v109";
 // The version people see: release.revision, such as 0.7.42. VERSION counts every release (it is what tells the app an
 // update is waiting); each release starts at its first VERSION number, and the revision counts on from there.
 // A new release (0.8, or 1.0) is one more line here, with the first VERSION number that belongs to it.
@@ -231,7 +231,34 @@ const BADGES = [ // once each, across your languages
   badge("langs-10", "🌍", "Ten languages", "Cards learned in ten languages"),
   badge("alphabet", "✍️", "New alphabet", "A card learned in a language with its own alphabet"),
   badge("tones", "🎵", "Tones", "A card learned in a tonal language"),
+  badge("europe", "🏰", "Europe", "Cards learned in a language of Europe"),
+  badge("asia", "🏯", "Asia", "Cards learned in a language of Asia"),
+  badge("africa", "🦁", "Africa", "Cards learned in a language of Africa"),
+  badge("americas", "🌎", "The Americas", "Cards learned in a language of the Americas"),
+  badge("middle-east", "🐪", "The Middle East", "Cards learned in a language of the Middle East"),
+  badge("globetrotter", "🌐", "Globetrotter", "Europe, Asia, Africa, the Americas, and the Middle East"),
+  badge("romance", "🍷", "Romance", "Two Romance languages: Spanish, French, Italian, Portuguese, or Romanian"),
+  badge("germanic", "🥨", "Germanic", "Two Germanic languages: German, Dutch, Danish, Swedish, Norwegian, or English"),
+  badge("slavic", "🪆", "Slavic", "Two Slavic languages: Russian, Ukrainian, Polish, Czech, Croatian, or Bulgarian"),
+  badge("semitic", "📜", "Semitic", "Two Semitic languages: Arabic, Hebrew, or Amharic"),
 ];
+// where each language is spoken, for the region badges (a language can count for more than one)
+const REGIONS = {
+  europe: ["es", "fr", "nl", "de", "it", "pt-pt", "ru", "uk", "da", "pl", "cs", "el", "hr", "hu", "ro", "sv", "nb", "fi", "bg", "tr"],
+  asia: ["vi", "ja", "km", "lo", "zh", "ko", "id", "tl", "th", "hi", "si", "ru"],
+  africa: ["sw", "zu", "am", "ary", "ar", "fr"],
+  americas: ["es", "pt-br", "en-us"],
+  "middle-east": ["ar", "he", "fa", "tr"],
+};
+// language families, for the family badges: two different languages earn one (the two Portugueses, and the two
+// Arabics, count as one language)
+const FAMILIES = {
+  romance: ["es", "fr", "it", "pt-br", "pt-pt", "ro"],
+  germanic: ["de", "nl", "da", "sv", "nb", "en-us"],
+  slavic: ["ru", "uk", "pl", "cs", "hr", "bg"],
+  semitic: ["ar", "ary", "he", "am"],
+};
+const SAME = { "pt-pt": "pt-br", ary: "ar" };
 const LANG_BADGES = [ // earned again in each language
   badge("first-words", "🌱", "First words", "Your first card learned"),
   badge("first-quiz", "🎯", "First quiz", "A quiz round finished"),
@@ -298,6 +325,12 @@ function checkBadges({ quiet = false, also = [] } = {}) {
   if (withCards.length >= 10) reached.add("langs-10");
   if (withCards.some((l) => OWN_ALPHABET.has(l.code))) reached.add("alphabet");
   if (withCards.some((l) => TONAL.has(l.code))) reached.add("tones");
+  const codes = withCards.map((l) => l.code);
+  for (const [region, langs] of Object.entries(REGIONS)) if (codes.some((c) => langs.includes(c))) reached.add(region);
+  if (Object.keys(REGIONS).every((r) => reached.has(r))) reached.add("globetrotter");
+  for (const [family, langs] of Object.entries(FAMILIES)) {
+    if (new Set(codes.filter((c) => langs.includes(c)).map((c) => SAME[c] || c)).size >= 2) reached.add(family);
+  }
   for (const b of BADGES) if (reached.has(b.id)) add(b.id, b);
   if (!fresh.length) return fresh;
   store.set(BADGE_KEY, earned);
@@ -333,32 +366,15 @@ function nextToast() {
 }
 // The first time the app has badges, someone with progress already has some: one note for all of them, not one each
 function firstBadges() {
-  // First words, First quiz, Perfect round, Good ear and All ears were once earned once in all; now each language has
-  // its own. One earned before that goes to the language in use (First words is worked out again from progress).
-  const old = store.get(BADGE_KEY, null);
-  const moved = ["first-words", "first-quiz", "perfect", "good-ear", "all-ears"].filter((id) => old && old[id]);
-  if (moved.length) {
-    for (const id of moved) { if (id !== "first-words") old[id + ":" + state.lang.code] ||= old[id]; delete old[id]; }
+  // Language badges start afresh, once: moving the old ones to a language put some on the wrong one. Those that
+  // progress shows (Polite basics, the topics...) come straight back, quietly; quiz and Play all ones are earned anew.
+  let old = store.get(BADGE_KEY, null);
+  if (old !== null && !store.get("phrasebook-badges-reset", false)) {
+    for (const k of Object.keys(old)) if (k.includes(":") || ["first-words", "first-quiz", "perfect", "good-ear", "all-ears"].includes(k)) delete old[k];
     store.set(BADGE_KEY, old);
     checkBadges({ quiet: true });
   }
-  // That move put them all on the language in use, which wasn't always the one they were earned in. Quiz badges are
-  // set right once: none in a language with no quiz played, and each language's saved round (its last) earns its own.
-  if (old !== null && !store.get("phrasebook-badges-fixed", false)) {
-    const got = store.get(BADGE_KEY, {});
-    for (const l of state.languages) {
-      const round = store.get(roundKey(l.code), null);
-      if (!round) for (const id of ["first-quiz", "perfect", "good-ear"]) delete got[id + ":" + l.code];
-      else if (round.counted) {
-        got["first-quiz:" + l.code] ||= Date.now();
-        const perfect = round.items.length >= 10 && round.correct === round.items.length;
-        if (perfect) got["perfect:" + l.code] ||= Date.now();
-        if (perfect && round.listen) got["good-ear:" + l.code] ||= Date.now();
-      }
-    }
-    store.set(BADGE_KEY, got);
-    store.set("phrasebook-badges-fixed", true);
-  }
+  store.set("phrasebook-badges-reset", true);
   if (old !== null) { checkBadges(); return; }
   const n = checkBadges({ quiet: true }).length;
   if (!n) { store.set(BADGE_KEY, {}); return; }

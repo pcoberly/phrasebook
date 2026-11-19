@@ -8,9 +8,9 @@ const ids = (cat) => phrases().filter((p) => p.cat === cat).map((p) => p.id);
 test("someone with progress already gets one note for all their badges", async () => {
   const page = await open({ storage: { "progress-ja": learned([...ids("basics"), ...ids("numbers"), ...ids("emergency")]) } });
   await page.locator(".badgeup").waitFor();
-  assert.match(await page.locator(".badgeup").innerText(), /already earned 6 badges/);
+  assert.match(await page.locator(".badgeup").innerText(), /already earned 7 badges/);
   const got = Object.keys(await stored(page, "badges")).sort();
-  assert.deepStrictEqual(got, ["alphabet", "emergency:ja", "first-words:ja", "numbers:ja", "polite:ja", "trip-ready:ja"]);
+  assert.deepStrictEqual(got, ["alphabet", "asia", "emergency:ja", "first-words:ja", "numbers:ja", "polite:ja", "trip-ready:ja"]);
   assert.ok(!got.includes("tones"), "Japanese isn't tonal");
 });
 
@@ -46,7 +46,7 @@ test("Good ear: a perfect round with Listening only on", async () => {
 });
 
 test("Badges page: a collapsed section per language on the device; Languages shows each language's", async () => {
-  const page = await open({ storage: { badges: { "first-quiz:ja": 1, "polite:ja": 1 }, "badges-fixed": true, "pack-fr": { complete: true } } });
+  const page = await open({ storage: { badges: { "first-quiz:ja": 1, "polite:ja": 1 }, "badges-reset": true, "pack-fr": { complete: true } } });
   await more(page, "badges");
   assert.deepStrictEqual(await page.locator("details.blang").evaluateAll((ds) => ds.map((d) => [d.dataset.code, d.open])), [["ja", false], ["fr", false]]);
   assert.match(await page.locator("details.blang[data-code=ja] summary").innerText(), /🎯🙏/);
@@ -59,22 +59,30 @@ test("Badges page: a collapsed section per language on the device; Languages sho
   assert.deepStrictEqual(page.errors, []);
 });
 
-test("badges earned once in all before move to the language in use", async () => {
-  const quiz = { items: [], missed: [], index: 0, correct: 0, counted: false, cat: "all", dir: "mixed", size: "10" };
-  const page = await open({ storage: { badges: { "first-quiz": 1, perfect: 1, "langs-2": 1 }, "quiz-ja": quiz } });
-  const got = await stored(page, "badges");
-  assert.ok(got["first-quiz:ja"] && got["perfect:ja"] && got["langs-2"]);
-  assert.ok(!got["first-quiz"] && !got.perfect);
-});
-
-test("quiz badges put on the wrong language are set right from each language's saved round", async () => {
-  const items = Array.from({ length: 10 }, (_, i) => ["hello", "to"]);
+test("language badges start afresh once: progress ones come back quietly, quiz ones go", async () => {
   const page = await open({ storage: {
-    badges: { "perfect:ja": 1, "first-quiz:ja": 1, "polite:ja": 1 },
-    "quiz-es": { items, missed: [], index: 10, correct: 10, counted: true, cat: "all", dir: "mixed", size: "10", listen: false },
+    badges: { "perfect:ja": 1, "first-quiz:ja": 1, "polite:ja": 1, perfect: 1, "langs-2": 1 },
+    "progress-ja": learned(["hello", "please", "thank-you", "excuse-me"]),
   } });
   const got = await stored(page, "badges");
-  assert.ok(!got["perfect:ja"] && !got["first-quiz:ja"], "no quiz was ever played in Japanese");
-  assert.ok(got["perfect:es"] && got["first-quiz:es"] && !got["good-ear:es"], "Spanish's saved perfect round");
-  assert.ok(got["polite:ja"], "other badges stay");
+  assert.ok(!got["perfect:ja"] && !got["first-quiz:ja"] && !got.perfect, "quiz badges are earned anew");
+  assert.ok(got["polite:ja"] && got["first-words:ja"], "progress shows these, so they come back");
+  assert.ok(got["langs-2"], "badges across languages stay");
+  assert.strictEqual(await page.locator(".badgeup").count(), 0, "quietly");
+  await page.reload();
+  await page.evaluate(() => checkBadges({ also: ["perfect"] })); // earned after the reset: kept
+  await page.reload();
+  assert.ok((await stored(page, "badges"))["perfect:ja"], "only once");
+});
+
+test("region and family badges", async () => {
+  const one = (ids) => learned(ids);
+  const page = await open({ storage: { badges: {}, "badges-reset": true,
+    "progress-es": one(["hello"]), "progress-it": one(["hello"]), "progress-sw": one(["hello"]), "progress-pt-br": one(["hello"]), "progress-pt-pt": one(["hello"]),
+    "progress-ar": one(["hello"]), "progress-ary": one(["hello"]), "progress-ja": one(["hello"]) } });
+  await page.evaluate(() => checkBadges({ quiet: true }));
+  const got = await stored(page, "badges");
+  for (const k of ["europe", "asia", "africa", "americas", "middle-east", "globetrotter", "romance"]) assert.ok(got[k], k);
+  assert.ok(!got.semitic, "the two Arabics count as one language");
+  assert.ok(!got.germanic && !got.slavic);
 });
