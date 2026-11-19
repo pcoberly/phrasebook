@@ -1,16 +1,7 @@
 [
  {"v": 96, "date": "2026-11-19", "items": [{"en": "Badges: small celebrations for milestones such as your first card learned, the polite basics, a whole topic, a perfect quiz round or being Trip-ready in a language. No streaks and nothing to lose. See them in More → Badges", "de": "Abzeichen: kleine Feiern für Meilensteine wie deine erste gelernte Karte, die Höflichkeit, ein ganzes Thema, eine perfekte Quizrunde oder Reisefertig in einer Sprache. Keine Serien, nichts zu verlieren. Du findest sie unter Mehr → Abzeichen", "fr": "Badges : de petites célébrations pour des étapes comme votre première fiche apprise, les formules de politesse, un thème entier, une manche de quiz parfaite ou Prêt à partir dans une langue. Pas de séries, rien à perdre. Retrouvez-les dans Plus → Badges", "es": "Insignias: pequeñas celebraciones de logros como tu primera tarjeta aprendida, la cortesía básica, un tema entero, una ronda perfecta o estar Listo para el viaje en un idioma. Sin rachas y sin nada que perder. Están en Más → Insignias"}]},
- {"v": 95, "date": "2026-11-19", "items": [{"langs": ["sv", "nb", "fi", "bg"]}]},
- {"v": 94, "date": "2026-11-19", "items": [{"langs": ["pl", "cs", "el", "hr", "hu", "ro"]}]},
- {"v": 93, "date": "2026-11-19", "items": [{"langs": ["hi", "am", "da"]}]},
- {"v": 92, "date": "2026-11-19", "items": [{"langs": ["fa", "uk"]}]},
- {"v": 91, "date": "2026-11-18", "items": [{"langs": ["en-us"]}]},
- {"v": 90, "date": "2026-11-18", "items": [{"langs": ["zu"]}]},
- {"v": 89, "date": "2026-11-18", "items": [{"langs": ["sw"]}]},
- {"v": 88, "date": "2026-11-18", "items": [{"langs": ["ary"]}]},
- {"v": 87, "date": "2026-11-18", "items": [{"langs": ["pt-pt"]}]},
- {"v": 86, "date": "2026-11-18", "items": [{"langs": ["pt-br"]}]},
- {"v": 85, "date": "2026-11-18", "items": [{"langs": ["ar"]}]},
+ {"v": 95, "date": "2026-11-18", "items": [{"langs": ["ar", "pt-br", "pt-pt", "ary", "sw", "zu", "fa", "uk", "hi", "am", "da", "pl", "cs", "el", "hr", "hu", "ro", "sv", "nb", "fi", "bg"]}]},
+ {"v": 91, "date": "2026-11-18", "items": [{"en": "English to learn, for German, French and Spanish speakers: American English, with its own audio in a woman's and a man's voice", "de": "Englisch zum Lernen, für alle, die Deutsch sprechen: amerikanisches Englisch, mit eigenen Aufnahmen von einer Frauen- und einer Männerstimme", "fr": "L'anglais à apprendre, pour les francophones : l'anglais américain, avec ses propres enregistrements, voix de femme et voix d'homme", "es": "Inglés para aprender, para quienes hablan español: inglés estadounidense, con su propio audio en voz de mujer y de hombre"}]},
  {"v": 80, "date": "2026-11-18", "items": [
   {"en": "After PhraseBook updates itself, a short note at the top says so, with a link here. Updates never interrupt a quiz or Play all: they wait until you leave the app, and bring you back to the same page", "de": "Nachdem sich PhraseBook aktualisiert hat, sagt es ein kurzer Hinweis oben, mit einem Link hierher. Updates unterbrechen nie ein Quiz oder Alle abspielen: Sie warten, bis du die App verlässt, und bringen dich auf dieselbe Seite zurück", "fr": "Après une mise à jour, un petit message en haut le signale, avec un lien ici. Les mises à jour n'interrompent jamais un quiz ni Tout écouter : elles attendent que vous quittiez l'app, et vous ramènent à la même page", "es": "Cuando PhraseBook se actualiza solo, un aviso breve arriba lo dice, con un enlace aquí. Las actualizaciones nunca interrumpen una prueba ni Reproducir todo: esperan a que salgas de la app y te devuelven a la misma página"}]},
  {"v": 73, "date": "2026-11-18", "items": [
