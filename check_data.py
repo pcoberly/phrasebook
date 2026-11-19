@@ -159,6 +159,8 @@ def main() -> int:
     keys = set(re.findall(r'data-t(?:-aria)?="([^"]+)"', (ROOT / "index.html").read_text(encoding="utf-8")))
     for call in t_calls(app_text):  # every quoted text in a t(...) call, such as both sides of t(many ? "..." : "...")
         keys |= set(re.findall(r'"((?:[^"\\]|\\.)*)"', call.split(", {")[0]))
+    for name, desc in re.findall(r'badge\("[^"]+", "[^"]+", "((?:[^"\\]|\\.)*)", "((?:[^"\\]|\\.)*)"\)', app_text):  # badges, passed to t()
+        keys |= {name, desc}
     for steps in re.findall(r"steps = \[(.*?)\];", app_text):  # the install steps, passed to t() one by one
         keys |= set(re.findall(r'"((?:[^"\\]|\\.)*)"', steps))
     keys |= {re.sub(r"\\(.)", r"\1", k) for k in keys}

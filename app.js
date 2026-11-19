@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v95";
+const VERSION = "phrasebook-v96";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -210,7 +210,153 @@ function grade(key, ok) {
   const box = ok ? Math.min(cur.box + 1, INTERVALS.length - 1) : 0;
   state.progress[key] = { box, due: Date.now() + INTERVALS[box] * DAY };
   store.set(progressKey(state.lang.code), state.progress);
+  if (ok && box >= LEARNED) checkBadges();
 }
+// ---------- badges: celebrations of what you've done, never pressure ----------
+// Earned once and kept for good, even if a card later slips back out of learned. No streaks, no countdowns, no
+// reminders: a small note pops up when one is earned, and More → Badges shows them all (the ones still to come
+// faded). Kept on this device only, like progress: { "first-words": time, "polite:ja": time }.
+const BADGE_KEY = "phrasebook-badges";
+const badge = (id, icon, name, desc) => ({ id, icon, name, desc });
+const BADGES = [ // once each, whatever the language
+  badge("first-words", "🌱", "First words", "Your first card learned"),
+  badge("first-quiz", "🎯", "First quiz", "A quiz round finished"),
+  badge("all-ears", "🎧", "All ears", "Play all listened to right to the end"),
+  badge("perfect", "⭐", "Perfect round", "Every answer right in a quiz round of 10 or more"),
+  badge("good-ear", "👂", "Good ear", "A perfect round with Listening only on"),
+  badge("langs-2", "🗺️", "Two languages", "Cards learned in two languages"),
+  badge("langs-5", "🧭", "Five languages", "Cards learned in five languages"),
+  badge("langs-10", "🌍", "Ten languages", "Cards learned in ten languages"),
+  badge("alphabet", "✍️", "New alphabet", "A card learned in a language with its own alphabet"),
+  badge("tones", "🎵", "Tones", "A card learned in a tonal language"),
+];
+const LANG_BADGES = [ // earned again in each language
+  badge("polite", "🙏", "Polite basics", "Hello, please, thank you and excuse me, learned both ways"),
+  badge("numbers", "🔢", "Counting", "All the numbers"),
+  badge("food", "🍽️", "Food", "The whole Food topic"),
+  badge("getting-around", "🚆", "Getting around", "The whole Getting Around topic"),
+  badge("emergency", "🆘", "Emergency", "The whole Emergency topic"),
+  badge("trip-ready", "✈️", "Trip-ready", "Polite basics, Counting and Emergency"),
+  badge("halfway", "🌗", "Halfway", "Half the cards you practise, learned"),
+  badge("whole-book", "🏅", "The whole book", "Every card you practise, learned"),
+];
+const POLITE = ["hello", "please", "thank-you", "excuse-me"];
+const OWN_ALPHABET = new Set(["ja", "km", "lo", "zh", "he", "ko", "th", "ru", "ar", "ary", "fa", "uk", "hi", "am", "el", "bg"]);
+const TONAL = new Set(["vi", "th", "lo", "zh"]);
+const BOOK_MIN = 40; // Halfway and The whole book need at least this many phrases in practice, so leaving out most can't earn them
+const earnedBadges = () => store.get(BADGE_KEY, {});
+// a language's progress and left-out phrases, from memory for the one in use and from storage for the others
+function progressOf(code) {
+  const mine = code === state.lang?.code;
+  return {
+    learned: new Set(Object.entries(mine ? state.progress : store.get(progressKey(code), {})).filter(([, v]) => v.box >= LEARNED).map(([k]) => k)),
+    skipped: mine ? state.skipped : new Set(store.get(skipKey(code), [])),
+  };
+}
+// the language badges a language has reached now: a topic counts once each of its phrases you practise is learned,
+// either way round (and at least half the topic is in practice); Polite basics needs both ways
+function langBadgesNow(code) {
+  const { learned, skipped } = progressOf(code);
+  const either = (id) => learned.has(id + ":to") || learned.has(id + ":from");
+  const topic = (cat) => {
+    const ids = state.shared.filter((p) => p.cat === cat).map((p) => p.id);
+    const active = ids.filter((id) => !skipped.has(id));
+    return active.length > 0 && active.length * 2 >= ids.length && active.every(either);
+  };
+  const active = state.shared.filter((p) => !skipped.has(p.id));
+  const known = active.reduce((n, p) => n + learned.has(p.id + ":to") + learned.has(p.id + ":from"), 0);
+  const got = {
+    polite: POLITE.every((id) => learned.has(id + ":to") && learned.has(id + ":from")),
+    numbers: topic("numbers"), food: topic("food"), "getting-around": topic("getting-around"), emergency: topic("emergency"),
+    halfway: active.length >= BOOK_MIN && known * 2 >= active.length * 2,
+    "whole-book": active.length >= BOOK_MIN && known === active.length * 2,
+  };
+  got["trip-ready"] = got.polite && got.numbers && got.emergency;
+  return Object.keys(got).filter((k) => got[k]);
+}
+// Award whatever has been reached and not yet earned. Returns the new ones as [badge, language or null].
+function checkBadges({ quiet = false, also = [] } = {}) {
+  if (!state.shared.length) return [];
+  const earned = earnedBadges();
+  const fresh = [];
+  const add = (key, b, lang = null) => { if (!earned[key]) { earned[key] = Date.now(); fresh.push([b, lang]); } };
+  const withCards = state.languages.filter((l) => progressOf(l.code).learned.size);
+  for (const l of withCards) for (const id of langBadgesNow(l.code)) add(id + ":" + l.code, LANG_BADGES.find((b) => b.id === id), l);
+  const reached = new Set(also);
+  if (withCards.length) reached.add("first-words");
+  if (withCards.length >= 2) reached.add("langs-2");
+  if (withCards.length >= 5) reached.add("langs-5");
+  if (withCards.length >= 10) reached.add("langs-10");
+  if (withCards.some((l) => OWN_ALPHABET.has(l.code))) reached.add("alphabet");
+  if (withCards.some((l) => TONAL.has(l.code))) reached.add("tones");
+  for (const b of BADGES) if (reached.has(b.id)) add(b.id, b);
+  if (!fresh.length) return fresh;
+  store.set(BADGE_KEY, earned);
+  if (!quiet) fresh.forEach(([b, l]) => badgeToast(`${b.icon} ${t("Badge earned")}: ${esc(t(b.name))}${l ? " · " + esc(langName(l)) : ""}`));
+  return fresh;
+}
+// The note that a badge was earned: at the top, for a few seconds, after the card's own ✓ has had its moment.
+// Several earned at once come one after another.
+const toastQueue = [];
+function badgeToast(html) {
+  toastQueue.push(html);
+  if (toastQueue.length === 1) setTimeout(nextToast, 900);
+}
+function nextToast() {
+  if (!toastQueue.length) return;
+  if (document.querySelector(".updated:not(.badgeup)")) { setTimeout(nextToast, 1500); return; } // after "PhraseBook was updated"
+  const el = document.createElement("div");
+  el.className = "updated badgeup";
+  el.setAttribute("role", "status");
+  el.innerHTML = `<span>${toastQueue[0]}</span><button class="ulink">${t("See badges")}</button><button class="uclose" aria-label="${t("Close")}">✕</button>`;
+
+  document.body.appendChild(el);
+  let done = false;
+  const close = () => {
+    if (done) return;
+    done = true;
+    el.classList.add("gone");
+    setTimeout(() => { el.remove(); toastQueue.shift(); nextToast(); }, 300);
+  };
+  el.querySelector(".ulink").onclick = () => { close(); goTo("badges"); };
+  el.querySelector(".uclose").onclick = close;
+  setTimeout(close, 5000);
+}
+// The first time the app has badges, someone with progress already has some: one note for all of them, not one each
+function firstBadges() {
+  if (store.get(BADGE_KEY, null) !== null) { checkBadges(); return; }
+  const n = checkBadges({ quiet: true }).length;
+  if (!n) { store.set(BADGE_KEY, {}); return; }
+  badgeToast(`🏅 ${n === 1 ? t("You've already earned a badge") : t("You've already earned {n} badges", { n })}`);
+}
+// a language's badges, small, under its progress on the Languages page
+function badgeStrip(code) {
+  const earned = earnedBadges();
+  const got = LANG_BADGES.filter((b) => earned[b.id + ":" + code]);
+  return got.length ? `<span class="lbadges" title="${t("Badges")}">${got.map((b) => `<span aria-label="${esc(t(b.name))}">${b.icon}</span>`).join("")}</span>` : "";
+}
+function badgeTile(b, on) {
+  return `<div class="badge${on ? " on" : ""}"><span class="bi" aria-hidden="true">${b.icon}</span><span class="bn">${esc(t(b.name))}</span><span class="bd">${on ? "" : `<span class="sr">${t("Not yet")}: </span>`}${esc(t(b.desc))}</span></div>`;
+}
+function renderBadges() {
+  checkBadges({ quiet: true });
+  const earned = earnedBadges();
+  const count = Object.keys(earned).length;
+  // the language in use first, then any other with a badge or a card learned
+  const langs = [state.lang, ...state.languages.filter((l) => l.code !== state.lang.code
+    && (LANG_BADGES.some((b) => earned[b.id + ":" + l.code]) || progressOf(l.code).learned.size))];
+  main.innerHTML = `${backToMore()}
+    <h2 class="group">${t("Badges")} · ${t("{n} earned", { n: count })}</h2>
+    <p class="note">${t("Badges celebrate what you've done. You can't lose them, and there's no rush.")}</p>
+    <h2 class="group">${t("Milestones")}</h2>
+    <div class="badges">${BADGES.map((b) => badgeTile(b, earned[b.id])).join("")}</div>
+    ${langs.map((l) => `
+    <h2 class="group">${esc(langName(l))} <span lang="${l.code}">${esc(l.native)}</span></h2>
+    <div class="badges">${LANG_BADGES.map((b) => badgeTile(b, earned[b.id + ":" + l.code])).join("")}</div>`).join("")}`;
+  wireBack();
+  hint("");
+}
+
 // Phrases you don't want to practise (the beer phrase, if you don't drink), one list per language, shown as an empty
 // circle where the others have a filled ✓. Cards, new quiz rounds and Play all leave them out; the List still shows
 // them, faded. (Kept as "skipped" in storage, from when the control was a Skip link.)
@@ -444,7 +590,7 @@ function buildRound() {
     if (picked.length >= Math.min(size, ordered.length)) break;
     if (!picked.includes(i)) picked.push(i);
   }
-  return { items: shuffle(picked), index: 0, correct: 0, missed: [], cat: topicsKey(), dir: $("#dir").value, size: state.settings.round };
+  return { items: shuffle(picked), index: 0, correct: 0, missed: [], cat: topicsKey(), dir: $("#dir").value, size: state.settings.round, listen: $("#listen").checked };
 }
 // The round in progress is saved after every answer, so if the phone closes the app in the background
 // it carries on where it was. One saved round per language; changing topic, direction or length starts afresh.
@@ -455,7 +601,7 @@ function saveRound() {
   const ref = (i) => [i.p.id, i.dir];
   store.set(roundKey(state.lang.code), {
     items: r.items.map(ref), missed: r.missed.map((m) => r.items.indexOf(m)),
-    index: r.index, correct: r.correct, counted: !!r.counted, cat: r.cat, dir: r.dir, size: r.size,
+    index: r.index, correct: r.correct, counted: !!r.counted, cat: r.cat, dir: r.dir, size: r.size, listen: !!r.listen,
   });
 }
 function loadRound() {
@@ -519,6 +665,7 @@ function renderQuiz() {
       if (ok) cheer(!wasLearned && state.progress[key].box >= LEARNED, ".card.q"); // as on the cards: a ✓, or "Learned!"
       // record the answer and move on at once, so leaving this tab and coming back never asks (or scores) it twice
       if (ok) round.correct++; else round.missed.push(round.items[round.index]);
+      if (!listenOnly) round.listen = false; // Good ear needs Listening only for the whole round
       round.index++;
       saveRound();
       $("#score").textContent = t("{n} correct", { n: round.correct });
@@ -542,7 +689,13 @@ function renderQuiz() {
 // The score screen at the end of a round: how you did, and the questions you missed.
 function renderSummary() {
   const r = state.round;
-  if (!r.counted) { r.counted = true; saveRound(); track("quiz/finished/" + state.lang.code); } // once per round, not each time the screen is redrawn
+  if (!r.counted) { // once per round, not each time the screen is redrawn
+    r.counted = true;
+    saveRound();
+    track("quiz/finished/" + state.lang.code);
+    const perfect = r.items.length >= 10 && r.correct === r.items.length;
+    checkBadges({ also: ["first-quiz", ...(perfect ? ["perfect"] : []), ...(perfect && r.listen ? ["good-ear"] : [])] });
+  }
   const total = r.items.length;
   const pct = total ? Math.round((100 * r.correct) / total) : 0;
   const message = t(r.correct === total ? "A perfect round!" : pct >= 80 ? "Great work." : pct >= 50 ? "Good effort." : "Keep going. These will stick.");
@@ -795,6 +948,7 @@ async function runPlayAll(run) {
       first = false;
       if (!still()) return;
     }
+    if (pa.index === pa.items.length - 1 && pa.items.length >= 10) checkBadges({ also: ["all-ears"] });
     pa.index = (pa.index + 1) % pa.items.length; // round again at the end
   }
 }
@@ -981,7 +1135,7 @@ function readyDialog(lang, downloaded, start) {
   d.querySelector("[data-go]").focus();
 }
 // The pages reached from the More tab, which stays lit on them
-const MORE_PAGES = ["more", "languages", "settings", "help", "changes", "about", "install"];
+const MORE_PAGES = ["more", "languages", "badges", "settings", "help", "changes", "about", "install"];
 const tabFor = (mode) => (MORE_PAGES.includes(mode) ? "more" : mode);
 // go to a page as if its tab had been tapped
 function goTo(mode) {
@@ -1084,6 +1238,7 @@ function render() {
   else if (state.mode === "changes") renderChanges();
   else if (state.mode === "more") renderMore();
   else if (state.mode === "languages") renderLanguages();
+  else if (state.mode === "badges") renderBadges();
   else if (state.mode === "help") renderHelp();
   else if (state.mode === "about") renderAbout();
   else if (state.mode === "install") renderInstall();
@@ -1535,7 +1690,7 @@ function learnedFor(code) {
 function progressLine(code) {
   const { known, all } = learnedFor(code);
   const p = all ? Math.round((known / all) * 100) : 0;
-  return `<div class="lprog"><span class="bar"><span style="width:${p}%"></span></span><span>${t("{known} of {all} cards learned", { known, all })}</span></div>`;
+  return `<div class="lprog"><span class="bar"><span style="width:${p}%"></span></span><span>${t("{known} of {all} cards learned", { known, all })}</span>${badgeStrip(code)}</div>`;
 }
 function languageRow(l, position, count) {
   const ps = packState(l.code);
@@ -1558,7 +1713,7 @@ function languageRow(l, position, count) {
         <div class="linfo"><div class="lname">${active ? "✓ " : ""}${name} <span class="note" lang="${l.code}">${esc(l.native)}</span></div>
           <div class="note">${line}</div></div>
         <div class="lbtn">${buttons}</div>
-        ${state.busy[l.code] ? "" : position >= 0 || learnedFor(l.code).known ? progressLine(l.code) : ""}
+        ${state.busy[l.code] ? "" : position >= 0 || learnedFor(l.code).known || badgeStrip(l.code) ? progressLine(l.code) : ""}
       </div>`;
 }
 // The languages: those on this device always in view, and below them a clear "Add a language" button that opens the
@@ -1614,6 +1769,7 @@ const MENU_ICONS = {
   feedback: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/>',
   about: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r="1.1" class="dot"/>',
   help: '<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .8-1 1.5v.5"/><circle cx="12" cy="17" r="1.1" class="dot"/>',
+  badges: '<circle cx="12" cy="9" r="6"/><path d="M8.5 13.8L7 21.5l5-2.8 5 2.8-1.5-7.7"/>',
 };
 const menuRow = (id, label, sub, chevron = true) => `
     <button class="menurow" id="${id}">
@@ -1628,6 +1784,7 @@ function renderMore() {
     <h2 class="group">${t("More")}</h2>
     <div class="menu">
       ${menuRow("languages", t("Languages"), t("Learning {name} · you speak {known}", { name: esc(langName(state.lang)), known: esc(state.known.native) }))}
+      ${menuRow("badges", t("Badges"), t("{n} earned", { n: Object.keys(earnedBadges()).length }))}
       ${menuRow("settings", t("Settings"), t("Audio, quiz and Play all"))}
       ${menuRow("help", t("Help"), t("How to use PhraseBook"))}
       ${menuRow("changes", t("What's new"), versionLabel())}
@@ -1639,7 +1796,7 @@ function renderMore() {
       <div class="draft" id="feedbackbox" hidden></div>
       ${menuRow("about", t("About"), t("Version, offline use and privacy"))}
     </div>`;
-  for (const page of ["languages", "settings", "help", "changes", "install", "about"]) {
+  for (const page of ["languages", "badges", "settings", "help", "changes", "install", "about"]) {
     const b = document.getElementById(page);
     if (b) b.onclick = () => { track("more/" + page); goTo(page); };
   }
@@ -2034,6 +2191,7 @@ async function boot() {
   else render();
   hideSplash();
   updatedNotice();
+  if (!state.firstRun) firstBadges();
   // how the app was opened: in its language, and from the Home Screen or from a browser tab
   track(state.firstRun ? "welcome/shown" : "open/" + state.lang.code);
   track(matchMedia("(display-mode: standalone)").matches || navigator.standalone === true ? "mode/installed" : "mode/browser");
