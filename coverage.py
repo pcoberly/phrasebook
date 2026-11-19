@@ -46,7 +46,7 @@ C = [
  ("Trinidad and Tobago", "Americas", 1.5, "EN", ""), ("Guyana", "Americas", 0.8, "EN", ""), ("Suriname", "Americas", 0.6, "nl", ""),
  ("Belize", "Americas", 0.4, "EN", "es"), ("Bahamas", "Americas", 0.4, "EN", ""), ("Guadeloupe and Martinique", "Americas", 0.7, "fr", ""),
  ("Barbados", "Americas", 0.3, "EN", ""), ("French Guiana", "Americas", 0.3, "fr", ""), ("Curaçao and Aruba", "Americas", 0.3, "nl", "es en"),
- ("Other Caribbean (English)", "Americas", 0.9, "EN", ""),
+ ("Other Caribbean (English)", "Americas", 0.9, "EN", ""), ("Greenland", "Americas", 0.06, "", "da"),
  # Asia
  ("India", "Asia", 1451, "hi en", ""), ("China", "Asia", 1419, "zh", ""), ("Indonesia", "Asia", 283, "id", ""),
  ("Pakistan", "Asia", 251, "en", "hi"), ("Bangladesh", "Asia", 174, "", ""), ("Japan", "Asia", 124, "ja", ""),
