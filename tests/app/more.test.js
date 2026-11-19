@@ -37,3 +37,14 @@ test("the Guide shows the language's pronunciation guide", async () => {
   await page.locator("main h2").first().waitFor();
   assert.match(await page.locator("main").innerText(), /Finnish/);
 });
+
+test("Share shows a QR code that works offline, and Send the link", async () => {
+  const page = await open();
+  await page.locator(".tab[data-mode='more']").click();
+  await page.locator("#share").click();
+  await page.locator("dialog.share img.qr").waitFor();
+  assert.ok(await page.locator("dialog.share img.qr").evaluate((i) => i.complete && i.naturalWidth > 0), "the QR code loads");
+  assert.match(await page.locator("dialog.share .qrurl").innerText(), /pcoberly\.github\.io\/phrasebook/);
+  await page.locator("dialog.share [data-close]").click();
+  assert.strictEqual(await page.locator("dialog.share").count(), 0);
+});

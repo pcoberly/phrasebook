@@ -270,5 +270,9 @@
  "You've already earned a badge": "Du hast schon ein Abzeichen verdient",
  "You've already earned {n} badges": "Du hast schon {n} Abzeichen verdient",
  "Your first card learned": "Deine erste Karte gelernt",
- "{n} earned": "{n} verdient"
+ "{n} earned": "{n} verdient",
+ "Share PhraseBook": "PhraseBook teilen",
+ "Someone with you can scan this with their phone's camera.": "Wer bei dir ist, kann das mit der Handykamera scannen.",
+ "QR code for PhraseBook's address": "QR-Code mit der Adresse von PhraseBook",
+ "Send the link": "Link senden"
 }

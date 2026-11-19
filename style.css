@@ -333,3 +333,7 @@ button.act.next { background: var(--fg); color: var(--bg); border-color: var(--f
 .badge.on .bn { color: var(--fg); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .lprog .lbadges { margin-left: auto; flex: none; white-space: nowrap; letter-spacing: 1px; font-size: 14px; }
+/* Share: the QR code, black on white whatever the theme, so any phone can scan it */
+dialog.share .qr { display: block; width: 220px; height: 220px; margin: 14px auto 6px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px var(--line); }
+dialog.share .qrurl { margin: 0 0 14px; font-size: 14px; color: var(--muted); text-align: center; user-select: all; }
+dialog.share .note { margin-bottom: 0; }

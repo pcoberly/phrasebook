@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v101";
+const VERSION = "phrasebook-v102";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -1870,16 +1870,40 @@ function renderInstall() {
   wireBack();
   hint("");
 }
-async function shareApp() {
+// Share: a QR code to scan from this phone, for someone right there (it ships with the app, so it works offline), and
+// Send the link for the phone's own share sheet, or a copy of the link where there is none. qr.svg holds the app's
+// address, written out under it for anyone who can't scan.
+const APP_ADDRESS = "pcoberly.github.io/phrasebook";
+function shareApp() {
   track("share/click");
+  document.querySelector("dialog.share")?.remove();
+  const d = document.createElement("dialog");
+  d.className = "ready share";
+  d.setAttribute("aria-labelledby", "sharetitle");
+  d.innerHTML = `
+    <h2 id="sharetitle">${t("Share PhraseBook")}</h2>
+    <p class="note">${t("Someone with you can scan this with their phone's camera.")}</p>
+    <img class="qr" src="qr.svg" alt="${t("QR code for PhraseBook's address")}" width="220" height="220">
+    <p class="qrurl">${APP_ADDRESS}</p>
+    <button class="act good" data-send>${t("Send the link")}</button>
+    <button class="later" data-close>${t("Close")}</button>`;
+  document.body.appendChild(d);
+  const close = () => { d.close(); d.remove(); };
+  d.querySelector("[data-send]").onclick = () => sendLink(d.querySelector("[data-send]"));
+  d.querySelector("[data-close]").onclick = close;
+  d.addEventListener("click", (e) => { if (e.target === d) close(); }); // a tap on the dimmed page around it
+  d.addEventListener("cancel", (e) => { e.preventDefault(); close(); }); // Escape
+  d.showModal();
+}
+async function sendLink(button) {
+  track("share/send");
   const url = new URL("./", location.href).href;
   const data = { title: "PhraseBook", text: t("A free phrase book for travel: flashcards, quizzes and audio, and it works offline."), url };
-  const label = $("#share .ml") || $("#share");
   try {
     if (navigator.share) { await navigator.share(data); return; }
     await navigator.clipboard.writeText(url);
-    label.textContent = t("Link copied ✓");
-    setTimeout(() => { if (label.isConnected) label.textContent = t("Share this app"); }, 2500);
+    button.textContent = t("Link copied ✓");
+    setTimeout(() => { if (button.isConnected) button.textContent = t("Send the link"); }, 2500);
   } catch (err) {
     if (err && err.name === "AbortError") return; // the person closed the share sheet
     prompt(t("Copy this link to share PhraseBook:"), url);
