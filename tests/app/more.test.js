@@ -21,10 +21,14 @@ test("Help is drawn as section cards", async () => {
   assert.ok(await page.locator("main section.sect").count() >= 8);
 });
 
-test("What's new marks this version", async () => {
+test("What's new lists the versions newest first, marking this one if it has an entry", async () => {
   const page = await open();
   await more(page, "changes");
-  assert.match(await page.locator(".change").first().innerText(), /This version/);
+  const vs = (await page.locator(".change .ver").allInnerTexts()).map((t) => +/v(\d+)/.exec(t)[1]);
+  assert.deepStrictEqual(vs, [...vs].sort((a, b) => b - a));
+  const current = await page.evaluate(() => +VERSION.replace("phrasebook-v", ""));
+  const marked = await page.locator(".change", { hasText: "This version" }).count();
+  assert.strictEqual(marked, vs[0] === current ? 1 : 0); // a version with nothing new to say has no entry
 });
 
 test("the Guide shows the language's pronunciation guide", async () => {
