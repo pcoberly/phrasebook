@@ -345,5 +345,77 @@
       "m": "da-DK-JeppeNeural"
     },
     "bytes": 2315456
+  },
+  {
+    "code": "pl",
+    "name": "Polish",
+    "native": "Polski",
+    "ttsLang": "pl-PL",
+    "draft": true,
+    "voices": {
+      "f": "pl-PL-ZofiaNeural",
+      "m": "pl-PL-MarekNeural"
+    },
+    "bytes": 2353717
+  },
+  {
+    "code": "cs",
+    "name": "Czech",
+    "native": "Čeština",
+    "ttsLang": "cs-CZ",
+    "draft": true,
+    "voices": {
+      "f": "cs-CZ-VlastaNeural",
+      "m": "cs-CZ-AntoninNeural"
+    },
+    "bytes": 2354639
+  },
+  {
+    "code": "el",
+    "name": "Greek",
+    "native": "Ελληνικά",
+    "ttsLang": "el-GR",
+    "draft": true,
+    "voices": {
+      "f": "el-GR-AthinaNeural",
+      "m": "el-GR-NestorasNeural"
+    },
+    "bytes": 2418272
+  },
+  {
+    "code": "hr",
+    "name": "Croatian",
+    "native": "Hrvatski",
+    "ttsLang": "hr-HR",
+    "draft": true,
+    "voices": {
+      "f": "hr-HR-GabrijelaNeural",
+      "m": "hr-HR-SreckoNeural"
+    },
+    "bytes": 2336092
+  },
+  {
+    "code": "hu",
+    "name": "Hungarian",
+    "native": "Magyar",
+    "ttsLang": "hu-HU",
+    "draft": true,
+    "voices": {
+      "f": "hu-HU-NoemiNeural",
+      "m": "hu-HU-TamasNeural"
+    },
+    "bytes": 2323998
+  },
+  {
+    "code": "ro",
+    "name": "Romanian",
+    "native": "Română",
+    "ttsLang": "ro-RO",
+    "draft": true,
+    "voices": {
+      "f": "ro-RO-AlinaNeural",
+      "m": "ro-RO-EmilNeural"
+    },
+    "bytes": 2364692
   }
 ]

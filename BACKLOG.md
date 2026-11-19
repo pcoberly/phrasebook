@@ -11,28 +11,26 @@ A banner for news such as a new language, a language checked by a native speaker
 - Keep it rare so it stays worth reading.
 
 ## New languages
-Ranked by how much of the world each would add (`python3 coverage.py`), weighed against travel value. With its 29 languages, English among them, PhraseBook covers 86% of the world's people in their own language (95% counting where English is official). Hindi, Amharic and Danish are done (v93), and Persian and Ukrainian (v92). All of these are learn-only, have a female and a male voice in edge-tts, and add about 2.5 MB each to the site (nothing to anyone's download unless they pick it). Each starts as a draft and joins the native-speaker review list. No edge-tts voice exists for Hausa or Yoruba, so Nigeria stays English.
+Ranked by how much of the world each would add (`python3 coverage.py`), weighed against travel value. With its 35 languages, English among them, PhraseBook covers 87% of the world's people in their own language (96% counting where English is official). Polish, Czech, Greek, Croatian, Hungarian and Romanian are done (v94); Hindi, Amharic and Danish (v93); Persian and Ukrainian (v92). All of these are learn-only, have a female and a male voice in edge-tts, and add about 2.5 MB each to the site (nothing to anyone's download unless they pick it). Each starts as a draft and joins the native-speaker review list. No edge-tts voice exists for Hausa or Yoruba, so Nigeria stays English.
 
-**Biggest remaining step**
-1. **Bengali** (+2 points). Bangladesh, 174 million, plus about 100 million in West Bengal. Little tourism, so lower travel value. Voices: bn-BD.
+**Next: the rest of Europe (agreed).** With these, Europe goes from 91% to about 97%.
+1. **Swedish, Norwegian (Bokmål) and Finnish** (+22 million). Nearly everyone speaks excellent English, so build them together. Swedish is also an official language in Finland. Voices: sv-SE, nb-NO, fi-FI.
+2. **Bulgarian** (+6 million). Cyrillic. Voices: bg-BG.
 
-**Traveller favourites: few people, many visitors, patchier English than Scandinavia.**
-2. **Greek** (Greece, Cyprus). 30 million visitors a year. Voices: el-GR.
-3. **Croatian / Serbian / Bosnian** (one language, four countries). Voices: hr-HR, sr-RS, bs-BA.
-4. **Polish** (+38 million; Kraków). Voices: pl-PL.
-5. **Czech** (Prague; Slovaks understand it) and **Hungarian** (Budapest). Voices: cs-CZ, hu-HU.
-6. **Nepali** (trekking; Hindi is already widely understood there) and **Sinhala** (Sri Lanka). Voices: ne-NP, si-LK.
+**Then**
+3. **Bengali** (+2 points of the world). Bangladesh, 174 million, plus about 100 million in West Bengal. Little tourism. Voices: bn-BD.
+4. **Nepali** (trekking; Hindi is already widely understood there) and **Sinhala** (Sri Lanka). Voices: ne-NP, si-LK.
+5. **Small European languages:** Slovenian, Macedonian, Albanian, Lithuanian, Latvian, Estonian, Icelandic. All have voices; each adds 0.4 to 3 million. The Baltic states and Albania already show as widely understood (Russian, Italian).
 
 **Low value now.**
-7. **Swedish and Norwegian (Bokmål)** (+16 million together). Nearly everyone speaks excellent English. Quick to build together, close to Danish. Voices: sv-SE, nb-NO.
-8. **Afrikaans** (+3 million, Namibia only). South Africa is already covered by Zulu and English. Probably drop. Voices: af-ZA.
+6. **Afrikaans** (+3 million, Namibia only). South Africa is already covered by Zulu and English. Probably drop. Voices: af-ZA.
 
-Also possible later: Burmese (54 million, little travel for now), Romanian, Urdu (Pakistan; spoken Hindi is understood, but Urdu has its own script).
+Also possible later: Burmese (54 million, little travel for now), Urdu (Pakistan; spoken Hindi is understood, but Urdu has its own script), Georgian, Armenian, Azerbaijani.
 
 ## More people who can use PhraseBook
 Today the app can be used in English, Spanish, French or German (about 2.4 billion speakers, roughly 3 in 10 people). A Vietnamese speaker, for example, can't use it in Vietnamese. With English to learn (v91), coverage is the same 64% of the world whichever of the four you speak.
 
-- **More "I speak" languages.** The phrases exist in all 29 languages already. Each new one needs the app's menus and messages translated (`ui.json`), a help page, and notes written for its speakers. Biggest gains in people who could use the app: Chinese, Portuguese, Arabic, then Indonesian, Japanese, Vietnamese.
+- **More "I speak" languages.** The phrases exist in all 35 languages already. Each new one needs the app's menus and messages translated (`ui.json`), a help page, and notes written for its speakers. Biggest gains in people who could use the app: Chinese, Portuguese, Arabic, then Indonesian, Japanese, Vietnamese.
 - **Smaller "I speak" languages (next up).** Let speakers of other languages, such as Vietnamese, use the app in their own language but learn only a few key languages: English first, then a couple of big tourist languages for them (for Vietnamese, perhaps Chinese, Korean, Japanese or Thai). Each one needs the menus and messages (`ui.json`), a help page, and notes and sounds-like spellings only for its chosen languages (`lang/<code>/for-<base>/`). The app would offer only the languages written for that speaker. The phrases and audio already exist, including Play all audio in every language.
 - **British English to learn.** English to learn is American (en-us). A British version (en-gb) would mostly be a copy with the bill, the toilets, return tickets and British voices.
 
@@ -40,7 +38,7 @@ Today the app can be used in English, Spanish, French or German (about 2.4 billi
 Use the star, kept free when skipping got the check circle, to mark favourite phrases, with a way to practise only those.
 
 ## Native-speaker review
-Every language marked `draft` needs checking by a native speaker: Korean, Hebrew, Indonesian, Tagalog, Thai, Russian, Turkish, Arabic, Moroccan Arabic, both Portugueses, Swahili, Zulu, Persian, Ukrainian, Hindi, Amharic and Danish, plus the German and French notes and guides. For Moroccan Arabic, first listen to whether the ar-MA voices sound like Darija or like Standard Arabic read aloud. Check first the ambulance numbers in the "I need a doctor" notes, then the Thai tone marks and the Khmer and Lao spellings.
+Every language marked `draft` needs checking by a native speaker: Korean, Hebrew, Indonesian, Tagalog, Thai, Russian, Turkish, Arabic, Moroccan Arabic, both Portugueses, Swahili, Zulu, Persian, Ukrainian, Hindi, Amharic, Danish, Polish, Czech, Greek, Croatian, Hungarian and Romanian, plus the German and French notes and guides. For Moroccan Arabic, first listen to whether the ar-MA voices sound like Darija or like Standard Arabic read aloud. Check first the ambulance numbers in the "I need a doctor" notes, then the Thai tone marks and the Khmer and Lao spellings.
 
 ## Speaking practice
 Practise saying a phrase, in two steps.
@@ -63,7 +61,7 @@ A post introducing PhraseBook.
 
 - **The story:** why you built it (the About page's words: the smile when a local hears you try), and what makes it different: free, ad-free, owl-free and streak-free, works offline, polite phrases.
 - **Hear it, then say it:** every phrase has natural-sounding audio in a woman's and a man's voice (and the woman's form where a phrase changes with the speaker), plus a "sounds like" spelling written for your own language. Play all reads the list aloud, English then the language, for hands-free listening on a walk, a flight or a drive, with the screen locked. All of it works offline.
-- **How much of the world it covers** (`python3 coverage.py` recalculates; approximate, 2024 populations; the map page shows it). English, the app's own language, counts where it is the everyday language (the United States, the United Kingdom, Australia...). With the 29 languages: about 132 countries and territories and 7 billion people, 86% of the world; adding the places where English is official but most people speak something else (Nigeria, Pakistan...), 95%. By region: the Americas 100%, the Middle East 100%, Asia 87%, Europe 78%, Africa 76% (100% with English), Oceania 70%. Lines that work: "PhraseBook has the words for 95% of the world" (the map page's headline), "Speak with nearly 9 in 10 people on Earth in their own language", "from Marrakech to Mombasa, São Paulo to Seoul". Also good for other posts and the About page.
+- **How much of the world it covers** (`python3 coverage.py` recalculates; approximate, 2024 populations; the map page shows it). English, the app's own language, counts where it is the everyday language (the United States, the United Kingdom, Australia...). With the 35 languages: about 142 countries and territories and 7.1 billion people, 87% of the world; adding the places where English is official but most people speak something else (Nigeria, Pakistan...), 96%. By region: the Americas 100%, the Middle East 100%, Europe 91%, Asia 87%, Africa 76% (100% with English), Oceania 70%. Lines that work: "PhraseBook has the words for 96% of the world" (the map page's headline), "Speak with nearly 9 in 10 people on Earth in their own language", "from Marrakech to Mombasa, São Paulo to Seoul". Also good for other posts and the About page.
 - **Show it:** two or three phone screenshots (the List with audio and sounds-like spellings, a card, the welcome page) or a short screen recording.
 - **The link,** and an ask: try it before your next trip, share it, and if you're a native speaker of a draft language, help check it (see Native-speaker review).
 - Best after the app has settled for a while; I can draft the post and make the screenshots when you're ready.
