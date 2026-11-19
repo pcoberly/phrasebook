@@ -20,7 +20,7 @@
   "repeat": {"text": "다시 한번 말해 주세요", "say": "da-shi han-bun mal-hae ju-se-yo", "note": "Literally \"please say it once more\""},
   "speak-english": {"text": "영어 할 수 있어요?", "say": "young-uh hal su i-ssuh-yo"},
 
-  "one": {"text": "일", "say": "il", "note": "The numbers for prices, money and phone numbers. Counting things uses a native set: 하나 (ha-na), 둘 (dool), 셋 (set)"},
+  "one": {"text": "일", "say": "il", "note": "The numbers for prices, money, and phone numbers. Counting things uses a native set: 하나 (ha-na), 둘 (dool), 셋 (set)"},
   "two": {"text": "이", "say": "ee", "spoken": "이!"},
   "three": {"text": "삼", "say": "sam"},
   "four": {"text": "사", "say": "sa", "note": "Sounds like the word for death, so lifts often show F instead of 4"},

@@ -1,5 +1,5 @@
 {
-  "hello": {"text": "Hola", "say": "OH-lah", "note": "The h is silent. Buenos días, buenas tardes and buenas noches change with the time of day"},
+  "hello": {"text": "Hola", "say": "OH-lah", "note": "The h is silent. Buenos días, buenas tardes, and buenas noches change with the time of day"},
   "how-are-you": {"text": "¿Cómo está?", "say": "KOH-moh ehs-TAH", "note": "The polite form; with friends, ¿Cómo estás?"},
   "im-well": {"text": "¡Bien, gracias!", "say": "BYEHN, GRAH-syahs"},
   "good-morning": {"text": "Buenos días", "say": "BWEH-nohs DEE-ahs", "note": "Used until about noon"},
@@ -67,7 +67,7 @@
 
   "delicious": {"text": "¡Está delicioso!", "say": "eh-STAH deh-lee-SYOH-soh", "note": "¡Qué rico! (keh REE-koh) is the casual version"},
   "allergic": {"text": "Soy alérgico a...", "say": "soy ah-LEHR-hee-koh ah ...", "note": "Women say alérgica (ah-LEHR-hee-kah). Add the food: mariscos (seafood), nueces (nuts), huevo (egg). The audio uses mariscos as the example", "spoken": "Soy alérgico a los mariscos", "filled": "Soy alérgico a ⟦los mariscos⟧"},
-  "love-dish": {"text": "¡Me encanta este plato!", "say": "meh ehn-KAHN-tah EHS-teh PLAH-toh", "note": "Me encanta means I love it, and works for food, music and places"},
+  "love-dish": {"text": "¡Me encanta este plato!", "say": "meh ehn-KAHN-tah EHS-teh PLAH-toh", "note": "Me encanta means I love it, and works for food, music, and places"},
   "what-called": {"text": "¿Cómo se llama esto?", "say": "KOH-moh seh YAH-mah EHS-toh", "note": "Point at the dish or item"},
   "table-for-two": {"text": "Una mesa para dos, por favor", "say": "OO-nah MEH-sah PAH-rah dohs por fah-BOR", "note": "For more people use tres (3) or cuatro (4) instead of dos"},
   "menu": {"text": "¿Me puede traer el menú?", "say": "meh PWEH-deh trah-EHR ehl meh-NOO"},

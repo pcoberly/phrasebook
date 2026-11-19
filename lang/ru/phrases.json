@@ -69,7 +69,7 @@
   "recommend": {"text": "Что вы посоветуете?", "say": "shto vih pa-sa-VYE-too-ye-tye", "note": "Что is said shto"},
   "beer": {"text": "Бутылку пива, пожалуйста", "say": "boo-TIHL-koo PEE-va, pa-ZHA-loos-ta"},
   "coffee": {"text": "Кофе", "say": "KO-fye"},
-  "tea": {"text": "Чай", "say": "chay", "note": "Usually black, with sugar, lemon or jam"},
+  "tea": {"text": "Чай", "say": "chay", "note": "Usually black, with sugar, lemon, or jam"},
   "water": {"text": "Вода", "say": "va-DA", "note": "Without gas is без газа (biz GA-za), sparkling с газом (z GA-zam)"},
   "milk": {"text": "Молоко", "say": "ma-la-KO"},
   "sugar": {"text": "Сахар", "say": "SA-khar"},

@@ -48,7 +48,7 @@
 
   "reservation": {"text": "رزرو دارم", "say": "re-ZERV DAA-ram", "note": "From French réserve"},
   "checkout-time": {"text": "ساعت تحویل اتاق چنده؟", "say": "saa-'a-te tah-VEE-le o-TAAGH CHAN-de", "note": "Literally \"what time is handing back the room?\""},
-  "breakfast": {"text": "صبحانه شامله؟", "say": "sob-HAA-ne SHAA-me-le", "note": "Iranian breakfast: flatbread, white cheese, walnuts, herbs and sweet tea"},
+  "breakfast": {"text": "صبحانه شامله؟", "say": "sob-HAA-ne SHAA-me-le", "note": "Iranian breakfast: flatbread, white cheese, walnuts, herbs, and sweet tea"},
   "wifi": {"text": "رمز وای‌فای چیه؟", "say": "RAM-ze VAAY-faay CHEE-ye"},
 
   "toilet": {"text": "دستشویی کجاست؟", "say": "dast-shoo-EE ko-JAAST", "note": "کجاست (ko-JAAST) means where is. Many toilets are squat toilets"},

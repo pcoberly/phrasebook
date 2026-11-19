@@ -47,7 +47,7 @@
   "checkout-time": {"text": "Çıkış saat kaçta?", "say": "chuh-KUHSH sah-AT KACH-tah", "note": "Saat kaçta? means at what time? for anything"},
   "breakfast": {"text": "Kahvaltı dahil mi?", "say": "kah-val-TUH dah-HIL mee", "note": "A Turkish breakfast is a feast worth getting up for"},
   "wifi": {"text": "Wi-Fi şifresi ne?", "say": "VAY-fay shif-reh-SEE NEH", "note": "Şifre is password"},
-  "toilet": {"text": "Tuvalet nerede?", "say": "too-vah-LET NEH-reh-deh", "note": "... nerede? means where is ...? for anything. Signs say WC, Bay (men) and Bayan (women)"},
+  "toilet": {"text": "Tuvalet nerede?", "say": "too-vah-LET NEH-reh-deh", "note": "... nerede? means where is ...? for anything. Signs say WC, Bay (men), and Bayan (women)"},
   "taxi": {"text": "Bana bir taksi çağırır mısınız?", "say": "bah-NAH bir tak-SEE chah-uh-RUHR muh-suh-nuhz", "note": "Yellow taxis run on a meter, the taksimetre"},
   "train": {"text": "Tren", "say": "tren"},
   "bus": {"text": "Otobüs", "say": "oh-toh-BÜS", "note": "City buses and long-distance coaches alike"},

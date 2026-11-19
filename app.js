@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v104";
+const VERSION = "phrasebook-v105";
 // The version people see: release.revision, such as 0.7.42. VERSION counts every release (it is what tells the app an
 // update is waiting); each release starts at its first VERSION number, and the revision counts on from there.
 // A new release (0.8, or 1.0) is one more line here, with the first VERSION number that belongs to it.
@@ -1241,7 +1241,7 @@ function renderWelcome() {
       <div class="whead">
         <img src="icon-v3-180.png" alt="" width="64" height="64">
         <h1>${t("Welcome to PhraseBook")}</h1>
-        <p class="tagline">${t("A free phrase book for travel: flashcards, quizzes and audio, and it works offline.")}</p>
+        <p class="tagline">${t("A free phrase book for travel: flashcards, quizzes, and audio, and it works offline.")}</p>
       </div>
       <div class="wknown"><label for="wknown">${t("I speak")}</label><select id="wknown">${knownSelect()}</select></div>
       <p class="lead">${t("Which language would you like to learn?")}</p>
@@ -1851,7 +1851,7 @@ function renderMore() {
     <div class="menu">
       ${menuRow("languages", t("Languages"), t("Learning {name} · you speak {known}", { name: esc(langName(state.lang)), known: esc(state.known.native) }))}
       ${menuRow("badges", t("Badges"), t("{n} earned", { n: Object.keys(earnedBadges()).length }))}
-      ${menuRow("settings", t("Settings"), t("Audio, quiz and Play all"))}
+      ${menuRow("settings", t("Settings"), t("Audio, quiz, and Play all"))}
       ${menuRow("help", t("Help"), t("How to use PhraseBook"))}
       ${menuRow("changes", t("What's new"), versionLabel())}
       ${installed ? "" : menuRow("install", t("Install on this device"), t("Add PhraseBook to your Home Screen"))}
@@ -1859,7 +1859,7 @@ function renderMore() {
     <div class="menu">
       ${menuRow("share", t("Share this app"), t("Send PhraseBook to a friend"), false)}
       ${menuRow("feedback", t("Send feedback"), t("Tell us what to fix or add"), false)}
-      ${menuRow("about", t("About"), t("Version, offline use and privacy"))}
+      ${menuRow("about", t("About"), t("Version, offline use, and privacy"))}
     </div>`;
   for (const page of ["languages", "badges", "settings", "help", "changes", "install", "about"]) {
     const b = document.getElementById(page);
@@ -1918,7 +1918,7 @@ function renderAbout() {
       <p class="shareline">${t("If you want to make it better, send me a note and volunteer to help with translations, guides, or maintaining the open-source code.")}</p>
       <button class="act" id="volunteer">${t("Send feedback")}</button>
     </section>
-    <p>${t("PhraseBook is free. Once a language is downloaded, everything works without a connection: the phrases, the audio, the cards, the quiz and the guide.")}</p>
+    <p>${t("PhraseBook is free. Once a language is downloaded, everything works without a connection: the phrases, the audio, the cards, the quiz, and the guide.")}</p>
     <p class="note">${t("Your progress and settings stay on this device.")}${analyticsOn ? " " + t("The app counts anonymous visits and which features are used, with no cookies and no personal data.") : ""}</p>`;
   wireBack();
   $("#share").onclick = shareApp;
@@ -1965,7 +1965,7 @@ function shareApp() {
 async function sendLink(button) {
   track("share/send");
   const url = new URL("./", location.href).href;
-  const data = { title: "PhraseBook", text: t("A free phrase book for travel: flashcards, quizzes and audio, and it works offline."), url };
+  const data = { title: "PhraseBook", text: t("A free phrase book for travel: flashcards, quizzes, and audio, and it works offline."), url };
   try {
     if (navigator.share) { await navigator.share(data); return; }
     await navigator.clipboard.writeText(url);
@@ -2057,7 +2057,7 @@ function renderLanguages() {
       <label for="known">${t("I speak")}</label>
       <select id="known">${knownSelect()}</select>
     </div>
-    <p class="note">${t("Prompts, answers, notes, the guide and Play all use the language you speak. Anything not yet written for it shows in English.")}${state.base === state.lang.code ? " " + t("While you learn {name}, English is used.", { name: esc(langName(state.lang)) }) : ""}</p>
+    <p class="note">${t("Prompts, answers, notes, the guide, and Play all use the language you speak. Anything not yet written for it shows in English.")}${state.base === state.lang.code ? " " + t("While you learn {name}, English is used.", { name: esc(langName(state.lang)) }) : ""}</p>
     ${languagePanel()}
 `;
   sectionize(main);

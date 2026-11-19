@@ -1,8 +1,8 @@
 {
- "bytes": 2282214,
+ "bytes": 2282218,
  "files": {
   "lang/fr/phrases.json": "02bd634e5ca7",
-  "lang/fr/guide.html": "50201f1a6ac4",
+  "lang/fr/guide.html": "14992bc75111",
   "audio/fr/f/hello.mp3": "cecf635011e0",
   "audio/fr/f/how-are-you.mp3": "e8caa367eaee",
   "audio/fr/f/im-well.mp3": "de81c72f1b8c",
@@ -175,7 +175,7 @@
   },
   "fr": {
    "lang/fr/for-fr/help.html": "dca7f86a00e8",
-   "lang/fr/for-fr/ui.json": "fce4081d798c"
+   "lang/fr/for-fr/ui.json": "da9fdf0cf874"
   }
  }
 }

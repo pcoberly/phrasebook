@@ -78,7 +78,7 @@
   "water": {"text": "Вода", "say": "vo-DA"},
   "milk": {"text": "Мляко", "say": "MLYA-ko", "note": "Bulgarian yoghurt, кисело мляко (KEE-se-lo MLYA-ko), sour milk, is famous"},
   "sugar": {"text": "Захар", "say": "ZA-khar"},
-  "hot": {"text": "Горещо", "say": "go-RESH-to", "note": "Hot, of food, drinks and weather"},
+  "hot": {"text": "Горещо", "say": "go-RESH-to", "note": "Hot, of food, drinks, and weather"},
   "cold": {"text": "Студено", "say": "stoo-DE-no"},
   "cheers": {"text": "Наздраве!", "say": "naz-DRA-ve", "note": "Look each person in the eye"},
 

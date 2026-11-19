@@ -71,7 +71,7 @@
   "what-called": {"text": "ይሄ ምን ይባላል?", "say": "yi-HE min yi-ba-LAL", "note": "Point at the dish or item"},
   "table-for-two": {"text": "ለሁለት ሰው ጠረጴዛ፣ እባክዎ", "say": "le-hu-LET sew t'e-re-P'E-za, i-BAK-wo", "note": "For more people: ለሶስት (le-SOST), 3, or ለአራት (le-a-RAT), 4"},
   "menu": {"text": "እባክዎ ሜኑ ይስጡኝ", "say": "i-BAK-wo ME-nu yis-TUGN"},
-  "recommend": {"text": "ምን ይመክሩኛል?", "say": "min yi-mek-ru-GNAL", "note": "On Wednesdays, Fridays and during fasts, many dishes are vegan (ፆም, tsom)"},
+  "recommend": {"text": "ምን ይመክሩኛል?", "say": "min yi-mek-ru-GNAL", "note": "On Wednesdays, Fridays, and during fasts, many dishes are vegan (ፆም, tsom)"},
   "beer": {"text": "አንድ ቢራ፣ እባክዎ", "say": "and BEE-ra, i-BAK-wo", "note": "Local beers include St. George and Habesha. Try ጠጅ (t'ej), honey wine"},
   "coffee": {"text": "ቡና", "say": "BU-na", "note": "Ethiopia is coffee's homeland. Being invited to a coffee ceremony, three rounds roasted and brewed in front of you, is an honor"},
   "tea": {"text": "ሻይ", "say": "shay", "note": "Often spiced, with cinnamon or cloves"},

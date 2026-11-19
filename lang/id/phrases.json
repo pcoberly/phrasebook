@@ -1,5 +1,5 @@
 {
-  "hello": {"text": "Halo", "say": "HAH-loh", "note": "Casual and fine anywhere. Selamat pagi, siang, sore and malam change with the time of day"},
+  "hello": {"text": "Halo", "say": "HAH-loh", "note": "Casual and fine anywhere. Selamat pagi, siang, sore, and malam change with the time of day"},
   "how-are-you": {"text": "Apa kabar?", "say": "AH-pah KAH-bahr", "note": "Literally what news? The reply is baik (bah-EE), well"},
   "im-well": {"text": "Baik, terima kasih!", "say": "bah-EE, tuh-REE-mah KAH-see"},
   "good-morning": {"text": "Selamat pagi", "say": "suh-LAH-maht PAH-gee", "note": "Until about 11 in the morning"},

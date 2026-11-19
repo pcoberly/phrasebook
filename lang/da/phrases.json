@@ -82,7 +82,7 @@
   "cold": {"text": "Kold", "say": "kol"},
   "cheers": {"text": "Skål!", "say": "skol", "note": "Look each person in the eye as you raise your glass"},
 
-  "help": {"text": "Hjælp!", "say": "yelp", "note": "Shout it. For police, ambulance or fire, call 112"},
+  "help": {"text": "Hjælp!", "say": "yelp", "note": "Shout it. For police, ambulance, or fire, call 112"},
   "need-doctor": {"text": "Jeg har brug for en læge", "say": "yai har BROO for een LAY-e", "note": "For an ambulance, call 112. In Copenhagen, call 1813 for urgent medical advice"},
   "pharmacy": {"text": "Hvor er apoteket?", "say": "vor er a-po-TEH-ket", "note": "Look for the green Apotek sign"}
 }

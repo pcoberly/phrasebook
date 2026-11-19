@@ -42,7 +42,7 @@
   "just-looking": {"text": "I'm just looking, thanks", "say": "ime JUST LOOK-ing, thanks", "note": "The polite answer when a shop assistant asks Can I help you?"},
   "ill-take-it": {"text": "I'll take it", "say": "ile TAKE it"},
   "too-expensive": {"text": "That's too expensive", "say": "thats too ex-PEN-siv", "note": "Softer: That's a bit more than I wanted to spend"},
-  "discount": {"text": "Can you give me a discount?", "say": "kan yoo GIV mee a DIS-kownt", "note": "Haggling is unusual in shops in the US, Britain or Australia. At markets and with private sellers, you can ask Is that your best price?"},
+  "discount": {"text": "Can you give me a discount?", "say": "kan yoo GIV mee a DIS-kownt", "note": "Haggling is unusual in shops in the US, Britain, or Australia. At markets and with private sellers, you can ask Is that your best price?"},
   "card": {"text": "Do you take credit cards?", "say": "doo yoo TAKE KRED-it kards", "note": "Cards and phone payments are accepted almost everywhere"},
   "bill": {"text": "Can I get the check, please?", "say": "kan eye GET tha CHEK, pleez", "note": "The American way. In Britain and Australia, Could I have the bill, please? In the US, tip 18 to 20%"},
 
@@ -75,7 +75,7 @@
   "beer": {"text": "Could I get a beer, please?", "say": "kood eye GET a BEER, pleez", "note": "Draft beer is on tap. In the US you must be 21 to drink, and you may be asked for ID"},
   "coffee": {"text": "Coffee", "say": "KAW-fee", "note": "In the US, plain coffee is filter coffee, often with free refills"},
   "tea": {"text": "Tea", "say": "tee", "note": "In Britain, tea comes with milk unless you ask. In the US, iced tea is common"},
-  "water": {"text": "Water", "say": "WAH-ter", "note": "Tap water is safe and free in restaurants in the US, Britain and Australia. Americans say the t almost like a d: WAH-der"},
+  "water": {"text": "Water", "say": "WAH-ter", "note": "Tap water is safe and free in restaurants in the US, Britain, and Australia. Americans say the t almost like a d: WAH-der"},
   "milk": {"text": "Milk", "say": "milk"},
   "sugar": {"text": "Sugar", "say": "SHOOG-er", "note": "Begins with sh"},
   "hot": {"text": "Hot", "say": "haht", "note": "Hot, and also spicy"},

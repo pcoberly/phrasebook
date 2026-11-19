@@ -72,7 +72,7 @@
   "table-for-two": {"text": "Meza ya watu wawili, tafadhali", "say": "MEH-zah yah WAH-too wah-WEE-lee, tah-fah-DHAH-lee", "note": "For more people: watatu (wah-TAH-too), 3, or wanne (WAHN-neh), 4"},
   "menu": {"text": "Naomba menyu", "say": "nah-OHM-bah MEH-nyoo"},
   "recommend": {"text": "Unapendekeza nini?", "say": "oo-nah-pen-deh-KEH-zah NEE-nee"},
-  "beer": {"text": "Naomba bia moja baridi", "say": "nah-OHM-bah BEE-ah MOH-jah bah-REE-dee", "note": "Ask for baridi, cold, as beer can come warm. Tusker, Kilimanjaro and Safari are the local beers"},
+  "beer": {"text": "Naomba bia moja baridi", "say": "nah-OHM-bah BEE-ah MOH-jah bah-REE-dee", "note": "Ask for baridi, cold, as beer can come warm. Tusker, Kilimanjaro, and Safari are the local beers"},
   "coffee": {"text": "Kahawa", "say": "kah-HAH-wah", "note": "On the coast, tiny cups of strong kahawa are sold in the street"},
   "tea": {"text": "Chai", "say": "CHAH-ee", "note": "Usually milky and sweet, often with spices. Black tea is chai ya rangi"},
   "water": {"text": "Maji", "say": "MAH-jee", "note": "Drink bottled water"},

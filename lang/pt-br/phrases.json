@@ -48,7 +48,7 @@
 
   "reservation": {"text": "Tenho uma reserva", "say": "TEN-yoo OO-mah heh-ZAIR-vah"},
   "checkout-time": {"text": "Que horas é o check-out?", "say": "kee OH-rahs EH oo sheh-KOW-chee", "note": "Brazilians use the English word, said their way"},
-  "breakfast": {"text": "O café da manhã está incluído?", "say": "oo kah-FEH dah mahn-YAHN es-TAH een-kloo-EE-doo", "note": "Brazilian hotel breakfasts are famously generous, with fruit, cakes and pão de queijo, cheese bread"},
+  "breakfast": {"text": "O café da manhã está incluído?", "say": "oo kah-FEH dah mahn-YAHN es-TAH een-kloo-EE-doo", "note": "Brazilian hotel breakfasts are famously generous, with fruit, cakes, and pão de queijo, cheese bread"},
   "wifi": {"text": "Qual é a senha do Wi-Fi?", "say": "kwah-OO EH ah SEN-yah doo wy-FY"},
 
   "toilet": {"text": "Onde fica o banheiro?", "say": "OHN-jee FEE-kah oo bahn-YAY-roo", "note": "Onde fica...? (OHN-jee FEE-kah) asks where anything is"},

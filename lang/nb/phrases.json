@@ -52,7 +52,7 @@
   "wifi": {"text": "Hva er passordet til wifi?", "say": "vaa air PAS-oor-reh til VAI-fai"},
 
   "toilet": {"text": "Hvor er toalettet?", "say": "vor air too-a-LET-teh", "note": "Hvor (vor) means where"},
-  "taxi": {"text": "Kan du ringe etter en taxi?", "say": "kan dü RING-eh ET-ter ehn TAK-see", "note": "Taxis are very expensive; trains, buses and ferries are excellent"},
+  "taxi": {"text": "Kan du ringe etter en taxi?", "say": "kan dü RING-eh ET-ter ehn TAK-see", "note": "Taxis are very expensive; trains, buses, and ferries are excellent"},
   "train": {"text": "Tog", "say": "tohg", "note": "The Oslo to Bergen line is one of the world's great train rides"},
   "bus": {"text": "Buss", "say": "bus"},
   "airport": {"text": "Flyplass", "say": "FLÜ-plas"},

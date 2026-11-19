@@ -44,7 +44,7 @@
   "too-expensive": {"text": "É muito caro", "say": "EH MOONG-too KAH-roo"},
   "discount": {"text": "Pode fazer um desconto?", "say": "POH-duh fuh-ZAIR oong dush-KOHN-too", "note": "Haggling is for markets and fairs (feiras), not shops"},
   "card": {"text": "Aceita cartão?", "say": "uh-SAY-tuh kur-TOWNG", "note": "Cards are taken in most places, but some small cafés and shops want cash or have a minimum"},
-  "bill": {"text": "A conta, por favor", "say": "uh KOHN-tuh, poor fuh-VOR", "note": "The bread, olives and cheese put on the table (couvert) are charged if you eat them. Send them back if you don't want them"},
+  "bill": {"text": "A conta, por favor", "say": "uh KOHN-tuh, poor fuh-VOR", "note": "The bread, olives, and cheese put on the table (couvert) are charged if you eat them. Send them back if you don't want them"},
 
   "reservation": {"text": "Tenho uma reserva", "say": "TAY-nyoo OO-muh ruh-ZAIR-vuh"},
   "checkout-time": {"text": "A que horas é o check-out?", "say": "uh kee OH-ruhz EH oo sheh-KOWT", "note": "The Portuguese use the English word"},
@@ -82,7 +82,7 @@
   "cold": {"text": "Frio", "say": "FREE-oo", "note": "Cold weather and cold food. A chilled drink is fresco (FRAYSH-koo)"},
   "cheers": {"text": "Saúde!", "say": "suh-OOD", "note": "Literally \"health\""},
 
-  "help": {"text": "Socorro!", "say": "soo-KOH-hoo", "note": "Shout it. For police, ambulance or fire, call 112"},
+  "help": {"text": "Socorro!", "say": "soo-KOH-hoo", "note": "Shout it. For police, ambulance, or fire, call 112"},
   "need-doctor": {"text": "Preciso de um médico", "say": "pruh-SEE-zoo doong MEH-dee-koo", "note": "The same for a man or a woman. For an ambulance, call 112"},
   "pharmacy": {"text": "Onde é a farmácia?", "say": "OHND EH uh fur-MAH-see-uh", "note": "Look for the green cross. At night, one farmácia de serviço in each area stays open, listed on every pharmacy's door"}
 }

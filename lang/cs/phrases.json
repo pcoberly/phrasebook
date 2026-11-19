@@ -51,7 +51,7 @@
   "breakfast": {"text": "Je snídaně v ceně?", "say": "yeh SNYEE-da-nyeh f TSEH-nyeh", "note": "Literally \"is breakfast in the price?\""},
   "wifi": {"text": "Jaké je heslo na wifi?", "say": "YA-keh yeh HES-lo na VEE-fee"},
 
-  "toilet": {"text": "Kde je toaleta?", "say": "gdeh yeh TO-a-leh-ta", "note": "Kde (gdeh) means where. Signs say WC, Muži (men) and Ženy (women)"},
+  "toilet": {"text": "Kde je toaleta?", "say": "gdeh yeh TO-a-leh-ta", "note": "Kde (gdeh) means where. Signs say WC, Muži (men), and Ženy (women)"},
   "taxi": {"text": "Můžete mi zavolat taxi?", "say": "MOO-zheh-teh mee ZA-vo-lat TAK-see", "note": "Use an app such as Bolt or Uber, or a taxi company, rather than hailing one in central Prague"},
   "train": {"text": "Vlak", "say": "vlak"},
   "bus": {"text": "Autobus", "say": "OW-to-boos"},

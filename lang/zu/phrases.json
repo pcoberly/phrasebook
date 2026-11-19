@@ -20,7 +20,7 @@
   "repeat": {"text": "Ngicela uphinde", "say": "ngee-[c]EH-lah oo-PEEN-deh", "note": "Literally \"I ask that you do it again\""},
   "speak-english": {"text": "Uyasikhuluma isiNgisi?", "say": "oo-yah-see-koo-LOO-mah ee-see-NGEE-see", "note": "Most South Africans speak some English, but they warm to anyone who greets them in Zulu first"},
 
-  "one": {"text": "Kunye", "say": "KOO-nyeh", "note": "For prices, times and phone numbers, most people use English numbers. Zulu ones are used for counting things"},
+  "one": {"text": "Kunye", "say": "KOO-nyeh", "note": "For prices, times, and phone numbers, most people use English numbers. Zulu ones are used for counting things"},
   "two": {"text": "Kubili", "say": "koo-BEE-lee"},
   "three": {"text": "Kuthathu", "say": "koo-TAH-too"},
   "four": {"text": "Kune", "say": "KOO-neh"},
@@ -53,7 +53,7 @@
 
   "toilet": {"text": "Iphi ithoyilethi?", "say": "EE-pee ee-toh-yee-LEH-tee", "note": "Iphi? (EE-pee) means where is? Many people say the toilet in English, or the loo"},
   "taxi": {"text": "Ngicela ungibizele itekisi", "say": "ngee-[c]EH-lah oo-ngee-bee-ZEH-leh ee-teh-KEE-see", "note": "In South Africa a taxi usually means a shared minibus taxi. For a private car, use a ride app or ask for a metered cab"},
-  "train": {"text": "Isitimela", "say": "ee-see-tee-MEH-lah", "note": "From English steamer. The Gautrain links Johannesburg airport, Johannesburg and Pretoria"},
+  "train": {"text": "Isitimela", "say": "ee-see-tee-MEH-lah", "note": "From English steamer. The Gautrain links Johannesburg airport, Johannesburg, and Pretoria"},
   "bus": {"text": "Ibhasi", "say": "ee-BAH-see"},
   "airport": {"text": "Isikhumulo sezindiza", "say": "ee-see-koo-MOO-loh seh-zeen-DEE-zah", "note": "Literally \"the landing place of the aeroplanes\". Many just say i-airport"},
   "bus-station": {"text": "Isiteshi samabhasi", "say": "ee-see-TEH-shee sah-mah-BAH-see", "note": "Long-distance coaches like Intercape and Greyhound leave from the main stations"},
@@ -78,7 +78,7 @@
   "water": {"text": "Amanzi", "say": "ah-MAHN-zee", "note": "Tap water is safe in most cities"},
   "milk": {"text": "Ubisi", "say": "oo-BEE-see"},
   "sugar": {"text": "Ushukela", "say": "oo-shoo-KEH-lah"},
-  "hot": {"text": "Kuyashisa", "say": "koo-yah-SHEE-sah", "note": "Literally \"it is hot\", of food, drinks and the weather"},
+  "hot": {"text": "Kuyashisa", "say": "koo-yah-SHEE-sah", "note": "Literally \"it is hot\", of food, drinks, and the weather"},
   "cold": {"text": "Kuyabanda", "say": "koo-yah-BAHN-dah", "note": "Literally \"it is cold\""},
   "cheers": {"text": "Impilo!", "say": "eem-PEE-loh", "note": "Literally \"life, health\". Cheers! in English is just as common"},
 

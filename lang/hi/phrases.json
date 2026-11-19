@@ -74,7 +74,7 @@
   "recommend": {"text": "यहाँ क्या अच्छा है?", "say": "ya-HAAN kyaa ACH-chhaa hai", "note": "Literally \"what's good here?\""},
   "beer": {"text": "एक बियर दीजिए", "say": "ek BEE-yar DEE-ji-ye", "note": "Some states, such as Gujarat and Bihar, are dry. Elsewhere, look for a bar or a licensed restaurant"},
   "coffee": {"text": "कॉफ़ी", "say": "KOF-fee", "note": "In the south, ask for filter coffee, strong and milky"},
-  "tea": {"text": "चाय", "say": "chaai", "note": "Usually masala chai: milky, sweet and spiced, sold at every corner"},
+  "tea": {"text": "चाय", "say": "chaai", "note": "Usually masala chai: milky, sweet, and spiced, sold at every corner"},
   "water": {"text": "पानी", "say": "PAA-nee", "note": "Drink sealed bottled water"},
   "milk": {"text": "दूध", "say": "doodh"},
   "sugar": {"text": "चीनी", "say": "CHEE-nee", "note": "Tea comes sweet. Without sugar is बिना चीनी (bi-NAA CHEE-nee)"},
