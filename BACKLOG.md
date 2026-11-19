@@ -42,6 +42,16 @@ Today the app can be used in English, Spanish, French or German (about 2.4 billi
   - **Candidates after Vietnamese**, by outbound travel and weak English: Japanese (katakana suits sounds-like spellings well), Korean (hangul too), Brazilian Portuguese (cheap, close to the Spanish work), Chinese (most travelers, but characters fit sounds-like spellings badly; use pinyin), Russian, Arabic. Check outbound-travel numbers and top destinations before choosing each one's full targets.
 - **British English to learn.** English to learn is American (en-us). A British version (en-gb) would mostly be a copy with the bill, the toilets, return tickets and British voices.
 
+## From the in-flight review (decisions needed)
+- **Donations wording for About:** "If you really like this site, help me keep it running by buying me a coffee or a beer." Ready to add with the ☕ link once the donation page exists (see Donations).
+- **Count phrases, not cards?** Today progress counts cards: each phrase is two, one each way ("73 of 182 cards learned"). Counting phrases reads more naturally, but needs a rule for when a phrase is learned: (a) both ways learned, strict, and someone who only practices one direction never finishes; (b) either way, generous; or (c) learned in the directions you practice. Recommendation: (c) shown as phrases, with (a) as the rule when practicing both directions. Badges' Halfway and The whole book would follow the same rule.
+
+## New phrases: what's still to do
+The 11 phrases added in v106 (let's go, left, right, vegetarian, vegan, rice, chicken, beef, pork, fish, leave me alone) have text and audio in all 40 languages. Still to do:
+- **Sounds-like spellings for German, French, and Spanish speakers** in the 21 older languages whose spellings were written by hand (vi, km, lo, es, fr, nl, de, it, he, ko, id, tl, th, ru, tr, ar, ary, pt-br, pt-pt, en-us, and ja/zh, which use romanization): until written, these 11 show the English sounds-like spelling. The other 19 languages have them.
+- **Notes in German, French, and Spanish** for the new phrases that have a note (vegetarian, left, and so on): they show in English for now.
+- **Native check:** the new phrases are drafts even in the checked languages (Vietnamese, Japanese, Spanish, French, Dutch, German, Italian, Chinese, and American English).
+
 ## Translate anything (online only)
 When search finds nothing ("No phrase matches 'where is the ferry'"), offer "Translate it with Google Translate ↗": a link carrying the two languages and the text, which opens Google Translate (its app, if installed) ready-translated, with its own audio.
 
