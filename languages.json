@@ -222,7 +222,7 @@
       "f": "pt-BR-FranciscaNeural",
       "m": "pt-BR-AntonioNeural"
     },
-    "bytes": 2339640
+    "bytes": 2343528
   },
   {
     "code": "pt-pt",
@@ -234,7 +234,7 @@
       "f": "pt-PT-RaquelNeural",
       "m": "pt-PT-DuarteNeural"
     },
-    "bytes": 2358171
+    "bytes": 2363211
   },
   {
     "code": "ary",
@@ -283,7 +283,7 @@
       "f": "en-US-AvaNeural",
       "m": "en-US-GuyNeural"
     },
-    "bytes": 2156358
+    "bytes": 2157222
   },
   {
     "code": "fa",

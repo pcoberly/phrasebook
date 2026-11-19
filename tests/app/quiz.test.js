@@ -32,3 +32,22 @@ test("New round starts again from question 1", async () => {
   assert.match(await page.locator(".roundbar").innerText(), /Question 1 of 10/);
   assert.strictEqual((await stored(page, "quiz-ja")).index, 0);
 });
+
+test("Listening only: the choices play one after another, each lit while it plays", async () => {
+  const page = await open({ storage: { round: "10", dir: "to", listen: true } });
+  await page.evaluate(() => { // clips that last a moment, so each choice is lit long enough to see
+    HTMLMediaElement.prototype.play = function () { setTimeout(() => this.dispatchEvent(new Event("ended")), 250); return Promise.resolve(); };
+  });
+  await page.locator(".tab[data-mode='quiz']").click();
+  await page.locator("#choices .choice.speaking").first().waitFor();
+  const n = await page.locator("#choices .choice").count();
+  const lit = new Set();
+  for (let i = 0; i < 200 && lit.size < n; i++) {
+    const n = await page.evaluate(() => [...document.querySelectorAll("#choices .choice")].findIndex((c) => c.classList.contains("speaking")));
+    if (n >= 0) lit.add(n);
+    await page.waitForTimeout(50);
+  }
+  assert.deepStrictEqual([...lit].sort(), [...Array(n).keys()]);
+  await page.locator("#choices .pick").first().click(); // answering stops them
+  assert.strictEqual(await page.locator("#choices .choice.speaking").count(), 0);
+});

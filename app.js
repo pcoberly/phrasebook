@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v102";
+const VERSION = "phrasebook-v103";
 const DAY = 86400000;
 const INTERVALS = [0, 1, 3, 7, 14, 30]; // days per Leitner box
 const ROUND_CHOICES = ["10", "20", "50"]; // questions in one quiz round, chosen in Settings
@@ -218,12 +218,7 @@ function grade(key, ok) {
 // faded). Kept on this device only, like progress: { "first-words": time, "polite:ja": time }.
 const BADGE_KEY = "phrasebook-badges";
 const badge = (id, icon, name, desc) => ({ id, icon, name, desc });
-const BADGES = [ // once each, whatever the language
-  badge("first-words", "🌱", "First words", "Your first card learned"),
-  badge("first-quiz", "🎯", "First quiz", "A quiz round finished"),
-  badge("all-ears", "🎧", "All ears", "Play all listened to right to the end"),
-  badge("perfect", "⭐", "Perfect round", "Every answer right in a quiz round of 10 or more"),
-  badge("good-ear", "👂", "Good ear", "A perfect round with Listening only on"),
+const BADGES = [ // once each, across your languages
   badge("langs-2", "🗺️", "Two languages", "Cards learned in two languages"),
   badge("langs-5", "🧭", "Five languages", "Cards learned in five languages"),
   badge("langs-10", "🌍", "Ten languages", "Cards learned in ten languages"),
@@ -231,6 +226,11 @@ const BADGES = [ // once each, whatever the language
   badge("tones", "🎵", "Tones", "A card learned in a tonal language"),
 ];
 const LANG_BADGES = [ // earned again in each language
+  badge("first-words", "🌱", "First words", "Your first card learned"),
+  badge("first-quiz", "🎯", "First quiz", "A quiz round finished"),
+  badge("perfect", "⭐", "Perfect round", "Every answer right in a quiz round of 10 or more"),
+  badge("good-ear", "👂", "Good ear", "A perfect round with Listening only on"),
+  badge("all-ears", "🎧", "All ears", "Play all listened to right to the end"),
   badge("polite", "🙏", "Polite basics", "Hello, please, thank you and excuse me, learned both ways"),
   badge("numbers", "🔢", "Counting", "All the numbers"),
   badge("food", "🍽️", "Food", "The whole Food topic"),
@@ -266,6 +266,7 @@ function langBadgesNow(code) {
   const active = state.shared.filter((p) => !skipped.has(p.id));
   const known = active.reduce((n, p) => n + learned.has(p.id + ":to") + learned.has(p.id + ":from"), 0);
   const got = {
+    "first-words": learned.size > 0,
     polite: POLITE.every((id) => learned.has(id + ":to") && learned.has(id + ":from")),
     numbers: topic("numbers"), food: topic("food"), "getting-around": topic("getting-around"), emergency: topic("emergency"),
     halfway: active.length >= BOOK_MIN && known * 2 >= active.length * 2,
@@ -275,6 +276,7 @@ function langBadgesNow(code) {
   return Object.keys(got).filter((k) => got[k]);
 }
 // Award whatever has been reached and not yet earned. Returns the new ones as [badge, language or null].
+// also: language badges just reached in the language in use (a quiz round, Play all), which progress can't show.
 function checkBadges({ quiet = false, also = [] } = {}) {
   if (!state.shared.length) return [];
   const earned = earnedBadges();
@@ -282,8 +284,8 @@ function checkBadges({ quiet = false, also = [] } = {}) {
   const add = (key, b, lang = null) => { if (!earned[key]) { earned[key] = Date.now(); fresh.push([b, lang]); } };
   const withCards = state.languages.filter((l) => progressOf(l.code).learned.size);
   for (const l of withCards) for (const id of langBadgesNow(l.code)) add(id + ":" + l.code, LANG_BADGES.find((b) => b.id === id), l);
-  const reached = new Set(also);
-  if (withCards.length) reached.add("first-words");
+  for (const id of also) add(id + ":" + state.lang.code, LANG_BADGES.find((b) => b.id === id), state.lang);
+  const reached = new Set();
   if (withCards.length >= 2) reached.add("langs-2");
   if (withCards.length >= 5) reached.add("langs-5");
   if (withCards.length >= 10) reached.add("langs-10");
@@ -324,7 +326,16 @@ function nextToast() {
 }
 // The first time the app has badges, someone with progress already has some: one note for all of them, not one each
 function firstBadges() {
-  if (store.get(BADGE_KEY, null) !== null) { checkBadges(); return; }
+  // First words, First quiz, Perfect round, Good ear and All ears were once earned once in all; now each language has
+  // its own. One earned before that goes to the language in use (First words is worked out again from progress).
+  const old = store.get(BADGE_KEY, null);
+  const moved = ["first-words", "first-quiz", "perfect", "good-ear", "all-ears"].filter((id) => old && old[id]);
+  if (moved.length) {
+    for (const id of moved) { if (id !== "first-words") old[id + ":" + state.lang.code] ||= old[id]; delete old[id]; }
+    store.set(BADGE_KEY, old);
+    checkBadges({ quiet: true });
+  }
+  if (old !== null) { checkBadges(); return; }
   const n = checkBadges({ quiet: true }).length;
   if (!n) { store.set(BADGE_KEY, {}); return; }
   badgeToast(`🏅 ${n === 1 ? t("You've already earned a badge") : t("You've already earned {n} badges", { n })}`);
@@ -342,17 +353,28 @@ function renderBadges() {
   checkBadges({ quiet: true });
   const earned = earnedBadges();
   const count = Object.keys(earned).length;
-  // the language in use first, then any other with a badge or a card learned
+  const has = (l, b) => earned[b.id + ":" + l.code];
+  // the language in use first, then the others on this device, then any other with a badge or a card learned
   const langs = [state.lang, ...state.languages.filter((l) => l.code !== state.lang.code
-    && (LANG_BADGES.some((b) => earned[b.id + ":" + l.code]) || progressOf(l.code).learned.size))];
+    && (packState(l.code) !== "none" || LANG_BADGES.some((b) => has(l, b)) || progressOf(l.code).learned.size))];
+  const open = store.get("phrasebook-badges-open", []);
   main.innerHTML = `${backToMore()}
     <h2 class="group">${t("Badges")} · ${t("{n} earned", { n: count })}</h2>
     <p class="note">${t("Badges celebrate what you've done. You can't lose them, and there's no rush.")}</p>
-    <h2 class="group">${t("Milestones")}</h2>
-    <div class="badges">${BADGES.map((b) => badgeTile(b, earned[b.id])).join("")}</div>
-    ${langs.map((l) => `
-    <h2 class="group">${esc(langName(l))} <span lang="${l.code}">${esc(l.native)}</span></h2>
-    <div class="badges">${LANG_BADGES.map((b) => badgeTile(b, earned[b.id + ":" + l.code])).join("")}</div>`).join("")}`;
+    ${langs.map((l) => {
+      const got = LANG_BADGES.filter((b) => has(l, b));
+      return `
+    <details class="blang" data-code="${l.code}"${open.includes(l.code) ? " open" : ""}>
+      <summary><span class="bln">${esc(langName(l))} <span class="note" lang="${l.code}">${esc(l.native)}</span></span>
+        <span class="blc">${got.map((b) => b.icon).join("")} <span class="note">${got.length}/${LANG_BADGES.length}</span></span></summary>
+      <div class="badges">${LANG_BADGES.map((b) => badgeTile(b, has(l, b))).join("")}</div>
+    </details>`;
+    }).join("")}
+    <h2 class="group">${t("Across your languages")}</h2>
+    <div class="badges">${BADGES.map((b) => badgeTile(b, earned[b.id])).join("")}</div>`;
+  main.querySelectorAll("details.blang").forEach((d) => d.addEventListener("toggle", () => {
+    store.set("phrasebook-badges-open", [...main.querySelectorAll("details.blang[open]")].map((x) => x.dataset.code));
+  }));
   wireBack();
   hint("");
 }
@@ -620,7 +642,30 @@ function resetRound() {
   state.round = null;
   store.remove(roundKey(state.lang.code));
 }
+// Listening only, with the choices in the language: they are played one after another, each lit while it plays, and
+// one can be picked at any time. Answering, or leaving the question, stops them.
+let quizRun = 0;
+function speakDone(p) {
+  return new Promise((done) => {
+    const finish = () => { tapPlayer.removeEventListener("ended", ended); clearTimeout(timer); done(); };
+    const ended = () => { if (tapPlayer.src.startsWith("blob:")) finish(); }; // the phrase, not the hum speak() starts with
+    const timer = setTimeout(finish, 6000); // the device's own voice, or a clip that never ends, doesn't hold it up
+    tapPlayer.addEventListener("ended", ended);
+    speak(p);
+  });
+}
+async function playChoices(opts, box, run) {
+  await sleep(600); // a moment to read the question first
+  for (let i = 0; i < opts.length; i++) {
+    if (run !== quizRun || state.mode !== "quiz") return;
+    box.children[i].classList.add("speaking");
+    await speakDone(opts[i]);
+    box.children[i]?.classList.remove("speaking");
+    await sleep(400);
+  }
+}
 function renderQuiz() {
+  quizRun++;
   if (state.phrases.length < 4) { main.innerHTML = `<div class="card">${t("Need at least 4 phrases.")}</div>`; return; }
   if (!state.round) { state.round = loadRound() || buildRound(); saveRound(); }
   const round = state.round;
@@ -659,6 +704,8 @@ function renderQuiz() {
     pick.onclick = () => {
       if (answered) return;
       answered = true;
+      quizRun++; // stops the choices playing
+      box.querySelectorAll(".speaking").forEach((c) => c.classList.remove("speaking"));
       const ok = o.id === p.id;
       const wasLearned = (state.progress[key]?.box || 0) >= LEARNED;
       grade(key, ok);
@@ -682,6 +729,7 @@ function renderQuiz() {
     };
     box.appendChild(div);
   });
+  if (toLang && listenOnly && !muted) playChoices(opts, box, quizRun);
   $("#next").onclick = render;
   updateStatus();
 }
@@ -1794,7 +1842,6 @@ function renderMore() {
     <div class="menu">
       ${menuRow("share", t("Share this app"), t("Send PhraseBook to a friend"), false)}
       ${menuRow("feedback", t("Send feedback"), t("Tell us what to fix or add"), false)}
-      <div class="draft" id="feedbackbox" hidden></div>
       ${menuRow("about", t("About"), t("Version, offline use and privacy"))}
     </div>`;
   for (const page of ["languages", "badges", "settings", "help", "changes", "install", "about"]) {
@@ -1848,14 +1895,17 @@ function renderAbout() {
     </div>
     <section class="sect why">
       <p>${t("PhraseBook was born out of a love of travel and of connecting with people. There's nothing like the smile when a local hears you make the effort with a few phrases in their language.")}</p>
-      <p>${t("It gives you the basic phrases to get around. It's ad-free, owl-free and streak-free, so you can learn at your own pace and talk with people all over the globe.")}</p>
+      <p>${t("Learn the basic phrases to engage locals and meet your basic travel needs. Then see the positive response to your efforts!")} ${t("It's ad-free, owl-free, and streak-free, so you can learn at your own pace and talk with people all over the globe.")}</p>
       <p class="shareline">${t("If PhraseBook helps you, share it with your friends and fellow travelers.")}</p>
       <button class="act" id="share"><span class="ml">${t("Share this app")}</span></button>
+      <p class="shareline">${t("If you want to make it better, send me a note and volunteer to help with translations, guides, or maintaining the open-source code.")}</p>
+      <button class="act" id="volunteer">${t("Send feedback")}</button>
     </section>
     <p>${t("PhraseBook is free. Once a language is downloaded, everything works without a connection: the phrases, the audio, the cards, the quiz and the guide.")}</p>
     <p class="note">${t("Your progress and settings stay on this device.")}${analyticsOn ? " " + t("The app counts anonymous visits and which features are used, with no cookies and no personal data.") : ""}</p>`;
   wireBack();
   $("#share").onclick = shareApp;
+  $("#volunteer").onclick = sendFeedback;
   hint("");
 }
 function renderInstall() {
@@ -1926,33 +1976,40 @@ function feedbackParts() {
   };
 }
 function openMailApp(url) { location.href = url; }
-function showFeedbackOptions() {
-  const box = $("#feedbackbox");
-  if (!box) return;
-  const f = feedbackParts();
-  box.innerHTML = `
-    <div>${t("Send your feedback to")} <b>${esc(f.to)}</b></div>
-    <div class="row fbrow">
-      <button class="mini" data-fb="gmail">Gmail</button>
-      <button class="mini" data-fb="yahoo">Yahoo Mail</button>
-      <button class="mini" data-fb="mail">${t("Email app")}</button>
-      <button class="mini ghost wide" data-fb="copy">${t("Copy address")}</button>
-    </div>`;
-  box.hidden = false;
-  box.onclick = async (e) => {
-    const btn = e.target.closest("button[data-fb]");
-    if (!btn) return;
-    const parts = feedbackParts();
-    if (btn.dataset.fb === "mail") openMailApp(parts.mailto);
-    else if (btn.dataset.fb === "copy") {
-      try { await navigator.clipboard.writeText(parts.to); btn.textContent = t("Copied ✓"); }
-      catch { prompt(t("Copy this address:"), parts.to); }
-    } else window.open(parts[btn.dataset.fb], "_blank", "noopener");
-  };
-}
+// Send feedback: a pop-up like Share's, with the address and the ways to write (Gmail, Yahoo Mail, the phone's own
+// email app, or copy the address)
 function sendFeedback() {
   track("feedback/click");
-  showFeedbackOptions();
+  document.querySelector("dialog.feedback")?.remove();
+  const f = feedbackParts();
+  const d = document.createElement("dialog");
+  d.className = "ready feedback";
+  d.setAttribute("aria-labelledby", "fbtitle");
+  d.innerHTML = `
+    <h2 id="fbtitle">${t("Send feedback")}</h2>
+    <p class="note">${t("Tell us what to fix or add, or offer to help.")} ${t("Send your feedback to")} <b>${esc(f.to)}</b></p>
+    <div class="fbrow">
+      <button class="act" data-fb="gmail">Gmail</button>
+      <button class="act" data-fb="yahoo">Yahoo Mail</button>
+      <button class="act" data-fb="mail">${t("Email app")}</button>
+      <button class="act" data-fb="copy">${t("Copy address")}</button>
+    </div>
+    <button class="later" data-close>${t("Close")}</button>`;
+  document.body.appendChild(d);
+  const close = () => { d.close(); d.remove(); };
+  d.onclick = async (e) => {
+    if (e.target === d) { close(); return; } // a tap on the dimmed page around it
+    if (e.target.closest("[data-close]")) { close(); return; }
+    const btn = e.target.closest("button[data-fb]");
+    if (!btn) return;
+    if (btn.dataset.fb === "mail") openMailApp(f.mailto);
+    else if (btn.dataset.fb === "copy") {
+      try { await navigator.clipboard.writeText(f.to); btn.textContent = t("Copied ✓"); }
+      catch { prompt(t("Copy this address:"), f.to); }
+    } else window.open(f[btn.dataset.fb], "_blank", "noopener");
+  };
+  d.addEventListener("cancel", (e) => { e.preventDefault(); close(); }); // Escape
+  d.showModal();
 }
 
 // Settings sections: each a card whose title has an icon, so the page reads as a few clear groups

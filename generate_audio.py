@@ -41,9 +41,15 @@ VOLUME = "+50%"  # the default output is quiet on a handheld device
 ENGLISH = {"code": "en", "voices": {"f": "en-US-AvaNeural", "m": "en-US-AndrewNeural"}, "rate": "+0%"}
 
 
-def spoken(text: str) -> str:
-    """The placeholder dots in phrases like "I would like..." are not spoken."""
-    return text.replace("...", "").replace("…", "").strip()
+# "Excuse me / Sorry": the slash is read as "or", in the language's own word
+OR = {"en": "or", "en-us": "or", "pt-br": "ou", "pt-pt": "ou", "es": "o", "fr": "ou", "de": "oder", "it": "o", "nl": "of"}
+
+
+def spoken(text: str, code: str = "en") -> str:
+    """The placeholder dots in phrases like "I would like..." are not spoken, and a slash between two ways of saying it
+    is read as "or"."""
+    text = text.replace("...", "").replace("…", "").strip()
+    return text.replace(" / ", f", {OR.get(code, 'or')} ") if code in OR else text
 
 
 def write_json(path: Path, data, **kwargs):
@@ -62,7 +68,7 @@ async def make_audio(code: str, language: dict, texts: dict, shared_ids: list, h
             # a phrase with a gap ("Which train for...?") can give the audio a "spoken" version with an example filled in;
             # the female voice says the woman's form where a phrase has one ("female": its own text, say and spoken)
             form = entry.get("female", {}) if folder == "f" else {}
-            text = spoken(form.get("spoken") or form.get("text") or entry.get("spoken", entry["text"]))
+            text = spoken(form.get("spoken") or form.get("text") or entry.get("spoken", entry["text"]), code)
             digest = hashlib.sha1(f"{voice}|{rate}|{VOLUME}|{text}".encode("utf-8")).hexdigest()
             out = AUDIO / code / folder / f"{phrase_id}.mp3"
             hkey = f"{code}/{folder}/{phrase_id}"

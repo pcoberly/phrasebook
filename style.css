@@ -337,3 +337,22 @@ button.act.next { background: var(--fg); color: var(--bg); border-color: var(--f
 dialog.share .qr { display: block; width: 220px; height: 220px; margin: 14px auto 6px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px var(--line); }
 dialog.share .qrurl { margin: 0 0 14px; font-size: 14px; color: var(--muted); text-align: center; user-select: all; }
 dialog.share .note { margin-bottom: 0; }
+/* Listening only changes Cards and Quiz; the List always shows everything, so it isn't offered there */
+body[data-mode="list"] .opts label.check { display: none; }
+/* Send feedback: the ways to write, two by two */
+dialog.feedback .fbrow { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+dialog.feedback .fbrow .act { padding: 12px 8px; font-size: 16px; }
+dialog.feedback .note { margin-bottom: 0; overflow-wrap: anywhere; }
+/* Listening only in the quiz: the choice being played */
+.choice.speaking .pick { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 35%, transparent); }
+.choice.speaking .speak { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, var(--card)); }
+/* Badges: one collapsed section per language, its badges in a row beside its name */
+details.blang { margin: 10px 0; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+details.blang > summary { display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; list-style: none; }
+details.blang > summary::-webkit-details-marker { display: none; }
+details.blang > summary::after { content: "›"; flex: none; color: var(--muted); font-size: 22px; transition: transform .2s; }
+details.blang[open] > summary::after { transform: rotate(90deg); }
+details.blang .bln { flex: 1; min-width: 0; font-weight: 600; }
+details.blang .blc { flex: none; text-align: right; letter-spacing: 1px; }
+details.blang .badges { margin: 0 12px 12px; }
+details.blang .badge { background: var(--bg); }
