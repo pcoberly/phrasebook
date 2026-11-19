@@ -16,7 +16,7 @@ APP = {CODES.get(l["code"], l["code"]) for l in json.loads((Path(__file__).paren
 # country, region, population (M), main languages, widely understood
 C = [
  # Africa
- ("Nigeria", "Africa", 228, "en", ""), ("Ethiopia", "Africa", 130, "", ""), ("Egypt", "Africa", 116, "ar", "en"),
+ ("Nigeria", "Africa", 228, "en", ""), ("Ethiopia", "Africa", 130, "am", ""), ("Egypt", "Africa", 116, "ar", "en"),
  ("DR Congo", "Africa", 109, "fr sw", ""), ("Tanzania", "Africa", 69, "sw en", ""), ("South Africa", "Africa", 64, "en zu", ""),
  ("Kenya", "Africa", 56, "sw en", ""), ("Sudan", "Africa", 50, "ar en", ""), ("Uganda", "Africa", 50, "en sw", ""),
  ("Algeria", "Africa", 47, "ar", "fr"), ("Morocco", "Africa", 38, "ary ar", "fr"), ("Angola", "Africa", 38, "pt", ""),
@@ -48,11 +48,11 @@ C = [
  ("Barbados", "Americas", 0.3, "EN", ""), ("French Guiana", "Americas", 0.3, "fr", ""), ("Curaçao and Aruba", "Americas", 0.3, "nl", "es en"),
  ("Other Caribbean (English)", "Americas", 0.9, "EN", ""),
  # Asia
- ("India", "Asia", 1451, "en", ""), ("China", "Asia", 1419, "zh", ""), ("Indonesia", "Asia", 283, "id", ""),
- ("Pakistan", "Asia", 251, "en", ""), ("Bangladesh", "Asia", 174, "", ""), ("Japan", "Asia", 124, "ja", ""),
+ ("India", "Asia", 1451, "hi en", ""), ("China", "Asia", 1419, "zh", ""), ("Indonesia", "Asia", 283, "id", ""),
+ ("Pakistan", "Asia", 251, "en", "hi"), ("Bangladesh", "Asia", 174, "", ""), ("Japan", "Asia", 124, "ja", ""),
  ("Philippines", "Asia", 116, "tl en", ""), ("Vietnam", "Asia", 101, "vi", ""), ("Thailand", "Asia", 72, "th", ""),
  ("Myanmar", "Asia", 54, "", ""), ("South Korea", "Asia", 52, "ko", ""), ("Afghanistan", "Asia", 43, "fa", ""),
- ("Uzbekistan", "Asia", 36, "", "ru"), ("Malaysia", "Asia", 35, "en zh", "id"), ("Nepal", "Asia", 31, "", "en"),
+ ("Uzbekistan", "Asia", 36, "", "ru"), ("Malaysia", "Asia", 35, "en zh", "id"), ("Nepal", "Asia", 31, "", "en hi"),
  ("North Korea", "Asia", 26, "ko", ""), ("Taiwan", "Asia", 23, "zh", ""), ("Sri Lanka", "Asia", 23, "", "en"),
  ("Kazakhstan", "Asia", 20, "ru", ""), ("Cambodia", "Asia", 18, "km", ""), ("Tajikistan", "Asia", 10.6, "", "ru fa"),
  ("Hong Kong", "Asia", 7.4, "zh en", ""), ("Papua New Guinea", "Oceania", 10.6, "en", ""), ("Laos", "Asia", 7.8, "lo", "th"),
@@ -67,7 +67,7 @@ C = [
  ("Czechia", "Europe", 10.7, "", ""), ("Greece", "Europe", 10.3, "", ""), ("Portugal", "Europe", 10.4, "pt", ""),
  ("Hungary", "Europe", 9.6, "", ""), ("Belarus", "Europe", 9, "ru", ""), ("Austria", "Europe", 9.1, "de", ""),
  ("Switzerland", "Europe", 8.9, "de fr it", ""), ("Serbia", "Europe", 6.6, "", ""), ("Bulgaria", "Europe", 6.4, "", ""),
- ("Denmark", "Europe", 6, "", "en"), ("Finland", "Europe", 5.6, "", "en"), ("Slovakia", "Europe", 5.5, "", ""),
+ ("Denmark", "Europe", 6, "da", "en"), ("Finland", "Europe", 5.6, "", "en"), ("Slovakia", "Europe", 5.5, "", ""),
  ("Norway", "Europe", 5.6, "", "en"), ("Ireland", "Europe", 5.3, "EN", ""), ("Croatia", "Europe", 3.9, "", ""),
  ("Georgia", "Europe", 3.8, "", "ru"), ("Bosnia and Herzegovina", "Europe", 3.2, "", ""), ("Moldova", "Europe", 2.4, "", "ru"),
  ("Albania", "Europe", 2.8, "", "it"), ("Armenia", "Europe", 3, "", "ru"), ("Azerbaijan", "Europe", 10.3, "", "ru tr"),

@@ -309,5 +309,41 @@
       "m": "uk-UA-OstapNeural"
     },
     "bytes": 2415062
+  },
+  {
+    "code": "hi",
+    "name": "Hindi",
+    "native": "हिन्दी",
+    "ttsLang": "hi-IN",
+    "draft": true,
+    "voices": {
+      "f": "hi-IN-SwaraNeural",
+      "m": "hi-IN-MadhurNeural"
+    },
+    "bytes": 2630168
+  },
+  {
+    "code": "am",
+    "name": "Amharic",
+    "native": "አማርኛ",
+    "ttsLang": "am-ET",
+    "draft": true,
+    "voices": {
+      "f": "am-ET-MekdesNeural",
+      "m": "am-ET-AmehaNeural"
+    },
+    "bytes": 2242422
+  },
+  {
+    "code": "da",
+    "name": "Danish",
+    "native": "Dansk",
+    "ttsLang": "da-DK",
+    "draft": true,
+    "voices": {
+      "f": "da-DK-ChristelNeural",
+      "m": "da-DK-JeppeNeural"
+    },
+    "bytes": 2315456
   }
 ]
