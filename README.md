@@ -97,6 +97,10 @@ against a fake network and cache (online, offline, slow connection, audio byte r
 push (`.github/workflows/check.yml`): a red ✗ beside the commit means something needs fixing, and GitHub emails you.
 A failed check does not stop the site updating, so fix it promptly.
 
+**Coverage map.** The About page shows `map.svg`, drawn by `python3 tools/make_map.py` from `coverage.py` and the
+country shapes in `tools/world-110m.json` (Natural Earth, public domain). After adding a language, add its code to the
+countries in `coverage.py` and run it again; `check_data.py` reports a map drawn for other languages.
+
 **Usage report.** `python3 tools/usage_report.py --out report.html` reads GoatCounter's counts (it needs a key with
 "Read statistics" in `GOATCOUNTER_KEY`; in a Claude cloud session the saved key is added for it) and writes one page:
 new users (first visits), active devices (once a day, week, and month per device, counted from November 21, 2026),

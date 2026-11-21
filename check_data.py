@@ -191,6 +191,14 @@ def main() -> int:
                 if not gap or filled.count("⟦") != 1 or filled.count("⟧") != 1 or not re.search(r"⟦[^⟦⟧]+⟧", filled):
                     problems.append(f"lang/{lang['code']}/phrases.json: {pid} \"filled\" must mark one example, ⟦like this⟧, in a phrase with a gap")
 
+    # the coverage map on the About page, drawn for the languages there are now
+    try:
+        drawn = re.search(r'data-languages="([^"]*)"', (ROOT / "map.svg").read_text(encoding="utf-8")).group(1).split()
+        if sorted(drawn) != sorted(l["code"] for l in languages):
+            problems.append("map.svg was drawn for other languages: run python3 tools/make_map.py")
+    except (OSError, AttributeError):
+        problems.append("map.svg is missing: run python3 tools/make_map.py")
+
     # Help: English with the app, and one in each other language you can speak, beside its interface text
     for path in ["help.html"] + [f"lang/{l['code']}/for-{l['code']}/help.html" for l in languages if l.get("base")]:
         if not (ROOT / path).exists():

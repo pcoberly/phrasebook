@@ -60,3 +60,10 @@ test("versions read as release.revision, and What's new folds each release, the 
   assert.deepStrictEqual(rel, [["0.7", true], ["0.6", false], ["0.5", false]]);
   assert.match(await page.locator(".change .ver").first().innerText(), /version 0\.7\.\d+/);
 });
+
+test("About shows the coverage map, drawn for today's languages", async () => {
+  const page = await open();
+  await more(page, "about");
+  await page.waitForFunction(() => { const i = document.querySelector(".mapcard img"); return i && i.complete && i.naturalWidth > 0; });
+  assert.strictEqual(await page.locator(".aboutcard .note").count(), 0, "no version number on About");
+});

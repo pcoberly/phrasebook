@@ -363,3 +363,6 @@ details.release > summary::-webkit-details-marker { display: none; }
 details.release > summary::after { content: "›"; margin-left: auto; color: var(--muted); font-size: 22px; transition: transform .2s; }
 details.release[open] > summary::after { transform: rotate(90deg); }
 details.release .change:last-child { padding-bottom: 12px; }
+/* About: the coverage map (map.svg, drawn by tools/make_map.py) */
+.mapcard img { display: block; width: 100%; height: auto; margin: 4px 0 2px; }
+.mapcard h2 { margin-top: 14px; }

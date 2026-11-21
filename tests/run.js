@@ -44,6 +44,7 @@ const SECTIONS = {
 // other files: the suites they need ("all" for everything; nothing for files that don't reach the app)
 const FILES = [
   [/^style\.css$/, ["layout"]],
+  [/^map\.svg$/, ["more"]],
   [/^index\.html$/, ["boot", "layout", "translations"]],
   [/^sw\.js$/, ["offline"]],
   [/^help\.html$|^changes\.json$/, ["more"]],
