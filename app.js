@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v109";
+const VERSION = "phrasebook-v110";
 // The version people see: release.revision, such as 0.7.42. VERSION counts every release (it is what tells the app an
 // update is waiting); each release starts at its first VERSION number, and the revision counts on from there.
 // A new release (0.8, or 1.0) is one more line here, with the first VERSION number that belongs to it.
@@ -57,6 +57,19 @@ const countQueue = []; // events that happen before GoatCounter's script has fin
     document.head.appendChild(gc);
   } catch { /* storage or DOM unavailable: no analytics */ }
 })();
+// Active devices, for the usage report: "active/day", "active/week" and "active/month" are each counted once per device
+// in that day, week or month. All that is kept is the date each was last counted, on this device; there is no ID.
+function countActive() {
+  const now = new Date();
+  const day = now.toISOString().slice(0, 10);
+  const monday = new Date(now); monday.setUTCDate(now.getUTCDate() - ((now.getUTCDay() + 6) % 7));
+  const periods = { day, week: monday.toISOString().slice(0, 10), month: day.slice(0, 7) };
+  for (const [name, stamp] of Object.entries(periods)) {
+    if (store.get("phrasebook-active-" + name, "") === stamp) continue;
+    store.set("phrasebook-active-" + name, stamp);
+    track("active/" + name);
+  }
+}
 // Count one thing that happened, such as "quiz/finished/ja". Names never contain a phrase or a person.
 function track(name, title) {
   if (!analyticsOn) return;
@@ -2327,6 +2340,7 @@ async function boot() {
   // how the app was opened: in its language, and from the Home Screen or from a browser tab
   track(state.firstRun ? "welcome/shown" : "open/" + state.lang.code);
   track(matchMedia("(display-mode: standalone)").matches || navigator.standalone === true ? "mode/installed" : "mode/browser");
+  countActive();
   $("#status").onclick = () => { if (state.updateReady) location.reload(); };
   checkForUpdates(true);
   document.addEventListener("visibilitychange", () => { if (!document.hidden) checkForUpdates(); });

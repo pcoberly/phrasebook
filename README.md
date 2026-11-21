@@ -97,6 +97,11 @@ against a fake network and cache (online, offline, slow connection, audio byte r
 push (`.github/workflows/check.yml`): a red ✗ beside the commit means something needs fixing, and GitHub emails you.
 A failed check does not stop the site updating, so fix it promptly.
 
+**Usage report.** `python3 tools/usage_report.py --out report.html` reads GoatCounter's counts (it needs a key with
+"Read statistics" in `GOATCOUNTER_KEY`; in a Claude cloud session the saved key is added for it) and writes one page:
+new users (first visits), active devices (once a day, week, and month per device, counted from November 21, 2026),
+app opens by language, downloads, and features used.
+
 **Browser tests.** `tests/app/` holds the app's tests, one file per part of the app (cards, quiz, list, Play all,
 badges, languages, translations, layout, offline...), run in a real browser with the audio faked. `node tests/run.js`
 runs only the ones your changes need, in seconds: it picks them by file, and in `app.js` by the

@@ -51,6 +51,7 @@ const FILES = [
   [/^languages\.json$|^phrases\.json$/, ["welcome", "languages", "list"]],
   [/^tests\/app\/([a-z]+)\.test\.js$/, (m) => [m[1]]],
   [/^tests\/run\.js$/, []],
+  [/^tools\//, []], // the usage report and other scripts that don't ship with the app
   [/^(lang|audio)\//, []], // phrases, notes, guides and audio: check_data.py checks them
   [/\.(md|py)$|^\.github\/|^\.gitignore$|^tests\/sw-test\.js$|^(manifest\.webmanifest|favicon-\d+\.png|icon-v\d+-\d+\.png)$/, []],
 ];

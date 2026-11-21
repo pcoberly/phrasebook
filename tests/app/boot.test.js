@@ -33,3 +33,12 @@ test("after an update, a note says so once, with a link to What's new", async ()
   await page.waitForTimeout(300);
   assert.strictEqual(await page.locator(".updated:not(.badgeup)").count(), 0);
 });
+
+test("active devices: each day, week, and month counted once, keeping only the date", async () => {
+  const page = await open();
+  const day = await page.evaluate(() => new Date().toISOString().slice(0, 10));
+  const kept = await page.evaluate(() => ["day", "week", "month"].map((p) => JSON.parse(localStorage.getItem("phrasebook-active-" + p))));
+  assert.strictEqual(kept[0], day);
+  assert.strictEqual(kept[2], day.slice(0, 7));
+  assert.ok(kept[1] <= day && new Date(kept[1] + "T12:00:00Z").getUTCDay() === 1, "the week is kept as its Monday");
+});
