@@ -17,7 +17,6 @@
  "Add PhraseBook to your Home Screen": "PhraseBook auf den Startbildschirm legen",
  "Send PhraseBook to a friend": "PhraseBook an Freunde schicken",
  "Tell us what to fix or add": "Sag uns, was fehlt oder falsch ist",
- "Version, offline use, and privacy": "Version, Offline-Nutzung und Datenschutz",
  "PhraseBook is free. Once a language is downloaded, everything works without a connection: the phrases, the audio, the cards, the quiz, and the guide.": "PhraseBook ist kostenlos. Sobald eine Sprache heruntergeladen ist, funktioniert alles ohne Verbindung: die Sätze, das Audio, die Karten, das Quiz und die Anleitung.",
  "Add a language": "Sprache hinzufügen",
  "{n} available": "{n} verfügbar",
@@ -297,5 +296,6 @@
  "Two Romance languages: Spanish, French, Italian, Portuguese, or Romanian": "Zwei romanische Sprachen: Spanisch, Französisch, Italienisch, Portugiesisch oder Rumänisch",
  "Two Germanic languages: German, Dutch, Danish, Swedish, Norwegian, or English": "Zwei germanische Sprachen: Deutsch, Niederländisch, Dänisch, Schwedisch, Norwegisch oder Englisch",
  "Two Slavic languages: Russian, Ukrainian, Polish, Czech, Croatian, or Bulgarian": "Zwei slawische Sprachen: Russisch, Ukrainisch, Polnisch, Tschechisch, Kroatisch oder Bulgarisch",
- "Two Semitic languages: Arabic, Hebrew, or Amharic": "Zwei semitische Sprachen: Arabisch, Hebräisch oder Amharisch"
+ "Two Semitic languages: Arabic, Hebrew, or Amharic": "Zwei semitische Sprachen: Arabisch, Hebräisch oder Amharisch",
+ "Why PhraseBook, offline use, and privacy": "Warum PhraseBook, offline nutzen und Datenschutz"
 }
