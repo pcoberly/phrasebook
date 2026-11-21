@@ -369,3 +369,7 @@ details.release .change:last-child { padding-bottom: 12px; }
 /* the Share and volunteer card starts with its first line, without the divider the lines below it have */
 .why .shareline:first-child { margin-top: 12px; padding-top: 0; border-top: 0; }
 .why #volunteer { width: 100%; }
+/* Support PhraseBook: a card for each way to help, its button full width */
+.why h3 { margin: 12px 0 0; font-size: 17px; }
+.why .act { display: block; width: 100%; box-sizing: border-box; text-align: center; text-decoration: none; }
+#tosupport { width: 100%; margin: 6px 0 18px; }

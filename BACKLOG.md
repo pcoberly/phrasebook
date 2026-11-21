@@ -43,7 +43,7 @@ Today the app can be used in English, Spanish, French or German (about 2.4 billi
 - **British English to learn.** English to learn is American (en-us). A British version (en-gb) would mostly be a copy with the bill, the toilets, return tickets and British voices.
 
 ## From the in-flight review (decisions needed)
-- **Donations wording for About:** "If you really like this site, help me keep it running by buying me a coffee or a beer." Ready to add with the ☕ link once the donation page exists (see Donations).
+- **Donations wording (for the Support page, ready):** "If you really like this site, help me keep it running by buying me a coffee or a beer." Already on the Support page: set DONATE_URL in app.js to the donation page and its Donate section appears (see Donations).
 - **Count phrases, not cards?** Today progress counts cards: each phrase is two, one each way ("73 of 182 cards learned"). Counting phrases reads more naturally, but needs a rule for when a phrase is learned: (a) both ways learned, strict, and someone who only practices one direction never finishes; (b) either way, generous; or (c) learned in the directions you practice. Recommendation: (c) shown as phrases, with (a) as the rule when practicing both directions. Badges' Halfway and The whole book would follow the same rule.
 
 ## New phrases: what's still to do

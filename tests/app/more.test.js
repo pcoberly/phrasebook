@@ -67,3 +67,20 @@ test("About shows the coverage map, drawn for today's languages", async () => {
   await page.waitForFunction(() => { const i = document.querySelector(".mapcard img"); return i && i.complete && i.naturalWidth > 0; });
   assert.strictEqual(await page.locator(".aboutcard .note").count(), 0, "no version number on About");
 });
+
+test("Support PhraseBook: share and help make it better, with no Donate until there's a link", async () => {
+  const page = await open();
+  await more(page, "support");
+  await page.locator("#volunteer").waitFor();
+  assert.strictEqual(await page.locator("#donate").count(), 0);
+  await page.locator("#share").click();
+  await page.locator("dialog.share").waitFor();
+  await page.locator("dialog.share [data-close]").click();
+  await page.locator("#volunteer").click();
+  await page.locator("dialog.feedback").waitFor();
+  await page.locator("dialog.feedback [data-close]").click();
+  await more(page, "about");
+  await page.locator("#tosupport").click();
+  assert.strictEqual(await page.evaluate(() => state.mode), "support");
+  assert.deepStrictEqual(page.errors, []);
+});

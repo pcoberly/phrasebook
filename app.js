@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v113";
+const VERSION = "phrasebook-v114";
 // The version people see: release.revision, such as 0.7.42. VERSION counts every release (it is what tells the app an
 // update is waiting); each release starts at its first VERSION number, and the revision counts on from there.
 // A new release (0.8, or 1.0) is one more line here, with the first VERSION number that belongs to it.
@@ -1246,7 +1246,7 @@ function readyDialog(lang, downloaded, start) {
   d.querySelector("[data-go]").focus();
 }
 // The pages reached from the More tab, which stays lit on them
-const MORE_PAGES = ["more", "languages", "badges", "settings", "help", "changes", "about", "install"];
+const MORE_PAGES = ["more", "languages", "badges", "settings", "help", "changes", "about", "install", "support"];
 const tabFor = (mode) => (MORE_PAGES.includes(mode) ? "more" : mode);
 // go to a page as if its tab had been tapped
 function goTo(mode) {
@@ -1352,6 +1352,7 @@ function render() {
   else if (state.mode === "badges") renderBadges();
   else if (state.mode === "help") renderHelp();
   else if (state.mode === "about") renderAbout();
+  else if (state.mode === "support") renderSupport();
   else if (state.mode === "install") renderInstall();
   else renderSettings();
 }
@@ -1879,6 +1880,7 @@ const MENU_ICONS = {
   install: '<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 7v7M9 11.5l3 3 3-3"/>',
   share: '<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/>',
   feedback: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/>',
+  support: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
   about: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r="1.1" class="dot"/>',
   help: '<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .8-1 1.5v.5"/><circle cx="12" cy="17" r="1.1" class="dot"/>',
   badges: '<circle cx="12" cy="9" r="6"/><path d="M8.5 13.8L7 21.5l5-2.8 5 2.8-1.5-7.7"/>',
@@ -1903,11 +1905,12 @@ function renderMore() {
       ${installed ? "" : menuRow("install", t("Install on this device"), t("Add PhraseBook to your Home Screen"))}
     </div>
     <div class="menu">
+      ${menuRow("support", t("Support PhraseBook"), DONATE_URL ? t("Share it, donate, or help make it better") : t("Share it, or help make it better"))}
       ${menuRow("share", t("Share this app"), t("Send PhraseBook to a friend"), false)}
       ${menuRow("feedback", t("Send feedback"), t("Tell us what to fix or add"), false)}
       ${menuRow("about", t("About"), t("Why PhraseBook, offline use, and privacy"))}
     </div>`;
-  for (const page of ["languages", "badges", "settings", "help", "changes", "install", "about"]) {
+  for (const page of ["languages", "badges", "settings", "help", "changes", "install", "about", "support"]) {
     const b = document.getElementById(page);
     if (b) b.onclick = () => { track("more/" + page); goTo(page); };
   }
@@ -1959,21 +1962,44 @@ function renderAbout() {
       <p>${t("PhraseBook was born out of a love of travel and of connecting with people. Learn nearly 100 basic phrases to engage with locals and handle your travel needs, then see the positive response to your efforts!")}</p>
       <p>${t("It's ad-free, owl-free, and streak-free, so you can learn at your own pace and talk with people all over the globe.")}</p>
     </section>
-    <section class="sect why">
-      <p class="shareline">${t("If PhraseBook helps you, share it with your friends and fellow travelers.")}</p>
-      <button class="act" id="share"><span class="ml">${t("Share this app")}</span></button>
-      <p class="shareline">${t("If you want to make it better, send me a note and volunteer to help with translations, guides, or maintaining the open-source code.")}</p>
-      <button class="act" id="volunteer">${t("Send feedback")}</button>
-    </section>
     <section class="sect mapcard">
       <h2 class="group" lang="en">Where PhraseBook speaks</h2>
       <img src="map.svg" alt="World map of the countries where PhraseBook's languages, or English, are spoken" width="1000" height="660">
     </section>
     <p>${t("PhraseBook is free. Once a language is downloaded, everything works without a connection: the phrases, the audio, the cards, the quiz, and the guide.")}</p>
-    <p class="note">${t("Your progress and settings stay on this device.")}${analyticsOn ? " " + t("The app counts anonymous visits and which features are used, with no cookies and no personal data.") : ""}</p>`;
+    <p class="note">${t("Your progress and settings stay on this device.")}${analyticsOn ? " " + t("The app counts anonymous visits and which features are used, with no cookies and no personal data.") : ""}</p>
+    <button class="act" id="tosupport">${t("Support PhraseBook")} ›</button>`;
+  wireBack();
+  $("#tosupport").onclick = () => goTo("support");
+  hint("");
+}
+// Support PhraseBook: the ways to help, each with its own button: share it, donate (once DONATE_URL is set), and help
+// make it better. Share and Send feedback are also rows of their own in More.
+const DONATE_URL = ""; // the donation page (Ko-fi, GitHub Sponsors...): until it is set, the Donate section isn't shown
+function renderSupport() {
+  main.innerHTML = `
+    ${backToMore()}
+    <h2 class="group">${t("Support PhraseBook")}</h2>
+    <p>${t("PhraseBook is free, with no ads. Here's how you can help it reach more travelers.")}</p>
+    <section class="sect why">
+      <h3>${t("Share it")}</h3>
+      <p>${t("If PhraseBook helps you, share it with your friends and fellow travelers.")}</p>
+      <button class="act" id="share"><span class="ml">${t("Share this app")}</span></button>
+    </section>
+    ${DONATE_URL ? `<section class="sect why">
+      <h3>${t("Donate")}</h3>
+      <p>${t("If you really like PhraseBook, help keep it running by buying me a coffee or a beer.")}</p>
+      <a class="act good" id="donate" href="${DONATE_URL}" target="_blank" rel="noopener">☕ ${t("Donate")}</a>
+    </section>` : ""}
+    <section class="sect why">
+      <h3>${t("Help make it better")}</h3>
+      <p>${t("If you want to make it better, send me a note and volunteer to help with translations, guides, or maintaining the open-source code.")}</p>
+      <button class="act" id="volunteer">${t("Send feedback")}</button>
+    </section>`;
   wireBack();
   $("#share").onclick = shareApp;
   $("#volunteer").onclick = sendFeedback;
+  if ($("#donate")) $("#donate").onclick = () => track("support/donate");
   hint("");
 }
 function renderInstall() {
