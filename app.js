@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v114";
+const VERSION = "phrasebook-v115";
 // The version people see: release.revision, such as 0.7.42. VERSION counts every release (it is what tells the app an
 // update is waiting); each release starts at its first VERSION number, and the revision counts on from there.
 // A new release (0.8, or 1.0) is one more line here, with the first VERSION number that belongs to it.
@@ -1905,9 +1905,9 @@ function renderMore() {
       ${installed ? "" : menuRow("install", t("Install on this device"), t("Add PhraseBook to your Home Screen"))}
     </div>
     <div class="menu">
-      ${menuRow("support", t("Support PhraseBook"), DONATE_URL ? t("Share it, donate, or help make it better") : t("Share it, or help make it better"))}
       ${menuRow("share", t("Share this app"), t("Send PhraseBook to a friend"), false)}
       ${menuRow("feedback", t("Send feedback"), t("Tell us what to fix or add"), false)}
+      ${menuRow("support", t("Support PhraseBook"), DONATE_URL ? t("Share it, donate, or help make it better") : t("Share it, or help make it better"))}
       ${menuRow("about", t("About"), t("Why PhraseBook, offline use, and privacy"))}
     </div>`;
   for (const page of ["languages", "badges", "settings", "help", "changes", "install", "about", "support"]) {
