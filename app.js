@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v112";
+const VERSION = "phrasebook-v113";
 // The version people see: release.revision, such as 0.7.42. VERSION counts every release (it is what tells the app an
 // update is waiting); each release starts at its first VERSION number, and the revision counts on from there.
 // A new release (0.8, or 1.0) is one more line here, with the first VERSION number that belongs to it.
@@ -1959,15 +1959,15 @@ function renderAbout() {
       <p>${t("PhraseBook was born out of a love of travel and of connecting with people. Learn nearly 100 basic phrases to engage with locals and handle your travel needs, then see the positive response to your efforts!")}</p>
       <p>${t("It's ad-free, owl-free, and streak-free, so you can learn at your own pace and talk with people all over the globe.")}</p>
     </section>
-    <section class="sect mapcard">
-      <h2 class="group" lang="en">Where PhraseBook speaks</h2>
-      <img src="map.svg" alt="World map of the countries where PhraseBook's languages, or English, are spoken" width="1000" height="660">
-    </section>
     <section class="sect why">
       <p class="shareline">${t("If PhraseBook helps you, share it with your friends and fellow travelers.")}</p>
       <button class="act" id="share"><span class="ml">${t("Share this app")}</span></button>
       <p class="shareline">${t("If you want to make it better, send me a note and volunteer to help with translations, guides, or maintaining the open-source code.")}</p>
       <button class="act" id="volunteer">${t("Send feedback")}</button>
+    </section>
+    <section class="sect mapcard">
+      <h2 class="group" lang="en">Where PhraseBook speaks</h2>
+      <img src="map.svg" alt="World map of the countries where PhraseBook's languages, or English, are spoken" width="1000" height="660">
     </section>
     <p>${t("PhraseBook is free. Once a language is downloaded, everything works without a connection: the phrases, the audio, the cards, the quiz, and the guide.")}</p>
     <p class="note">${t("Your progress and settings stay on this device.")}${analyticsOn ? " " + t("The app counts anonymous visits and which features are used, with no cookies and no personal data.") : ""}</p>`;
