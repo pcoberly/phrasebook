@@ -72,7 +72,7 @@ test("Support PhraseBook: share, donate, and help make it better", async () => {
   const page = await open();
   await more(page, "support");
   await page.locator("#volunteer").waitFor();
-  assert.strictEqual(await page.locator("#donate").getAttribute("href"), "https://ko-fi.com/phrasebook?hidefeed=true");
+  assert.strictEqual(await page.locator("#donate").getAttribute("href"), "https://ko-fi.com/phrasebook");
   assert.strictEqual(await page.locator("#donate").getAttribute("target"), "_blank");
   await page.locator("#share").click();
   await page.locator("dialog.share").waitFor();
