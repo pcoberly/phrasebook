@@ -1,7 +1,7 @@
 // Badges: earned once, never twice, one note for badges already earned, and shown in More and on Languages.
 const { test } = require("node:test");
 const assert = require("node:assert");
-const { setup, open, more, stored, phrases, learned, answer } = require("./helpers");
+const { setup, open, ready, more, stored, phrases, learned, answer } = require("./helpers");
 setup();
 const ids = (cat) => phrases().filter((p) => p.cat === cat).map((p) => p.id);
 
@@ -70,8 +70,10 @@ test("language badges start afresh once: progress ones come back quietly, quiz o
   assert.ok(got["langs-2"], "badges across languages stay");
   assert.strictEqual(await page.locator(".badgeup").count(), 0, "quietly");
   await page.reload();
+  await ready(page);
   await page.evaluate(() => checkBadges({ also: ["perfect"] })); // earned after the reset: kept
   await page.reload();
+  await ready(page);
   assert.ok((await stored(page, "badges"))["perfect:ja"], "only once");
 });
 
