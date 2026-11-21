@@ -68,11 +68,12 @@ test("About shows the coverage map, drawn for today's languages", async () => {
   assert.strictEqual(await page.locator(".aboutcard .note").count(), 0, "no version number on About");
 });
 
-test("Support PhraseBook: share and help make it better, with no Donate until there's a link", async () => {
+test("Support PhraseBook: share, donate, and help make it better", async () => {
   const page = await open();
   await more(page, "support");
   await page.locator("#volunteer").waitFor();
-  assert.strictEqual(await page.locator("#donate").count(), 0);
+  assert.strictEqual(await page.locator("#donate").getAttribute("href"), "https://ko-fi.com/phrasebook");
+  assert.strictEqual(await page.locator("#donate").getAttribute("target"), "_blank");
   await page.locator("#share").click();
   await page.locator("dialog.share").waitFor();
   await page.locator("dialog.share [data-close]").click();

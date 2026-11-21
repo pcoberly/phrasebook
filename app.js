@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v115";
+const VERSION = "phrasebook-v116";
 // The version people see: release.revision, such as 0.7.42. VERSION counts every release (it is what tells the app an
 // update is waiting); each release starts at its first VERSION number, and the revision counts on from there.
 // A new release (0.8, or 1.0) is one more line here, with the first VERSION number that belongs to it.
@@ -1975,7 +1975,7 @@ function renderAbout() {
 }
 // Support PhraseBook: the ways to help, each with its own button: share it, donate (once DONATE_URL is set), and help
 // make it better. Share and Send feedback are also rows of their own in More.
-const DONATE_URL = ""; // the donation page (Ko-fi, GitHub Sponsors...): until it is set, the Donate section isn't shown
+const DONATE_URL = "https://ko-fi.com/phrasebook"; // the donation page: empty hides the Donate section
 function renderSupport() {
   main.innerHTML = `
     ${backToMore()}

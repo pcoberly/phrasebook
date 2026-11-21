@@ -43,7 +43,6 @@ Today the app can be used in English, Spanish, French or German (about 2.4 billi
 - **British English to learn.** English to learn is American (en-us). A British version (en-gb) would mostly be a copy with the bill, the toilets, return tickets and British voices.
 
 ## From the in-flight review (decisions needed)
-- **Donations wording (for the Support page, ready):** "If you really like this site, help me keep it running by buying me a coffee or a beer." Already on the Support page: set DONATE_URL in app.js to the donation page and its Donate section appears (see Donations).
 - **Count phrases, not cards?** Today progress counts cards: each phrase is two, one each way ("73 of 182 cards learned"). Counting phrases reads more naturally, but needs a rule for when a phrase is learned: (a) both ways learned, strict, and someone who only practices one direction never finishes; (b) either way, generous; or (c) learned in the directions you practice. Recommendation: (c) shown as phrases, with (a) as the rule when practicing both directions. Badges' Halfway and The whole book would follow the same rule.
 
 ## New phrases: what's still to do
@@ -71,14 +70,6 @@ Practice saying a phrase, in two steps.
 2. **"Did it understand you?" (optional, later).** Run the phone's speech recognition (Chrome uses Google's, Safari Apple's) and compare what it heard with the phrase: a match, a near miss, or "it heard something else", showing what it heard. It needs a connection, since the recording goes to Google or Apple. Khmer, Lao and probably Tagalog may not be supported, and one-syllable words like the numbers are unreliable, so match generously. Test it in the iPhone Home Screen app first, where support has been patchy. A few hours.
 
 Not planned: sound-by-sound scoring like Duolingo's needs a paid cloud service and a server, which would end PhraseBook being free, offline and private.
-
-## Donations
-A voluntary "☕ Support PhraseBook" link, which keeps the app in the free, non-commercial categories (GitHub Pages, GoatCounter) as long as it stays a gift: everyone gets the same app, and a donation never unlocks anything.
-
-- **Where to take them:** GitHub Sponsors (0% for personal accounts, one-off or monthly) or Ko-fi (0% on one-off donations; only the card or PayPal fee). Liberapay (non-profit, 0%) and Buy Me a Coffee (5%) are the alternatives.
-- **In the app:** a row in the More menu, opening the donation page, with one quiet line such as "PhraseBook is free. If it helped on your trip, you can support it." No pop-ups or reminders.
-- **Before it goes in:** set up the donation page and send the link. Donations to a person count as income, not a charitable gift; check how small amounts are taxed.
-- About 15 minutes once the link exists.
 
 ## LinkedIn post
 A post introducing PhraseBook.

@@ -373,3 +373,6 @@ details.release .change:last-child { padding-bottom: 12px; }
 .why h3 { margin: 12px 0 0; font-size: 17px; }
 .why .act { display: block; width: 100%; box-sizing: border-box; text-align: center; text-decoration: none; }
 #tosupport { width: 100%; margin: 6px 0 18px; }
+/* Donate opens Ko-fi in a new tab, so it is a link, dressed as the green button */
+a.act { display: block; padding: 16px; font-size: 18px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); color: var(--fg); text-align: center; text-decoration: none; }
+a.act.good { background: var(--good); color: #fff; border-color: var(--good); }

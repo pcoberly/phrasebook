@@ -77,7 +77,7 @@ def build(days: int) -> dict:
     feature_paths = {
         "Cards tab": ["tab/cards"], "Quiz tab": ["tab/quiz"], "Quiz rounds finished": [p for p in s if p.startswith("quiz/finished/")],
         "Play all": [p for p in s if p.startswith("playall/")], "Guide tab": ["tab/guide"], "Search": ["search/open"],
-        "Badges page": ["more/badges"], "Share opened": ["share/click"], "Link sent": ["share/send"], "Feedback opened": ["feedback/click"],
+        "Badges page": ["more/badges"], "Share opened": ["share/click"], "Link sent": ["share/send"], "Feedback opened": ["feedback/click"], "Support page": ["more/support"], "Donate tapped": ["support/donate"],
         "Help": ["more/help"], "What's new": ["more/changes"],
     }
     return {
