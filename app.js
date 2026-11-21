@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v116";
+const VERSION = "phrasebook-v117";
 // The version people see: release.revision, such as 0.7.42. VERSION counts every release (it is what tells the app an
 // update is waiting); each release starts at its first VERSION number, and the revision counts on from there.
 // A new release (0.8, or 1.0) is one more line here, with the first VERSION number that belongs to it.
@@ -1975,7 +1975,7 @@ function renderAbout() {
 }
 // Support PhraseBook: the ways to help, each with its own button: share it, donate (once DONATE_URL is set), and help
 // make it better. Share and Send feedback are also rows of their own in More.
-const DONATE_URL = "https://ko-fi.com/phrasebook"; // the donation page: empty hides the Donate section
+const DONATE_URL = "https://ko-fi.com/phrasebook?hidefeed=true"; // ?hidefeed=true: just the donation part // the donation page: empty hides the Donate section
 function renderSupport() {
   main.innerHTML = `
     ${backToMore()}
@@ -1984,18 +1984,18 @@ function renderSupport() {
     <section class="sect why">
       <h3>${t("Share it")}</h3>
       <p>${t("If PhraseBook helps you, share it with your friends and fellow travelers.")}</p>
-      <button class="act" id="share"><span class="ml">${t("Share this app")}</span></button>
+      <button class="act good" id="share"><span class="ml">${t("Share this app")}</span></button>
+    </section>
+    <section class="sect why">
+      <h3>${t("Help make it better")}</h3>
+      <p>${t("If you want to make it better, send me a note and volunteer to help with translations, guides, or maintaining the open-source code.")}</p>
+      <button class="act good" id="volunteer">${t("Send feedback")}</button>
     </section>
     ${DONATE_URL ? `<section class="sect why">
       <h3>${t("Donate")}</h3>
       <p>${t("If you really like PhraseBook, help keep it running by buying me a coffee or a beer.")}</p>
       <a class="act good" id="donate" href="${DONATE_URL}" target="_blank" rel="noopener">☕ ${t("Donate")}</a>
-    </section>` : ""}
-    <section class="sect why">
-      <h3>${t("Help make it better")}</h3>
-      <p>${t("If you want to make it better, send me a note and volunteer to help with translations, guides, or maintaining the open-source code.")}</p>
-      <button class="act" id="volunteer">${t("Send feedback")}</button>
-    </section>`;
+    </section>` : ""}`;
   wireBack();
   $("#share").onclick = shareApp;
   $("#volunteer").onclick = sendFeedback;
