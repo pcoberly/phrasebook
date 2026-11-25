@@ -16,10 +16,11 @@ Ranked by how much of the world each would add (`python3 coverage.py`), weighed 
 **Next**
 1. **Bengali** (+2 points of the world). Bangladesh, 174 million, plus about 100 million in West Bengal. Little tourism. Voices: bn-BD.
 2. **Nepali** (trekking; Hindi is already widely understood there). Voices: ne-NP. Also **Tamil**, Sri Lanka's other official language (north, east and the tea country) and Tamil Nadu's, with Singapore and Malaysia: voices ta-IN, ta-LK.
-3. **Small European languages:** Slovenian, Macedonian, Albanian, Lithuanian, Latvian, Estonian, Icelandic. All have voices; each adds 0.4 to 3 million. Slovenia is Europe's only country with no PhraseBook language; the others already show as widely understood (Russian, Italian, Bulgarian, Danish).
+3. **The Baltic states: Lithuanian, Latvian, and Estonian** (6 million together), as one group like the Nordic one. Lithuanian and Latvian are Baltic languages, cousins of each other; Estonian is a close relative of Finnish. Russian is widely understood there but is the language of the Soviet occupation for many, so the coverage counts English, not Russian, until these are in. Voices: lt-LT, lv-LV, et-EE.
+4. **Small European languages:** Slovenian, Macedonian, Albanian, Icelandic. All have voices; each adds 0.4 to 2 million. Slovenia is Europe's only country with no PhraseBook language; the others already show as widely understood (Bulgarian, Italian, Danish).
 
 **Low value now.**
-4. **Afrikaans** (+3 million, Namibia only). South Africa is already covered by Zulu and English. Probably drop. Voices: af-ZA.
+5. **Afrikaans** (+3 million, Namibia only). South Africa is already covered by Zulu and English. Probably drop. Voices: af-ZA.
 
 Also possible later: Burmese (54 million, little travel for now), Urdu (Pakistan; spoken Hindi is understood, but Urdu has its own script), Georgian, Armenian, Azerbaijani.
 

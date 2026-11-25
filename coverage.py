@@ -6,7 +6,8 @@ language most people use (main). "wide" lists app languages that are a widely un
 EN = English is the everyday language most people speak (the United States, the United Kingdom, Australia...): it is
 PhraseBook's own language, so those countries count as covered. en = English is an official language but most people
 speak something else day to day (India, Nigeria...): English works there, but it is not their own language.
-Croatian (hr) counts for Serbia, Bosnia and Montenegro too: Croatian, Serbian, Bosnian and Montenegrin are one language
+In the Baltic states English counts as widely understood, not Russian: many understand Russian, but for many it is
+the language of the Soviet occupation, and English goes over better. Croatian (hr) counts for Serbia, Bosnia and Montenegro too: Croatian, Serbian, Bosnian and Montenegrin are one language
 with four standard names."""
 
 import json
@@ -64,7 +65,7 @@ C = [
  # Europe
  ("Russia", "Europe", 144, "ru", ""), ("Germany", "Europe", 84, "de", ""), ("United Kingdom", "Europe", 69, "EN", ""),
  ("France", "Europe", 66, "fr", ""), ("Italy", "Europe", 59, "it", ""), ("Spain", "Europe", 48, "es", ""),
- ("Poland", "Europe", 38, "pl", ""), ("Ukraine", "Europe", 38, "uk", "ru"), ("Romania", "Europe", 19, "ro", ""),
+ ("Poland", "Europe", 38, "pl", ""), ("Ukraine", "Europe", 38, "uk", ""), ("Romania", "Europe", 19, "ro", ""),
  ("Netherlands", "Europe", 18, "nl", "en"), ("Belgium", "Europe", 11.8, "nl fr de", ""), ("Sweden", "Europe", 10.6, "sv", "en"),
  ("Czechia", "Europe", 10.7, "cs", ""), ("Greece", "Europe", 10.3, "el", ""), ("Portugal", "Europe", 10.4, "pt", ""),
  ("Hungary", "Europe", 9.6, "hu", ""), ("Belarus", "Europe", 9, "ru", ""), ("Austria", "Europe", 9.1, "de", ""),
@@ -73,8 +74,8 @@ C = [
  ("Norway", "Europe", 5.6, "nb", "en"), ("Ireland", "Europe", 5.3, "EN", ""), ("Croatia", "Europe", 3.9, "hr", ""),
  ("Georgia", "Europe", 3.8, "", "ru"), ("Bosnia and Herzegovina", "Europe", 3.2, "hr", ""), ("Moldova", "Europe", 2.4, "ro", "ru"),
  ("Albania", "Europe", 2.8, "", "it"), ("Armenia", "Europe", 3, "", "ru"), ("Azerbaijan", "Europe", 10.3, "", "ru tr"),
- ("Lithuania", "Europe", 2.9, "", "ru"), ("Slovenia", "Europe", 2.1, "", ""), ("North Macedonia", "Europe", 1.8, "", "bg hr"),
- ("Latvia", "Europe", 1.9, "", "ru"), ("Estonia", "Europe", 1.4, "", "ru"), ("Cyprus", "Europe", 1.4, "el tr", "en"),
+ ("Lithuania", "Europe", 2.9, "", "EN"), ("Slovenia", "Europe", 2.1, "", ""), ("North Macedonia", "Europe", 1.8, "", "bg hr"),
+ ("Latvia", "Europe", 1.9, "", "EN"), ("Estonia", "Europe", 1.4, "", "EN"), ("Cyprus", "Europe", 1.4, "el tr", "en"),
  ("Luxembourg", "Europe", 0.7, "fr de", ""), ("Montenegro", "Europe", 0.6, "hr", ""), ("Malta", "Europe", 0.5, "en", "it"),
  ("Iceland", "Europe", 0.4, "", "da en"), ("Andorra, Monaco, San Marino, Liechtenstein", "Europe", 0.2, "es fr it de", ""),
  # Middle East
