@@ -87,8 +87,10 @@ def build(days: int) -> dict:
         "opens": {"week": total(s, opens, week, today), "period": total(s, opens, since, today)},
         "active": {"today": total(s, ["active/day"], today, today),
                    "day_avg": round(total(s, ["active/day"], week, today) / 7, 1),
-                   "week": total(s, ["active/week"], today - timedelta(days=(today.weekday())), today),
-                   "month": total(s, ["active/month"], today.replace(day=1), today)},
+                   # each device counts itself once in any 7 days and once in any 30 (see countActive in app.js), so
+                   # adding up the last 7 or 30 days counts each about once, whichever day GoatCounter files it under
+                   "week": total(s, ["active/week"], week, today),
+                   "month": total(s, ["active/month"], today - timedelta(days=29), today)},
         "installed": {"installed": total(s, ["mode/installed"], since, today), "browser": total(s, ["mode/browser"], since, today)},
         "chart": [{"day": d, "opens": sum(s[p].get(d, 0) for p in opens), "new": s.get("welcome/shown", {}).get(d, 0),
                    "active": s.get("active/day", {}).get(d, 0)} for d in day_list],
@@ -143,7 +145,7 @@ th { color: var(--muted); font-weight: 600; font-size: 13px; } td.n, th.n { text
     <section><h2>Languages</h2><table><tr><th>Language</th><th class="n">Opens</th><th class="n">Downloads</th></tr>${languages}</table></section>
     <section><h2>Features</h2><table><tr><th>Feature</th><th class="n">Times</th></tr>${features}</table></section>
   </div>
-  <p class="note">New users are first visits on a device (the welcome page). Active devices count each phone or computer once a day, week, or month, from ${active_from_long}; before then only opens were counted, and one person opening the app often counts many times. Your own devices aren't counted once opened with ?analytics=mine.</p>
+  <p class="note">New users are first visits on a device (the welcome page). Active devices count each phone or computer once a day, once in any 7 days, and once in any 30, from ${active_from_long} (rolling periods from November 25); before then only opens were counted, and one person opening the app often counts many times. Your own devices aren't counted once opened with ?analytics=mine.</p>
 </main>"""
 
 
@@ -159,10 +161,10 @@ def render(r: dict) -> str:
     active_started = r["made"] >= r["active_from"]
     tile = lambda n, label, d, wait=False: f'<div class="tile{" wait" if wait else ""}"><span class="n">{n}</span><span class="l">{esc(label)}</span><span class="d">{esc(d)}</span></div>'
     tiles = [
-        tile(r["new_users"]["week"], "New users this week", f'{r["new_users"]["period"]} in {r["days"]} days, {r["new_users"]["all"]} since the start'),
-        tile(r["active"]["week"], "Active devices this week", f'{r["active"]["month"]} this month, about {r["active"]["day_avg"]} a day') if active_started and (r["active"]["week"] or r["active"]["month"])
+        tile(r["new_users"]["week"], "New users, last 7 days", f'{r["new_users"]["period"]} in {r["days"]} days, {r["new_users"]["all"]} since the start'),
+        tile(r["active"]["week"], "Active devices, last 7 days", f'{r["active"]["month"]} in 30 days, about {r["active"]["day_avg"]} a day') if active_started and (r["active"]["week"] or r["active"]["month"])
         else tile("Counting", "Active devices", f'From {long_date(r["active_from"])}', wait=True),
-        tile(r["opens"]["week"], "App opens this week", f'{r["opens"]["period"]} in {r["days"]} days'),
+        tile(r["opens"]["week"], "App opens, last 7 days", f'{r["opens"]["period"]} in {r["days"]} days'),
         tile(f"{share}%", "Installed", "Opened from the Home Screen, not a browser tab"),
     ]
     # chart: bars for opens, a line for new users, and active devices where counted

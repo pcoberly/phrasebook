@@ -1,7 +1,7 @@
 "use strict";
 
 // This copy of the app's version. It must match CACHE in sw.js; a newer CACHE on the server means an update.
-const VERSION = "phrasebook-v118";
+const VERSION = "phrasebook-v119";
 // The version people see: release.revision, such as 0.7.42. VERSION counts every release (it is what tells the app an
 // update is waiting); each release starts at its first VERSION number, and the revision counts on from there.
 // A new release (0.8, or 1.0) is one more line here, with the first VERSION number that belongs to it.
@@ -57,17 +57,22 @@ const countQueue = []; // events that happen before GoatCounter's script has fin
     document.head.appendChild(gc);
   } catch { /* storage or DOM unavailable: no analytics */ }
 })();
-// Active devices, for the usage report: "active/day", "active/week" and "active/month" are each counted once per device
-// in that day, week or month. All that is kept is the date each was last counted, on this device; there is no ID.
+// Active devices, for the usage report: "active/day" once per device per day (its own local date), "active/week" once in
+// any 7 days and "active/month" once in any 30, so a report adding up the last 7 or 30 days counts each device about
+// once, whatever time zone GoatCounter files the counts under. All that is kept is the date each was last counted, on
+// this device; there is no ID.
 function countActive() {
   const now = new Date();
-  const day = now.toISOString().slice(0, 10);
-  const monday = new Date(now); monday.setUTCDate(now.getUTCDate() - ((now.getUTCDay() + 6) % 7));
-  const periods = { day, week: monday.toISOString().slice(0, 10), month: day.slice(0, 7) };
-  for (const [name, stamp] of Object.entries(periods)) {
-    if (store.get("phrasebook-active-" + name, "") === stamp) continue;
-    store.set("phrasebook-active-" + name, stamp);
-    track("active/" + name);
+  const pad = (n) => String(n).padStart(2, "0");
+  const today = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+  // days since a stored date ("2026-11-23", or "2026-11" as kept by the first version of this, for the 1st)
+  const daysSince = (d) => (typeof d === "string" && /^\d{4}-\d{2}/.test(d) ? (Date.parse(today) - Date.parse(d.length === 7 ? d + "-01" : d)) / DAY : Infinity);
+  let wait = 1000; // a second apart, after the open itself: several counts in the same instant may not all be kept
+  for (const [name, every] of [["day", 1], ["week", 7], ["month", 30]]) {
+    if (daysSince(store.get("phrasebook-active-" + name, "")) < every) continue;
+    store.set("phrasebook-active-" + name, today);
+    setTimeout(() => track("active/" + name), wait);
+    wait += 1000;
   }
 }
 // Count one thing that happened, such as "quiz/finished/ja". Names never contain a phrase or a person.
